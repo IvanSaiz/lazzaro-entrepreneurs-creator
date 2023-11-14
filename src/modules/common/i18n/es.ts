@@ -1,0 +1,53 @@
+export default {
+  actions: {
+    cancel: "Cancelar",
+    withdraw: "Retirar",
+    delete: "Eliminar",
+    askConfirm: "¿Quiere confirmar?",
+    confirm: "Confirmar",
+    downloadData: "Descargar datos",
+    changePlan: "Cambiar plan",
+    send: "Enviar",
+    enter: "Entrar",
+    back: "Volver",
+    next: "Siguiente",
+    skip: "Saltar este paso",
+    create: "Crear",
+    save: "Guardar",
+    deleteAccount: "Eliminar cuenta",
+    search: "Buscar",
+    yes: "Sí",
+    no: "No",
+    active: "Activar",
+    close: "Cerrar",
+    goToLogin: "Ir al login",
+    alreadyConnected: "Conectado",
+    connectToStripe: "Conectar Stripe"
+  },
+  notifications: {
+    changeSuccess: "Cambios guardados con éxito",
+    upgradeToPremium:
+      "Debe tener una suscripción premium para usar esta función"
+  },
+  error: {
+    generic: "Ops! Ha ocurrido un error, por favor inténtalo de nuevo.",
+    accountAlreadyExists: "Ya existe una cuenta con este email",
+    companyAlreadyExists: "Ya existe una empresa con este nombre",
+  },
+
+  logout: "cerrar sesión",
+
+  nav: {
+    Web: "Web",
+    Proyectos: "Proyectos",
+    Tienda: "Tienda",
+    Calendario: "Calendario",
+    Cuentas: "Cuentas",
+    Socios: "Socios",
+    Organización: "Organización",
+    Asesor: "Asesor",
+    NFTs: "NFTs",
+    Datos: "Datos",
+    Mejora: "Mejora"
+  }
+};

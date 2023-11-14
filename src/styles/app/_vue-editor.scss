@@ -1,0 +1,25 @@
+.ql-toolbar {
+  & {
+    border-top-left-radius: $border-radius-default;
+    border-top-right-radius: $border-radius-default;
+  }
+
+  .ql-formats {
+    .ql-image {
+      display: none;
+    }
+  
+    .ql-video {
+      display: none;
+    }
+  }
+}
+
+.ql-container {
+  border-bottom-left-radius: $border-radius-default;
+  border-bottom-right-radius: $border-radius-default;
+}
+
+.ql-toolbar,.ql-container {
+  background-color: $color-white;
+}

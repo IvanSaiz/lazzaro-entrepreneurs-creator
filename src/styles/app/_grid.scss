@@ -1,0 +1,9 @@
+.grid {
+  &-container {
+    height: inherit;
+    margin: 0 auto;
+    max-width: $br-xlg;
+    padding: 24px;
+    width: 100%;
+  }
+}

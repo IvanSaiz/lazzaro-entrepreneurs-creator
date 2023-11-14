@@ -1,0 +1,14 @@
+.vue-notification {
+  &-group {
+    padding: 10px;
+  }
+
+  &-template {
+    border-radius: calc(#{$border-radius-default} / 2);
+  }
+
+  .notification-content {
+    color: $color-white;
+    padding: 5px;
+  }
+}

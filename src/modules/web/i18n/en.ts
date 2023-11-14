@@ -1,0 +1,187 @@
+export default {
+  public: {
+    title: "Public web",
+    subtitle: "Set up your public website here",
+    generalForm: {
+      title: "General",
+      publicate: "Publish your web",
+      status: {
+        label: "Publication status",
+        options: {
+          enabled: "Enabled",
+          disabled: "Disabled"
+        }
+      },
+      seeWeb: "See web",
+      url: "URL of your portal",
+      powered: {
+        title: 'Remove "Powered by Lázzaro" from footer',
+        under: "The message will appear at the bottom of your website",
+        options: {
+          enabled: "Enabled",
+          disabled: "Disabled"
+        }
+      }
+    },
+    logosForm: {
+      title: "Logos",
+      subtitle: "We have left this space for you to add logos of cool things",
+      logo: {
+        label: "Logo",
+        help: "180x60, max 25MB",
+        limit: "You can not add more than 10 logos",
+        delete: "logo Deleted successfully",
+        error: "Error deleting logo"
+      }
+    },
+
+    chooseTemplate: {
+      title: "Template",
+      template1: "Modern",
+      template2: "Classic",
+      template3: "Minimalist",
+      modalText: "Choose a template",
+      templateChangeModal: {
+        title: "The template is being changed",
+        subtitle:
+          "Cool you are gonna see the new template! this might take few minutes. It is the perfect moment to prepare the coffee"
+      }
+    },
+
+    googleAnalytics: {
+      title: "Google analytics ID"
+    },
+
+    websiteStatus: {
+      publishWebsite: {
+        title: "We are publishing your website this can take up to 5 minutes.",
+        subtitle:
+          "Remember you can unpublish it again whenever you one clicking the same button and saving the changes in the “save”. "
+      },
+
+      unpublishWebsite: {
+        title:
+          "We are unpublishing your website this can take up to 5 minutes.",
+        subtitle:
+          "Remember you can publish it again whenever you one clicking the same button and saving the changes in the “save”. "
+      }
+    },
+
+    brandForm: {
+      title: "Appearance",
+      logo: {
+        label: "Logo",
+        help: "180x60, max 25MB"
+      },
+      mainImg: {
+        label: "Primary image",
+        help: "180x60, max 25MB"
+      },
+      orgName: "Company name",
+      colour: {
+        first: "Theme colour 1",
+        second: "Theme colour 2"
+      }
+    },
+    contactForm: {
+      title: "Contact Form",
+      subtitle: "Allow a potential customer to contact you. Configure the title and subtitle of your contact page.",
+      phone: "Phone no.",
+      location: "Location"
+    },
+    contentForm: {
+      title: "Content",
+      subtitle: "Choose what sections will appear in your public website.",
+      sectionStatus: {
+        title: "Selection status",
+        options: {
+          enabled: "Enabled",
+          disabled: "Disabled"
+        }
+      },
+      projects: "Projects",
+      donations: "Donators",
+      partners: "Members",
+      market: "Shop",
+      courses: "Courses",
+      impact: "Information on impact",
+      events: "Events",
+      volunteers: "Volunteers"
+    },
+    footer: {
+      title: "Footer",
+      subtitle: "Allows a potential customer to contact you.",
+      socialForm: {
+        title: "Social media",
+        facebook: "Link to Facebook",
+        twitter: "Link to Twitter",
+        whatsapp: "Link to Whatsapp",
+        linkedin: "Link to LinkedIn",
+        web: "Link to Secondary web",
+        instagram: "Link to Instagram"
+      },
+      termsForm: {
+        title: "Terms and conditions, legal notice and privacy policy",
+        add: "Choose files",
+        terms:
+          "Upload your terms and conditions, legal notice and privacy policy so that users can accept them",
+        transparencyDescription: "Transparency description",
+        accountability: "Transparency and accountability"
+      }
+    },
+    teamForm: {
+      title: "Team",
+      subtitle:
+        "Set up one by one each of your members' profile. You can see them all down below.",
+      photo: {
+        label: "Profile picture",
+        help: "180x60, max 25MB"
+      },
+      name: "Surname and first name",
+      position: "Position",
+      linkedin: "LinkedIn",
+      newMember: "Add member",
+      table: "Your team",
+      delete: ""
+    },
+    descriptionForm: {
+      title: "Description",
+      subtitle:
+        "Describe your organisation and your vision, mission and values.",
+      motto: {
+        label: "Motto",
+        help: "Max. 40 characters."
+      },
+      description: "Brief description of your organisation",
+      titleDescription: {
+        label: "Description title",
+        help: "Max. 40 characters."
+      },
+      secondaryImg: {
+        label: "Secondary image",
+        help: "180x60, max 25MB"
+      },
+      largeDescription: "Full description"
+    },
+    impactForm: {
+      title: "Information on impact",
+      subtitle: "Modify the impact data visible on the website.",
+      text: {
+        one: "Text impact 1",
+        two: "Text impact 2",
+        three: "Text impact 3",
+        four: "Text impact 4"
+      },
+      amount: {
+        one: "Amount impact 1",
+        two: "Amount impact 2",
+        three: "Amount impact 3",
+        four: "Amount impact 4"
+      }
+    },
+    notify: {
+      success: "Changes successfully saved",
+      error: "An error occurred while saving"
+    }
+  }
+};

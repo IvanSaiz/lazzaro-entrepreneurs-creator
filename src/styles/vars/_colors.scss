@@ -1,0 +1,45 @@
+$color-pink: #eb2873;
+$color-pink-lighter: #f37eab;
+$color-pink-lightest: #fbd4e3;
+
+$color-red: #ff4863;
+$color-red-lighter: #f37eab;
+$color-red-lightest: #ffdae0;
+
+$color-orange: #ff7456;
+$color-orange-lighter: #ffac9a;
+$color-orange-lightest: #ffe3dd;
+
+$color-green: #0cf2b4;
+$color-green-lighter: #6df7d2;
+$color-green-lightest: #cefcf0;
+
+$color-purple: #8d00d8;
+$color-purple-lighter: #bb66e8;
+$color-purple-lightest: #e8ccf7;
+
+$color-green-01: #0093a7;
+$color-green-02: #0093a7cc;
+
+$color-orange-01: #ff7456;
+$color-orange-02: #ffc257cc;
+
+$color-black-01: #08080d;
+$color-black-02: #2c3e50;
+$color-black-03: #68798a;
+$color-black-04: #a0a7b9;
+$color-black-05: #ced4da;
+$color-black-06: #e7ecf7;
+$color-black-07: #f7fbfe;
+
+$color-shadow-01: #e3e8f6;
+
+$color-white: #ffffff;
+
+.color-gradient-01 {
+  background-image: linear-gradient(to-right, $color-pink, $color-orange);
+}
+
+.color-gradient-02 {
+  background-image: linear-gradient(to-right, $color-pink, $color-purple);
+}

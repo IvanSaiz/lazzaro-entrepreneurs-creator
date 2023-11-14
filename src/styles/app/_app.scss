@@ -1,0 +1,12 @@
+#app {
+  height: 100%;
+
+  * {
+    box-sizing: border-box;
+  }
+
+  // * to be able to click a button when it's disabled
+  input[disabled] {
+    pointer-events: none;
+  }
+}

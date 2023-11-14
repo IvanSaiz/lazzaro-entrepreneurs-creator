@@ -1,0 +1,546 @@
+/** vue-formulate default */
+@import './formulate';
+
+/** Custom form modifications */
+form {
+  font-family: Muli;
+  text-align: left;
+  width: 100%;
+}
+
+/* Formulate input override */
+.formulate-input {
+
+  /** Common native elements */
+  &-label {
+    color: $color-black-02;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: 1.25;
+
+    &.required:after {
+        content:"*";
+        color: red;
+    }
+
+    &--sm {
+      label {
+        font-size: 12px;
+      }
+    }
+  }
+
+  &-under-label {
+    color: $color-black-04;
+    font-size: 12px;
+    line-height: 15px;
+    margin: 6px 0;
+  }
+
+  &--smaller {
+    input {
+      height: 40px;
+    }
+  }
+
+  &[data-has-errors="true"] {
+    &[data-is-showing-errors="true"] {
+      & input,
+      & select,
+      & textarea,
+      & .formulate-input-upload-area-mask {
+        border-color: $color-red  !important;
+      }
+    }
+  }
+
+  input[type="text"],
+  input[type="password"],
+  input[type="color"],
+  input[type="tel"],
+  input[type="url"],
+  input[type="date"],
+  textarea,
+  select {
+    border-radius: $border-radius-default;
+    border: solid 1px $color-black-05;
+    box-sizing: border-box;
+    background-color: $color-white;
+    color: $color-black-01;
+    font-size: 14px;
+    line-height: 1.28;
+    height: 52px;
+    margin-top: 8px;
+    padding: 16px;
+    transition: background-color $transition-default, border-color $transition-default;
+    width: 100%;
+
+    &:hover {
+      border-color: $color-black-04;
+    }
+
+    &:disabled {
+      background-color: $color-black-07;
+
+      &:hover {
+        border-color: $color-black-05;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  /** Textarea **/
+  &[data-classification="textarea"] textarea {
+    height: 132px;
+  }
+
+  /** Select */
+  &[data-classification="select"] {
+    .formulate-input-element {
+      position: relative;
+
+      &::before {
+        content: "";
+        display: inline-block;
+        border-left: 2px solid $color-black-01;
+        border-bottom: 2px solid $color-black-01;
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%) rotate(-45deg);
+        width: 10px;
+        height: 10px;
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      select {
+        appearance: none;
+      }
+    }
+  }
+
+  /** Radio */
+  &[data-type="radio"][data-classification="group"] {
+    .formulate-input-element {
+      align-items: center;
+      display: flex;
+
+      .formulate-input-group-item:not(:first-child) {
+        margin-left: 15px;
+      }
+
+      .formulate-input-label {
+        font-size: 14px;
+        color: $color-black-01;
+        text-decoration: none;
+      }
+    }
+  }
+
+  /** Checkbox */
+  &[data-classification="box"] {
+    &:hover {
+      .formulate-input-element label {
+        &:before {
+          border-color: $color-green-01;
+        }
+      }
+    }
+
+    .formulate-input-element {
+      display: flex;
+      position: relative;
+      cursor: pointer;
+
+      input {
+        display: none;
+      }
+
+      label {
+        &::before {
+          content: "";
+          border: solid 2px $color-black-01;
+          border-radius: 2px;
+          height: 18px;
+          position: absolute;
+          transition: border-color $transition-default;
+          width: 18px;
+        }
+
+        &:hover {
+          cursor: pointer
+        }
+      }
+
+      input:checked {
+        &+label {
+          &::after {
+            content: "";
+            border: solid $color-black-01;
+            border-width: 0 2px 2px 0;
+            height: 18px;
+            left: 12.5px;
+            position: absolute;
+            top: -4px;
+            transform: rotate(43deg);
+            width: 10px;
+          }
+        }
+      }
+
+      &+label {
+        color: $color-black-04;
+        cursor: pointer;
+        text-decoration: underline;
+        font-family: Muli;
+        font-size: 12px;
+        line-height: 25px;
+        padding-left: 38px;
+        transition: color $transition-default;
+      }
+    }
+  }
+
+  /** Toggle */
+  &[data-classification="toggle"] {
+    .formulate-input-toggle {
+      border: solid 1px $color-black-01;
+      border-radius: 18px;
+      cursor: pointer;
+      height: 30px;
+      padding: 3px;
+      position: relative;
+      margin-top: 8px;
+      width: 48px;
+
+      &:before {
+        content: "";
+        border: solid 1px $color-black-01;
+        border-radius: 18px;
+        height: 21px;
+        position: absolute;
+        left: 3px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 21px;
+      }
+
+      &:hover {
+        border-color: #0093A7;
+
+        &:before {
+          border-color: #0093A7;
+        }
+      }
+
+      &-active {
+        &:before {
+          background-color: #0093A7;
+          border-color: #0093A7;
+          right: 3px;
+          left: unset;
+          transform: translateY(-50%);
+        }
+
+        &:hover {
+          &:before {
+            background-color: #0093A7;
+          }
+        }
+      }
+    }
+
+    input[type="checkbox"] {
+      height: 100%;
+      left: 0;
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  /** File */
+  &[data-classification="file"] {
+    .formulate-input-element {
+      margin-top: 8px;
+    }
+
+    /** Image */
+    &[data-type="image"] {
+      .formulate-input-area {
+
+        input[data-is-drag-hover] {
+          &~.formulate-input-upload-area-mask {
+            border-color: $color-green-01;
+
+            &::before {
+              background-color: $color-green-01;
+            }
+          }
+        }
+      }
+
+      .formulate-input-element--image {
+        margin-top: 8px;
+        width: 100%;
+
+        .formulate-input-upload-area-mask {
+          display: flex;
+          flex-flow: column wrap;
+          background-color: $color-white;
+          border: 1px dashed $color-black-05;
+          border-radius: $border-radius-default;
+
+          &:before {
+            background-color: $color-black-01;
+            height: 45px;
+            position: relative;
+            width: 45px;
+          }
+
+          &:after {
+            content: "Subir imagen";
+            margin-top: 10px;
+          }
+        }
+
+        .formulate-input-upload-area {
+          height: 100%;
+          min-height: 135px;
+          width: 100%;
+
+          .formulate-file {
+            border: none;
+            flex-flow: row wrap;
+            padding: 0;
+
+            .formulate-file-image-preview {
+              border: none;
+              box-shadow: none;
+              height: auto;
+              width: auto;
+              flex-basis: 100%;
+
+              &:hover {
+                transform: none;
+                background-color: unset;
+              }
+
+              .formulate-file-image-preview-image {
+                background-color: $color-white;
+                border: 1px dashed $color-black-05;
+                border-radius: 15px;
+                height: 135px;
+                width: 100%;
+                margin-bottom: 10px;
+                position: relative;
+              }
+            }
+
+            .formulate-file-name {
+              flex-basis: 80%;
+              padding: 0;
+            }
+
+            .formulate-file-remove {
+              position: relative;
+            }
+
+            .formulate-file-progress,
+            .formulate-file-progress-inner {
+              display: none;
+            }
+          }
+        }
+
+        &:hover {
+          .formulate-input-upload-area-mask {
+            border-color: $color-green-01;
+
+            &:before {
+              background-color: $color-green-01;
+            }
+
+            &:after {
+              color: $color-green-01;
+            }
+          }
+        }
+      }
+
+      &.formulate-input-element--image-simple {
+        .formulate-file-image-preview {
+          flex-basis: auto !important;
+          margin-right: 10px;
+        }
+
+        .formulate-file-image-preview-image {
+          flex-basis: unset;
+          height: 40px !important;
+          width: 40px !important;
+        }
+
+        .formulate-file-name {
+          flex-basis: auto !important;
+          width: 70%;
+        }
+      }
+    }
+
+    /** File */
+    &[data-type="file"] {
+      .formulate-input-upload-area {
+
+        input[data-is-drag-hover] {
+          &~.formulate-input-upload-area-mask {
+            border-color: $color-green-01;
+
+            &::before {
+              background-color: $color-green-01;
+            }
+          }
+        }
+      }
+
+      .formulate-input-upload-area-mask {
+        display: flex;
+        flex-flow: column wrap;
+        background-color: $color-white;
+        border: 1px dashed $color-black-05;
+        border-radius: $border-radius-default;
+
+        &:before {
+          background-color: $color-black-01;
+          height: 45px;
+          position: relative;
+          width: 45px;
+        }
+
+        &:after {
+          content: "Subir archivo";
+          margin-top: 10px;
+        }
+      }
+
+      .formulate-input-upload-area {
+        height: 100%;
+        width: 100%;
+        padding: 50px;
+
+        &[data-has-files="true"] {
+          padding: 0;
+        }
+      }
+
+      &:hover {
+        .formulate-input-upload-area-mask {
+          border-color: $color-green-01;
+
+          &:before {
+            background-color: $color-green-01;
+          }
+
+          &:after {
+            color: $color-green-01;
+          }
+        }
+      }
+
+      /** Multiple */
+      [multiple="multiple"] {
+        &~.formulate-files {
+          display: flex;
+          flex-direction: column;
+
+          .formulate-file {
+            border: none;
+            justify-content: flex-start;
+
+            .formulate-file-name {
+              border: none;
+              color: $color-black-03;
+              font-size: 16px;
+              line-height: 1.25;
+              letter-spacing: normal;
+              margin-right: 0;
+              padding-right: 24px;
+              text-align: left;
+            }
+
+            .formulate-file-remove {
+              border-color: $color-black-03;
+              background-color: $color-black-03;
+              position: relative;
+              top: -2px;
+              transform: scale(2);
+            }
+          }
+
+          .formulate-file-add {
+            background-color: $color-white;
+            border-radius: $border-radius-default;
+            border: 1px solid $color-black-04;
+            order: -1;
+            padding: 12px 24px;
+          }
+        }
+      }
+    }
+
+  }
+
+  /** Errors */
+  &-errors {
+    margin-top: 5px;
+
+    &>li {
+      color: $color-red;
+      font-size: 11px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: 1.2;
+    }
+  }
+}
+
+/** Form custom grid */
+.form {
+  &__row {
+    display: flex;
+    margin: 10px -15px;
+
+    &>* {
+      flex-basis: 100%;
+      flex-wrap: wrap;
+      padding: 0 15px;
+      margin: 8px 0;
+    }
+
+    &--flex-end {
+      align-items: flex-end;
+
+      &>* {
+        margin: 0;
+      }
+    }
+
+    &--flex-center {
+      align-items: center;
+
+      &>* {
+        margin: 0;
+      }
+    }
+  }
+}

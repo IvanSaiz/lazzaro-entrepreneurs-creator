@@ -1,0 +1,32 @@
+// Init
+$br-init: 0px;
+
+// Small devices (landscape phones, 576px and up)
+$br-sm: 576px;
+
+// Medium devices (tablets, 768px and up)
+$br-md: 768px;
+
+// Large devices (desktops, 992px and up)
+$br-lg: 992px;
+
+// Extra large devices (large desktops, 1200px and up)
+$br-xlg: 1200px;
+
+// Map
+$brs: (
+  'init': $br-init,
+  'sm': $br-sm,
+  'md': $br-md,
+  'lg': $br-lg,
+  'xlg': $br-xlg
+) !default;
+
+// Breakpoint mixin
+@mixin breakpoint($br) {
+  @if map-has-key($brs, $br) {
+    @media (min-width: map-get($brs, $br)) {
+      @content;
+    }
+  }
+}
