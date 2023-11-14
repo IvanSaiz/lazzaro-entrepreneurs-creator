@@ -22,7 +22,7 @@
                 :class="{ 'organization-read__item--disabled': !item.status }"
               )
                 | {{ item.text }}
-            lz-button.organization-read__btn(type="primary" @click="redirectToPlan(plan.url)")
+            lz-button.organization-read__btn(type="primary" @click="redirectToPlan(plan.url)" disabled)
               | {{ plan.priceText }}
               .organization-read__tax {{ $t('organization.read.subscriptionForm.tax' )}}
 

@@ -90,8 +90,8 @@
             await this.getWebTemplateFeatures();
 
             await this.updateData(data);
-            this.$router.push({ name: "Home" });
-          }
+            window.location.href =
+              "https://lazzaro.io/en/crea-tu-web-para-empredimiento/gracias/";          }
         })
         .catch(err => {
           if (err.response.status === 401) {

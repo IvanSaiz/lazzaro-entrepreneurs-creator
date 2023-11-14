@@ -239,7 +239,6 @@
         })
         .catch(err => {
           let error = "";
-          debugger;
           switch (err.response.data.message) {
             case "EXISTS_EMAIL":
               error = "common.error.accountAlreadyExists";
@@ -247,6 +246,9 @@
             case "EXISTS_COMPANY":
               error = "common.error.companyAlreadyExists";
               break;
+            case "Validation error":
+            error = "common.error.validationError";
+            break;
             default:
               error = "common.error.generic";
               break;
