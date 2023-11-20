@@ -104,7 +104,8 @@ export default {
       partners: "Members",
       market: "Shop",
       courses: "Courses",
-      impact: "Information on impact",
+      reviews: "Reviews",
+      impact: "Impact data",
       events: "Events",
       volunteers: "Volunteers"
     },
@@ -172,8 +173,17 @@ export default {
       },
       largeDescription: "Full description"
     },
+    reviewsForm: {
+      title: "Reviews",
+      subtitle: "Link your website to your Google profile and let your users see your reviews.",
+      formTitle: "Title",
+      formSubtitle: "Subtitle",
+      titleHelper: "(Max 80 characters)",
+      subtitleHelper: "(Max 140 characters)",
+      link: "Link to your Google My Business profile*"
+    },
     impactForm: {
-      title: "Information on impact",
+      title: "Impact data",
       subtitle: "Modify the impact data visible on the website.",
       icon: {
         1: "Icon 1",
