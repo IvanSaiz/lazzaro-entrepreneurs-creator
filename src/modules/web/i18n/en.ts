@@ -175,17 +175,24 @@ export default {
     impactForm: {
       title: "Information on impact",
       subtitle: "Modify the impact data visible on the website.",
+      icon: {
+        1: "Icon 1",
+        2: "Icon 2",
+        3: "Icon 3",
+        4: "Icon 4",
+        help: "60x60. Max 25MB"
+      },
       text: {
-        one: "Text impact 1",
-        two: "Text impact 2",
-        three: "Text impact 3",
-        four: "Text impact 4"
+        1: "Text impact 1",
+        2: "Text impact 2",
+        3: "Text impact 3",
+        4: "Text impact 4"
       },
       amount: {
-        one: "Amount impact 1",
-        two: "Amount impact 2",
-        three: "Amount impact 3",
-        four: "Amount impact 4"
+        1: "Amount impact 1",
+        2: "Amount impact 2",
+        3: "Amount impact 3",
+        4: "Amount impact 4"
       }
     },
     notify: {
