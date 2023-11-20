@@ -102,6 +102,7 @@ export default {
       partners: "Socios",
       market: "Tienda online",
       courses: "Cursos",
+      reviews: "Reseñas", 
       impact: "Datos de impacto",
       events: "Eventos",
       volunteers: "Voluntarios"
@@ -170,6 +171,15 @@ export default {
         help: "180x60, máx 25MB"
       },
       largeDescription: "Descripción larga"
+    },
+    reviewsForm: {
+      title: "Reseñas",
+      subtitle: "Vincula tu web con tu perfil de Google y permite que tus usuarios vean tus reseñas.",
+      formTitle: "Título",
+      formSubtitle: "Subtítulo",
+      titleHelper: "(Máx 80 caracteres)",
+      subtitleHelper: "(Máx 140 caracteres)",
+      link: "Link a tu perfil de Google My Business*"
     },
     impactForm: {
       title: "Datos de impacto",

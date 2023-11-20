@@ -42,6 +42,45 @@
 
       <choose-template :chosenTemplateId='publicWebForm.chosenTemplateId' :handleChooseTemplate='handleChooseTemplate' />
       
+      section.public-reviews
+        .public-reviews__header
+          h2.h2--dash {{ $t('web.public.reviewsForm.title') }}
+          h3 {{ $t('web.public.reviewsForm.subtitle') }}
+        .public-reviews__title
+          .reviews-section
+            formulate-input(
+              type="text"
+              name="teamTitle"
+              :label="$t('web.public.reviewsForm.formTitle')"
+              :help="$t('web.public.reviewsForm.titleHelper')"
+            )
+            FormulateInput#primary-color(
+              type="textColor"
+              name="teamTitleColor"
+              :label="$t('auth.onboarding.stepStyle.form.textColour')"
+              value="#1081F2"
+              )
+
+          .reviews-section
+            formulate-input(
+              type="text"
+              name="teamTitle"
+              :label="$t('web.public.reviewsForm.formSubtitle')"
+              :help="$t('web.public.reviewsForm.subtitleHelper')"
+            )
+            FormulateInput#primary-color(
+              type="textColor"
+              name="teamTitleColor"
+              :label="$t('auth.onboarding.stepStyle.form.textColour')"
+              value="#1081F2"
+              )
+        .form__row
+          formulate-input(
+            type="text"
+            name="teamTitle"
+            :label="$t('web.public.reviewsForm.link')"
+          )
+
       section.public-impact
         .public-impact__header
           h2.h2--dash {{ $t('web.public.impactForm.title') }}
@@ -753,6 +792,35 @@
         }
       }
 
+      &-reviews{
+        &__header {
+          h3 {
+            color: $color-black-03;
+            font-size: 16px;
+            font-weight: 400;
+          }
+        }
+
+        &__title {
+          display: flex;
+          align-items: flex-start;
+          gap: 30px;
+          width: 100%;
+          
+          .reviews-section {
+            display: flex;
+            width: 563px;
+            gap: 18px;
+            
+            .formulate-input-element--text{
+                width: 382px;
+            }
+            .formulate-input[data-classification=text-color]{                
+                width: 153px;
+            }
+          }
+        }
+      }
       &-impact{
         &__content {
           display: inline-flex;
@@ -859,12 +927,8 @@
             .formulate-input[data-classification=text-color]{                
                 width: 153px;
             }
-            // .formulate-input-help{
-            //   display: inline-block;
-            //   margin-right: 10px;
-            // }
           }
-          }
+        }
         h3 {
           color: $color-black-03;
           font-size: 16px;
