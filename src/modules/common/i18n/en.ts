@@ -32,6 +32,7 @@ export default {
     generic: "An error has occurred",
     accountAlreadyExists: "An account with this email already exists",
     companyAlreadyExists: "A company with this name already exists",
+    validationError: "Please make sure your CIF/DNI are correct"
   },
   nav: {
     Web: "Web",

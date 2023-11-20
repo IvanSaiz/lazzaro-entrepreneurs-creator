@@ -130,8 +130,17 @@ export default {
     },
     teamForm: {
       title: "Equipo",
-      subtitle:
-        "Configura y crea uno a uno cada miembro de tu equipo. Puedes verlos todos en el listado de abajo.",
+      subtitle: "Muestra a todo el mundo de que tipo de pasta estás hecho.",
+      header: {
+        title: "Título",
+        subtitle: "Subtítulo",
+        titleHelperText: "(Máx 80 caracteres)",
+        subtitleHelperText: "(Máx 180 caracteres)"
+      },
+      teamMembers: {
+        title: "Miembros del equipo",
+        subtitle:"Crea el perfil de cada uno de los integrantes de tu empresa. Con el link a su Linkedin será mucha más fácil darle visibilidad a ellos y la empresa."
+      },
       photo: {
         label: "Foto de perfil",
         help: "180x60, máx 25MB"

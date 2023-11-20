@@ -131,8 +131,17 @@ export default {
     },
     teamForm: {
       title: "Team",
-      subtitle:
-        "Set up one by one each of your members' profile. You can see them all down below.",
+      subtitle: "Create the profile of each of the members of your company. With the link to their Linkedin it will be much easier to give visibility to them and the company.",
+      header: {
+        title: "Title",
+        subtitle: "Subtitle",
+        titleHelperText: "(Max 80 characters)",
+        subtitleHelperText: "(Max 180 characters)",
+      },
+      teamMembers: {
+        title: "Team Members",
+        subtitle:"Create the profile of each of the members of your company. With the link to their Linkedin it will be much easier to give visibility to them and the company."
+      },
       photo: {
         label: "Profile picture",
         help: "180x60, max 25MB"

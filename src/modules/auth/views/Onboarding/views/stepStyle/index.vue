@@ -11,13 +11,14 @@
       )
         .form__container
           .form__row
-            FormulateInput(
-              type="image"
-              name="logo"
-              :label="$t('auth.onboarding.stepStyle.form.logo.label')"
-              :help="$t('auth.onboarding.stepStyle.form.logo.help')"
-              validation="mime:image/jpeg,image/png"
-            )
+            .form__logo
+              FormulateInput(
+                type="image"
+                name="logo"
+                :label="$t('auth.onboarding.stepStyle.form.logo.label')"
+                :help="$t('auth.onboarding.stepStyle.form.logo.help')"
+                validation="mime:image/jpeg,image/png"
+              )
           .form__colors
             .form__row
               FormulateInput#primary-color(
@@ -162,17 +163,19 @@
 
     .form__container {
       display: flex;
-      justify-content: space-between;
-      width: 630px;
+      justify-content: center;
+      gap: 20px;
     }
-
+    .form__logo {
+      width: 200px;
+    }
     .form__colors {
-      flex: 1;
+      flex: 0 0 480px;
       padding-left: 25px;
+      padding-top: 0;
     }
-
-    .formulate-form {
-      width: 630px;
+    .form__row {
+      margin-top: 0;
     }
   }
 </style>

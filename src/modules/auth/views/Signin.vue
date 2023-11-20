@@ -90,9 +90,9 @@
             await this.getWebTemplateFeatures();
 
             await this.updateData(data);
-            this.$router.push({ name: "Home" });
-          }
-        })
+            this.$router.push({name: "Home"});
+          }}           
+        )
         .catch(err => {
           if (err.response.status === 401) {
             return this.$notify({

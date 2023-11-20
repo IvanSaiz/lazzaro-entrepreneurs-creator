@@ -42,6 +42,91 @@
 
       <choose-template :chosenTemplateId='publicWebForm.chosenTemplateId' :handleChooseTemplate='handleChooseTemplate' />
 
+      section.public-team
+        .public-team__header
+          h2.h2--dash {{ $t('web.public.teamForm.title') }}
+          h4 {{ $t('web.public.teamForm.subtitle') }}
+          .public-team__title
+            .team-section
+              formulate-input(
+                type="text"
+                name="teamTitle"
+                :label="$t('web.public.teamForm.header.title')"
+                :help="$t('web.public.teamForm.header.titleHelperText')"
+              )
+              FormulateInput#primary-color(
+                  type="textColor"
+                  name="teamTitleColor"
+                  :label="$t('auth.onboarding.stepStyle.form.textColour')"
+                  value="#1081F2"
+                )
+            .team-section
+              formulate-input(
+                type="text"
+                name="teamSubtitle"
+                :label="$t('web.public.teamForm.header.subtitle')"
+                :help="$t('web.public.teamForm.header.subtitleHelperText')"
+              )
+              FormulateInput#primary-color(
+                  type="textColor"
+                  name="teamSubtitleColor"
+                  :label="$t('auth.onboarding.stepStyle.form.textColour')"
+                  value="#1081F2"
+                )
+
+        .public-team__header
+          h3.h3--dash {{ $t('web.public.teamForm.teamMembers.title') }}
+          h4 {{ $t('web.public.teamForm.teamMembers.subtitle') }}
+        FormulateForm.public-team__form(
+          v-model="teamForm"
+          @submit="onTeamSubmit"
+          :keep-model-data="true"
+        )
+          .public-team__image
+            formulate-input(
+              type="image"
+              name="image"
+              :label="$t('web.public.teamForm.photo.label')"
+              :help="$t('web.public.teamForm.photo.help')"
+            )
+          .public-team__texts
+            .form__row
+              formulate-input(
+                type="text"
+                name="name"
+                :label="$t('web.public.teamForm.name')"
+              )
+              formulate-input(
+                type="text"
+                name="position"
+                :label="$t('web.public.teamForm.position')"
+              )
+            .form__row
+              formulate-input(
+                type="text"
+                name="linkedin"
+                :label="$t('web.public.teamForm.linkedin')"
+              )
+            .form__row  
+              lz-button(type="secondary") {{ $t('web.public.teamForm.newMember') }}
+
+        transition(name="fade")
+          .title-table-container   
+            h3.h3--dash {{$t('web.public.teamForm.table')}}
+            lz-table(
+              class="lz-table"
+              v-if="publicWebForm.team.length > 0"
+              :fields="teamFields"
+              :items="publicWebForm.team"
+            )
+              template(#dot="{ row }")
+                DotsIcon        
+              template(#name="{ row: { name } }") {{ name }}
+              template(#position="{ row: { position } }") {{ position }}
+              template(#linkedin="{ row: { linkedin } }") {{ linkedin }}
+              template(#delete="{ row }")
+                XIcon(@click="removeTeamMember(row)")
+
       section.public-contact
         .public-contact__header
           h2.h2--dash {{ $t('web.public.contactForm.title') }}
@@ -139,18 +224,19 @@
   /* eslint-disable */
 
   import { Component, Vue } from "vue-property-decorator";
+  import { namespace } from "vuex-class";
+  import cloneDeep from "lodash/cloneDeep";
+  import isObjectEmpty from "lodash/isEmpty";
+  import isEqual from "lodash/isEqual";
   import LzButton from "@/components/Button.vue";
   import LzTable from "@/components/Table.vue";
-  import { namespace } from "vuex-class";
-  import { apiBrand, apiWebsite } from "../api";
-  import { parseFile } from "@/utils/parseFile";
   import LzEditorInput from "@/components/EditorInput.vue";
-  import { ChooseTemplate } from "../components";
   import LzModal from "@/components/Modal.vue";
+  import {DotsIcon} from '@/components';
   import { checkSubscriptionPlan } from "@/utils";
-  import cloneDeep from "lodash/cloneDeep";
-  import isEqual from "lodash/isEqual";
-  import isObjectEmpty from "lodash/isEmpty";
+  import { parseFile } from "@/utils/parseFile";
+  import { apiBrand, apiWebsite } from "../api";
+  import { ChooseTemplate } from "../components";
 
   const auth = namespace("auth");
 
@@ -160,7 +246,8 @@
       LzTable,
       LzEditorInput,
       ChooseTemplate,
-      LzModal
+      LzModal,
+      DotsIcon
     }
   })
   export default class Public extends Vue {
@@ -194,7 +281,33 @@
         }
       },
       phone: "",
-      address: ""
+      address: "",
+      team: [
+        {
+          name: "Mithila",
+          position: "Diseñadora Web",
+          linkedin: "https://www.linkedin.com/in/mithila"
+        },
+        {
+          name: "Ellen Eyre",
+          position: "Desarrolladora Web",
+          linkedin: "https://www.linkedin.com/in/elleneyre"
+        },
+        {
+          name: "Sanjida",
+          position: "Especialista en Marketing digital",
+          linkedin: "https://www.linkedin.com/in/sanjida"
+        },
+        {
+          name: "Robin Hood",
+          position: "Desarrollador de App",
+          linkedin: "https://www.linkedin.com/in/robinhood"
+        }
+      ],
+      teamTitle: "",
+      teamTitleColor: "",
+      teamSubtitle: "",
+      teamSubtitleColor: ""
     };
     loaded = false;
 
@@ -234,6 +347,21 @@
       return !isEqual(this.prevForm, this.publicWebForm);
     }
 
+    teamForm = {
+      image: null,
+      name: "",
+      position: "",
+      linkedin: ""
+    };
+
+    teamFields = [
+      { id: "dot", label: this.$t("web.public.teamForm.delete") },
+      { id: "name", label: this.$t("web.public.teamForm.name") },
+      { id: "position", label: this.$t("web.public.teamForm.position") },
+      { id: "linkedin", label: this.$t("web.public.teamForm.linkedin") },
+      { id: "delete", label: this.$t("web.public.teamForm.delete") },
+    ];
+
     async handlePublishWebsite(active: boolean, websiteId: string) {
       try {
         //TODO: update the member to be active
@@ -272,6 +400,52 @@
       }
     }
 
+    removeTeamMember(e: any) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const teamArr = this.publicWebForm.team as any[];
+      const memberIdx = teamArr.findIndex(el => el === e);
+      teamArr.splice(memberIdx, 1);
+    }
+
+    onTeamSubmit() {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const teamArr = this.publicWebForm.team as any[];
+
+      teamArr.push({
+        name: this.teamForm.name,
+        position: this.teamForm.position,
+        linkedin: this.teamForm.linkedin,
+        photo: this.teamForm.image
+      });
+
+      this.teamForm.image = null;
+      this.teamForm.name = "";
+      this.teamForm.position = "";
+      this.teamForm.linkedin = "";
+    }
+
+    async mounted() {
+      try {
+        const data = await apiWebsite.getWebsiteSections(this.websiteId, "web");
+        this.publicWebForm.chosenTemplateId = data.templateId;
+        this.publicWebForm.url = data.properties.general.url;
+        this.loaded = true;
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        this.$notify({
+          type: "error",
+          text: this.$tc("web.public.notify.error"),
+          ignoreDuplicates: true
+        });
+      }
+
+      // not perfect but it works for now
+      setTimeout(() => {
+        this.prevForm = cloneDeep(this.publicWebForm);
+      }, 3000);
+    }
+
+
     async onPublicWebSubmit() {
       const transparency = (
         await parseFile(this.publicWebForm.accountability)
@@ -282,7 +456,18 @@
         };
       });
 
-      console.log(transparency);
+      const team = [];
+      for await (const member of this.publicWebForm.team) {
+        if (member.photo && member.photo.files) {
+          let photo = await parseFile(member.photo);
+          photo = photo[0];
+          team.push({ ...member, photo });
+        } else {
+          team.push({ ...member });
+        }
+      }
+
+      const imagesToRemove = [];
 
       const hasTemplateChanged =
         this.publicWebForm.chosenTemplateId !== this.templateId;
@@ -331,27 +516,6 @@
             ignoreDuplicates: true
           } as NotificationOptions);
         });
-    }
-
-    async mounted() {
-      try {
-        const data = await apiWebsite.getWebsiteSections(this.websiteId, "web");
-        this.publicWebForm.chosenTemplateId = data.templateId;
-        this.publicWebForm.url = data.properties.general.url;
-        this.loaded = true;
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        this.$notify({
-          type: "error",
-          text: this.$tc("web.public.notify.error"),
-          ignoreDuplicates: true
-        });
-      }
-
-      // not perfect but it works for now
-      setTimeout(() => {
-        this.prevForm = cloneDeep(this.publicWebForm);
-      }, 3000);
     }
   }
 </script>
@@ -601,8 +765,47 @@
       }
 
       &-team {
+        &__title {
+          display: flex;
+          align-items: flex-start;
+          gap: 30px;
+          width: 100%;
+          
+          .team-section {
+            display: flex;
+            width: 563px;
+            gap: 18px;
+            
+            .formulate-input-element--text{
+                width: 382px;
+            }
+            .formulate-input[data-classification=text-color]{                
+                width: 153px;
+            }
+            // .formulate-input-help{
+            //   display: inline-block;
+            //   margin-right: 10px;
+            // }
+          }
+          }
+        h3 {
+          color: $color-black-03;
+          font-size: 16px;
+          font-weight: 400;
+        }
+        .title-table-container {
+          display: flex;
+          flex-direction: column;
+          h3 {
+            margin-bottom: 35px;
+          }
+        }
+        
         &__form {
           display: flex;
+          row {
+            gap: 30px
+          }
         }
 
         &__image {
@@ -612,6 +815,15 @@
 
         &__texts {
           flex-grow: 1;
+          &:last-child{
+            button{
+              margin-left: auto;
+              margin-right: 15px;
+            }            
+          }
+        }
+        .lz-table__tools {
+          display: none;
         }
 
         .lz-table__th--delete {

@@ -33,6 +33,7 @@ export default {
     generic: "Ops! Ha ocurrido un error, por favor inténtalo de nuevo.",
     accountAlreadyExists: "Ya existe una cuenta con este email",
     companyAlreadyExists: "Ya existe una empresa con este nombre",
+    validationError: "Asegúrese de que su CIF / DNI sea correcto"
   },
 
   logout: "cerrar sesión",
