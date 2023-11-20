@@ -41,6 +41,29 @@
             )            
 
       <choose-template :chosenTemplateId='publicWebForm.chosenTemplateId' :handleChooseTemplate='handleChooseTemplate' />
+      
+      section.public-impact
+        .public-impact__header
+          h2.h2--dash {{ $t('web.public.impactForm.title') }}
+          p {{ $t('web.public.impactForm.subtitle') }}
+          .public-impact__content
+            .impact-item(v-for="(item, index) in publicWebForm.impactData" :key="index")
+              formulate-input(
+                type="image"
+                :name="`impactData[${index}].image`"
+                :label="$t(`web.public.impactForm.icon.${index + 1}`)"
+                :help="$t('web.public.impactForm.icon.help')"
+              )
+              formulate-input(
+                type="text"
+                :name="`impactData[${index}].text`"
+                :label="$t(`web.public.impactForm.text.${index + 1}`)"
+              )
+              formulate-input(
+                type="text"
+                :name="`impactData[${index}].amount`"
+                :label="$t(`web.public.impactForm.amount.${index + 1}`)"
+              )
 
       section.public-team
         .public-team__header
@@ -263,6 +286,32 @@
       active: false,
       url: "",
       chosenTemplateId: "9bdd56dc-edf8-432a-bff4-fb5f2fc0e90c",
+      impactData: [
+      {
+        id: 1,
+        image: "https://www.example.com/impact1.jpg",
+        text: "Positive Impact One",
+        amount: "$1000"
+      },
+      {
+        id: 2,
+        image: "https://www.example.com/impact2.jpg",
+        text: "Positive Impact Two",
+        amount: "$2000"
+      },
+      {
+        id: 3,
+        image: "https://www.example.com/impact3.jpg",
+        text: "Positive Impact Three",
+        amount: "$3000"
+      },
+      {
+        id: 4,
+        image: "https://www.example.com/impact4.jpg",
+        text: "Positive Impact Four",
+        amount: "$4000"
+      }
+    ],
       footer: {
         info: {
           terms: "",
@@ -307,7 +356,16 @@
       teamTitle: "",
       teamTitleColor: "",
       teamSubtitle: "",
-      teamSubtitleColor: ""
+      teamSubtitleColor: "",
+      impact: false,
+      impact_field_one: "",
+      impact_field_two: "",
+      impact_field_three: "",
+      impact_field_four: "",
+      impact_value_one: 0,
+      impact_value_two: 0,
+      impact_value_three: 0,
+      impact_value_four: 0,
     };
     loaded = false;
 
@@ -693,6 +751,25 @@
             }
           }
         }
+      }
+
+      &-impact{
+        &__content {
+          display: inline-flex;
+          align-items: flex-start; 
+          gap: 43px;
+          margin-top: 42px;
+        
+        .impact-item {
+          display: flex;
+          flex-direction: column;
+          width: 256px; 
+          gap: 24px;
+
+          formulate-input {
+            width: 100%;
+          }
+        }}
       }
 
       &-contact {
