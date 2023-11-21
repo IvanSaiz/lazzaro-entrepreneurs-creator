@@ -42,6 +42,51 @@
 
       <choose-template :chosenTemplateId='publicWebForm.chosenTemplateId' :handleChooseTemplate='handleChooseTemplate' />
 
+
+      section.public-whyUs
+        .public-whyUs__header
+          h2.h2--dash {{ $t('web.public.whyChooseUsForm.title') }}
+          h3 {{ $t('web.public.whyChooseUsForm.subtitle') }}
+          .form__row
+            FormulateInput(
+              type="image"
+              :label="$t('web.public.whyChooseUsForm.image')"
+              label-position="before"
+              name="logo"
+              :help="$t('web.public.whyChooseUsForm.imageHelperText')"
+            )
+            .form-section
+              .section-row
+                formulate-input(
+                    type="text"
+                    name="teamTitle"
+                    :label="$t('web.public.whyChooseUsForm.formTitle')"
+                    :help="$t('web.public.whyChooseUsForm.titleHelperText')"
+                  )
+                FormulateInput#primary-color(
+                  type="textColor"
+                  name="teamTitleColor"
+                  :label="$t('auth.onboarding.stepStyle.form.textColour')"
+                  value="#1081F2"
+                  )
+              lz-editor-input(
+              :label="$t('web.public.whyChooseUsForm.description')"
+              v-model="publicWebForm.footer.info.transparency.description"
+              )
+        .public-whyUs__content
+          .text-item(v-for="(item, index) in publicWebForm.impactData" :key="index")
+            formulate-input(
+              type="text"
+              :name="`impactData[${index}].text`"
+              :label="$t(`web.public.whyChooseUsForm.titles.${index + 1}`)"
+            )
+            formulate-input(
+              type="text"
+              :name="`impactData[${index}].amount`"
+              :label="$t(`web.public.whyChooseUsForm.descriptions.${index + 1}`)"
+            )
+
+
       section.public-bookings
         .public-bookings__header
           h2.h2--dash {{ $t('web.public.bookingsForm.title') }}
@@ -843,6 +888,62 @@
         }
       }
 
+      &-whyUs {
+        &__header {
+          h3 {
+            color: $color-black-03;
+            font-size: 16px;
+            font-weight: 400;
+          }
+        }
+        .form__row {
+          gap: 22px;
+          > :first-child {
+            min-width: 140px;
+            .formulate-input-element {
+              height: 148px;
+              width: 140px;
+          }
+          }
+        }
+        .form-section {
+          display: flex;
+          flex-direction: column;
+          .section-row {
+            display: flex;
+            width: 970px;
+
+            > :first-child {
+              width: 82%; 
+            }
+
+            > :last-child {
+              flex-grow: 1; 
+              margin-left: 18px;
+            }
+          }
+        }
+
+        &__content {
+          display: inline-flex;
+          align-items: flex-start; 
+          gap: 44px;
+          margin-top: 4px;
+        
+        .text-item {
+          display: flex;
+          flex-direction: column;
+          width: 256px; 
+          gap: 24px;
+
+          formulate-input {
+            width: 100%;
+          }
+        }
+      }
+
+      }
+
       &-bookings {
         &__header {
           h3 {
@@ -859,7 +960,7 @@
               height: 148px;
               width: 140px;
           }
-        }
+          }
         }
         .form-section {
           display: flex;
@@ -938,7 +1039,8 @@
           formulate-input {
             width: 100%;
           }
-        }}
+        }
+      }
       }
 
       &-contact {
