@@ -175,6 +175,29 @@ export default {
       largeDescription: "Descripción larga"
     },
 
+    whyChooseUsForm: {
+      title: "¿Por qué elegirnos?",
+      subtitle: "Escribe aquí lo que te diferencia del resto",
+      image: "Imagen principal*",
+      imageHelperText: "180x60. Máx 25MB",
+      formTitle: "Título",
+      titleHelperText: "(Máx 80 caracteres)",
+      description: "Descripción*",
+      titles: {
+        1: "Título 1*",
+        2: "Título 2*",
+        3: "Título 3",
+        4: "Título 4",
+        helper: "(Máx 30 caracteres)"
+      },
+      descriptions: {
+        1: "Texto descriptivo 1*",
+        2: "Texto descriptivo 2*",
+        3: "Texto descriptivo 3",
+        4: "Texto descriptivo 4"
+      }
+    },
+
     bookingsForm:{
       title: "Reservas",
       subtitle: "Dá la oportunidad a tus usuarios a que puedan reunirse contigo.",
