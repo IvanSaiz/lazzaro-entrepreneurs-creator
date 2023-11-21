@@ -41,6 +41,57 @@
             )            
 
       <choose-template :chosenTemplateId='publicWebForm.chosenTemplateId' :handleChooseTemplate='handleChooseTemplate' />
+
+      section.public-bookings
+        .public-bookings__header
+          h2.h2--dash {{ $t('web.public.bookingsForm.title') }}
+          h3 {{ $t('web.public.bookingsForm.subtitle') }}
+          .form__row
+            FormulateInput(
+              type="image"
+              :label="$t('web.public.brandForm.logo.label')"
+              label-position="before"
+              name="logo"
+              :help="$t('web.public.brandForm.logo.help')"
+            )
+            .form-section
+              .section-row
+                formulate-input(
+                    type="text"
+                    name="teamTitle"
+                    :label="$t('web.public.bookingsForm.formTitle')"
+                    :help="$t('web.public.bookingsForm.titleHelper')"
+                  )
+                FormulateInput#primary-color(
+                  type="textColor"
+                  name="teamTitleColor"
+                  :label="$t('auth.onboarding.stepStyle.form.textColour')"
+                  value="#1081F2"
+                  )
+              .section-row
+                formulate-input(
+                    type="text"
+                    name="teamTitle"
+                    :label="$t('web.public.bookingsForm.formSubtitle')"
+                    :help="$t('web.public.bookingsForm.subtitleHelper')"
+                  )
+                FormulateInput#primary-color(
+                  type="textColor"
+                  name="teamTitleColor"
+                  :label="$t('auth.onboarding.stepStyle.form.textColour')"
+                  value="#1081F2"
+                  )
+              .links-row
+                formulate-input(
+                  type="text"
+                  name="teamTitle"
+                  :label="$t('web.public.bookingsForm.button')"
+                )
+                formulate-input(
+                  type="text"
+                  name="teamTitle"
+                  :label="$t('web.public.bookingsForm.link')"
+                )
       
       section.public-reviews
         .public-reviews__header
@@ -792,7 +843,57 @@
         }
       }
 
-      &-reviews{
+      &-bookings {
+        &__header {
+          h3 {
+            color: $color-black-03;
+            font-size: 16px;
+            font-weight: 400;
+          }
+        }
+        .form__row {
+          gap: 22px;
+          > :first-child {
+            min-width: 140px;
+            .formulate-input-element {
+              height: 148px;
+              width: 140px;
+          }
+        }
+        }
+        .form-section {
+          display: flex;
+          flex-direction: column;
+          .section-row {
+            display: flex;
+            width: 970px;
+
+            > :first-child {
+              width: 82%; 
+            }
+
+            > :last-child {
+              flex-grow: 1; 
+              margin-left: 18px;
+            }
+          }
+          .links-row {
+            display: flex;
+            width: 970px;
+            gap: 22px;
+            > :first-child {
+              width: 24%; 
+            }
+
+            > :last-child {
+              flex-grow: 1; 
+              margin-left: 18px;
+            }
+          }
+        }
+
+      }
+      &-reviews {
         &__header {
           h3 {
             color: $color-black-03;
