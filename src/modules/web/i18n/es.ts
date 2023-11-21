@@ -129,6 +129,7 @@ export default {
         accountability: "Transparencia y rendición de cuentas"
       }
     },
+    
     teamForm: {
       title: "Equipo",
       subtitle: "Muestra a todo el mundo de que tipo de pasta estás hecho.",
@@ -153,6 +154,7 @@ export default {
       table: "Tu equipo",
       delete: ""
     },
+
     descriptionForm: {
       title: "Descripción",
       subtitle:
@@ -172,6 +174,20 @@ export default {
       },
       largeDescription: "Descripción larga"
     },
+
+    bookingsForm:{
+      title: "Reservas",
+      subtitle: "Dá la oportunidad a tus usuarios a que puedan reunirse contigo.",
+      image: "Imagen",
+      formTitle: "Título",
+      formSubtitle: "Subtítulo*",
+      imageHelper: "180x60. Máx 25MB",
+      titleHelper: "(Máx 80 caracteres)",
+      subtitleHelper: "(Máx 140 caracteres)",
+      button : "Botón* ",
+      link: "Link a tu página de reserva*"
+    },
+
     reviewsForm: {
       title: "Reseñas",
       subtitle: "Vincula tu web con tu perfil de Google y permite que tus usuarios vean tus reseñas.",
@@ -181,6 +197,7 @@ export default {
       subtitleHelper: "(Máx 140 caracteres)",
       link: "Link a tu perfil de Google My Business*"
     },
+
     impactForm: {
       title: "Datos de impacto",
       subtitle: "Modifica los datos de impacto visibles en la web.",

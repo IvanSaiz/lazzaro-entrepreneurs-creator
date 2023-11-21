@@ -83,12 +83,14 @@ export default {
         second: "Theme colour 2"
       }
     },
+
     contactForm: {
       title: "Contact Form",
       subtitle: "Allow a potential customer to contact you. Configure the title and subtitle of your contact page.",
       phone: "Phone no.",
       location: "Location"
     },
+
     contentForm: {
       title: "Content",
       subtitle: "Choose what sections will appear in your public website.",
@@ -109,6 +111,7 @@ export default {
       events: "Events",
       volunteers: "Volunteers"
     },
+
     footer: {
       title: "Footer",
       subtitle: "Allows a potential customer to contact you.",
@@ -130,6 +133,7 @@ export default {
         accountability: "Transparency and accountability"
       }
     },
+
     teamForm: {
       title: "Team",
       subtitle: "Create the profile of each of the members of your company. With the link to their Linkedin it will be much easier to give visibility to them and the company.",
@@ -154,6 +158,7 @@ export default {
       table: "Your team",
       delete: ""
     },
+
     descriptionForm: {
       title: "Description",
       subtitle:
@@ -173,6 +178,20 @@ export default {
       },
       largeDescription: "Full description"
     },
+
+    bookingsForm:{
+      title: "Bookings",
+      subtitle: "Give your users the opportunity to meet with you.",
+      image: "Image",
+      formTitle: "Title",
+      formSubtitle: "Subtitle*",
+      imageHelper: "180x60. Max 25MB",
+      titleHelper: "(Max 80 characters)",
+      subtitleHelper: "(Max 140 characters)",
+      button : "Button* ",
+      link: "Link to your booking page*"
+    },
+
     reviewsForm: {
       title: "Reviews",
       subtitle: "Link your website to your Google profile and let your users see your reviews.",
@@ -182,6 +201,7 @@ export default {
       subtitleHelper: "(Max 140 characters)",
       link: "Link to your Google My Business profile*"
     },
+
     impactForm: {
       title: "Impact data",
       subtitle: "Modify the impact data visible on the website.",
