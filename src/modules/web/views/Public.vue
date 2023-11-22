@@ -42,6 +42,86 @@
 
       <choose-template :chosenTemplateId='publicWebForm.chosenTemplateId' :handleChooseTemplate='handleChooseTemplate' />
 
+      section.public-whoWeAre
+        .public-whoWeAre__header
+          h2.h2--dash {{ $t('web.public.whoWeAreForm.title') }}
+          h3 {{ $t('web.public.whoWeAreForm.subtitle') }}
+          .form__row
+            FormulateInput(
+              type="image"
+              :label="$t('web.public.whoWeAreForm.form.image')"
+              label-position="before"
+              name="logo"
+              :help="$t('web.public.whoWeAreForm.form.imageHelper')"
+            )
+            .form-section
+              .section-row
+                formulate-input(
+                    type="text"
+                    name="teamTitle"
+                    :label="$t('web.public.whoWeAreForm.form.title')"
+                    :help="$t('web.public.whoWeAreForm.form.titleHelper')"
+                  )
+                FormulateInput#primary-color(
+                  type="textColor"
+                  name="teamTitleColor"
+                  :label="$t('auth.onboarding.stepStyle.form.textColour')"
+                  value="#1081F2"
+                  )
+              .section-row
+                formulate-input(
+                    type="text"
+                    name="teamTitle"
+                    :label="$t('web.public.whoWeAreForm.form.subtitle')"
+                    :help="$t('web.public.whoWeAreForm.form.subtitleHelper')"
+                  )
+                FormulateInput#primary-color(
+                  type="textColor"
+                  name="teamTitleColor"
+                  :label="$t('auth.onboarding.stepStyle.form.textColour')"
+                  value="#1081F2"
+                  )
+              lz-editor-input(
+              :label="$t('web.public.whoWeAreForm.form.description')"
+              v-model="publicWebForm.footer.info.transparency.description"
+              )
+        section.public-whoWeAre
+          .public-whoWeAre__header
+            h3.h3--dash {{ $t('web.public.whoWeAreForm.features.title') }}
+
+
+        .public-whoWeAre__content
+          .text-item(v-for="(item, index) in publicWebForm.impactData" :key="index")
+            formulate-input(
+                type="image"
+                :name="`impactData[${index}].image`"
+                :label="$t(`web.public.whoWeAreForm.features.icon.${index + 1}`)"
+                :help="$t('web.public.whoWeAreForm.features.icon.help')"
+              )
+            formulate-input(
+              type="text"
+              :name="`impactData[${index}].text`"
+              :label="$t(`web.public.whoWeAreForm.features.titles.${index + 1}`)"
+            )
+            formulate-input(
+              type="text"
+              :name="`impactData[${index}].amount`"
+              :label="$t(`web.public.whoWeAreForm.features.descriptions.${index + 1}`)"
+            )
+
+        hr.hr--dash
+      
+        .public-whoWeAre__cta
+          formulate-input(
+            type="text"
+            name="teamTitle"
+            :label="$t('web.public.whoWeAreForm.features.button')"
+          )
+          formulate-input(
+            type="text"
+            name="teamTitle"
+            :label="$t('web.public.whoWeAreForm.features.link')"
+          )
 
       section.public-whyUs
         .public-whyUs__header
@@ -390,7 +470,7 @@
   import LzTable from "@/components/Table.vue";
   import LzEditorInput from "@/components/EditorInput.vue";
   import LzModal from "@/components/Modal.vue";
-  import {DotsIcon} from '@/components';
+  import { DotsIcon } from "@/components";
   import { checkSubscriptionPlan } from "@/utils";
   import { parseFile } from "@/utils/parseFile";
   import { apiBrand, apiWebsite } from "../api";
@@ -422,31 +502,31 @@
       url: "",
       chosenTemplateId: "9bdd56dc-edf8-432a-bff4-fb5f2fc0e90c",
       impactData: [
-      {
-        id: 1,
-        image: "https://www.example.com/impact1.jpg",
-        text: "Positive Impact One",
-        amount: "$1000"
-      },
-      {
-        id: 2,
-        image: "https://www.example.com/impact2.jpg",
-        text: "Positive Impact Two",
-        amount: "$2000"
-      },
-      {
-        id: 3,
-        image: "https://www.example.com/impact3.jpg",
-        text: "Positive Impact Three",
-        amount: "$3000"
-      },
-      {
-        id: 4,
-        image: "https://www.example.com/impact4.jpg",
-        text: "Positive Impact Four",
-        amount: "$4000"
-      }
-    ],
+        {
+          id: 1,
+          image: "https://www.example.com/impact1.jpg",
+          text: "Positive Impact One",
+          amount: "$1000"
+        },
+        {
+          id: 2,
+          image: "https://www.example.com/impact2.jpg",
+          text: "Positive Impact Two",
+          amount: "$2000"
+        },
+        {
+          id: 3,
+          image: "https://www.example.com/impact3.jpg",
+          text: "Positive Impact Three",
+          amount: "$3000"
+        },
+        {
+          id: 4,
+          image: "https://www.example.com/impact4.jpg",
+          text: "Positive Impact Four",
+          amount: "$4000"
+        }
+      ],
       footer: {
         info: {
           terms: "",
@@ -500,7 +580,7 @@
       impact_value_one: 0,
       impact_value_two: 0,
       impact_value_three: 0,
-      impact_value_four: 0,
+      impact_value_four: 0
     };
     loaded = false;
 
@@ -552,7 +632,7 @@
       { id: "name", label: this.$t("web.public.teamForm.name") },
       { id: "position", label: this.$t("web.public.teamForm.position") },
       { id: "linkedin", label: this.$t("web.public.teamForm.linkedin") },
-      { id: "delete", label: this.$t("web.public.teamForm.delete") },
+      { id: "delete", label: this.$t("web.public.teamForm.delete") }
     ];
 
     async handlePublishWebsite(active: boolean, websiteId: string) {
@@ -637,7 +717,6 @@
         this.prevForm = cloneDeep(this.publicWebForm);
       }, 3000);
     }
-
 
     async onPublicWebSubmit() {
       const transparency = (
@@ -888,6 +967,73 @@
         }
       }
 
+      &-whoWeAre {
+        &__header {
+          h3 {
+            color: $color-black-03;
+            font-size: 16px;
+            font-weight: 400;
+          }
+        }
+        .form__row {
+          gap: 22px;
+          > :first-child {
+            min-width: 140px;
+            .formulate-input-element {
+              height: 148px;
+              width: 140px;
+            }
+          }
+        }
+        .form-section {
+          display: flex;
+          flex-direction: column;
+          .section-row {
+            display: flex;
+            width: 970px;
+
+            > :first-child {
+              width: 82%;
+            }
+
+            > :last-child {
+              flex-grow: 1;
+              margin-left: 18px;
+            }
+          }
+        }
+
+        &__content {
+          display: inline-flex;
+          align-items: flex-start;
+          gap: 44px;
+          margin-top: 4px;
+          margin-bottom: 43px;
+
+          .text-item {
+            display: flex;
+            flex-direction: column;
+            width: 256px;
+            gap: 24px;
+
+            formulate-input {
+              width: 100%;
+            }
+          }
+        }
+        &__cta {
+            display: flex;
+            margin-top: 22px;
+          > :first-child {
+              width: 24%;
+            }
+          > :last-child {
+            flex-grow: 1;
+            margin-left: 18px;
+          }  
+        }
+      }
+
       &-whyUs {
         &__header {
           h3 {
@@ -903,7 +1049,7 @@
             .formulate-input-element {
               height: 148px;
               width: 140px;
-          }
+            }
           }
         }
         .form-section {
@@ -914,11 +1060,11 @@
             width: 970px;
 
             > :first-child {
-              width: 82%; 
+              width: 82%;
             }
 
             > :last-child {
-              flex-grow: 1; 
+              flex-grow: 1;
               margin-left: 18px;
             }
           }
@@ -926,22 +1072,21 @@
 
         &__content {
           display: inline-flex;
-          align-items: flex-start; 
+          align-items: flex-start;
           gap: 44px;
           margin-top: 4px;
-        
-        .text-item {
-          display: flex;
-          flex-direction: column;
-          width: 256px; 
-          gap: 24px;
 
-          formulate-input {
-            width: 100%;
+          .text-item {
+            display: flex;
+            flex-direction: column;
+            width: 256px;
+            gap: 24px;
+
+            formulate-input {
+              width: 100%;
+            }
           }
         }
-      }
-
       }
 
       &-bookings {
@@ -959,7 +1104,7 @@
             .formulate-input-element {
               height: 148px;
               width: 140px;
-          }
+            }
           }
         }
         .form-section {
@@ -970,11 +1115,11 @@
             width: 970px;
 
             > :first-child {
-              width: 82%; 
+              width: 82%;
             }
 
             > :last-child {
-              flex-grow: 1; 
+              flex-grow: 1;
               margin-left: 18px;
             }
           }
@@ -983,16 +1128,15 @@
             width: 970px;
             gap: 22px;
             > :first-child {
-              width: 24%; 
+              width: 24%;
             }
 
             > :last-child {
-              flex-grow: 1; 
+              flex-grow: 1;
               margin-left: 18px;
             }
           }
         }
-
       }
       &-reviews {
         &__header {
@@ -1008,39 +1152,39 @@
           align-items: flex-start;
           gap: 30px;
           width: 100%;
-          
+
           .reviews-section {
             display: flex;
             width: 563px;
             gap: 18px;
-            
-            .formulate-input-element--text{
-                width: 382px;
+
+            .formulate-input-element--text {
+              width: 382px;
             }
-            .formulate-input[data-classification=text-color]{                
-                width: 153px;
+            .formulate-input[data-classification="text-color"] {
+              width: 153px;
             }
           }
         }
       }
-      &-impact{
+      &-impact {
         &__content {
           display: inline-flex;
-          align-items: flex-start; 
+          align-items: flex-start;
           gap: 43px;
           margin-top: 42px;
-        
-        .impact-item {
-          display: flex;
-          flex-direction: column;
-          width: 256px; 
-          gap: 24px;
 
-          formulate-input {
-            width: 100%;
+          .impact-item {
+            display: flex;
+            flex-direction: column;
+            width: 256px;
+            gap: 24px;
+
+            formulate-input {
+              width: 100%;
+            }
           }
         }
-      }
       }
 
       &-contact {
@@ -1118,17 +1262,17 @@
           align-items: flex-start;
           gap: 30px;
           width: 100%;
-          
+
           .team-section {
             display: flex;
             width: 563px;
             gap: 18px;
-            
-            .formulate-input-element--text{
-                width: 382px;
+
+            .formulate-input-element--text {
+              width: 382px;
             }
-            .formulate-input[data-classification=text-color]{                
-                width: 153px;
+            .formulate-input[data-classification="text-color"] {
+              width: 153px;
             }
           }
         }
@@ -1144,11 +1288,11 @@
             margin-bottom: 35px;
           }
         }
-        
+
         &__form {
           display: flex;
           row {
-            gap: 30px
+            gap: 30px;
           }
         }
 
@@ -1159,11 +1303,11 @@
 
         &__texts {
           flex-grow: 1;
-          &:last-child{
-            button{
+          &:last-child {
+            button {
               margin-left: auto;
               margin-right: 15px;
-            }            
+            }
           }
         }
         .lz-table__tools {
@@ -1216,7 +1360,7 @@
     }
 
     .public-buttons {
-      margin-top: 5.6rem
+      margin-top: 5.6rem;
     }
 
     .public-buttons .save-btn {
