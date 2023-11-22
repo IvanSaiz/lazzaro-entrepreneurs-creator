@@ -175,6 +175,45 @@ export default {
       largeDescription: "Descripción larga"
     },
 
+    whoWeAreForm: {
+      title: "Quienes somos",
+      subtitle: "Muestra lo que haces al mundo",
+      form: {
+        image: "Imagen principal**",
+        title: "Título",
+        subtitle: "Subtítulo",
+        imageHelper: "180x60. Máx 25MB",
+        titleHelper: "(Máx 80 caracteres)",
+        subtitleHelper: "(Máx 140 caracteres)",
+        description: "Descripción*"
+      },
+      features: {
+        title: "Características de la empresa",
+        icon: {
+          1: "Icon 1",
+          2: "Icon 2",
+          3: "Icon 3",
+          4: "Icon 4",
+          help: "60x60. Max 25MB"
+        },
+        titles: {
+          1: "Title 1*",
+          2: "Title 2*",
+          3: "Title 3",
+          4: "Title 4",
+          helper: "(Max 30 characters)"
+        },
+        descriptions: {
+          1: "Descriptive text 1*",
+          2: "Descriptive text 2*",
+          3: "Descriptive text 3",
+          4: "Descriptive text 4"
+        },
+        button: "Button",
+        link: "Link of the button"
+      }
+    },
+    
     whyChooseUsForm: {
       title: "¿Por qué elegirnos?",
       subtitle: "Escribe aquí lo que te diferencia del resto",

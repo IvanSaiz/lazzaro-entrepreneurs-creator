@@ -75,6 +75,15 @@ h4 {
   margin-bottom: 18px;
 }
 
+hr {
+  &.hr {
+    &--dash {      
+      border: none;
+      border-bottom: 1px dashed $color-black-02;
+    }
+  }
+}
+
 strong {
   font-weight: 700;
 }
