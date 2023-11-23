@@ -175,6 +175,41 @@ export default {
       largeDescription: "Descripción larga"
     },
 
+    personalizeWebForm: {
+      title: "Personaliza tu web",
+      subtitle: "Elige los elementos que encajan contigo",
+      form: {
+        logo: "Logotipo*",
+        mainTypography: "Tipografía principal",
+        secondTypography: "Tipografía secundaria",
+        buttonsColor: "Color botones",
+        menuColor: "Color menú",
+        footerColor: "Color Footer",
+        logoHelper: "60x60. Máx 25MB"
+      }
+    },
+    
+    homepageForm: {
+      title: "Portada",
+      subtitle: "Las primeras impresiones son las que importan",
+      form: {
+        image: "Imagen principal*",
+        title: "Título",
+        subtitle: "Subtítulo",
+        imageHelper: "180x60. Máx 25MB",
+        titleHelper: "(Máx 80 characters)",
+        subtitleHelper: "(Máx 140 characters)",
+        buttons: {
+          1: "Boton 1*",
+          2: "Boton 2*",
+        },
+        links: {
+          1: "Link Botón 1*",
+          2: "Link Botón 2*",
+        }
+      }
+    },
+
     whoWeAreForm: {
       title: "Quienes somos",
       subtitle: "Muestra lo que haces al mundo",

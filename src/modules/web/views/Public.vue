@@ -42,6 +42,114 @@
 
       <choose-template :chosenTemplateId='publicWebForm.chosenTemplateId' :handleChooseTemplate='handleChooseTemplate' />
 
+      section.public-personalizeWeb
+        .public-personalizeWeb__header
+          h2.h2--dash {{ $t('web.public.personalizeWebForm.title') }}
+          h3 {{ $t('web.public.personalizeWebForm.subtitle') }}
+
+        .form__row
+          FormulateInput(
+            type="image"
+            :label="$t('web.public.personalizeWebForm.form.logo')"
+            label-position="before"
+            name="logo"
+            :help="$t('web.public.personalizeWebForm.form.logoHelper')"
+          )
+          .form-section
+            FormulateInput(
+              type="select"
+              name="template"
+              :label="$t('web.public.personalizeWebForm.form.mainTypography')"
+              :label-class="['required']"
+              :options="styleOptions"
+              validation="required"
+              :validation-name="$t('web.public.personalizeWebForm.form')"
+              :placeholder="$t('auth.signup.form.choose')"
+            )  
+            FormulateInput(
+              type="select"
+              name="template"
+              :label="$t('web.public.personalizeWebForm.form.secondTypography')"
+              :label-class="['required']"
+              :options="styleOptions"
+              validation="required"
+              :validation-name="$t('auth.onboarding.stepStyle.form.style')"
+              :placeholder="$t('auth.signup.form.choose')"
+            )
+            .form-colors
+              FormulateInput#primary-color(
+                type="textColor"
+                name="teamTitleColor"
+                :label="$t('web.public.personalizeWebForm.form.buttonsColor')"
+                value="#1081F2"
+                )
+              FormulateInput#primary-color(
+                type="textColor"
+                name="teamTitleColor"
+                :label="$t('web.public.personalizeWebForm.form.menuColor')"
+                value="#1081F2"
+                )
+              FormulateInput#primary-color(
+                type="textColor"
+                name="teamTitleColor"
+                :label="$t('web.public.personalizeWebForm.form.footerColor')"
+                value="#1081F2"
+                )
+
+          
+
+
+      section.public-homepage
+        .public-homepage__header
+          h2.h2--dash {{ $t('web.public.homepageForm.title') }}
+          h3 {{ $t('web.public.homepageForm.subtitle') }}
+          .form__row
+            FormulateInput(
+              type="image"
+              :label="$t('web.public.homepageForm.form.image')"
+              label-position="before"
+              name="logo"
+              :help="$t('web.public.homepageForm.form.imageHelper')"
+            )
+            .form-section
+              .section-row
+                formulate-input(
+                    type="text"
+                    name="teamTitle"
+                    :label="$t('web.public.homepageForm.form.title')"
+                    :help="$t('web.public.homepageForm.form.titleHelper')"
+                  )
+                FormulateInput#primary-color(
+                  type="textColor"
+                  name="teamTitleColor"
+                  :label="$t('auth.onboarding.stepStyle.form.textColour')"
+                  value="#1081F2"
+                  )
+              .section-row
+                formulate-input(
+                    type="text"
+                    name="teamTitle"
+                    :label="$t('web.public.homepageForm.form.subtitle')"
+                    :help="$t('web.public.homepageForm.form.subtitleHelper')"
+                  )
+                FormulateInput#primary-color(
+                  type="textColor"
+                  name="teamTitleColor"
+                  :label="$t('auth.onboarding.stepStyle.form.textColour')"
+                  value="#1081F2"
+                  )
+              .form-section__cta(v-for="(item, index) in publicWebForm.homepage" :key="index")            
+                formulate-input(
+                  type="text"
+                  :name="`homepage[${index}].text`"
+                  :label="$t(`web.public.homepageForm.form.buttons.${index + 1}`)"
+                )
+                formulate-input(
+                  type="text"
+                  :name="`homepage[${index}].amount`"
+                  :label="$t(`web.public.homepageForm.form.links.${index + 1}`)"
+                )
+
       section.public-whoWeAre
         .public-whoWeAre__header
           h2.h2--dash {{ $t('web.public.whoWeAreForm.title') }}
@@ -568,6 +676,18 @@
           linkedin: "https://www.linkedin.com/in/robinhood"
         }
       ],
+      homepage: [
+        {
+          id: 1,
+          button: "",
+          link:"" 
+        },
+        {
+          id: 2,
+          button: "",
+          link:"" 
+        }
+      ],
       teamTitle: "",
       teamTitleColor: "",
       teamSubtitle: "",
@@ -965,6 +1085,85 @@
             }
           }
         }
+      }
+
+      &-personalizeWeb {
+        &__header {
+          h3 {
+            color: $color-black-03;
+            font-size: 16px;
+            font-weight: 400;
+          }
+        }
+
+        .form__row {
+          > :first-child {
+            flex-basis: 16.2%;
+            .formulate-input-element {
+              height: 148px;
+            }
+          }
+        }
+        .form-section {
+          display: flex;
+          flex-direction: column;
+          gap: 18px;
+          
+          .form-colors {
+            display: flex;
+            gap: 42px;
+            flex-wrap: wrap;
+          }
+        }        
+      }
+
+      &-homepage {
+        &__header {
+          h3 {
+            color: $color-black-03;
+            font-size: 16px;
+            font-weight: 400;
+          }
+        }
+        .form__row {
+          gap: 10px;
+          > :first-child {
+            min-width: 140px;
+            .formulate-input-element {
+              height: 148px;
+              width: 140px;
+            }
+          }
+        }
+        .form-section {
+          display: flex;
+          flex-direction: column;
+          .section-row {
+            display: flex;
+            width: 970px;
+
+            > :first-child {
+              width: 82%;
+            }
+
+            > :last-child {
+              flex-grow: 1;
+              margin-left: 18px;
+            }
+          }
+          
+          &__cta {
+            display: flex;
+            margin-top: 10px;
+            > :first-child {
+              width: 24%;
+            }
+            > :last-child {
+              flex-grow: 1;
+              margin-left: 18px;
+            }  
+          }
+        } 
       }
 
       &-whoWeAre {
