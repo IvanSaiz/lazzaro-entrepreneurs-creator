@@ -42,6 +42,63 @@
 
       <choose-template :chosenTemplateId='publicWebForm.chosenTemplateId' :handleChooseTemplate='handleChooseTemplate' />
 
+      section.public-personalizeWeb
+        .public-personalizeWeb__header
+          h2.h2--dash {{ $t('web.public.personalizeWebForm.title') }}
+          h3 {{ $t('web.public.personalizeWebForm.subtitle') }}
+
+        .form__row
+          FormulateInput(
+            type="image"
+            :label="$t('web.public.personalizeWebForm.form.logo')"
+            label-position="before"
+            name="logo"
+            :help="$t('web.public.personalizeWebForm.form.logoHelper')"
+          )
+          .form-section
+            FormulateInput(
+              type="select"
+              name="template"
+              :label="$t('web.public.personalizeWebForm.form.mainTypography')"
+              :label-class="['required']"
+              :options="styleOptions"
+              validation="required"
+              :validation-name="$t('web.public.personalizeWebForm.form')"
+              :placeholder="$t('auth.signup.form.choose')"
+            )  
+            FormulateInput(
+              type="select"
+              name="template"
+              :label="$t('web.public.personalizeWebForm.form.secondTypography')"
+              :label-class="['required']"
+              :options="styleOptions"
+              validation="required"
+              :validation-name="$t('auth.onboarding.stepStyle.form.style')"
+              :placeholder="$t('auth.signup.form.choose')"
+            )
+            .form-colors
+              FormulateInput#primary-color(
+                type="textColor"
+                name="teamTitleColor"
+                :label="$t('web.public.personalizeWebForm.form.buttonsColor')"
+                value="#1081F2"
+                )
+              FormulateInput#primary-color(
+                type="textColor"
+                name="teamTitleColor"
+                :label="$t('web.public.personalizeWebForm.form.menuColor')"
+                value="#1081F2"
+                )
+              FormulateInput#primary-color(
+                type="textColor"
+                name="teamTitleColor"
+                :label="$t('web.public.personalizeWebForm.form.footerColor')"
+                value="#1081F2"
+                )
+
+          
+
+
       section.public-homepage
         .public-homepage__header
           h2.h2--dash {{ $t('web.public.homepageForm.title') }}
@@ -1030,6 +1087,36 @@
         }
       }
 
+      &-personalizeWeb {
+        &__header {
+          h3 {
+            color: $color-black-03;
+            font-size: 16px;
+            font-weight: 400;
+          }
+        }
+
+        .form__row {
+          > :first-child {
+            flex-basis: 16.2%;
+            .formulate-input-element {
+              height: 148px;
+            }
+          }
+        }
+        .form-section {
+          display: flex;
+          flex-direction: column;
+          gap: 18px;
+          
+          .form-colors {
+            display: flex;
+            gap: 42px;
+            flex-wrap: wrap;
+          }
+        }        
+      }
+
       &-homepage {
         &__header {
           h3 {
@@ -1039,6 +1126,7 @@
           }
         }
         .form__row {
+          gap: 10px;
           > :first-child {
             min-width: 140px;
             .formulate-input-element {

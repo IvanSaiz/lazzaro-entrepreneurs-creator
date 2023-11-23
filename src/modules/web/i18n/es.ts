@@ -175,6 +175,20 @@ export default {
       largeDescription: "Descripción larga"
     },
 
+    personalizeWebForm: {
+      title: "Personaliza tu web",
+      subtitle: "Elige los elementos que encajan contigo",
+      form: {
+        logo: "Logotipo*",
+        mainTypography: "Tipografía principal",
+        secondTypography: "Tipografía secundaria",
+        buttonsColor: "Color botones",
+        menuColor: "Color menú",
+        footerColor: "Color Footer",
+        logoHelper: "60x60. Máx 25MB"
+      }
+    },
+    
     homepageForm: {
       title: "Portada",
       subtitle: "Las primeras impresiones son las que importan",

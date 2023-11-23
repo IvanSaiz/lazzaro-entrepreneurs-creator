@@ -182,6 +182,20 @@ export default {
       largeDescription: "Full description"
     },
 
+    personalizeWebForm: {
+      title: "Personalize your website",
+      subtitle: "Choose the elements that suit you",
+      form: {
+        logo: "Logo*",
+        mainTypography: "Main Typography",
+        secondTypography: "Secondary Typography",
+        buttonsColor: "Button color",
+        menuColor: "Menu color",
+        footerColor: "Footer color",
+        logoHelper: "60x60. Máx 25MB"
+      }
+    },
+
     homepageForm: {
       title: "Homepage",
       subtitle: "First impressions are what matter",
