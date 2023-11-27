@@ -82,7 +82,8 @@ export default {
     },
     contactForm: {
       title: "Formulario de contacto",
-      subtitle:"Permite que un posible cliente pueda ponerse en contacto contigo. Configura el título y subtítulo de tu página de contacto",
+      subtitle:
+        "Permite que un posible cliente pueda ponerse en contacto contigo. Configura el título y subtítulo de tu página de contacto",
       phone: "Teléfono",
       location: "Ubicación"
     },
@@ -102,7 +103,7 @@ export default {
       partners: "Socios",
       market: "Tienda online",
       courses: "Cursos",
-      reviews: "Reseñas", 
+      reviews: "Reseñas",
       impact: "Datos de impacto",
       events: "Eventos",
       volunteers: "Voluntarios"
@@ -129,7 +130,7 @@ export default {
         accountability: "Transparencia y rendición de cuentas"
       }
     },
-    
+
     teamForm: {
       title: "Equipo",
       subtitle: "Muestra a todo el mundo de que tipo de pasta estás hecho.",
@@ -141,7 +142,8 @@ export default {
       },
       teamMembers: {
         title: "Miembros del equipo",
-        subtitle:"Crea el perfil de cada uno de los integrantes de tu empresa. Con el link a su Linkedin será mucha más fácil darle visibilidad a ellos y la empresa."
+        subtitle:
+          "Crea el perfil de cada uno de los integrantes de tu empresa. Con el link a su Linkedin será mucha más fácil darle visibilidad a ellos y la empresa."
       },
       photo: {
         label: "Foto de perfil",
@@ -182,13 +184,18 @@ export default {
         logo: "Logotipo*",
         mainTypography: "Tipografía principal",
         secondTypography: "Tipografía secundaria",
+        fonts: {
+          label: "Font",
+          roboto: "Roboto",
+          arial: "Arial",
+        },
         buttonsColor: "Color botones",
         menuColor: "Color menú",
         footerColor: "Color Footer",
         logoHelper: "60x60. Máx 25MB"
       }
     },
-    
+
     homepageForm: {
       title: "Portada",
       subtitle: "Las primeras impresiones son las que importan",
@@ -201,11 +208,11 @@ export default {
         subtitleHelper: "(Máx 140 characters)",
         buttons: {
           1: "Boton 1*",
-          2: "Boton 2*",
+          2: "Boton 2*"
         },
         links: {
           1: "Link Botón 1*",
-          2: "Link Botón 2*",
+          2: "Link Botón 2*"
         }
       }
     },
@@ -248,7 +255,7 @@ export default {
         link: "Link of the button"
       }
     },
-    
+
     whyChooseUsForm: {
       title: "¿Por qué elegirnos?",
       subtitle: "Escribe aquí lo que te diferencia del resto",
@@ -272,22 +279,24 @@ export default {
       }
     },
 
-    bookingsForm:{
+    bookingsForm: {
       title: "Reservas",
-      subtitle: "Dá la oportunidad a tus usuarios a que puedan reunirse contigo.",
+      subtitle:
+        "Dá la oportunidad a tus usuarios a que puedan reunirse contigo.",
       image: "Imagen",
       formTitle: "Título",
       formSubtitle: "Subtítulo*",
       imageHelper: "180x60. Máx 25MB",
       titleHelper: "(Máx 80 caracteres)",
       subtitleHelper: "(Máx 140 caracteres)",
-      button : "Botón* ",
+      button: "Botón* ",
       link: "Link a tu página de reserva*"
     },
 
     reviewsForm: {
       title: "Reseñas",
-      subtitle: "Vincula tu web con tu perfil de Google y permite que tus usuarios vean tus reseñas.",
+      subtitle:
+        "Vincula tu web con tu perfil de Google y permite que tus usuarios vean tus reseñas.",
       formTitle: "Título",
       formSubtitle: "Subtítulo",
       titleHelper: "(Máx 80 caracteres)",
