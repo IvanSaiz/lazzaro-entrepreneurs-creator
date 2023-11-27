@@ -513,7 +513,7 @@
             .form__row  
               formulate-input(
                 type="text"
-                name="footerSocialLinkedin"
+                name="footerSocialLinkedIn"
                 :label="$t('web.public.footer.socialForm.linkedin')"
               )
               formulate-input(
@@ -877,16 +877,20 @@
       const teamArr = this.publicWebForm.teamMembers as any[];
 
       teamArr.push({
-        name: this.publicWebForm.teamMembers.name,
-        position: this.publicWebForm.teamMembers.position,
-        linkedin: this.publicWebForm.teamMembers.linkedin,
-        picture: this.publicWebForm.teamMembers.picture
+        id: this.publicWebForm.teamMembers.length + 1,
+        name: this.teamForm.name,
+        position: this.teamForm.position,
+        linkedin: this.teamForm.linkedin,
+        picture: this.teamForm.picture
       });
 
-      this.publicWebForm.teamMembers.picture = null;
-      this.publicWebForm.teamMembers.name = "";
-      this.publicWebForm.teamMembers.position = "";
-      this.publicWebForm.teamMembers.linkedin = "";
+      this.teamForm = {
+        id: "",
+        picture: null,
+        name: "",
+        position: "",
+        linkedin: ""
+      };
     }
 
     async mounted() {
