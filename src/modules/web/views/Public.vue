@@ -52,13 +52,13 @@
             type="image"
             :label="$t('web.public.personalizeWebForm.form.logo')"
             label-position="before"
-            name="style.logo"
+            name="styleLogo"
             :help="$t('web.public.personalizeWebForm.form.logoHelper')"
           )
           .form-section
             FormulateInput(
               type="select"
-              name="style.mainTypography"
+              name="styleMainTypography"
               :label="$t('web.public.personalizeWebForm.form.mainTypography')"
               :label-class="['required']"
               :options="fontOptions"
@@ -68,7 +68,7 @@
             )  
             FormulateInput(
               type="select"
-              name="style.secondaryTypography"
+              name="styleSecondaryTypography"
               :label="$t('web.public.personalizeWebForm.form.secondTypography')"
               :label-class="['required']"
               :options="fontOptions"
@@ -79,19 +79,19 @@
             .form-colors
               FormulateInput#primary-color(
                 type="textColor"
-                name="style.buttonColor"
+                name="styleButtonColor"
                 :label="$t('web.public.personalizeWebForm.form.buttonsColor')"
                 value="#1081F2"
                 )
               FormulateInput#primary-color(
                 type="textColor"
-                name="style.menuColor"
+                name="styleMenuColor"
                 :label="$t('web.public.personalizeWebForm.form.menuColor')"
                 value="#1081F2"
                 )
               FormulateInput#primary-color(
                 type="textColor"
-                name="style.footerColor"
+                name="styleFooterColor"
                 :label="$t('web.public.personalizeWebForm.form.footerColor')"
                 value="#1081F2"
                 )
@@ -108,46 +108,46 @@
               type="image"
               :label="$t('web.public.homepageForm.form.image')"
               label-position="before"
-              name="homepage.mainImage"
+              name="homepageMainImage"
               :help="$t('web.public.homepageForm.form.imageHelper')"
             )
             .form-section
               .section-row
                 formulate-input(
                     type="text"
-                    name="homepage.title"
+                    name="homepageTitle"
                     :label="$t('web.public.homepageForm.form.title')"
                     :help="$t('web.public.homepageForm.form.titleHelper')"
                   )
                 FormulateInput#primary-color(
                   type="textColor"
-                  name="homepage.titleColor"
+                  name="homepageTitleColor"
                   :label="$t('auth.onboarding.stepStyle.form.textColour')"
                   value="#1081F2"
                   )
               .section-row
                 formulate-input(
                     type="text"
-                    name="homepage.subtitle"
+                    name="homepageSubtitle"
                     :label="$t('web.public.homepageForm.form.subtitle')"
                     :help="$t('web.public.homepageForm.form.subtitleHelper')"
                   )
                 FormulateInput#primary-color(
                   type="textColor"
-                  name="homepage.subtitleColor"
+                  name="homepageSubtitleColor"
                   :label="$t('auth.onboarding.stepStyle.form.textColour')"
                   value="#1081F2"
                   )
-              .form-section__cta(v-for="(item, index) in publicWebForm.homepage.buttons" :key="index")            
+              .form-section__cta(v-for="index in 2" :key="index")            
                 formulate-input(
                   type="text"
-                  :name="`buttons[${index}].text`"
-                  :label="$t(`web.public.homepageForm.form.buttons.${index + 1}`)"
+                  :name="`homepageButton[${index}]Text`"
+                  :label="$t(`web.public.homepageForm.form.buttons.${index}`)"
                 )
                 formulate-input(
                   type="text"
-                  :name="`buttons[${index}].link`"
-                  :label="$t(`web.public.homepageForm.form.links.${index + 1}`)"
+                  :name="`homepageButton${index}Link`"
+                  :label="$t(`web.public.homepageForm.form.links.${index}`)"
                 )
 
       section.public-whoWeAre
@@ -159,14 +159,14 @@
               type="image"
               :label="$t('web.public.whoWeAreForm.form.image')"
               label-position="before"
-              name="aboutUs.imgUrl"
+              name="aboutUsImgUrl"
               :help="$t('web.public.whoWeAreForm.form.imageHelper')"
             )
             .form-section
               .section-row
                 formulate-input(
                     type="text"
-                    name="aboutUs.title"
+                    name="aboutUsTitle"
                     :label="$t('web.public.whoWeAreForm.form.title')"
                     :help="$t('web.public.whoWeAreForm.form.titleHelper')"
                   )
@@ -179,55 +179,55 @@
               .section-row
                 formulate-input(
                     type="text"
-                    name="aboutUs.subtitle"
+                    name="aboutUsSubtitle"
                     :label="$t('web.public.whoWeAreForm.form.subtitle')"
                     :help="$t('web.public.whoWeAreForm.form.subtitleHelper')"
                   )
                 FormulateInput#primary-color(
                   type="textColor"
-                  name="aboutUs.subtitleColor"
+                  name="aboutUsSubtitleColor"
                   :label="$t('auth.onboarding.stepStyle.form.textColour')"
                   value="#1081F2"
                   )
               lz-editor-input(
               :label="$t('web.public.whoWeAreForm.form.description')"
-              v-model="publicWebForm.aboutUs.description"
+              v-model="publicWebForm.aboutUsDescription"
               )
         section.public-whoWeAre
           .public-whoWeAre__header
             h3.h3--dash {{ $t('web.public.whoWeAreForm.features.title') }}
 
 
-        .public-whoWeAre__content
-          .text-item(v-for="(item, index) in publicWebForm.aboutUs.features.icons" :key="index")
-            formulate-input(
+          .public-whoWeAre__content
+            .text-item(v-for="featureIndex in 4" :key="`feature-${featureIndex}`")
+              formulate-input(
                 type="image"
-                :name="`icons[${index}].url`"
-                :label="$t(`web.public.whoWeAreForm.features.icon.${index + 1}`)"
+                :name="`aboutUsFeature${featureIndex}Url`"
+                :label="$t(`web.public.whoWeAreForm.features.icon.${featureIndex}`)"
                 :help="$t('web.public.whoWeAreForm.features.icon.help')"
               )
-            formulate-input(
-              type="text"
-              :name="`icons[${index}].title`"
-              :label="$t(`web.public.whoWeAreForm.features.titles.${index + 1}`)"
-            )
-            formulate-input(
-              type="text"
-              :name="`icons[${index}].description`"
-              :label="$t(`web.public.whoWeAreForm.features.descriptions.${index + 1}`)"
-            )
+              formulate-input(
+                type="text"
+                :name="`aboutUsFeature${featureIndex}Title`"
+                :label="$t(`web.public.whoWeAreForm.features.titles.${featureIndex}`)"
+              )
+              formulate-input(
+                type="text"
+                :name="`aboutUsFeature${featureIndex}Description`"
+                :label="$t(`web.public.whoWeAreForm.features.descriptions.${featureIndex}`)"
+              )
 
         hr.hr--dash
       
         .public-whoWeAre__cta
           formulate-input(
             type="text"
-            name="aboutUs.features.buttons[0].text"
+            name="aboutUsReadMoreButtonText"
             :label="$t('web.public.whoWeAreForm.features.button')"
           )
           formulate-input(
             type="text"
-            name="aboutUs.features.buttons[0].link"
+            name="aboutUsReadMoreButtonLnk"
             :label="$t('web.public.whoWeAreForm.features.link')"
           )
 
@@ -240,39 +240,39 @@
               type="image"
               :label="$t('web.public.whyChooseUsForm.image')"
               label-position="before"
-              name="whyChooseUs.imgUrl"
+              name="whyChooseUsImgUrl"
               :help="$t('web.public.whyChooseUsForm.imageHelperText')"
             )
             .form-section
               .section-row
                 formulate-input(
                     type="text"
-                    name="whyChooseUs.title"
+                    name="whyChooseUsTitle"
                     :label="$t('web.public.whyChooseUsForm.formTitle')"
                     :help="$t('web.public.whyChooseUsForm.titleHelperText')"
                   )
                 FormulateInput#primary-color(
                   type="textColor"
-                  name="whyChooseUs.titleColor"
+                  name="whyChooseUsTitleColor"
                   :label="$t('auth.onboarding.stepStyle.form.textColour')"
                   value="#1081F2"
                   )
               lz-editor-input(
               :label="$t('web.public.whyChooseUsForm.description')"
-              v-model="publicWebForm.whyChooseUs.description"
+              v-model="publicWebForm.whyChooseUsDescription"
               )
-        .public-whyUs__content
-          .text-item(v-for="(item, index) in publicWebForm.whyChooseUs.subtitles" :key="index")
-            formulate-input(
-              type="text"
-              :name="`subtitles[${index}].title`"
-              :label="$t(`web.public.whyChooseUsForm.titles.${item.id}`)"
-            )
-            formulate-input(
-              type="text"
-              :name="`subtitles[${index}].description`"
-              :label="$t(`web.public.whyChooseUsForm.descriptions.${item.id}`)"
-            )
+          .public-whyUs__content
+            .text-item(v-for="index in 4" :key="`whyChooseUsSubtitle${index}Id`")
+              formulate-input(
+                type="text"
+                :name="`whyChooseUsSubtitle${index}Title`"
+                :label="$t(`web.public.whyChooseUsForm.titles.${index}`)"
+              )
+              formulate-input(
+                type="text"
+                :name="`whyChooseUsSubtitle${index}Description`"
+                :label="$t(`web.public.whyChooseUsForm.descriptions.${index}`)"
+              )
 
 
       section.public-bookings
@@ -284,45 +284,45 @@
               type="image"
               :label="$t('web.public.brandForm.logo.label')"
               label-position="before"
-              name="bookings.imgUrl"
+              name="bookingsImgUrl"
               :help="$t('web.public.brandForm.logo.help')"
             )
             .form-section
               .section-row
                 formulate-input(
                     type="text"
-                    name="bookings.title"
+                    name="bookingsTitle"
                     :label="$t('web.public.bookingsForm.formTitle')"
                     :help="$t('web.public.bookingsForm.titleHelper')"
                   )
                 FormulateInput#primary-color(
                   type="textColor"
-                  name="bookings.titleColor"
+                  name="bookingsTitleColor"
                   :label="$t('auth.onboarding.stepStyle.form.textColour')"
                   value="#1081F2"
                   )
               .section-row
                 formulate-input(
                     type="text"
-                    name="bookings.subtitle"
+                    name="bookingsSubtitle"
                     :label="$t('web.public.bookingsForm.formSubtitle')"
                     :help="$t('web.public.bookingsForm.subtitleHelper')"
                   )
                 FormulateInput#primary-color(
                   type="textColor"
-                  name="bookings.subtitleColor"
+                  name="bookingsSubtitleColor"
                   :label="$t('auth.onboarding.stepStyle.form.textColour')"
                   value="#1081F2"
                   )
               .links-row
                 formulate-input(
                   type="text"
-                  name="bookings.buttonText"
+                  name="bookingsButtonText"
                   :label="$t('web.public.bookingsForm.button')"
                 )
                 formulate-input(
                   type="text"
-                  name="bookings.buttonUrl"
+                  name="bookingsButtonUrl"
                   :label="$t('web.public.bookingsForm.link')"
                 )
       
@@ -334,13 +334,13 @@
           .reviews-section
             formulate-input(
               type="text"
-              name="reviews.title"
+              name="reviewsTitle"
               :label="$t('web.public.reviewsForm.formTitle')"
               :help="$t('web.public.reviewsForm.titleHelper')"
             )
             FormulateInput#primary-color(
               type="textColor"
-              name="reviews.titleColor"
+              name="reviewsTitleColor"
               :label="$t('auth.onboarding.stepStyle.form.textColour')"
               value="#1081F2"
               )
@@ -348,20 +348,20 @@
           .reviews-section
             formulate-input(
               type="text"
-              name="reviews.subtitle"
+              name="reviewsSubtitle"
               :label="$t('web.public.reviewsForm.formSubtitle')"
               :help="$t('web.public.reviewsForm.subtitleHelper')"
             )
             FormulateInput#primary-color(
               type="textColor"
-              name="reviews.subtitleColor"
+              name="reviewsSubtitleColor"
               :label="$t('auth.onboarding.stepStyle.form.textColour')"
               value="#1081F2"
               )
         .form__row
           formulate-input(
             type="text"
-            name="reviews.url"
+            name="reviewsUrl"
             :label="$t('web.public.reviewsForm.link')"
           )
 
@@ -370,22 +370,22 @@
           h2.h2--dash {{ $t('web.public.impactForm.title') }}
           p {{ $t('web.public.impactForm.subtitle') }}
           .public-impact__content
-            .impact-item(v-for="(item, index) in publicWebForm.impact.data" :key="index")
+            .impact-item(v-for="index in 4" :key="`impactData${index}Id`")
               formulate-input(
                 type="image"
-                :name="`data[${index}].url`"
-                :label="$t(`web.public.impactForm.icon.${index + 1}`)"
+                :name="`impactData${index}]Url`"
+                :label="$t(`web.public.impactForm.icon.${index}`)"
                 :help="$t('web.public.impactForm.icon.help')"
               )
               formulate-input(
                 type="text"
-                :name="`data[${index}].text`"
-                :label="$t(`web.public.impactForm.text.${index + 1}`)"
+                :name="`impactData${index}Text`"
+                :label="$t(`web.public.impactForm.text.${index}`)"
               )
               formulate-input(
                 type="text"
-                :name="`data[${index}].amount`"
-                :label="$t(`web.public.impactForm.amount.${index + 1}`)"
+                :name="`impactData${index}Amount`"
+                :label="$t(`web.public.impactForm.amount.${index}`)"
               )
 
       section.public-team
@@ -396,26 +396,26 @@
             .team-section
               formulate-input(
                 type="text"
-                name="team.title.title"
+                name="teamTitle"
                 :label="$t('web.public.teamForm.header.title')"
                 :help="$t('web.public.teamForm.header.titleHelperText')"
               )
               FormulateInput#primary-color(
                   type="textColor"
-                  name="team.titleColor"
+                  name="teamTitleColor"
                   :label="$t('auth.onboarding.stepStyle.form.textColour')"
                   value="#1081F2"
                 )
             .team-section
               formulate-input(
                 type="text"
-                name="team.subtitle"
+                name="teamSubtitle"
                 :label="$t('web.public.teamForm.header.subtitle')"
                 :help="$t('web.public.teamForm.header.subtitleHelperText')"
               )
               FormulateInput#primary-color(
                   type="textColor"
-                  name="team.subtitleColor"
+                  name="teamSubtitleColor"
                   :label="$t('auth.onboarding.stepStyle.form.textColour')"
                   value="#1081F2"
                 )
@@ -461,9 +461,9 @@
           .title-table-container   
             lz-table(
               class="lz-table"
-              v-if="publicWebForm.team.members.length > 0"
+              v-if="publicWebForm.teamMembers.length > 0"
               :fields="teamFields"
-              :items="publicWebForm.team.members"
+              :items="publicWebForm.teamMembers"
               :title="$t('web.public.teamForm.table')"
             )
               template(#dot="{ row }")
@@ -481,12 +481,12 @@
           .public-contact__content
             formulate-input(
               type="text"
-              name="contact.title"
+              name="contactTitle"
               :label="$t('web.public.contactForm.phone')"
             )
             formulate-input(
               type="text"
-              name="contact.subtitle"
+              name="contactSubTitle"
               :label="$t('web.public.contactForm.location')"
             )
 
@@ -502,34 +502,34 @@
             .form__row
               formulate-input(
                 type="text"
-                name="footer.social.facebook"
+                name="footerSocialFacebook"
                 :label="$t('web.public.footer.socialForm.facebook')"
               )
               formulate-input(
                 type="text"
-                name="footer.social.twitter"
+                name="footerSocialTwitter"
                 :label="$t('web.public.footer.socialForm.twitter')"
               )
             .form__row  
               formulate-input(
                 type="text"
-                name="footer.social.linkedin"
+                name="footerSocialLinkedin"
                 :label="$t('web.public.footer.socialForm.linkedin')"
               )
               formulate-input(
                 type="text"
-                name="footer.social.whatsapp"
+                name="footerSocialWhatsapp"
                 :label="$t('web.public.footer.socialForm.whatsapp')"
               )
             .form__row  
               formulate-input(
                 type="text"
-                name="footer.social.web"
+                name="footerSocialSecondaryWeb"
                 :label="$t('web.public.footer.socialForm.web')"
               )
               formulate-input(
                 type="text"
-                name="footer.social.instagram"
+                name="footerSocialInstagram"
                 :label="$t('web.public.footer.socialForm.instagram')"
               )
 
@@ -541,22 +541,23 @@
           .form__row
             lz-editor-input(
               :label="$t('web.public.footer.termsForm.terms')"
-              v-model="publicWebForm.footer.info.terms"
+              v-model="publicWebForm.footerTerms"
             )
           .form__row
             lz-editor-input(
               :label="$t('web.public.footer.termsForm.transparencyDescription')"
-              v-model="publicWebForm.footer.info.transparency.description"
+              v-model="publicWebForm.footerTransparencyDescription"
             )
           .form__row
             formulate-input(
               type="file"
-              name="publicWebForm.footer.info.transparency.accountability"
+              name="footerTransparencyAccountability"
               :label="$t('web.public.footer.termsForm.accountability')"
               :add-label="$t('web.public.footer.termsForm.add')"
               :multiple="true"
             )
 
+  
     .public-buttons
       lz-button(
         type="secondary"
@@ -610,230 +611,161 @@
       active: false,
       url: "",
       chosenTemplateId: "9bdd56dc-edf8-432a-bff4-fb5f2fc0e90c",
-      style: {
-        logo: "https://dummyimage.com/100x100/000/fff&text=Logo",
-        menuColor: "#0055A5",
-        buttonColor: "#FF5733",
-        footerColor: "#008000",
-        mainTypography: "",
-        secondaryTypography: ""
-      },
-      homepage: {
-        title: "Welcome to Our Website",
-        design: {
-          layout: "left",
-          backgroundColor: "#EFEFEF"
-        },
-        subtitle: "Discover Our Services",
-        mainImage: "https://dummyimage.com/500x300/000/fff&text=Main+Image",
-        moreImages: [
-          "https://dummyimage.com/200x200/000/fff&text=Image+1",
-          "https://dummyimage.com/200x200/000/fff&text=Image+2"
-        ],
-        titleColor: "#FF5733",
-        subtitleColor: "#3366FF",
-        buttons: [
-          {
+
+      // style properties
+      styleLogo: [] as any,
+      styleMainTypography: "",
+      styleSecondaryTypography: "",
+      styleButtonColor: "#FF5733",
+      styleMenuColor: "#0055A5",
+      styleFooterColor: "#008000",
+
+      // homepage properties
+      homepageMainImage: [] as any,
+      homepageMoreImages: [] as any,
+      homepageTitle: "Welcome to Our Website",
+      homepageTitleColor: "#FF5733",
+      homepageSubtitle: "Discover Our Services",
+      homepageSubtitleColor: "#3366FF",
+      homepageButton1Text: "Learn More",
+      homepageButton1Link: "https://www.example.com/more-info",
+      homepageButton2Text: "Contact Us",
+      homepageButton2Link: "https://www.example.com/contact-us",
+      homepageDesignLayout: "left",
+      homepageDesignBackgroundColor: "#EFEFEF",
+
+      // aboutUs properties
+      aboutUsImgUrl: [] as any,
+      aboutUsTitle: "About Us",
+      aboutUsTitleColor: "#FF5733",
+      aboutUsSubtitle: "Our Story",
+      aboutUsSubtitleColor: "#3366FF",
+      aboutUsDescription:
+        "Learn about our journey and how we make a difference.",
+      aboutUsFeature1Id: 1,
+      aboutUsFeature1Url: [] as any,
+      aboutUsFeature1Title: "Feature 1",
+      aboutUsFeature1Description: "Description for Feature 1",
+      aboutUsFeature2Id: 2,
+      aboutUsFeature2Url: [] as any,
+      aboutUsFeature2Title: "Feature 2",
+      aboutUsFeature2Description: "Description for Feature 2",
+      aboutUsFeature3Id: 3,
+      aboutUsFeature3Url: [] as any,
+      aboutUsFeature3Title: "Feature 3",
+      aboutUsFeature3Description: "Description for Feature 3",
+      aboutUsFeature4Id: 4,
+      aboutUsFeature4Url: [] as any,
+      aboutUsFeature4Title: "Feature 4",
+      aboutUsFeature4Description: "Description for Feature 4",
+      aboutUsReadMoreButtonId: 1,
+      aboutUsReadMoreButtonText: "Read More",
+      aboutUsReadMoreButtonLink: "https://www.example.com/feature1",
+
+      // whyChooseUs properties
+      whyChooseUsImgUrl: [] as any,
+      whyChooseUsTitle: "Why Choose Us",
+      whyChooseUsTitleColor: "#FFFFFF",
+      whyChooseUsDescription:
+        "Discover the reasons to choose our company for your needs.",
+      whyChooseUsSubtitle1Id: 1,
+      whyChooseUsSubtitle1Title: "Quality Services",
+      whyChooseUsSubtitle1Description:
+        "We offer top-notch services with a focus on client satisfaction.",
+      whyChooseUsSubtitle2Id: 2,
+      whyChooseUsSubtitle2Title: "Experienced Team",
+      whyChooseUsSubtitle2Description: "Our team consists of experienced professionals in the industry.",
+      whyChooseUsSubtitle3Id: 3,
+      whyChooseUsSubtitle3Title: "Innovative Solutions",
+      whyChooseUsSubtitle3Description: "We provide innovative solutions to complex challenges.",
+      whyChooseUsSubtitle4Id: 4,
+      whyChooseUsSubtitle4Title: "Customer Focus",
+      whyChooseUsSubtitle4Description: "Dedicated to meeting and exceeding customer expectations.",
+
+      // ... similarly for other subtitles
+      whyChooseUsDesignLayout: "right",
+      whyChooseUsDesignBackgroundColor: "#F0F0F0",
+
+      // bookings properties
+      bookingsImgUrl: [] as any,
+      bookingsTitle: "Book a Consultation",
+      bookingsTitleColor: "#3366FF",
+      bookingsSubtitle: "Reserve Your Spot",
+      bookingsSubtitleColor: "#FFFFFF",
+      bookingsButtonUrl: "https://www.example.com/book-now",
+      bookingsButtonText: "Book Now",
+      bookingsDesignLayout: "center",
+      bookingsDesignBackgroundColor: "#F0F0F0",
+
+      // reviews properties
+      reviewsTitle: "What Our Clients Say",
+      reviewsTitleColor: "#FFFFFF",
+      reviewsSubtitle: "Client Testimonials",
+      reviewsSubtitleColor: "#3366FF",
+      reviewsUrl: "https://lazzaro.io/en/",
+
+      // impact properties
+      impactData1Id: 1,
+      impactData1Url: [] as any,
+      impactData1Text: "Positive Impact One",
+      impactData1Amount: "$1000",
+      impactData2Id: 2,
+      impactData2Url: [] as any,
+      impactData2Text: "Positive Impact Two",
+      impactData2Amount: "$2000",
+      impactData3Id: 3,
+      impactData3Url: [] as any,
+      impactData3Text: "Positive Impact Three",
+      impactData3Amount: "$3000",
+      impactData4Id: 4,
+      impactData4Url: [] as any,
+      impactData4Text: "Positive Impact Four",
+      impactData4Amount: "$4000",
+      impactDesignBackgroundColor: "#FFF0F0",
+      impactDesignBackgroundImage:
+        "https://dummyimage.com/600x400/000/fff&text=Impact+Background",
+
+      // team properties
+      teamTitle: "Our Dynamic Team",
+      teamSubtitle: "Meet the Innovators Behind Our Success",
+      teamTitleColor: "#333333",
+      teamSubtitleColor: "#666666",
+      teamMembers: [  {
             id: 1,
-            text: "Learn More",
-            link: "https://www.example.com/more-info"
-          },
-          {
-            id: 2,
-            text: "Contact Us",
-            link: "https://www.example.com/contact-us"
-          }
-        ]
-      },
-      aboutUs: {
-        imgUrl: "https://dummyimage.com/400x300/000/fff&text=About+Us",
-        title: "About Us",
-        subtitle: "Our Story",
-        titleColor: "#FF5733",
-        subtitleColor: "#3366FF",
-        description: "Learn about our journey and how we make a difference.",
-        features: {
-          icons: [
-            {
-              id: 1,
-              url: "https://www.example.com/icon1.png",
-              title: "Feature 1",
-              description: "Description for Feature 1"
-            },
-            {
-              id: 2,
-              url: "https://www.example.com/icon2.png",
-              title: "Feature 2",
-              description: "Description for Feature 2"
-            },
-            {
-              id: 3,
-              url: "https://www.example.com/icon3.png",
-              title: "Feature 3",
-              description: "Description for Feature 3"
-            },
-            {
-              id: 4,
-              url: "https://www.example.com/icon4.png",
-              title: "Feature 4",
-              description: "Description for Feature 4"
-            }
-          ],
-          buttons: [
-            {
-              id: 1,
-              text: "Read More",
-              link: "https://www.example.com/feature1"
-            }
-          ]
-        }
-      },
-      whyChooseUs: {
-        imgUrl: "https://dummyimage.com/400x300/000/fff&text=Choose+Us",
-        title: "Why Choose Us",
-        titleColor: "#FFFFFF",
-        subtitles: [
-          {
-            id: 1,
-            title: "Quality Services",
-            description:
-              "We offer top-notch services with a focus on client satisfaction."
-          },
-          {
-            id: 2,
-            title: "Quality Services",
-            description:
-              "We offer top-notch services with a focus on client satisfaction."
-          },
-          {
-            id: 3,
-            title: "Quality Services",
-            description:
-              "We offer top-notch services with a focus on client satisfaction."
-          },
-          {
-            id: 4,
-            title: "Quality Services",
-            description:
-              "We offer top-notch services with a focus on client satisfaction."
-          }
-        ],
-        description:
-          "Discover the reasons to choose our company for your needs.",
-        design: {
-          layout: "right",
-          backgroundColor: "#F0F0F0"
-        }
-      },
-      bookings: {
-        title: "Book a Consultation",
-        design: {
-          layout: "center",
-          backgroundColor: "#F0F0F0"
-        },
-        imgUrl: "https://dummyimage.com/300x200/000/fff&text=Book+Now",
-        subtitle: "Reserve Your Spot",
-        buttonUrl: "https://www.example.com/book-now",
-        buttonText: "Book Now",
-        titleColor: "#3366FF",
-        subtitleColor: "#FFFFFF"
-      },
-      reviews: {
-        url: "https://www.example.com/reviews",
-        title: "What Our Clients Say",
-        subtitle: "Client Testimonials",
-        titleColor: "#FFFFFF",
-        subtitleColor: "#3366FF"
-      },
-      impact: {
-        data: [
-          {
-            id: 1,
-            url: "https://www.example.com/impact1.jpg",
-            text: "Positive Impact One",
-            amount: "$1000"
-          },
-          {
-            id: 2,
-            url: "https://www.example.com/impact2.jpg",
-            text: "Positive Impact Two",
-            amount: "$2000"
-          },
-          {
-            id: 3,
-            url: "https://www.example.com/impact3.jpg",
-            text: "Positive Impact Three",
-            amount: "$3000"
-          },
-          {
-            id: 4,
-            url: "https://www.example.com/impact4.jpg",
-            text: "Positive Impact Four",
-            amount: "$4000"
-          }
-        ],
-        design: {
-          backgroundColor: "#FFF0F0",
-          backgroundImage:
-            "https://dummyimage.com/600x400/000/fff&text=Impact+Background"
-        }
-      },
-      team: {
-        title: "Our Dynamic Team",
-        design: {
-          backgroundColor: "#F0F0F0"
-        },
-        members: [
-          {
-            id: 1,
-            picture: "https://dummyimage.com/200x200/000/fff&text=Member+1",
+            picture: [] as any,
             name: "Jane Doe",
             linkedin: "https://www.linkedin.com/in/janedoe",
             position: "Chief Technology Officer"
           },
           {
             id: 2,
-            picture: "https://dummyimage.com/200x200/000/fff&text=Member+2",
+            picture: [] as any,
             name: "John Smith",
             linkedin: "https://www.linkedin.com/in/johnsmith",
             position: "Marketing Director"
-          }
-        ],
-        subtitle: "Meet the Innovators Behind Our Success",
-        titleColor: "#333333",
-        subtitleColor: "#666666"
-      },
-      contact: {
-        title: "Get in Touch",
-        design: {
-          backgroundColor: "#EFEFEF"
-        },
-        subTitle: "We're Here to Help",
-        titleColor: "#333333",
-        subtitleColor: "#666666"
-      },
-      footer: {
-        info: {
-          terms: "Terms of Service: All rights reserved.",
-          transparency: {
-            accountability: "https://example.com/transparency.pdf",
-            description: "We value transparency and openness."
-          }
-        },
-        design: {
-          backgroundColor: "#333333",
-          backgroundImage:
-            "https://dummyimage.com/600x200/000/fff&text=Footer+Background"
-        },
-        social: {
-          facebook: "https://facebook.com/example",
-          twitter: "https://twitter.com/example",
-          linkedIn: "https://www.linkedin.com/company/example",
-          whatsapp: "+123456789",
-          secondaryWeb: "https://example-secondary.com",
-          instagram: "https://instagram.com/example"
-        }
-      }
+          }],
+      teamDesignBackgroundColor: "#F0F0F0",
+      
+      // contact properties
+      contactTitle: "Get in Touch",
+      contactDesignBackgroundColor: "#EFEFEF",
+      contactSubTitle: "We're Here to Help",
+      contactTitleColor: "#333333",
+      contactSubtitleColor: "#666666",
+
+      // footer properties
+      footerTerms: "Terms of Service: All rights reserved.",
+      footerTransparencyAccountability: [] as any,
+      footerTransparencyDescription: "We value transparency and openness.",
+      footerSocialFacebook: "https://facebook.com/example",
+      footerSocialTwitter: "https://twitter.com/example",
+      footerSocialLinkedIn: "https://www.linkedin.com/company/example",
+      footerSocialWhatsapp: "+123456789",
+      footerSocialSecondaryWeb: "https://example-secondary.com",
+      footerSocialInstagram: "https://instagram.com/example",
+      footerDesignBackgroundColor: "#333333",
+      footerDesignBackgroundImage:
+        "https://dummyimage.com/600x200/000/fff&text=Footer+Background",
     };
 
     fontOptions = {
@@ -842,12 +774,13 @@
     };
 
     teamForm = {
-      id: '',
+      id: "",
       picture: null,
       name: "",
       position: "",
       linkedin: ""
     };
+
     teamFields = [
       { id: "dot", label: this.$t("web.public.teamForm.delete") },
       { id: "name", label: this.$t("web.public.teamForm.name") },
@@ -855,7 +788,6 @@
       { id: "linkedin", label: this.$t("web.public.teamForm.linkedin") },
       { id: "delete", label: this.$t("web.public.teamForm.delete") }
     ];
-
 
     loaded = false;
 
@@ -935,32 +867,32 @@
 
     removeTeamMember(e: any) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const teamArr = this.publicWebForm.team.members as any[];
+      const teamArr = this.publicWebForm.teamMembers as any[];
       const memberIdx = teamArr.findIndex(el => el === e);
       teamArr.splice(memberIdx, 1);
     }
 
     onTeamSubmit() {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const teamArr = this.publicWebForm.team as any[];
+      const teamArr = this.publicWebForm.teamMembers as any[];
 
       teamArr.push({
-        name: this.publicWebForm.team.members.fullName,
-        position: this.publicWebForm.team.members.position,
-        linkedin: this.publicWebForm.team.members.linkedin,
-        photo: this.publicWebForm.team.members.picture
+        name: this.publicWebForm.teamMembers.name,
+        position: this.publicWebForm.teamMembers.position,
+        linkedin: this.publicWebForm.teamMembers.linkedin,
+        picture: this.publicWebForm.teamMembers.picture
       });
 
-      this.publicWebForm.team.members.picture = null;
-      this.publicWebForm.team.members.fullName = "";
-      this.publicWebForm.team.members.position = "";
-      this.publicWebForm.team.members.linkedin = "";
+      this.publicWebForm.teamMembers.picture = null;
+      this.publicWebForm.teamMembers.name = "";
+      this.publicWebForm.teamMembers.position = "";
+      this.publicWebForm.teamMembers.linkedin = "";
     }
 
     async mounted() {
       try {
         const data = await apiWebsite.getWebsiteSections(this.websiteId, "web");
-        
+
         this.publicWebForm.chosenTemplateId = data.templateId;
         this.publicWebForm.url = data.properties.general.url;
         this.loaded = true;
@@ -976,29 +908,36 @@
       // not perfect but it works for now
       setTimeout(() => {
         this.prevForm = cloneDeep(this.publicWebForm);
-      }, 3000);
+      }, 1000);
     }
 
     async onPublicWebSubmit() {
-      const transparency = (
-        await parseFile(this.publicWebForm.accountability)
+      console.log(this.publicWebForm);
+      console.log(this.publicWebForm.footer.info.transparency.accountability);
+      const accountability = (
+        await parseFile(
+          this.publicWebForm.footer.info.transparency.accountability
+        )
       ).map((file: any, key: any) => {
         return {
           file,
-          title: this.publicWebForm.accountability.files[key].name
+          title: this.publicWebForm.footer.info.transparency.accountability
+            .files[key].name
         };
       });
 
-      const team = [];
-      for await (const member of this.publicWebForm.team) {
-        if (member.photo && member.photo.files) {
-          let photo = await parseFile(member.photo);
-          photo = photo[0];
-          team.push({ ...member, photo });
-        } else {
-          team.push({ ...member });
-        }
-      }
+      console.log(accountability);
+
+      // const team = [];
+      // for await (const member of this.publicWebForm.team.members) {
+      //   if (member.picture && member.picture.files) {
+      //     let photo = await parseFile(member.picture);
+      //     photo = photo[0];
+      //     team.push({ ...member, photo });
+      //   } else {
+      //     team.push({ ...member });
+      //   }
+      // }
 
       const imagesToRemove = [];
 
@@ -1021,34 +960,34 @@
       // to disable submit button
       this.prevForm = {};
 
-      Promise.all([
-        // apiOngs.postPlatformConfig(this.ongId, {
-        //   ...this.ongConfiguration,
-        //   isActive: this.publicWebForm.isActive,
-        //   powered_by_lazzaro: this.publicWebForm.powered_by_lazzaro,
-        //   url: this.publicWebForm.url,
-        //   template_id: this.publicWebForm.chosenTemplateId
-        // }),
+      // Promise.all([
+      // apiOngs.postPlatformConfig(this.ongId, {
+      //   ...this.ongConfiguration,
+      //   isActive: this.publicWebForm.isActive,
+      //   powered_by_lazzaro: this.publicWebForm.powered_by_lazzaro,
+      //   url: this.publicWebForm.url,
+      //   template_id: this.publicWebForm.chosenTemplateId
+      // }),
 
-        this.handlePublishWebsite(this.publicWebForm.active, this.websiteId)
-      ])
-        .then(async () => {
-          this.$notify({
-            type: "success",
-            text: this.$tc("web.public.notify.success"),
-            ignoreDuplicates: true
-          } as NotificationOptions);
+      // this.handlePublishWebsite(this.publicWebForm.active, this.websiteId)
+      // ])
+      //   .then(async () => {
+      //     this.$notify({
+      //       type: "success",
+      //       text: this.$tc("web.public.notify.success"),
+      //       ignoreDuplicates: true
+      //     } as NotificationOptions);
 
-          // await this.updateFeatures();
-          this.prevForm = cloneDeep(this.publicWebForm);
-        })
-        .catch(() => {
-          this.$notify({
-            type: "error",
-            text: this.$tc("web.public.notify.error"),
-            ignoreDuplicates: true
-          } as NotificationOptions);
-        });
+      // await this.updateFeatures();
+      // })
+      // .catch(() => {
+      //   this.$notify({
+      //     type: "error",
+      //     text: this.$tc("web.public.notify.error"),
+      //     ignoreDuplicates: true
+      //   } as NotificationOptions);
+      // });
+      this.prevForm = cloneDeep(this.publicWebForm);
     }
   }
 </script>
