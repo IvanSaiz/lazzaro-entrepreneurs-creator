@@ -626,167 +626,142 @@
     publicWebForm: PublicWebForm = {
       active: false,
       url: "",
-      chosenTemplateId: "9bdd56dc-edf8-432a-bff4-fb5f2fc0e90c",
+      chosenTemplateId: "",
 
       // style properties
       styleLogo: [] as any,
       styleMainTypography: "",
       styleSecondaryTypography: "",
-      styleButtonColor: "#FF5733",
-      styleMenuColor: "#0055A5",
-      styleFooterColor: "#008000",
+      styleButtonColor: "",
+      styleMenuColor: "",
+      styleFooterColor: "",
 
       // homepage properties
       homepageMainImage: [] as any,
       homepageMoreImages: [] as any,
-      homepageTitle: "Welcome to Our Website",
-      homepageTitleColor: "#FF5733",
-      homepageSubtitle: "Discover Our Services",
-      homepageSubtitleColor: "#3366FF",
-      homepageButton1Text: "Learn More",
-      homepageButton1Link: "https://www.example.com/more-info",
-      homepageButton2Text: "Contact Us",
-      homepageButton2Link: "https://www.example.com/contact-us",
+      homepageTitle: "",
+      homepageTitleColor: "",
+      homepageSubtitle: "",
+      homepageSubtitleColor: "",
+      homepageButton1Text: "",
+      homepageButton1Link: "",
+      homepageButton2Text: "",
+      homepageButton2Link: "",
       homepageDesignLayout: "left",
       homepageDesignBackgroundColor: "#EFEFEF",
 
       // aboutUs properties
       aboutUsImgUrl: [] as any,
-      aboutUsTitle: "About Us",
-      aboutUsTitleColor: "#FF5733",
-      aboutUsSubtitle: "Our Story",
-      aboutUsSubtitleColor: "#3366FF",
-      aboutUsDescription:
-        "Learn about our journey and how we make a difference.",
+      aboutUsTitle: "",
+      aboutUsTitleColor: "",
+      aboutUsSubtitle: "",
+      aboutUsSubtitleColor: "",
+      aboutUsDescription: "",
       aboutUsFeature1Id: 1,
       aboutUsFeature1Url: [] as any,
-      aboutUsFeature1Title: "Feature 1",
-      aboutUsFeature1Description: "Description for Feature 1",
+      aboutUsFeature1Title: "",
+      aboutUsFeature1Description: "",
       aboutUsFeature2Id: 2,
       aboutUsFeature2Url: [] as any,
-      aboutUsFeature2Title: "Feature 2",
-      aboutUsFeature2Description: "Description for Feature 2",
+      aboutUsFeature2Title: "",
+      aboutUsFeature2Description: "",
       aboutUsFeature3Id: 3,
       aboutUsFeature3Url: [] as any,
-      aboutUsFeature3Title: "Feature 3",
-      aboutUsFeature3Description: "Description for Feature 3",
+      aboutUsFeature3Title: "",
+      aboutUsFeature3Description: "",
       aboutUsFeature4Id: 4,
       aboutUsFeature4Url: [] as any,
-      aboutUsFeature4Title: "Feature 4",
-      aboutUsFeature4Description: "Description for Feature 4",
+      aboutUsFeature4Title: "",
+      aboutUsFeature4Description: "",
       aboutUsReadMoreButtonId: 1,
-      aboutUsReadMoreButtonText: "Read More",
-      aboutUsReadMoreButtonLink: "https://www.example.com/feature1",
+      aboutUsReadMoreButtonText: "",
+      aboutUsReadMoreButtonLink: "",
 
       // whyChooseUs properties
       whyChooseUsImgUrl: [] as any,
-      whyChooseUsTitle: "Why Choose Us",
-      whyChooseUsTitleColor: "#FFFFFF",
-      whyChooseUsDescription:
-        "Discover the reasons to choose our company for your needs.",
+      whyChooseUsTitle: "",
+      whyChooseUsTitleColor: "",
+      whyChooseUsDescription: "",
       whyChooseUsSubtitle1Id: 1,
-      whyChooseUsSubtitle1Title: "Quality Services",
-      whyChooseUsSubtitle1Description:
-        "We offer top-notch services with a focus on client satisfaction.",
+      whyChooseUsSubtitle1Title: "",
+      whyChooseUsSubtitle1Description: "",
       whyChooseUsSubtitle2Id: 2,
-      whyChooseUsSubtitle2Title: "Experienced Team",
-      whyChooseUsSubtitle2Description:
-        "Our team consists of experienced professionals in the industry.",
+      whyChooseUsSubtitle2Title: "",
+      whyChooseUsSubtitle2Description: "",
       whyChooseUsSubtitle3Id: 3,
-      whyChooseUsSubtitle3Title: "Innovative Solutions",
-      whyChooseUsSubtitle3Description:
-        "We provide innovative solutions to complex challenges.",
+      whyChooseUsSubtitle3Title: "",
+      whyChooseUsSubtitle3Description: "",
       whyChooseUsSubtitle4Id: 4,
-      whyChooseUsSubtitle4Title: "Customer Focus",
-      whyChooseUsSubtitle4Description:
-        "Dedicated to meeting and exceeding customer expectations.",
-
-      // ... similarly for other subtitles
+      whyChooseUsSubtitle4Title: "",
+      whyChooseUsSubtitle4Description: "",
       whyChooseUsDesignLayout: "right",
       whyChooseUsDesignBackgroundColor: "#F0F0F0",
 
       // bookings properties
       bookingsImgUrl: [] as any,
-      bookingsTitle: "Book a Consultation",
-      bookingsTitleColor: "#3366FF",
-      bookingsSubtitle: "Reserve Your Spot",
-      bookingsSubtitleColor: "#FFFFFF",
-      bookingsButtonUrl: "https://www.example.com/book-now",
-      bookingsButtonText: "Book Now",
+      bookingsTitle: "",
+      bookingsTitleColor: "",
+      bookingsSubtitle: "",
+      bookingsSubtitleColor: "",
+      bookingsButtonUrl: "",
+      bookingsButtonText: "",
       bookingsDesignLayout: "center",
       bookingsDesignBackgroundColor: "#F0F0F0",
 
       // reviews properties
-      reviewsTitle: "What Our Clients Say",
-      reviewsTitleColor: "#FFFFFF",
-      reviewsSubtitle: "Client Testimonials",
-      reviewsSubtitleColor: "#3366FF",
-      reviewsUrl: "https://lazzaro.io/en/",
+      reviewsTitle: "",
+      reviewsTitleColor: "",
+      reviewsSubtitle: "",
+      reviewsSubtitleColor: "",
+      reviewsUrl: "",
 
       // impact properties
       impactData1Id: 1,
       impactData1Url: [] as any,
-      impactData1Text: "Positive Impact One",
-      impactData1Amount: "$1000",
+      impactData1Text: "",
+      impactData1Amount: "",
       impactData2Id: 2,
       impactData2Url: [] as any,
-      impactData2Text: "Positive Impact Two",
-      impactData2Amount: "$2000",
+      impactData2Text: "",
+      impactData2Amount: "",
       impactData3Id: 3,
       impactData3Url: [] as any,
-      impactData3Text: "Positive Impact Three",
-      impactData3Amount: "$3000",
+      impactData3Text: "",
+      impactData3Amount: "",
       impactData4Id: 4,
       impactData4Url: [] as any,
-      impactData4Text: "Positive Impact Four",
-      impactData4Amount: "$4000",
+      impactData4Text: "",
+      impactData4Amount: "",
       impactDesignBackgroundColor: "#FFF0F0",
-      impactDesignBackgroundImage:
-        "https://dummyimage.com/600x400/000/fff&text=Impact+Background",
+      impactDesignBackgroundImage: "",
 
       // team properties
-      teamTitle: "Our Dynamic Team",
-      teamSubtitle: "Meet the Innovators Behind Our Success",
-      teamTitleColor: "#333333",
-      teamSubtitleColor: "#666666",
-      teamMembers: [
-        {
-          id: 1,
-          picture: [] as any,
-          name: "Jane Doe",
-          linkedin: "https://www.linkedin.com/in/janedoe",
-          position: "Chief Technology Officer"
-        },
-        {
-          id: 2,
-          picture: [] as any,
-          name: "John Smith",
-          linkedin: "https://www.linkedin.com/in/johnsmith",
-          position: "Marketing Director"
-        }
-      ],
+      teamTitle: "",
+      teamSubtitle: "",
+      teamTitleColor: "",
+      teamSubtitleColor: "",
+      teamMembers: [],
       teamDesignBackgroundColor: "#F0F0F0",
 
       // contact properties
-      contactTitle: "Get in Touch",
+      contactTitle: "",
+      contactSubTitle: "",
+      contactTitleColor: "",
+      contactSubtitleColor: "",
       contactDesignBackgroundColor: "#EFEFEF",
-      contactSubTitle: "We're Here to Help",
-      contactTitleColor: "#333333",
-      contactSubtitleColor: "#666666",
 
       // footer properties
-      footerTerms: "Terms of Service: All rights reserved.",
+      footerTerms: "",
       footerTransparencyAccountability: [] as any,
-      footerTransparencyDescription: "We value transparency and openness.",
-      footerSocialFacebook: "https://facebook.com/example",
-      footerSocialTwitter: "https://twitter.com/example",
-      footerSocialLinkedIn: "https://www.linkedin.com/company/example",
-      footerSocialWhatsapp: "+123456789",
-      footerSocialSecondaryWeb: "https://example-secondary.com",
-      footerSocialInstagram: "https://instagram.com/example",
-      footerDesignBackgroundColor: "#333333",
-      footerDesignBackgroundImage:
-        "https://dummyimage.com/600x200/000/fff&text=Footer+Background"
+      footerTransparencyDescription: "",
+      footerSocialFacebook: "",
+      footerSocialTwitter: "",
+      footerSocialLinkedIn: "",
+      footerSocialWhatsapp: "",
+      footerSocialSecondaryWeb: "",
+      footerSocialInstagram: "",
+      footerDesignBackgroundColor: "",
+      footerDesignBackgroundImage: ""
     };
 
     fontOptions = {
@@ -921,6 +896,151 @@
 
         this.publicWebForm.chosenTemplateId = data.templateId;
         this.publicWebForm.url = this.url;
+
+        // Style section
+        this.publicWebForm.styleLogo = data.properties.style.logo;
+        this.publicWebForm.styleMenuColor = data.properties.style.menuColor;
+        this.publicWebForm.styleButtonColor = data.properties.style.buttonColor;
+        this.publicWebForm.styleFooterColor = data.properties.style.footerColor;
+        this.publicWebForm.styleMainTypography =
+          data.properties.style.mainTypography;
+        this.publicWebForm.styleSecondaryTypography =
+          data.properties.style.secondaryTypography;
+
+        // HomePage section
+        this.publicWebForm.homepageTitle = data.properties.homePage.title;
+        this.publicWebForm.homepageDesignLayout =
+          data.properties.homePage.design.layout;
+        this.publicWebForm.homepageDesignBackgroundColor =
+          data.properties.homePage.design.backgroundColor;
+        this.publicWebForm.homepageSubtitle = data.properties.homePage.subTitle;
+        this.publicWebForm.homepageMainImage =
+          data.properties.homePage.mainImage;
+        this.publicWebForm.homepageMoreImages =
+          data.properties.homePage.moreImages;
+        this.publicWebForm.homepageTitleColor =
+          data.properties.homePage.titleColor;
+        this.publicWebForm.homepageSubtitleColor =
+          data.properties.homePage.subTitleColor;
+        this.publicWebForm.homepageButton1Link =
+          data.properties.homePage.firstButtonLink;
+        this.publicWebForm.homepageButton1Text =
+          data.properties.homePage.firstButtonText;
+        this.publicWebForm.homepageButton2Link =
+          data.properties.homePage.secondButtonLink;
+        this.publicWebForm.homepageButton2Text =
+          data.properties.homePage.secondButtonText;
+
+        // AboutUs section
+        this.publicWebForm.aboutUsTitle = data.properties.aboutUs.title;
+        this.publicWebForm.aboutUsImgUrl = data.properties.aboutUs.imgUrl;
+        this.publicWebForm.aboutUsSubtitle = data.properties.aboutUs.subTitle;
+        this.publicWebForm.aboutUsTitleColor =
+          data.properties.aboutUs.titleColor;
+        this.publicWebForm.aboutUsSubtitleColor =
+          data.properties.aboutUs.subTitleColor;
+        this.publicWebForm.aboutUsDescription =
+          data.properties.aboutUs.description;
+
+        // WhyChooseUs section
+        this.publicWebForm.whyChooseUsTitle = data.properties.whyChooseUs.title;
+        this.publicWebForm.whyChooseUsImgUrl =
+          data.properties.whyChooseUs.imgUrl;
+        this.publicWebForm.whyChooseUsTitleColor =
+          data.properties.whyChooseUs.titleColor;
+        this.publicWebForm.whyChooseUsDescription =
+          data.properties.whyChooseUs.description;
+        this.publicWebForm.whyChooseUsSubtitles = data.properties.whyChooseUs.subTitles.map(
+          subtitle => ({
+            id: subtitle.id,
+            title: subtitle.title,
+            description: subtitle.description
+          })
+        );
+
+        // Bookings section
+        this.publicWebForm.bookingsImgUrl = data.properties.bookings.imgUrl;
+        this.publicWebForm.bookingsTitle = data.properties.bookings.title;
+        this.publicWebForm.bookingsTitleColor =
+          data.properties.bookings.titleColor;
+        this.publicWebForm.bookingsSubtitle = data.properties.bookings.subtitle;
+        this.publicWebForm.bookingsSubtitleColor =
+          data.properties.bookings.subtitleColor;
+        this.publicWebForm.bookingsButtonUrl =
+          data.properties.bookings.buttonUrl;
+        this.publicWebForm.bookingsButtonText =
+          data.properties.bookings.buttonText;
+
+        // Reviews section
+        this.publicWebForm.reviewsTitle = data.properties.reviews.title;
+        this.publicWebForm.reviewsTitleColor =
+          data.properties.reviews.titleColor;
+        this.publicWebForm.reviewsSubtitle = data.properties.reviews.subtitle;
+        this.publicWebForm.reviewsSubtitleColor =
+          data.properties.reviews.subtitleColor;
+        this.publicWebForm.reviewsUrl = data.properties.reviews.url;
+
+        this.publicWebForm.impactData = data.properties.impact.data.map(
+          item => ({
+            id: item.id,
+            icon: item.url,
+            text: item.text,
+            amount: item.amount
+          })
+        );
+        this.publicWebForm.impactDesignBackgroundColor =
+          data.properties.impact.design.backgroundColor;
+        this.publicWebForm.impactDesignBackgroundImage =
+          data.properties.impact.design.backgroundImage;
+
+        // Team section
+        this.publicWebForm.teamTitle = data.properties.team.title;
+        this.publicWebForm.teamSubtitle = data.properties.team.subTitle;
+        this.publicWebForm.teamTitleColor = data.properties.team.titleColor;
+        this.publicWebForm.teamSubtitleColor =
+          data.properties.team.subtitleColor;
+        this.publicWebForm.teamMembers = data.properties.team.members.map(
+          member => ({
+            id: member.id,
+            picture: member.picture,
+            name: member.name,
+            linkedin: member.linkedin,
+            position: member.position
+          })
+        );
+        this.publicWebForm.teamDesignBackgroundColor =
+          data.properties.team.design.backgroundColor;
+
+        // Contact section
+        this.publicWebForm.contactTitle = data.properties.contact.title;
+        this.publicWebForm.contactSubTitle = data.properties.contact.subTitle;
+        this.publicWebForm.contactTitleColor =
+          data.properties.contact.titleColor;
+        this.publicWebForm.contactSubtitleColor =
+          data.properties.contact.subtitleColor;
+
+        // Footer section
+        this.publicWebForm.footerTerms = data.properties.footer.info.terms;
+        this.publicWebForm.footerTransparencyAccountability =
+          data.properties.footer.info.transparency.fileUrl;
+        this.publicWebForm.footerTransparencyDescription =
+          data.properties.footer.info.transparency.description;
+        this.publicWebForm.footerSocialFacebook =
+          data.properties.footer.social.facebook;
+        this.publicWebForm.footerSocialTwitter =
+          data.properties.footer.social.twitter;
+        this.publicWebForm.footerSocialLinkedIn =
+          data.properties.footer.social.linkedIn;
+        this.publicWebForm.footerSocialWhatsapp =
+          data.properties.footer.social.whatsapp;
+        this.publicWebForm.footerSocialSecondaryWeb =
+          data.properties.footer.social.secondaryWeb;
+        this.publicWebForm.footerSocialInstagram =
+          data.properties.footer.social.instagram;
+        this.publicWebForm.footerDesignBackgroundColor =
+          data.properties.footer.design.backgroundColor;
+        this.publicWebForm.footerDesignBackgroundImage =
+          data.properties.footer.design.backgroundImage;
 
         this.loaded = true;
       } catch (error) {
@@ -1131,7 +1251,7 @@
                 id: this.publicWebForm.whyChooseUsSubtitle4Id,
                 title: this.publicWebForm.whyChooseUsSubtitle4Title,
                 description: this.publicWebForm.whyChooseUsSubtitle4Description
-              },
+              }
             ],
             design: {
               layout: this.publicWebForm.whyChooseUsDesignLayout,
@@ -1245,8 +1365,10 @@
         }
       };
 
+      console.log(postData.properties.team);
+
       try {
-        await apiWebsite.postWebsiteSection(postData); 
+        await apiWebsite.postWebsiteSection(postData);
         // this.handlePublishWebsite(this.publicWebForm.active, this.websiteId);
         this.$notify({
           type: "success",
