@@ -53,6 +53,7 @@
             :label="$t('web.public.personalizeWebForm.form.logo')"
             label-position="before"
             name="styleLogo"
+            @change="handleImageUpload($event, 'publicWebForm.styleLogo')"
             :help="$t('web.public.personalizeWebForm.form.logoHelper')"
           )
           .form-section
@@ -141,7 +142,7 @@
               .form-section__cta(v-for="index in 2" :key="index")            
                 formulate-input(
                   type="text"
-                  :name="`homepageButton[${index}]Text`"
+                  :name="`homepageButton${index}Text`"
                   :label="$t(`web.public.homepageForm.form.buttons.${index}`)"
                 )
                 formulate-input(
@@ -172,7 +173,7 @@
                   )
                 FormulateInput#primary-color(
                   type="textColor"
-                  name="aboutUs.titleColor"
+                  name="aboutUsTitleColor"
                   :label="$t('auth.onboarding.stepStyle.form.textColour')"
                   value="#1081F2"
                   )
@@ -227,7 +228,7 @@
           )
           formulate-input(
             type="text"
-            name="aboutUsReadMoreButtonLnk"
+            name="aboutUsReadMoreButtonLink"
             :label="$t('web.public.whoWeAreForm.features.link')"
           )
 
@@ -606,6 +607,21 @@
     };
 
     prevForm: PublicWebForm | {} = {};
+    imageChanged: {
+      styleLogo: false;
+      homepageMainImage: false;
+      aboutUsImgUrl: false;
+      aboutUsFeature1Url: false;
+      aboutUsFeature2Url: false;
+      aboutUsFeature3Url: false;
+      aboutUsFeature4Url: false;
+      whyChooseUsImgUrl: false;
+      bookingsImgUrl: false;
+      impactData1Url: false;
+      impactData2Url: false;
+      impactData3Url: false;
+      impactData4Url: false;
+    };
 
     publicWebForm: PublicWebForm = {
       active: false,
@@ -674,13 +690,16 @@
         "We offer top-notch services with a focus on client satisfaction.",
       whyChooseUsSubtitle2Id: 2,
       whyChooseUsSubtitle2Title: "Experienced Team",
-      whyChooseUsSubtitle2Description: "Our team consists of experienced professionals in the industry.",
+      whyChooseUsSubtitle2Description:
+        "Our team consists of experienced professionals in the industry.",
       whyChooseUsSubtitle3Id: 3,
       whyChooseUsSubtitle3Title: "Innovative Solutions",
-      whyChooseUsSubtitle3Description: "We provide innovative solutions to complex challenges.",
+      whyChooseUsSubtitle3Description:
+        "We provide innovative solutions to complex challenges.",
       whyChooseUsSubtitle4Id: 4,
       whyChooseUsSubtitle4Title: "Customer Focus",
-      whyChooseUsSubtitle4Description: "Dedicated to meeting and exceeding customer expectations.",
+      whyChooseUsSubtitle4Description:
+        "Dedicated to meeting and exceeding customer expectations.",
 
       // ... similarly for other subtitles
       whyChooseUsDesignLayout: "right",
@@ -730,22 +749,24 @@
       teamSubtitle: "Meet the Innovators Behind Our Success",
       teamTitleColor: "#333333",
       teamSubtitleColor: "#666666",
-      teamMembers: [  {
-            id: 1,
-            picture: [] as any,
-            name: "Jane Doe",
-            linkedin: "https://www.linkedin.com/in/janedoe",
-            position: "Chief Technology Officer"
-          },
-          {
-            id: 2,
-            picture: [] as any,
-            name: "John Smith",
-            linkedin: "https://www.linkedin.com/in/johnsmith",
-            position: "Marketing Director"
-          }],
+      teamMembers: [
+        {
+          id: 1,
+          picture: [] as any,
+          name: "Jane Doe",
+          linkedin: "https://www.linkedin.com/in/janedoe",
+          position: "Chief Technology Officer"
+        },
+        {
+          id: 2,
+          picture: [] as any,
+          name: "John Smith",
+          linkedin: "https://www.linkedin.com/in/johnsmith",
+          position: "Marketing Director"
+        }
+      ],
       teamDesignBackgroundColor: "#F0F0F0",
-      
+
       // contact properties
       contactTitle: "Get in Touch",
       contactDesignBackgroundColor: "#EFEFEF",
@@ -765,7 +786,7 @@
       footerSocialInstagram: "https://instagram.com/example",
       footerDesignBackgroundColor: "#333333",
       footerDesignBackgroundImage:
-        "https://dummyimage.com/600x200/000/fff&text=Footer+Background",
+        "https://dummyimage.com/600x200/000/fff&text=Footer+Background"
     };
 
     fontOptions = {
@@ -794,20 +815,17 @@
     @auth.State("id")
     public memberId!: string;
 
-    @auth.State("email")
-    public email!: string;
-
     @auth.State("websiteId")
     public websiteId!: string;
 
     @auth.State("templateId")
     public templateId!: string;
 
+    @auth.State("url")
+    public url!: string;
+
     @auth.State("isActive")
     public isActive!: string;
-
-    @auth.State("ongConfiguration")
-    public ongConfiguration!: any;
 
     handleChooseTemplate(e: Event & { target: HTMLInputElement }) {
       if (isObjectEmpty(this.prevForm)) return;
@@ -820,6 +838,10 @@
 
     onModalOpen(): void {
       this.showModal = true;
+    }
+
+    handleImageUpload(event, fieldName): void {
+      this.imageChanged[fieldName] = true;
     }
 
     get isFormChanged(): boolean {
@@ -878,10 +900,10 @@
 
       teamArr.push({
         id: this.publicWebForm.teamMembers.length + 1,
+        picture: this.teamForm.picture,
         name: this.teamForm.name,
         position: this.teamForm.position,
-        linkedin: this.teamForm.linkedin,
-        picture: this.teamForm.picture
+        linkedin: this.teamForm.linkedin
       });
 
       this.teamForm = {
@@ -895,10 +917,11 @@
 
     async mounted() {
       try {
-        const data = await apiWebsite.getWebsiteSections(this.websiteId, "web");
+        const data = await apiWebsite.getWebsiteSection(this.websiteId, "web");
 
         this.publicWebForm.chosenTemplateId = data.templateId;
-        this.publicWebForm.url = data.properties.general.url;
+        this.publicWebForm.url = this.url;
+
         this.loaded = true;
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -915,35 +938,74 @@
       }, 1000);
     }
 
+    async parseImageUrl(url) {
+      if (url) {
+        const parsed = await parseFile(url);
+        return parsed[0] as string;
+      }
+      return null;
+    }
+
     async onPublicWebSubmit() {
-      console.log(this.publicWebForm);
-      console.log(this.publicWebForm.footer.info.transparency.accountability);
       const accountability = (
-        await parseFile(
-          this.publicWebForm.footer.info.transparency.accountability
-        )
+        await parseFile(this.publicWebForm.footerTransparencyAccountability)
       ).map((file: any, key: any) => {
         return {
           file,
-          title: this.publicWebForm.footer.info.transparency.accountability
-            .files[key].name
+          title: this.publicWebForm.footerTransparencyAccountability.files[key]
+            .name
         };
       });
 
-      console.log(accountability);
+      const team = [];
 
-      // const team = [];
-      // for await (const member of this.publicWebForm.team.members) {
-      //   if (member.picture && member.picture.files) {
-      //     let photo = await parseFile(member.picture);
-      //     photo = photo[0];
-      //     team.push({ ...member, photo });
-      //   } else {
-      //     team.push({ ...member });
-      //   }
-      // }
+      for await (const member of this.publicWebForm.teamMembers) {
+        let picture =
+          member.picture && member.picture.files
+            ? (await parseFile(member.picture))[0]
+            : null;
+        team.push({ ...member, picture });
+      }
 
-      const imagesToRemove = [];
+      const styleLogoTrimmed = await this.parseImageUrl(
+        this.publicWebForm.styleLogo
+      );
+      const homepageMainImageTrimmed = await this.parseImageUrl(
+        this.publicWebForm.homepageMainImage
+      );
+      const aboutUsImgUrlTrimmed = await this.parseImageUrl(
+        this.publicWebForm.aboutUsImgUrl
+      );
+      const aboutUsFeature1UrlTrimmed = await this.parseImageUrl(
+        this.publicWebForm.aboutUsFeature1Url
+      );
+      const aboutUsFeature2UrlTrimmed = await this.parseImageUrl(
+        this.publicWebForm.aboutUsFeature2Url
+      );
+      const aboutUsFeature3UrlTrimmed = await this.parseImageUrl(
+        this.publicWebForm.aboutUsFeature3Url
+      );
+      const aboutUsFeature4UrlTrimmed = await this.parseImageUrl(
+        this.publicWebForm.aboutUsFeature4Url
+      );
+      const whyChooseUsImgUrlTrimmed = await this.parseImageUrl(
+        this.publicWebForm.whyChooseUsImgUrl
+      );
+      const bookingsImgUrlTrimmed = await this.parseImageUrl(
+        this.publicWebForm.bookingsImgUrl
+      );
+      const impactData1UrlTrimmed = await this.parseImageUrl(
+        this.publicWebForm.impactData1Url
+      );
+      const impactData2UrlTrimmed = await this.parseImageUrl(
+        this.publicWebForm.impactData2Url
+      );
+      const impactData3UrlTrimmed = await this.parseImageUrl(
+        this.publicWebForm.impactData3Url
+      );
+      const impactData4UrlTrimmed = await this.parseImageUrl(
+        this.publicWebForm.impactData4Url
+      );
 
       const hasTemplateChanged =
         this.publicWebForm.chosenTemplateId !== this.templateId;
@@ -964,34 +1026,243 @@
       // to disable submit button
       this.prevForm = {};
 
-      // Promise.all([
-      // apiOngs.postPlatformConfig(this.ongId, {
-      //   ...this.ongConfiguration,
-      //   isActive: this.publicWebForm.isActive,
-      //   powered_by_lazzaro: this.publicWebForm.powered_by_lazzaro,
-      //   url: this.publicWebForm.url,
-      //   template_id: this.publicWebForm.chosenTemplateId
-      // }),
+      const postData = {
+        active: this.publicWebForm.active,
+        templateId: this.publicWebForm.chosenTemplateId,
+        websiteId: this.websiteId,
+        type: "web",
+        properties: {
+          general: {
+            url: this.publicWebForm.url
+          },
+          style: {
+            logo: styleLogoTrimmed,
+            menuColor: this.publicWebForm.styleMenuColor,
+            buttonColor: this.publicWebForm.styleButtonColor,
+            footerColor: this.publicWebForm.styleFooterColor,
+            mainTypography: this.publicWebForm.styleMainTypography,
+            secondaryTypography: this.publicWebForm.styleSecondaryTypography
+          },
 
-      // this.handlePublishWebsite(this.publicWebForm.active, this.websiteId)
-      // ])
-      //   .then(async () => {
-      //     this.$notify({
-      //       type: "success",
-      //       text: this.$tc("web.public.notify.success"),
-      //       ignoreDuplicates: true
-      //     } as NotificationOptions);
+          homePage: {
+            title: this.publicWebForm.homepageTitle,
+            design: {
+              layout: this.publicWebForm.homepageDesignLayout,
+              backgroundColor: this.publicWebForm.homepageDesignBackgroundColor
+            },
+            subTitle: this.publicWebForm.homepageSubtitle,
+            mainImage: homepageMainImageTrimmed,
+            moreImages: this.publicWebForm.homepageMoreImages,
+            titleColor: this.publicWebForm.homepageTitleColor,
+            subTitleColor: this.publicWebForm.homepageSubtitleColor,
+            firstButtonLink: this.publicWebForm.homepageButton1Link,
+            firstButtonText: this.publicWebForm.homepageButton1Text,
+            secondButtonLink: this.publicWebForm.homepageButton2Link,
+            secondButtonText: this.publicWebForm.homepageButton2Text
+          },
 
-      // await this.updateFeatures();
-      // })
-      // .catch(() => {
-      //   this.$notify({
-      //     type: "error",
-      //     text: this.$tc("web.public.notify.error"),
-      //     ignoreDuplicates: true
-      //   } as NotificationOptions);
-      // });
-      this.prevForm = cloneDeep(this.publicWebForm);
+          aboutUs: {
+            title: this.publicWebForm.aboutUsTitle,
+            imgUrl: aboutUsImgUrlTrimmed,
+            subTitle: this.publicWebForm.aboutUsSubtitle,
+            titleColor: this.publicWebForm.aboutUsTitleColor,
+            subTitleColor: this.publicWebForm.aboutUsSubtitleColor,
+            description: this.publicWebForm.aboutUsDescription,
+            features: {
+              icons: [
+                {
+                  id: this.publicWebForm.aboutUsFeature1Id,
+                  url: aboutUsFeature1UrlTrimmed,
+                  title: this.publicWebForm.aboutUsFeature1Title,
+                  description: this.publicWebForm.aboutUsFeature1Description
+                },
+                {
+                  id: this.publicWebForm.aboutUsFeature2Id,
+                  url: aboutUsFeature2UrlTrimmed,
+                  title: this.publicWebForm.aboutUsFeature2Title,
+                  description: this.publicWebForm.aboutUsFeature2Description
+                },
+                {
+                  id: this.publicWebForm.aboutUsFeature3Id,
+                  url: aboutUsFeature3UrlTrimmed,
+                  title: this.publicWebForm.aboutUsFeature3Title,
+                  description: this.publicWebForm.aboutUsFeature3Description
+                },
+                {
+                  id: this.publicWebForm.aboutUsFeature4Id,
+                  url: aboutUsFeature4UrlTrimmed,
+                  title: this.publicWebForm.aboutUsFeature4Title,
+                  description: this.publicWebForm.aboutUsFeature4Description
+                }
+              ],
+              buttons: [
+                {
+                  id: this.publicWebForm.aboutUsReadMoreButtonId,
+                  text: this.publicWebForm.aboutUsReadMoreButtonText,
+                  link: this.publicWebForm.aboutUsReadMoreButtonLink
+                }
+              ]
+            }
+          },
+
+          // WhyChooseUs properties
+          whyChooseUs: {
+            title: this.publicWebForm.whyChooseUsTitle,
+            imgUrl: whyChooseUsImgUrlTrimmed,
+            titleColor: this.publicWebForm.whyChooseUsTitleColor,
+            description: this.publicWebForm.whyChooseUsDescription,
+            subTitles: [
+              {
+                id: this.publicWebForm.whyChooseUsSubtitle1Id,
+                title: this.publicWebForm.whyChooseUsSubtitle1Title,
+                description: this.publicWebForm.whyChooseUsSubtitle1Description
+              },
+              {
+                id: this.publicWebForm.whyChooseUsSubtitle2Id,
+                title: this.publicWebForm.whyChooseUsSubtitle2Title,
+                description: this.publicWebForm.whyChooseUsSubtitle2Description
+              },
+              {
+                id: this.publicWebForm.whyChooseUsSubtitle3Id,
+                title: this.publicWebForm.whyChooseUsSubtitle3Title,
+                description: this.publicWebForm.whyChooseUsSubtitle3Description
+              },
+              {
+                id: this.publicWebForm.whyChooseUsSubtitle4Id,
+                title: this.publicWebForm.whyChooseUsSubtitle4Title,
+                description: this.publicWebForm.whyChooseUsSubtitle4Description
+              },
+            ],
+            design: {
+              layout: this.publicWebForm.whyChooseUsDesignLayout,
+              backgroundColor: this.publicWebForm
+                .whyChooseUsDesignBackgroundColor
+            }
+          },
+
+          // Bookings properties
+          bookings: {
+            imgUrl: bookingsImgUrlTrimmed,
+            title: this.publicWebForm.bookingsTitle,
+            titleColor: this.publicWebForm.bookingsTitleColor,
+            subtitle: this.publicWebForm.bookingsSubtitle,
+            subtitleColor: this.publicWebForm.bookingsSubtitleColor,
+            buttonUrl: this.publicWebForm.bookingsButtonUrl,
+            buttonText: this.publicWebForm.bookingsButtonText,
+            design: {
+              layout: this.publicWebForm.bookingsDesignLayout,
+              backgroundColor: this.publicWebForm.bookingsDesignBackgroundColor
+            }
+          },
+
+          // Reviews properties
+          reviews: {
+            title: this.publicWebForm.reviewsTitle,
+            titleColor: this.publicWebForm.reviewsTitleColor,
+            subtitle: this.publicWebForm.reviewsSubtitle,
+            subtitleColor: this.publicWebForm.reviewsSubtitleColor,
+            url: this.publicWebForm.reviewsUrl
+          },
+
+          // Impact properties
+          impact: {
+            data: [
+              {
+                id: this.publicWebForm.impactData1Id,
+                url: impactData1UrlTrimmed,
+                text: this.publicWebForm.impactData1Text,
+                amount: this.publicWebForm.impactData1Amount
+              },
+              {
+                id: this.publicWebForm.impactData2Id,
+                url: impactData2UrlTrimmed,
+                text: this.publicWebForm.impactData2Text,
+                amount: this.publicWebForm.impactData2Amount
+              },
+              {
+                id: this.publicWebForm.impactData3Id,
+                url: impactData3UrlTrimmed,
+                text: this.publicWebForm.impactData3Text,
+                amount: this.publicWebForm.impactData3Amount
+              },
+              {
+                id: this.publicWebForm.impactData4Id,
+                url: impactData4UrlTrimmed,
+                text: this.publicWebForm.impactData4Text,
+                amount: this.publicWebForm.impactData4Amount
+              }
+            ],
+            design: {
+              backgroundColor: this.publicWebForm.impactDesignBackgroundColor,
+              backgroundImage: this.publicWebForm.impactDesignBackgroundImage
+            }
+          },
+          // Team properties
+          team: {
+            title: this.publicWebForm.teamTitle,
+            subTitle: this.publicWebForm.teamSubtitle,
+            titleColor: this.publicWebForm.teamTitleColor,
+            subtitleColor: this.publicWebForm.teamSubtitleColor,
+            members: team,
+            design: {
+              backgroundColor: this.publicWebForm.teamDesignBackgroundColor
+            }
+          },
+
+          // Contact properties
+          contact: {
+            title: this.publicWebForm.contactTitle,
+            subTitle: this.publicWebForm.contactSubTitle,
+            titleColor: this.publicWebForm.contactTitleColor,
+            subtitleColor: this.publicWebForm.contactSubtitleColor,
+            design: {
+              backgroundColor: this.publicWebForm.contactDesignBackgroundColor
+            }
+          },
+
+          // Footer properties
+          footer: {
+            info: {
+              terms: this.publicWebForm.footerTerms,
+              transparency: {
+                fileUrl: accountability[0].file,
+                description: this.publicWebForm.footerTransparencyDescription
+              }
+            },
+            social: {
+              twitter: this.publicWebForm.footerSocialTwitter,
+              facebook: this.publicWebForm.footerSocialFacebook,
+              linkedIn: this.publicWebForm.footerSocialLinkedIn,
+              whatsapp: this.publicWebForm.footerSocialWhatsapp,
+              instagram: this.publicWebForm.footerSocialInstagram,
+              secondaryWeb: this.publicWebForm.footerSocialSecondaryWeb
+            },
+            design: {
+              backgroundColor: this.publicWebForm.footerDesignBackgroundColor,
+              backgroundImage: this.publicWebForm.footerDesignBackgroundImage
+            }
+          }
+        }
+      };
+
+      try {
+        await apiWebsite.postWebsiteSection(postData); 
+        // this.handlePublishWebsite(this.publicWebForm.active, this.websiteId);
+        this.$notify({
+          type: "success",
+          text: this.$tc("web.public.notify.success"),
+          ignoreDuplicates: true
+        });
+
+        // await this.updateFeatures();
+        this.prevForm = cloneDeep(this.publicWebForm);
+      } catch (error) {
+        this.$notify({
+          type: "error",
+          text: this.$tc("web.public.notify.error"),
+          ignoreDuplicates: true
+        });
+      }
     }
   }
 </script>
