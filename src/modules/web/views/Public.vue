@@ -53,7 +53,6 @@
             :label="$t('web.public.personalizeWebForm.form.logo')"
             label-position="before"
             name="styleLogo"
-            :src="publicWebForm.styleLogo"
             @change="handleImageUpload($event, 'publicWebForm.styleLogo')"
             :help="$t('web.public.personalizeWebForm.form.logoHelper')"
           )
@@ -243,7 +242,6 @@
               :label="$t('web.public.whyChooseUsForm.image')"
               label-position="before"
               name="whyChooseUsImgUrl"
-              :src="whyChooseUsImgUrl"
               :help="$t('web.public.whyChooseUsForm.imageHelperText')"
             )
             .form-section
@@ -375,23 +373,23 @@
           h2.h2--dash {{ $t('web.public.impactForm.title') }}
           p {{ $t('web.public.impactForm.subtitle') }}
           .public-impact__content
-            .impact-item(v-for="(item, index) in publicWebForm.impactData" :key="item.id")
+            .impact-item(v-for="(item, index) in publicWebForm.impactData" :key="index")
               formulate-input(
                 type="image"
-                :name= "`impactData${index}Icon`"
-                v-model="item.icon"
+                :name= "`impactData${index-1}Url`"
+                v-model="item.url"
                 :label="$t(`web.public.impactForm.icon.${index+1}`)"
                 :help="$t('web.public.impactForm.icon.help')"
               )
               formulate-input(
                 type="text"
-                :name= "`impactData${index}Text`"
+                :name= "`impactData${index-1}Text`"
                 v-model="item.text"
                 :label="$t(`web.public.impactForm.text.${index+1}`)"
               )
               formulate-input(
                 type="text"
-                :name= "`impactData${index}Amount`"
+                :name= "`impactData${index-1}Amount`"
                 v-model="item.amount"
                 :label="$t(`web.public.impactForm.amount.${index+1}`)"
               )
@@ -490,12 +488,12 @@
             formulate-input(
               type="text"
               name="contactTitle"
-              :label="$t('web.public.contactForm.phone')"
+              :label="$t('web.public.contactForm.form.title')"
             )
             formulate-input(
               type="text"
               name="contactSubTitle"
-              :label="$t('web.public.contactForm.location')"
+              :label="$t('web.public.contactForm.form.subtitle')"
             )
 
       section.public-footer
@@ -726,22 +724,22 @@
       // impact properties
       // TODO:remove that and kept the impactData only
       impactData1Id: 1,
-      impactData1Icon: [] as any,
+      impactData1Url: [] as any,
       impactData1Text: "",
       impactData1Amount: "",
       impactData2Id: 2,
-      impactData2Icon: [] as any,
+      impactData2Url: [] as any,
       impactData2Text: "",
       impactData2Amount: "",
       impactData3Id: 3,
-      impactData3Icon: [] as any,
+      impactData3Url: [] as any,
       impactData3Text: "",
       impactData3Amount: "",
       impactData4Id: 4,
-      impactData4Icon: [] as any,
+      impactData4Url: [] as any,
       impactData4Text: "",
       impactData4Amount: "",
-      impactData: [],
+      impactData: [] as any,
       impactDesignBackgroundColor: "#FFF0F0",
       impactDesignBackgroundImage: "",
 
@@ -909,7 +907,7 @@
           this.publicWebForm.url = this.url;
 
           // Style section
-          this.publicWebForm.styleLogo = data.properties.style.logo;
+          this.publicWebForm.styleLogo =[{ url: data.properties.style.logo }] ;
           this.publicWebForm.styleMenuColor = data.properties.style.menuColor;
           this.publicWebForm.styleButtonColor =
             data.properties.style.buttonColor;
@@ -929,7 +927,7 @@
           this.publicWebForm.homepageSubtitle =
             data.properties.homePage.subTitle;
           this.publicWebForm.homepageMainImage =
-            data.properties.homePage.mainImage;
+            [ {url: data.properties.homePage?.mainImage}];
           this.publicWebForm.homepageMoreImages =
             data.properties.homePage.moreImages;
           this.publicWebForm.homepageTitleColor =
@@ -947,7 +945,7 @@
 
           // AboutUs section
           this.publicWebForm.aboutUsTitle = data.properties.aboutUs.title;
-          this.publicWebForm.aboutUsImgUrl = data.properties.aboutUs.imgUrl;
+          this.publicWebForm.aboutUsImgUrl = [{url: data.properties.aboutUs?.imgUrl}];
           this.publicWebForm.aboutUsSubtitle = data.properties.aboutUs.subTitle;
           this.publicWebForm.aboutUsTitleColor =
             data.properties.aboutUs.titleColor;
@@ -957,7 +955,7 @@
             data.properties.aboutUs.description;
           this.publicWebForm.aboutUsFeaturesIcons = data.properties.aboutUs.features.icons.map(icon => ({
             id: icon.id,
-            url: icon.url, 
+            url: [{url: icon.url}], 
             title: icon.title,
             description: icon.description
           }));
@@ -970,7 +968,7 @@
           this.publicWebForm.whyChooseUsTitle =
             data.properties.whyChooseUs.title;
           this.publicWebForm.whyChooseUsImgUrl =
-            data.properties.whyChooseUs.imgUrl;
+            [{url: data.properties.whyChooseUs.imgUrl}]
           this.publicWebForm.whyChooseUsTitleColor =
             data.properties.whyChooseUs.titleColor;
           this.publicWebForm.whyChooseUsDescription =
@@ -984,7 +982,7 @@
           );
 
           // Bookings section
-          this.publicWebForm.bookingsImgUrl = data.properties.bookings.imgUrl;
+          this.publicWebForm.bookingsImgUrl =[{url: data.properties.bookings.imgUrl}];
           this.publicWebForm.bookingsTitle = data.properties.bookings.title;
           this.publicWebForm.bookingsTitleColor =
             data.properties.bookings.titleColor;
@@ -1010,7 +1008,7 @@
           this.publicWebForm.impactData = data.properties.impact.data.map(
             item => ({
               id: item.id,
-              icon: item.icon,
+              url: [{url:item.url}],
               text: item.text,
               amount: item.amount
             })
@@ -1029,7 +1027,7 @@
           this.publicWebForm.teamMembers = data.properties.team.members.map(
             member => ({
               id: member.id,
-              picture: member.picture,
+              picture: [{url: member.picture}],
               name: member.name,
               linkedin: member.linkedin,
               position: member.position
@@ -1049,7 +1047,7 @@
           // Footer section
           this.publicWebForm.footerTerms = data.properties.footer.info.terms;
           this.publicWebForm.footerTransparencyAccountability =
-            data.properties.footer.info.transparency.fileUrl;
+          [{ url: data.properties.footer.info.transparency.fileUrl}]
           this.publicWebForm.footerTransparencyDescription =
             data.properties.footer.info.transparency.description;
           this.publicWebForm.footerSocialFacebook =
@@ -1107,52 +1105,54 @@
       });
 
       const team = [];
+      if(this.publicWebForm.teamMembers){
 
-      for await (const member of this.publicWebForm.teamMembers) {
-        let picture =
+        for await (const member of this.publicWebForm.teamMembers) {
+          let picture =
           member.picture && member.picture.files
-            ? (await parseFile(member.picture))[0]
-            : null;
-        team.push({ ...member, picture });
+          ? (await parseFile(member.picture))[0]
+          : null;
+          team.push({ ...member, picture });
+        }
       }
 
       const styleLogoTrimmed = await this.parseImageUrl(
         this.publicWebForm.styleLogo
       );
-      const homepageMainImageTrimmed = await this.parseImageUrl(
+      const homepageMainImageTrimmed = this.publicWebForm.homepageMainImage && await this.parseImageUrl(
         this.publicWebForm.homepageMainImage
       );
-      const aboutUsImgUrlTrimmed = await this.parseImageUrl(
+      const aboutUsImgUrlTrimmed = this.publicWebForm.aboutUsImgUrl && await this.parseImageUrl(
         this.publicWebForm.aboutUsImgUrl
       );
-      const aboutUsFeature1UrlTrimmed = await this.parseImageUrl(
+      const aboutUsFeature1UrlTrimmed = this.publicWebForm.aboutUsFeature1Url && await this.parseImageUrl(
         this.publicWebForm.aboutUsFeature1Url
       );
-      const aboutUsFeature2UrlTrimmed = await this.parseImageUrl(
+      const aboutUsFeature2UrlTrimmed = this.publicWebForm.aboutUsFeature2Url && await this.parseImageUrl(
         this.publicWebForm.aboutUsFeature2Url
       );
-      const aboutUsFeature3UrlTrimmed = await this.parseImageUrl(
+      const aboutUsFeature3UrlTrimmed = this.publicWebForm.aboutUsFeature3Url && await this.parseImageUrl(
         this.publicWebForm.aboutUsFeature3Url
       );
-      const aboutUsFeature4UrlTrimmed = await this.parseImageUrl(
+      const aboutUsFeature4UrlTrimmed = this.publicWebForm.aboutUsFeature4Url && await this.parseImageUrl(
         this.publicWebForm.aboutUsFeature4Url
       );
-      const whyChooseUsImgUrlTrimmed = await this.parseImageUrl(
+      const whyChooseUsImgUrlTrimmed = this.publicWebForm.whyChooseUsImgUrl && await this.parseImageUrl(
         this.publicWebForm.whyChooseUsImgUrl
       );
-      const bookingsImgUrlTrimmed = await this.parseImageUrl(
+      const bookingsImgUrlTrimmed = this.publicWebForm.bookingsImgUrl && await this.parseImageUrl(
         this.publicWebForm.bookingsImgUrl
       );
-      const impactData1UrlTrimmed = await this.parseImageUrl(
+      const impactData1UrlTrimmed = this.publicWebForm.impactData1Url && await this.parseImageUrl(
         this.publicWebForm.impactData1Url
       );
-      const impactData2UrlTrimmed = await this.parseImageUrl(
+      const impactData2UrlTrimmed = this.publicWebForm.impactData2Url && await this.parseImageUrl(
         this.publicWebForm.impactData2Url
       );
-      const impactData3UrlTrimmed = await this.parseImageUrl(
+      const impactData3UrlTrimmed = this.publicWebForm.impactData3Url && await this.parseImageUrl(
         this.publicWebForm.impactData3Url
       );
-      const impactData4UrlTrimmed = await this.parseImageUrl(
+      const impactData4UrlTrimmed = this.publicWebForm.impactData4Url && await this.parseImageUrl(
         this.publicWebForm.impactData4Url
       );
 

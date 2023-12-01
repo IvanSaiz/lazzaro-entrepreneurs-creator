@@ -10,7 +10,7 @@ const getWebsiteSection = (
 };
 
 const postWebsiteSection = (sectionBody: any): Promise<any> => {
-  return http.patch("websites/section", sectionBody, {noAuth: false});
+  return http.put("websites/section", sectionBody, {noAuth: false});
 }
 
 const publishWebsite = (websiteId: string): Promise<any> => {

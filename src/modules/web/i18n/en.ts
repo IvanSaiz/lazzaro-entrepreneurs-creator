@@ -88,6 +88,10 @@ export default {
       title: "Contact Form",
       subtitle:
         "Allow a potential customer to contact you. Configure the title and subtitle of your contact page.",
+      form: {
+        title: "Title",
+        subtitle: "Subtitle",
+      },
       phone: "Phone no.",
       location: "Location"
     },

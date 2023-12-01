@@ -84,6 +84,10 @@ export default {
       title: "Formulario de contacto",
       subtitle:
         "Permite que un posible cliente pueda ponerse en contacto contigo. Configura el título y subtítulo de tu página de contacto",
+      form: {
+        title: "Título",
+        subtitle: "Subtítulo",
+      },
       phone: "Teléfono",
       location: "Ubicación"
     },
