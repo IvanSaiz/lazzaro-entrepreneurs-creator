@@ -376,20 +376,20 @@
             .impact-item(v-for="(item, index) in publicWebForm.impactData" :key="index")
               formulate-input(
                 type="image"
-                :name= "`impactData${index-1}Url`"
+                :name= "`impactData${index+1}Url`"
                 v-model="item.url"
                 :label="$t(`web.public.impactForm.icon.${index+1}`)"
                 :help="$t('web.public.impactForm.icon.help')"
               )
               formulate-input(
                 type="text"
-                :name= "`impactData${index-1}Text`"
+                :name= "`impactData${index+1}Text`"
                 v-model="item.text"
                 :label="$t(`web.public.impactForm.text.${index+1}`)"
               )
               formulate-input(
                 type="text"
-                :name= "`impactData${index-1}Amount`"
+                :name= "`impactData${index+1}Amount`"
                 v-model="item.amount"
                 :label="$t(`web.public.impactForm.amount.${index+1}`)"
               )
@@ -774,7 +774,8 @@
 
     fontOptions = {
       roboto: this.$t("web.public.personalizeWebForm.form.fonts.roboto"),
-      arial: this.$t("web.public.personalizeWebForm.form.fonts.arial")
+      //TODO: uncomment it when the template project is adopted to that feature
+      // arial: this.$t("web.public.personalizeWebForm.form.fonts.arial")
     };
 
     teamForm = {
@@ -813,7 +814,6 @@
     handleChooseTemplate(e: Event & { target: HTMLInputElement }) {
       if (isObjectEmpty(this.prevForm)) return;
       this.publicWebForm.chosenTemplateId = e.target.value;
-      console.log(this.publicWebForm.impactData);
     }
 
     onModalClose(): void {
@@ -953,7 +953,7 @@
             data.properties.aboutUs.subTitleColor;
           this.publicWebForm.aboutUsDescription =
             data.properties.aboutUs.description;
-          this.publicWebForm.aboutUsFeaturesIcons = data.properties.aboutUs.features.icons.map(icon => ({
+          this.publicWebForm.aboutUsFeaturesIcons = data.properties.aboutUs.features.icons?.map(icon => ({
             id: icon.id,
             url: [{url: icon.url}], 
             title: icon.title,
@@ -973,7 +973,7 @@
             data.properties.whyChooseUs.titleColor;
           this.publicWebForm.whyChooseUsDescription =
             data.properties.whyChooseUs.description;
-          this.publicWebForm.whyChooseUsSubtitles = data.properties.whyChooseUs.subTitles.map(
+          this.publicWebForm.whyChooseUsSubtitles = data.properties.whyChooseUs.subTitles?.map(
             subtitle => ({
               id: subtitle.id,
               title: subtitle.title,
@@ -1005,7 +1005,7 @@
           this.publicWebForm.reviewsUrl = data.properties.reviews.url;
 
           // Impact section
-          this.publicWebForm.impactData = data.properties.impact.data.map(
+          this.publicWebForm.impactData = data.properties.impact.data?.map(
             item => ({
               id: item.id,
               url: [{url:item.url}],
@@ -1024,7 +1024,7 @@
           this.publicWebForm.teamTitleColor = data.properties.team.titleColor;
           this.publicWebForm.teamSubtitleColor =
             data.properties.team.subtitleColor;
-          this.publicWebForm.teamMembers = data.properties.team.members.map(
+          this.publicWebForm.teamMembers = data.properties.team.members?.map(
             member => ({
               id: member.id,
               picture: [{url: member.picture}],
@@ -1094,7 +1094,7 @@
     }
 
     async onPublicWebSubmit() {
-      const accountability = this.publicWebForm.footerTransparencyAccountability && (
+      const accountability = this.publicWebForm.footerTransparencyAccountability?.url && (
         await parseFile(this.publicWebForm.footerTransparencyAccountability)
       ).map((file: any, key: any) => {
         return {
@@ -1314,6 +1314,7 @@
           },
 
           // Impact properties
+          //TODO: that logic is not the correct way to handle this
           impact: {
             data: [
               {
@@ -1374,7 +1375,7 @@
             info: {
               terms: this.publicWebForm.footerTerms,
               transparency: {
-                fileUrl: accountability[0].file,
+                fileUrl: accountability && accountability[0]?.file,
                 description: this.publicWebForm.footerTransparencyDescription
               }
             },
