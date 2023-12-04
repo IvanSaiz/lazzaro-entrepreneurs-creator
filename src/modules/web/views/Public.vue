@@ -52,26 +52,27 @@
             type="image"
             :label="$t('web.public.personalizeWebForm.form.logo')"
             label-position="before"
-            name="logo"
+            name="styleLogo"
+            @change="handleImageUpload($event, 'publicWebForm.styleLogo')"
             :help="$t('web.public.personalizeWebForm.form.logoHelper')"
           )
           .form-section
             FormulateInput(
               type="select"
-              name="template"
+              name="styleMainTypography"
               :label="$t('web.public.personalizeWebForm.form.mainTypography')"
               :label-class="['required']"
-              :options="styleOptions"
+              :options="fontOptions"
               validation="required"
-              :validation-name="$t('web.public.personalizeWebForm.form')"
+              :validation-name="$t('web.public.personalizeWebForm.form.fonts.label')"
               :placeholder="$t('auth.signup.form.choose')"
             )  
             FormulateInput(
               type="select"
-              name="template"
+              name="styleSecondaryTypography"
               :label="$t('web.public.personalizeWebForm.form.secondTypography')"
               :label-class="['required']"
-              :options="styleOptions"
+              :options="fontOptions"
               validation="required"
               :validation-name="$t('auth.onboarding.stepStyle.form.style')"
               :placeholder="$t('auth.signup.form.choose')"
@@ -79,25 +80,22 @@
             .form-colors
               FormulateInput#primary-color(
                 type="textColor"
-                name="teamTitleColor"
+                name="styleButtonColor"
                 :label="$t('web.public.personalizeWebForm.form.buttonsColor')"
                 value="#1081F2"
                 )
               FormulateInput#primary-color(
                 type="textColor"
-                name="teamTitleColor"
+                name="styleMenuColor"
                 :label="$t('web.public.personalizeWebForm.form.menuColor')"
                 value="#1081F2"
                 )
               FormulateInput#primary-color(
                 type="textColor"
-                name="teamTitleColor"
+                name="styleFooterColor"
                 :label="$t('web.public.personalizeWebForm.form.footerColor')"
                 value="#1081F2"
                 )
-
-          
-
 
       section.public-homepage
         .public-homepage__header
@@ -108,46 +106,46 @@
               type="image"
               :label="$t('web.public.homepageForm.form.image')"
               label-position="before"
-              name="logo"
+              name="homepageMainImage"
               :help="$t('web.public.homepageForm.form.imageHelper')"
             )
             .form-section
               .section-row
                 formulate-input(
                     type="text"
-                    name="teamTitle"
+                    name="homepageTitle"
                     :label="$t('web.public.homepageForm.form.title')"
                     :help="$t('web.public.homepageForm.form.titleHelper')"
                   )
                 FormulateInput#primary-color(
                   type="textColor"
-                  name="teamTitleColor"
+                  name="homepageTitleColor"
                   :label="$t('auth.onboarding.stepStyle.form.textColour')"
                   value="#1081F2"
                   )
               .section-row
                 formulate-input(
                     type="text"
-                    name="teamTitle"
+                    name="homepageSubtitle"
                     :label="$t('web.public.homepageForm.form.subtitle')"
                     :help="$t('web.public.homepageForm.form.subtitleHelper')"
                   )
                 FormulateInput#primary-color(
                   type="textColor"
-                  name="teamTitleColor"
+                  name="homepageSubtitleColor"
                   :label="$t('auth.onboarding.stepStyle.form.textColour')"
                   value="#1081F2"
                   )
-              .form-section__cta(v-for="(item, index) in publicWebForm.homepage" :key="index")            
+              .form-section__cta(v-for="index in 2" :key="index")            
                 formulate-input(
                   type="text"
-                  :name="`homepage[${index}].text`"
-                  :label="$t(`web.public.homepageForm.form.buttons.${index + 1}`)"
+                  :name="`homepageButton${index}Text`"
+                  :label="$t(`web.public.homepageForm.form.buttons.${index}`)"
                 )
                 formulate-input(
                   type="text"
-                  :name="`homepage[${index}].amount`"
-                  :label="$t(`web.public.homepageForm.form.links.${index + 1}`)"
+                  :name="`homepageButton${index}Link`"
+                  :label="$t(`web.public.homepageForm.form.links.${index}`)"
                 )
 
       section.public-whoWeAre
@@ -159,75 +157,78 @@
               type="image"
               :label="$t('web.public.whoWeAreForm.form.image')"
               label-position="before"
-              name="logo"
+              name="aboutUsImgUrl"
               :help="$t('web.public.whoWeAreForm.form.imageHelper')"
             )
             .form-section
               .section-row
                 formulate-input(
                     type="text"
-                    name="teamTitle"
+                    name="aboutUsTitle"
                     :label="$t('web.public.whoWeAreForm.form.title')"
                     :help="$t('web.public.whoWeAreForm.form.titleHelper')"
                   )
                 FormulateInput#primary-color(
                   type="textColor"
-                  name="teamTitleColor"
+                  name="aboutUsTitleColor"
                   :label="$t('auth.onboarding.stepStyle.form.textColour')"
                   value="#1081F2"
                   )
               .section-row
                 formulate-input(
                     type="text"
-                    name="teamTitle"
+                    name="aboutUsSubtitle"
                     :label="$t('web.public.whoWeAreForm.form.subtitle')"
                     :help="$t('web.public.whoWeAreForm.form.subtitleHelper')"
                   )
                 FormulateInput#primary-color(
                   type="textColor"
-                  name="teamTitleColor"
+                  name="aboutUsSubtitleColor"
                   :label="$t('auth.onboarding.stepStyle.form.textColour')"
                   value="#1081F2"
                   )
               lz-editor-input(
               :label="$t('web.public.whoWeAreForm.form.description')"
-              v-model="publicWebForm.footer.info.transparency.description"
+              v-model="publicWebForm.aboutUsDescription"
               )
         section.public-whoWeAre
           .public-whoWeAre__header
             h3.h3--dash {{ $t('web.public.whoWeAreForm.features.title') }}
 
 
-        .public-whoWeAre__content
-          .text-item(v-for="(item, index) in publicWebForm.impactData" :key="index")
-            formulate-input(
+          .public-whoWeAre__content
+            .text-item(v-for="(item, featureIndex) in publicWebForm.aboutUsFeaturesIcons" :key="`feature-${featureIndex}`")
+              formulate-input(
                 type="image"
-                :name="`impactData[${index}].image`"
-                :label="$t(`web.public.whoWeAreForm.features.icon.${index + 1}`)"
+                :name="`aboutUsFeature${featureIndex+1}Url`"
+                v-model="item.url"
+                :label="$t(`web.public.whoWeAreForm.features.icon.${featureIndex + 1}`)"
                 :help="$t('web.public.whoWeAreForm.features.icon.help')"
               )
-            formulate-input(
-              type="text"
-              :name="`impactData[${index}].text`"
-              :label="$t(`web.public.whoWeAreForm.features.titles.${index + 1}`)"
-            )
-            formulate-input(
-              type="text"
-              :name="`impactData[${index}].amount`"
-              :label="$t(`web.public.whoWeAreForm.features.descriptions.${index + 1}`)"
-            )
+              formulate-input(
+                type="text"
+                :name="`aboutUsFeature${featureIndex+1}Title`"
+                v-model="item.title"
+                :label="$t(`web.public.whoWeAreForm.features.titles.${featureIndex + 1}`)"
+              )
+              formulate-input(
+                type="text"
+                :name="`aboutUsFeature${featureIndex+1}Description`"
+                v-model="item.description"
+                :label="$t(`web.public.whoWeAreForm.features.descriptions.${featureIndex+1}`)"
+              )
 
         hr.hr--dash
       
         .public-whoWeAre__cta
           formulate-input(
             type="text"
-            name="teamTitle"
+            name="aboutUsReadMoreButtonText"
             :label="$t('web.public.whoWeAreForm.features.button')"
           )
           formulate-input(
             type="text"
-            name="teamTitle"
+            name="aboutUsReadMoreButtonLink"
             :label="$t('web.public.whoWeAreForm.features.link')"
           )
 
@@ -240,39 +241,41 @@
               type="image"
               :label="$t('web.public.whyChooseUsForm.image')"
               label-position="before"
-              name="logo"
+              name="whyChooseUsImgUrl"
               :help="$t('web.public.whyChooseUsForm.imageHelperText')"
             )
             .form-section
               .section-row
                 formulate-input(
                     type="text"
-                    name="teamTitle"
+                    name="whyChooseUsTitle"
                     :label="$t('web.public.whyChooseUsForm.formTitle')"
                     :help="$t('web.public.whyChooseUsForm.titleHelperText')"
                   )
                 FormulateInput#primary-color(
                   type="textColor"
-                  name="teamTitleColor"
+                  name="whyChooseUsTitleColor"
                   :label="$t('auth.onboarding.stepStyle.form.textColour')"
                   value="#1081F2"
                   )
               lz-editor-input(
               :label="$t('web.public.whyChooseUsForm.description')"
-              v-model="publicWebForm.footer.info.transparency.description"
+              v-model="publicWebForm.whyChooseUsDescription"
               )
-        .public-whyUs__content
-          .text-item(v-for="(item, index) in publicWebForm.impactData" :key="index")
-            formulate-input(
-              type="text"
-              :name="`impactData[${index}].text`"
-              :label="$t(`web.public.whyChooseUsForm.titles.${index + 1}`)"
-            )
-            formulate-input(
-              type="text"
-              :name="`impactData[${index}].amount`"
-              :label="$t(`web.public.whyChooseUsForm.descriptions.${index + 1}`)"
-            )
+          .public-whyUs__content
+            .text-item(v-for="(item, index) in publicWebForm.whyChooseUsSubtitles" :key="item.key")
+              formulate-input(
+                type="text"
+                :name="`whyChooseUsSubtitle${index+1}Title`"
+                v-model="item.title"
+                :label="$t(`web.public.whyChooseUsForm.titles.${index+1}`)"
+              )
+              formulate-input(
+                type="text"
+                :name="`whyChooseUsSubtitle${index+1}Description`"
+                v-model="item.description"
+                :label="$t(`web.public.whyChooseUsForm.descriptions.${index+1}`)"
+              )
 
 
       section.public-bookings
@@ -284,45 +287,45 @@
               type="image"
               :label="$t('web.public.brandForm.logo.label')"
               label-position="before"
-              name="logo"
+              name="bookingsImgUrl"
               :help="$t('web.public.brandForm.logo.help')"
             )
             .form-section
               .section-row
                 formulate-input(
                     type="text"
-                    name="teamTitle"
+                    name="bookingsTitle"
                     :label="$t('web.public.bookingsForm.formTitle')"
                     :help="$t('web.public.bookingsForm.titleHelper')"
                   )
                 FormulateInput#primary-color(
                   type="textColor"
-                  name="teamTitleColor"
+                  name="bookingsTitleColor"
                   :label="$t('auth.onboarding.stepStyle.form.textColour')"
                   value="#1081F2"
                   )
               .section-row
                 formulate-input(
                     type="text"
-                    name="teamTitle"
+                    name="bookingsSubtitle"
                     :label="$t('web.public.bookingsForm.formSubtitle')"
                     :help="$t('web.public.bookingsForm.subtitleHelper')"
                   )
                 FormulateInput#primary-color(
                   type="textColor"
-                  name="teamTitleColor"
+                  name="bookingsSubtitleColor"
                   :label="$t('auth.onboarding.stepStyle.form.textColour')"
                   value="#1081F2"
                   )
               .links-row
                 formulate-input(
                   type="text"
-                  name="teamTitle"
+                  name="bookingsButtonText"
                   :label="$t('web.public.bookingsForm.button')"
                 )
                 formulate-input(
                   type="text"
-                  name="teamTitle"
+                  name="bookingsButtonUrl"
                   :label="$t('web.public.bookingsForm.link')"
                 )
       
@@ -334,13 +337,13 @@
           .reviews-section
             formulate-input(
               type="text"
-              name="teamTitle"
+              name="reviewsTitle"
               :label="$t('web.public.reviewsForm.formTitle')"
               :help="$t('web.public.reviewsForm.titleHelper')"
             )
             FormulateInput#primary-color(
               type="textColor"
-              name="teamTitleColor"
+              name="reviewsTitleColor"
               :label="$t('auth.onboarding.stepStyle.form.textColour')"
               value="#1081F2"
               )
@@ -348,20 +351,20 @@
           .reviews-section
             formulate-input(
               type="text"
-              name="teamTitle"
+              name="reviewsSubtitle"
               :label="$t('web.public.reviewsForm.formSubtitle')"
               :help="$t('web.public.reviewsForm.subtitleHelper')"
             )
             FormulateInput#primary-color(
               type="textColor"
-              name="teamTitleColor"
+              name="reviewsSubtitleColor"
               :label="$t('auth.onboarding.stepStyle.form.textColour')"
               value="#1081F2"
               )
         .form__row
           formulate-input(
             type="text"
-            name="teamTitle"
+            name="reviewsUrl"
             :label="$t('web.public.reviewsForm.link')"
           )
 
@@ -373,19 +376,22 @@
             .impact-item(v-for="(item, index) in publicWebForm.impactData" :key="index")
               formulate-input(
                 type="image"
-                :name="`impactData[${index}].image`"
-                :label="$t(`web.public.impactForm.icon.${index + 1}`)"
+                :name= "`impactData${index+1}Url`"
+                v-model="item.url"
+                :label="$t(`web.public.impactForm.icon.${index+1}`)"
                 :help="$t('web.public.impactForm.icon.help')"
               )
               formulate-input(
                 type="text"
-                :name="`impactData[${index}].text`"
-                :label="$t(`web.public.impactForm.text.${index + 1}`)"
+                :name= "`impactData${index+1}Text`"
+                v-model="item.text"
+                :label="$t(`web.public.impactForm.text.${index+1}`)"
               )
               formulate-input(
                 type="text"
-                :name="`impactData[${index}].amount`"
-                :label="$t(`web.public.impactForm.amount.${index + 1}`)"
+                :name= "`impactData${index+1}Amount`"
+                v-model="item.amount"
+                :label="$t(`web.public.impactForm.amount.${index+1}`)"
               )
 
       section.public-team
@@ -431,7 +437,7 @@
           .public-team__image
             formulate-input(
               type="image"
-              name="image"
+              name="picture"
               :label="$t('web.public.teamForm.photo.label')"
               :help="$t('web.public.teamForm.photo.help')"
             )
@@ -456,14 +462,15 @@
             .form__row  
               lz-button(type="secondary") {{ $t('web.public.teamForm.newMember') }}
 
+        hr.hr--dash
         transition(name="fade")
           .title-table-container   
-            h3.h3--dash {{$t('web.public.teamForm.table')}}
             lz-table(
               class="lz-table"
-              v-if="publicWebForm.team.length > 0"
+              v-if="publicWebForm.teamMembers.length > 0"
               :fields="teamFields"
-              :items="publicWebForm.team"
+              :items="publicWebForm.teamMembers"
+              :title="$t('web.public.teamForm.table')"
             )
               template(#dot="{ row }")
                 DotsIcon        
@@ -479,14 +486,14 @@
           h4 {{ $t('web.public.contactForm.subtitle') }}
           .public-contact__content
             formulate-input(
-              type="tel"
-              name="phone"
-              :label="$t('web.public.contactForm.phone')"
+              type="text"
+              name="contactTitle"
+              :label="$t('web.public.contactForm.form.title')"
             )
             formulate-input(
               type="text"
-              name="address"
-              :label="$t('web.public.contactForm.location')"
+              name="contactSubTitle"
+              :label="$t('web.public.contactForm.form.subtitle')"
             )
 
       section.public-footer
@@ -501,34 +508,34 @@
             .form__row
               formulate-input(
                 type="text"
-                name="footer.social.facebook"
+                name="footerSocialFacebook"
                 :label="$t('web.public.footer.socialForm.facebook')"
               )
               formulate-input(
                 type="text"
-                name="footer.social.twitter"
+                name="footerSocialTwitter"
                 :label="$t('web.public.footer.socialForm.twitter')"
               )
             .form__row  
               formulate-input(
                 type="text"
-                name="footer.social.linkedin"
+                name="footerSocialLinkedIn"
                 :label="$t('web.public.footer.socialForm.linkedin')"
               )
               formulate-input(
                 type="text"
-                name="footer.social.whatsapp"
+                name="footerSocialWhatsapp"
                 :label="$t('web.public.footer.socialForm.whatsapp')"
               )
             .form__row  
               formulate-input(
                 type="text"
-                name="footer.social.web"
+                name="footerSocialSecondaryWeb"
                 :label="$t('web.public.footer.socialForm.web')"
               )
               formulate-input(
                 type="text"
-                name="footer.social.instagram"
+                name="footerSocialInstagram"
                 :label="$t('web.public.footer.socialForm.instagram')"
               )
 
@@ -540,22 +547,23 @@
           .form__row
             lz-editor-input(
               :label="$t('web.public.footer.termsForm.terms')"
-              v-model="publicWebForm.footer.info.terms"
+              v-model="publicWebForm.footerTerms"
             )
           .form__row
             lz-editor-input(
               :label="$t('web.public.footer.termsForm.transparencyDescription')"
-              v-model="publicWebForm.footer.info.transparency.description"
+              v-model="publicWebForm.footerTransparencyDescription"
             )
           .form__row
             formulate-input(
               type="file"
-              name="publicWebForm.footer.info.transparency.accountability"
+              name="footerTransparencyAccountability"
               :label="$t('web.public.footer.termsForm.accountability')"
               :add-label="$t('web.public.footer.termsForm.add')"
               :multiple="true"
             )
 
+  
     .public-buttons
       lz-button(
         type="secondary"
@@ -604,111 +612,192 @@
     };
 
     prevForm: PublicWebForm | {} = {};
+    imageChanged: {
+      styleLogo: false;
+      homepageMainImage: false;
+      aboutUsImgUrl: false;
+      aboutUsFeature1Url: false;
+      aboutUsFeature2Url: false;
+      aboutUsFeature3Url: false;
+      aboutUsFeature4Url: false;
+      whyChooseUsImgUrl: false;
+      bookingsImgUrl: false;
+      impactData1Url: false;
+      impactData2Url: false;
+      impactData3Url: false;
+      impactData4Url: false;
+    };
 
     publicWebForm: PublicWebForm = {
       active: false,
       url: "",
-      chosenTemplateId: "9bdd56dc-edf8-432a-bff4-fb5f2fc0e90c",
-      impactData: [
-        {
-          id: 1,
-          image: "https://www.example.com/impact1.jpg",
-          text: "Positive Impact One",
-          amount: "$1000"
-        },
-        {
-          id: 2,
-          image: "https://www.example.com/impact2.jpg",
-          text: "Positive Impact Two",
-          amount: "$2000"
-        },
-        {
-          id: 3,
-          image: "https://www.example.com/impact3.jpg",
-          text: "Positive Impact Three",
-          amount: "$3000"
-        },
-        {
-          id: 4,
-          image: "https://www.example.com/impact4.jpg",
-          text: "Positive Impact Four",
-          amount: "$4000"
-        }
-      ],
-      footer: {
-        info: {
-          terms: "",
-          transparency: {
-            description: "",
-            accountability: ""
-          }
-        },
-        social: {
-          twitter: "",
-          facebook: "",
-          linkedIn: "",
-          whatsapp: "",
-          instagram: "",
-          secondaryWeb: ""
-        }
-      },
-      phone: "",
-      address: "",
-      team: [
-        {
-          name: "Mithila",
-          position: "Diseñadora Web",
-          linkedin: "https://www.linkedin.com/in/mithila"
-        },
-        {
-          name: "Ellen Eyre",
-          position: "Desarrolladora Web",
-          linkedin: "https://www.linkedin.com/in/elleneyre"
-        },
-        {
-          name: "Sanjida",
-          position: "Especialista en Marketing digital",
-          linkedin: "https://www.linkedin.com/in/sanjida"
-        },
-        {
-          name: "Robin Hood",
-          position: "Desarrollador de App",
-          linkedin: "https://www.linkedin.com/in/robinhood"
-        }
-      ],
-      homepage: [
-        {
-          id: 1,
-          button: "",
-          link:"" 
-        },
-        {
-          id: 2,
-          button: "",
-          link:"" 
-        }
-      ],
+      chosenTemplateId: "",
+
+      // style properties
+      styleLogo: [] as any,
+      styleMainTypography: "",
+      styleSecondaryTypography: "",
+      styleButtonColor: "",
+      styleMenuColor: "",
+      styleFooterColor: "",
+
+      // homepage properties
+      homepageMainImage: [] as any,
+      homepageMoreImages: [] as any,
+      homepageTitle: "",
+      homepageTitleColor: "",
+      homepageSubtitle: "",
+      homepageSubtitleColor: "",
+      homepageButton1Text: "",
+      homepageButton1Link: "",
+      homepageButton2Text: "",
+      homepageButton2Link: "",
+      homepageDesignLayout: "left",
+      homepageDesignBackgroundColor: "#EFEFEF",
+
+      // aboutUs properties
+      aboutUsImgUrl: [] as any,
+      aboutUsTitle: "",
+      aboutUsTitleColor: "",
+      aboutUsSubtitle: "",
+      aboutUsSubtitleColor: "",
+      aboutUsDescription: "",
+      aboutUsFeature1Id: 1,
+      aboutUsFeature1Url: [] as any,
+      aboutUsFeature1Title: "",
+      aboutUsFeature1Description: "",
+      aboutUsFeature2Id: 2,
+      aboutUsFeature2Url: [] as any,
+      aboutUsFeature2Title: "",
+      aboutUsFeature2Description: "",
+      aboutUsFeature3Id: 3,
+      aboutUsFeature3Url: [] as any,
+      aboutUsFeature3Title: "",
+      aboutUsFeature3Description: "",
+      aboutUsFeature4Id: 4,
+      aboutUsFeature4Url: [] as any,
+      aboutUsFeature4Title: "",
+      aboutUsFeature4Description: "",
+      aboutUsFeaturesIcons: [],
+      aboutUsReadMoreButtonId: 1,
+      aboutUsReadMoreButtonText: "",
+      aboutUsReadMoreButtonLink: "",
+
+      // whyChooseUs properties
+      whyChooseUsImgUrl: [] as any,
+      whyChooseUsTitle: "",
+      whyChooseUsTitleColor: "",
+      whyChooseUsDescription: "",
+      whyChooseUsSubtitle1Id: 1,
+      whyChooseUsSubtitle1Title: "",
+      whyChooseUsSubtitle1Description: "",
+      whyChooseUsSubtitle2Id: 2,
+      whyChooseUsSubtitle2Title: "",
+      whyChooseUsSubtitle2Description: "",
+      whyChooseUsSubtitle3Id: 3,
+      whyChooseUsSubtitle3Title: "",
+      whyChooseUsSubtitle3Description: "",
+      whyChooseUsSubtitle4Id: 4,
+      whyChooseUsSubtitle4Title: "",
+      whyChooseUsSubtitle4Description: "",
+      whyChooseUsDesignLayout: "right",
+      whyChooseUsDesignBackgroundColor: "#F0F0F0",
+
+      // bookings properties
+      bookingsImgUrl: [] as any,
+      bookingsTitle: "",
+      bookingsTitleColor: "",
+      bookingsSubtitle: "",
+      bookingsSubtitleColor: "",
+      bookingsButtonUrl: "",
+      bookingsButtonText: "",
+      bookingsDesignLayout: "center",
+      bookingsDesignBackgroundColor: "#F0F0F0",
+
+      // reviews properties
+      reviewsTitle: "",
+      reviewsTitleColor: "",
+      reviewsSubtitle: "",
+      reviewsSubtitleColor: "",
+      reviewsUrl: "",
+
+      // impact properties
+      // TODO:remove that and kept the impactData only
+      impactData1Id: 1,
+      impactData1Url: [] as any,
+      impactData1Text: "",
+      impactData1Amount: "",
+      impactData2Id: 2,
+      impactData2Url: [] as any,
+      impactData2Text: "",
+      impactData2Amount: "",
+      impactData3Id: 3,
+      impactData3Url: [] as any,
+      impactData3Text: "",
+      impactData3Amount: "",
+      impactData4Id: 4,
+      impactData4Url: [] as any,
+      impactData4Text: "",
+      impactData4Amount: "",
+      impactData: [] as any,
+      impactDesignBackgroundColor: "#FFF0F0",
+      impactDesignBackgroundImage: "",
+
+      // team properties
       teamTitle: "",
-      teamTitleColor: "",
       teamSubtitle: "",
+      teamTitleColor: "",
       teamSubtitleColor: "",
-      impact: false,
-      impact_field_one: "",
-      impact_field_two: "",
-      impact_field_three: "",
-      impact_field_four: "",
-      impact_value_one: 0,
-      impact_value_two: 0,
-      impact_value_three: 0,
-      impact_value_four: 0
+      teamMembers: [],
+      teamDesignBackgroundColor: "#F0F0F0",
+
+      // contact properties
+      contactTitle: "",
+      contactSubTitle: "",
+      contactTitleColor: "",
+      contactSubtitleColor: "",
+      contactDesignBackgroundColor: "#EFEFEF",
+
+      // footer properties
+      footerTerms: "",
+      footerTransparencyAccountability: [] as any,
+      footerTransparencyDescription: "",
+      footerSocialFacebook: "",
+      footerSocialTwitter: "",
+      footerSocialLinkedIn: "",
+      footerSocialWhatsapp: "",
+      footerSocialSecondaryWeb: "",
+      footerSocialInstagram: "",
+      footerDesignBackgroundColor: "",
+      footerDesignBackgroundImage: ""
     };
+
+    fontOptions = {
+      roboto: this.$t("web.public.personalizeWebForm.form.fonts.roboto"),
+      //TODO: uncomment it when the template project is adopted to that feature
+      // arial: this.$t("web.public.personalizeWebForm.form.fonts.arial")
+    };
+
+    teamForm = {
+      id: "",
+      picture: null,
+      name: "",
+      position: "",
+      linkedin: ""
+    };
+
+    teamFields = [
+      { id: "dot", label: this.$t("web.public.teamForm.delete") },
+      { id: "name", label: this.$t("web.public.teamForm.name") },
+      { id: "position", label: this.$t("web.public.teamForm.position") },
+      { id: "linkedin", label: this.$t("web.public.teamForm.linkedin") },
+      { id: "delete", label: this.$t("web.public.teamForm.delete") }
+    ];
+
     loaded = false;
 
     @auth.State("id")
     public memberId!: string;
-
-    @auth.State("email")
-    public email!: string;
 
     @auth.State("websiteId")
     public websiteId!: string;
@@ -716,11 +805,11 @@
     @auth.State("templateId")
     public templateId!: string;
 
+    @auth.State("url")
+    public url!: string;
+
     @auth.State("isActive")
     public isActive!: string;
-
-    @auth.State("ongConfiguration")
-    public ongConfiguration!: any;
 
     handleChooseTemplate(e: Event & { target: HTMLInputElement }) {
       if (isObjectEmpty(this.prevForm)) return;
@@ -735,25 +824,14 @@
       this.showModal = true;
     }
 
+    handleImageUpload(event, fieldName): void {
+      this.imageChanged[fieldName] = true;
+    }
+
     get isFormChanged(): boolean {
       if (isObjectEmpty(this.prevForm)) return false;
       return !isEqual(this.prevForm, this.publicWebForm);
     }
-
-    teamForm = {
-      image: null,
-      name: "",
-      position: "",
-      linkedin: ""
-    };
-
-    teamFields = [
-      { id: "dot", label: this.$t("web.public.teamForm.delete") },
-      { id: "name", label: this.$t("web.public.teamForm.name") },
-      { id: "position", label: this.$t("web.public.teamForm.position") },
-      { id: "linkedin", label: this.$t("web.public.teamForm.linkedin") },
-      { id: "delete", label: this.$t("web.public.teamForm.delete") }
-    ];
 
     async handlePublishWebsite(active: boolean, websiteId: string) {
       try {
@@ -795,71 +873,288 @@
 
     removeTeamMember(e: any) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const teamArr = this.publicWebForm.team as any[];
+      const teamArr = this.publicWebForm.teamMembers as any[];
       const memberIdx = teamArr.findIndex(el => el === e);
       teamArr.splice(memberIdx, 1);
     }
 
     onTeamSubmit() {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const teamArr = this.publicWebForm.team as any[];
+      const teamArr = this.publicWebForm.teamMembers as any[];
 
       teamArr.push({
+        id: this.publicWebForm.teamMembers.length + 1,
+        picture: this.teamForm.picture,
         name: this.teamForm.name,
         position: this.teamForm.position,
-        linkedin: this.teamForm.linkedin,
-        photo: this.teamForm.image
+        linkedin: this.teamForm.linkedin
       });
 
-      this.teamForm.image = null;
-      this.teamForm.name = "";
-      this.teamForm.position = "";
-      this.teamForm.linkedin = "";
+      this.teamForm = {
+        id: "",
+        picture: null,
+        name: "",
+        position: "",
+        linkedin: ""
+      };
     }
 
-    async mounted() {
-      try {
-        const data = await apiWebsite.getWebsiteSections(this.websiteId, "web");
-        this.publicWebForm.chosenTemplateId = data.templateId;
-        this.publicWebForm.url = data.properties.general.url;
-        this.loaded = true;
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        this.$notify({
-          type: "error",
-          text: this.$tc("web.public.notify.error"),
-          ignoreDuplicates: true
+    mounted() {
+      apiWebsite
+        .getWebsiteSection(this.websiteId, "web")
+        .then(data => {
+          this.publicWebForm.chosenTemplateId = data.templateId;
+          this.publicWebForm.url = this.url;
+
+          // Style section
+          this.publicWebForm.styleLogo =[{ url: data.properties.style.logo }] ;
+          this.publicWebForm.styleMenuColor = data.properties.style.menuColor;
+          this.publicWebForm.styleButtonColor =
+            data.properties.style.buttonColor;
+          this.publicWebForm.styleFooterColor =
+            data.properties.style.footerColor;
+          this.publicWebForm.styleMainTypography =
+            data.properties.style.mainTypography;
+          this.publicWebForm.styleSecondaryTypography =
+            data.properties.style.secondaryTypography;
+
+          // HomePage section
+          this.publicWebForm.homepageTitle = data.properties.homePage.title;
+          this.publicWebForm.homepageDesignLayout =
+            data.properties.homePage.design.layout;
+          this.publicWebForm.homepageDesignBackgroundColor =
+            data.properties.homePage.design.backgroundColor;
+          this.publicWebForm.homepageSubtitle =
+            data.properties.homePage.subTitle;
+          this.publicWebForm.homepageMainImage =
+            [ {url: data.properties.homePage?.mainImage}];
+          this.publicWebForm.homepageMoreImages =
+            data.properties.homePage.moreImages;
+          this.publicWebForm.homepageTitleColor =
+            data.properties.homePage.titleColor;
+          this.publicWebForm.homepageSubtitleColor =
+            data.properties.homePage.subTitleColor;
+          this.publicWebForm.homepageButton1Link =
+            data.properties.homePage.firstButtonLink;
+          this.publicWebForm.homepageButton1Text =
+            data.properties.homePage.firstButtonText;
+          this.publicWebForm.homepageButton2Link =
+            data.properties.homePage.secondButtonLink;
+          this.publicWebForm.homepageButton2Text =
+            data.properties.homePage.secondButtonText;
+
+          // AboutUs section
+          this.publicWebForm.aboutUsTitle = data.properties.aboutUs.title;
+          this.publicWebForm.aboutUsImgUrl = [{url: data.properties.aboutUs?.imgUrl}];
+          this.publicWebForm.aboutUsSubtitle = data.properties.aboutUs.subTitle;
+          this.publicWebForm.aboutUsTitleColor =
+            data.properties.aboutUs.titleColor;
+          this.publicWebForm.aboutUsSubtitleColor =
+            data.properties.aboutUs.subTitleColor;
+          this.publicWebForm.aboutUsDescription =
+            data.properties.aboutUs.description;
+          this.publicWebForm.aboutUsFeaturesIcons = data.properties.aboutUs.features.icons?.map(icon => ({
+            id: icon.id,
+            url: [{url: icon.url}], 
+            title: icon.title,
+            description: icon.description
+          }));
+
+          this.publicWebForm.aboutUsReadMoreButtonText= data.properties.aboutUs.features.buttons[0].text,
+          this.publicWebForm.aboutUsReadMoreButtonLink= data.properties.aboutUs.features.buttons[0].link,
+
+
+          // WhyChooseUs section
+          this.publicWebForm.whyChooseUsTitle =
+            data.properties.whyChooseUs.title;
+          this.publicWebForm.whyChooseUsImgUrl =
+            [{url: data.properties.whyChooseUs.imgUrl}]
+          this.publicWebForm.whyChooseUsTitleColor =
+            data.properties.whyChooseUs.titleColor;
+          this.publicWebForm.whyChooseUsDescription =
+            data.properties.whyChooseUs.description;
+          this.publicWebForm.whyChooseUsSubtitles = data.properties.whyChooseUs.subTitles?.map(
+            subtitle => ({
+              id: subtitle.id,
+              title: subtitle.title,
+              description: subtitle.description
+            })
+          );
+
+          // Bookings section
+          this.publicWebForm.bookingsImgUrl =[{url: data.properties.bookings.imgUrl}];
+          this.publicWebForm.bookingsTitle = data.properties.bookings.title;
+          this.publicWebForm.bookingsTitleColor =
+            data.properties.bookings.titleColor;
+          this.publicWebForm.bookingsSubtitle =
+            data.properties.bookings.subtitle;
+          this.publicWebForm.bookingsSubtitleColor =
+            data.properties.bookings.subtitleColor;
+          this.publicWebForm.bookingsButtonUrl =
+            data.properties.bookings.buttonUrl;
+          this.publicWebForm.bookingsButtonText =
+            data.properties.bookings.buttonText;
+
+          // Reviews section
+          this.publicWebForm.reviewsTitle = data.properties.reviews.title;
+          this.publicWebForm.reviewsTitleColor =
+            data.properties.reviews.titleColor;
+          this.publicWebForm.reviewsSubtitle = data.properties.reviews.subtitle;
+          this.publicWebForm.reviewsSubtitleColor =
+            data.properties.reviews.subtitleColor;
+          this.publicWebForm.reviewsUrl = data.properties.reviews.url;
+
+          // Impact section
+          this.publicWebForm.impactData = data.properties.impact.data?.map(
+            item => ({
+              id: item.id,
+              url: [{url:item.url}],
+              text: item.text,
+              amount: item.amount
+            })
+          );
+          this.publicWebForm.impactDesignBackgroundColor =
+            data.properties.impact.design.backgroundColor;
+          this.publicWebForm.impactDesignBackgroundImage =
+            data.properties.impact.design.backgroundImage;
+
+          // Team section
+          this.publicWebForm.teamTitle = data.properties.team.title;
+          this.publicWebForm.teamSubtitle = data.properties.team.subTitle;
+          this.publicWebForm.teamTitleColor = data.properties.team.titleColor;
+          this.publicWebForm.teamSubtitleColor =
+            data.properties.team.subtitleColor;
+          this.publicWebForm.teamMembers = data.properties.team.members?.map(
+            member => ({
+              id: member.id,
+              picture: [{url: member.picture}],
+              name: member.name,
+              linkedin: member.linkedin,
+              position: member.position
+            })
+          );
+          this.publicWebForm.teamDesignBackgroundColor =
+            data.properties.team.design.backgroundColor;
+
+          // Contact section
+          this.publicWebForm.contactTitle = data.properties.contact.title;
+          this.publicWebForm.contactSubTitle = data.properties.contact.subTitle;
+          this.publicWebForm.contactTitleColor =
+            data.properties.contact.titleColor;
+          this.publicWebForm.contactSubtitleColor =
+            data.properties.contact.subtitleColor;
+
+          // Footer section
+          this.publicWebForm.footerTerms = data.properties.footer.info.terms;
+          this.publicWebForm.footerTransparencyAccountability =
+          [{ url: data.properties.footer.info.transparency.fileUrl}]
+          this.publicWebForm.footerTransparencyDescription =
+            data.properties.footer.info.transparency.description;
+          this.publicWebForm.footerSocialFacebook =
+            data.properties.footer.social.facebook;
+          this.publicWebForm.footerSocialTwitter =
+            data.properties.footer.social.twitter;
+          this.publicWebForm.footerSocialLinkedIn =
+            data.properties.footer.social.linkedIn;
+          this.publicWebForm.footerSocialWhatsapp =
+            data.properties.footer.social.whatsapp;
+          this.publicWebForm.footerSocialSecondaryWeb =
+            data.properties.footer.social.secondaryWeb;
+          this.publicWebForm.footerSocialInstagram =
+            data.properties.footer.social.instagram;
+          this.publicWebForm.footerDesignBackgroundColor =
+            data.properties.footer.design.backgroundColor;
+          this.publicWebForm.footerDesignBackgroundImage =
+            data.properties.footer.design.backgroundImage;
+
+          this.loaded = true;
+        })
+        .catch(error => {
+          console.error("Error fetching data:", error);
+          this.$notify({
+            type: "error",
+            text: this.$tc("web.public.notify.error"),
+            ignoreDuplicates: true
+          });
         });
-      }
 
       // not perfect but it works for now
-      setTimeout(() => {
+      const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+      delay(1000).then(() => {
         this.prevForm = cloneDeep(this.publicWebForm);
-      }, 3000);
+      });
+    }
+
+    async parseImageUrl(url) {
+      if (url) {
+        const parsed = await parseFile(url);
+        return parsed[0] as string;
+      }
+      return null;
     }
 
     async onPublicWebSubmit() {
-      const transparency = (
-        await parseFile(this.publicWebForm.accountability)
+      const accountability = this.publicWebForm.footerTransparencyAccountability?.url && (
+        await parseFile(this.publicWebForm.footerTransparencyAccountability)
       ).map((file: any, key: any) => {
         return {
           file,
-          title: this.publicWebForm.accountability.files[key].name
+          title: this.publicWebForm.footerTransparencyAccountability.files[key]
+            .name
         };
       });
 
       const team = [];
-      for await (const member of this.publicWebForm.team) {
-        if (member.photo && member.photo.files) {
-          let photo = await parseFile(member.photo);
-          photo = photo[0];
-          team.push({ ...member, photo });
-        } else {
-          team.push({ ...member });
+      if(this.publicWebForm.teamMembers){
+
+        for await (const member of this.publicWebForm.teamMembers) {
+          let picture =
+          member.picture && member.picture.files
+          ? (await parseFile(member.picture))[0]
+          : null;
+          team.push({ ...member, picture });
         }
       }
 
-      const imagesToRemove = [];
+      const styleLogoTrimmed = await this.parseImageUrl(
+        this.publicWebForm.styleLogo
+      );
+      const homepageMainImageTrimmed = this.publicWebForm.homepageMainImage && await this.parseImageUrl(
+        this.publicWebForm.homepageMainImage
+      );
+      const aboutUsImgUrlTrimmed = this.publicWebForm.aboutUsImgUrl && await this.parseImageUrl(
+        this.publicWebForm.aboutUsImgUrl
+      );
+      const aboutUsFeature1UrlTrimmed = this.publicWebForm.aboutUsFeature1Url && await this.parseImageUrl(
+        this.publicWebForm.aboutUsFeature1Url
+      );
+      const aboutUsFeature2UrlTrimmed = this.publicWebForm.aboutUsFeature2Url && await this.parseImageUrl(
+        this.publicWebForm.aboutUsFeature2Url
+      );
+      const aboutUsFeature3UrlTrimmed = this.publicWebForm.aboutUsFeature3Url && await this.parseImageUrl(
+        this.publicWebForm.aboutUsFeature3Url
+      );
+      const aboutUsFeature4UrlTrimmed = this.publicWebForm.aboutUsFeature4Url && await this.parseImageUrl(
+        this.publicWebForm.aboutUsFeature4Url
+      );
+      const whyChooseUsImgUrlTrimmed = this.publicWebForm.whyChooseUsImgUrl && await this.parseImageUrl(
+        this.publicWebForm.whyChooseUsImgUrl
+      );
+      const bookingsImgUrlTrimmed = this.publicWebForm.bookingsImgUrl && await this.parseImageUrl(
+        this.publicWebForm.bookingsImgUrl
+      );
+      const impactData1UrlTrimmed = this.publicWebForm.impactData1Url && await this.parseImageUrl(
+        this.publicWebForm.impactData1Url
+      );
+      const impactData2UrlTrimmed = this.publicWebForm.impactData2Url && await this.parseImageUrl(
+        this.publicWebForm.impactData2Url
+      );
+      const impactData3UrlTrimmed = this.publicWebForm.impactData3Url && await this.parseImageUrl(
+        this.publicWebForm.impactData3Url
+      );
+      const impactData4UrlTrimmed = this.publicWebForm.impactData4Url && await this.parseImageUrl(
+        this.publicWebForm.impactData4Url
+      );
 
       const hasTemplateChanged =
         this.publicWebForm.chosenTemplateId !== this.templateId;
@@ -880,34 +1175,246 @@
       // to disable submit button
       this.prevForm = {};
 
-      Promise.all([
-        // apiOngs.postPlatformConfig(this.ongId, {
-        //   ...this.ongConfiguration,
-        //   isActive: this.publicWebForm.isActive,
-        //   powered_by_lazzaro: this.publicWebForm.powered_by_lazzaro,
-        //   url: this.publicWebForm.url,
-        //   template_id: this.publicWebForm.chosenTemplateId
-        // }),
+      const postData = {
+        active: this.publicWebForm.active,
+        templateId: this.publicWebForm.chosenTemplateId,
+        websiteId: this.websiteId,
+        type: "web",
+        properties: {
+          general: {
+            url: this.publicWebForm.url
+          },
+          style: {
+            logo: styleLogoTrimmed,
+            menuColor: this.publicWebForm.styleMenuColor,
+            buttonColor: this.publicWebForm.styleButtonColor,
+            footerColor: this.publicWebForm.styleFooterColor,
+            mainTypography: this.publicWebForm.styleMainTypography,
+            secondaryTypography: this.publicWebForm.styleSecondaryTypography
+          },
 
-        this.handlePublishWebsite(this.publicWebForm.active, this.websiteId)
-      ])
-        .then(async () => {
-          this.$notify({
-            type: "success",
-            text: this.$tc("web.public.notify.success"),
-            ignoreDuplicates: true
-          } as NotificationOptions);
+          homePage: {
+            title: this.publicWebForm.homepageTitle,
+            design: {
+              layout: this.publicWebForm.homepageDesignLayout,
+              backgroundColor: this.publicWebForm.homepageDesignBackgroundColor
+            },
+            subTitle: this.publicWebForm.homepageSubtitle,
+            mainImage: homepageMainImageTrimmed,
+            moreImages: this.publicWebForm.homepageMoreImages,
+            titleColor: this.publicWebForm.homepageTitleColor,
+            subTitleColor: this.publicWebForm.homepageSubtitleColor,
+            firstButtonLink: this.publicWebForm.homepageButton1Link,
+            firstButtonText: this.publicWebForm.homepageButton1Text,
+            secondButtonLink: this.publicWebForm.homepageButton2Link,
+            secondButtonText: this.publicWebForm.homepageButton2Text
+          },
 
-          // await this.updateFeatures();
-          this.prevForm = cloneDeep(this.publicWebForm);
-        })
-        .catch(() => {
-          this.$notify({
-            type: "error",
-            text: this.$tc("web.public.notify.error"),
-            ignoreDuplicates: true
-          } as NotificationOptions);
+          aboutUs: {
+            title: this.publicWebForm.aboutUsTitle,
+            imgUrl: aboutUsImgUrlTrimmed,
+            subTitle: this.publicWebForm.aboutUsSubtitle,
+            titleColor: this.publicWebForm.aboutUsTitleColor,
+            subTitleColor: this.publicWebForm.aboutUsSubtitleColor,
+            description: this.publicWebForm.aboutUsDescription,
+            features: {
+              icons: [
+                {
+                  id: this.publicWebForm.aboutUsFeature1Id,
+                  url: aboutUsFeature1UrlTrimmed,
+                  title: this.publicWebForm.aboutUsFeature1Title,
+                  description: this.publicWebForm.aboutUsFeature1Description
+                },
+                {
+                  id: this.publicWebForm.aboutUsFeature2Id,
+                  url: aboutUsFeature2UrlTrimmed,
+                  title: this.publicWebForm.aboutUsFeature2Title,
+                  description: this.publicWebForm.aboutUsFeature2Description
+                },
+                {
+                  id: this.publicWebForm.aboutUsFeature3Id,
+                  url: aboutUsFeature3UrlTrimmed,
+                  title: this.publicWebForm.aboutUsFeature3Title,
+                  description: this.publicWebForm.aboutUsFeature3Description
+                },
+                {
+                  id: this.publicWebForm.aboutUsFeature4Id,
+                  url: aboutUsFeature4UrlTrimmed,
+                  title: this.publicWebForm.aboutUsFeature4Title,
+                  description: this.publicWebForm.aboutUsFeature4Description
+                }
+              ],
+              buttons: [
+                {
+                  id: this.publicWebForm.aboutUsReadMoreButtonId,
+                  text: this.publicWebForm.aboutUsReadMoreButtonText,
+                  link: this.publicWebForm.aboutUsReadMoreButtonLink
+                }
+              ]
+            }
+          },
+
+          // WhyChooseUs properties
+          whyChooseUs: {
+            title: this.publicWebForm.whyChooseUsTitle,
+            imgUrl: whyChooseUsImgUrlTrimmed,
+            titleColor: this.publicWebForm.whyChooseUsTitleColor,
+            description: this.publicWebForm.whyChooseUsDescription,
+            subTitles: [
+              {
+                id: this.publicWebForm.whyChooseUsSubtitle1Id,
+                title: this.publicWebForm.whyChooseUsSubtitle1Title,
+                description: this.publicWebForm.whyChooseUsSubtitle1Description
+              },
+              {
+                id: this.publicWebForm.whyChooseUsSubtitle2Id,
+                title: this.publicWebForm.whyChooseUsSubtitle2Title,
+                description: this.publicWebForm.whyChooseUsSubtitle2Description
+              },
+              {
+                id: this.publicWebForm.whyChooseUsSubtitle3Id,
+                title: this.publicWebForm.whyChooseUsSubtitle3Title,
+                description: this.publicWebForm.whyChooseUsSubtitle3Description
+              },
+              {
+                id: this.publicWebForm.whyChooseUsSubtitle4Id,
+                title: this.publicWebForm.whyChooseUsSubtitle4Title,
+                description: this.publicWebForm.whyChooseUsSubtitle4Description
+              }
+            ],
+            design: {
+              layout: this.publicWebForm.whyChooseUsDesignLayout,
+              backgroundColor: this.publicWebForm
+                .whyChooseUsDesignBackgroundColor
+            }
+          },
+
+          // Bookings properties
+          bookings: {
+            imgUrl: bookingsImgUrlTrimmed,
+            title: this.publicWebForm.bookingsTitle,
+            titleColor: this.publicWebForm.bookingsTitleColor,
+            subtitle: this.publicWebForm.bookingsSubtitle,
+            subtitleColor: this.publicWebForm.bookingsSubtitleColor,
+            buttonUrl: this.publicWebForm.bookingsButtonUrl,
+            buttonText: this.publicWebForm.bookingsButtonText,
+            design: {
+              layout: this.publicWebForm.bookingsDesignLayout,
+              backgroundColor: this.publicWebForm.bookingsDesignBackgroundColor
+            }
+          },
+
+          // Reviews properties
+          reviews: {
+            title: this.publicWebForm.reviewsTitle,
+            titleColor: this.publicWebForm.reviewsTitleColor,
+            subtitle: this.publicWebForm.reviewsSubtitle,
+            subtitleColor: this.publicWebForm.reviewsSubtitleColor,
+            url: this.publicWebForm.reviewsUrl
+          },
+
+          // Impact properties
+          //TODO: that logic is not the correct way to handle this
+          impact: {
+            data: [
+              {
+                id: this.publicWebForm.impactData1Id,
+                url: impactData1UrlTrimmed,
+                text: this.publicWebForm.impactData1Text,
+                amount: this.publicWebForm.impactData1Amount
+              },
+              {
+                id: this.publicWebForm.impactData2Id,
+                url: impactData2UrlTrimmed,
+                text: this.publicWebForm.impactData2Text,
+                amount: this.publicWebForm.impactData2Amount
+              },
+              {
+                id: this.publicWebForm.impactData3Id,
+                url: impactData3UrlTrimmed,
+                text: this.publicWebForm.impactData3Text,
+                amount: this.publicWebForm.impactData3Amount
+              },
+              {
+                id: this.publicWebForm.impactData4Id,
+                url: impactData4UrlTrimmed,
+                text: this.publicWebForm.impactData4Text,
+                amount: this.publicWebForm.impactData4Amount
+              }
+            ],
+            design: {
+              backgroundColor: this.publicWebForm.impactDesignBackgroundColor,
+              backgroundImage: this.publicWebForm.impactDesignBackgroundImage
+            }
+          },
+          // Team properties
+          team: {
+            title: this.publicWebForm.teamTitle,
+            subTitle: this.publicWebForm.teamSubtitle,
+            titleColor: this.publicWebForm.teamTitleColor,
+            subtitleColor: this.publicWebForm.teamSubtitleColor,
+            members: team,
+            design: {
+              backgroundColor: this.publicWebForm.teamDesignBackgroundColor
+            }
+          },
+
+          // Contact properties
+          contact: {
+            title: this.publicWebForm.contactTitle,
+            subTitle: this.publicWebForm.contactSubTitle,
+            titleColor: this.publicWebForm.contactTitleColor,
+            subtitleColor: this.publicWebForm.contactSubtitleColor,
+            design: {
+              backgroundColor: this.publicWebForm.contactDesignBackgroundColor
+            }
+          },
+
+          // Footer properties
+          footer: {
+            info: {
+              terms: this.publicWebForm.footerTerms,
+              transparency: {
+                fileUrl: accountability && accountability[0]?.file,
+                description: this.publicWebForm.footerTransparencyDescription
+              }
+            },
+            social: {
+              twitter: this.publicWebForm.footerSocialTwitter,
+              facebook: this.publicWebForm.footerSocialFacebook,
+              linkedIn: this.publicWebForm.footerSocialLinkedIn,
+              whatsapp: this.publicWebForm.footerSocialWhatsapp,
+              instagram: this.publicWebForm.footerSocialInstagram,
+              secondaryWeb: this.publicWebForm.footerSocialSecondaryWeb
+            },
+            design: {
+              backgroundColor: this.publicWebForm.footerDesignBackgroundColor,
+              backgroundImage: this.publicWebForm.footerDesignBackgroundImage
+            }
+          }
+        }
+      };
+
+      console.log(postData.properties.team);
+
+      try {
+        await apiWebsite.postWebsiteSection(postData);
+        // this.handlePublishWebsite(this.publicWebForm.active, this.websiteId);
+        this.$notify({
+          type: "success",
+          text: this.$tc("web.public.notify.success"),
+          ignoreDuplicates: true
         });
+
+        // await this.updateFeatures();
+        this.prevForm = cloneDeep(this.publicWebForm);
+      } catch (error) {
+        this.$notify({
+          type: "error",
+          text: this.$tc("web.public.notify.error"),
+          ignoreDuplicates: true
+        });
+      }
     }
   }
 </script>
@@ -1108,13 +1615,13 @@
           display: flex;
           flex-direction: column;
           gap: 18px;
-          
+
           .form-colors {
             display: flex;
             gap: 42px;
             flex-wrap: wrap;
           }
-        }        
+        }
       }
 
       &-homepage {
@@ -1151,7 +1658,7 @@
               margin-left: 18px;
             }
           }
-          
+
           &__cta {
             display: flex;
             margin-top: 10px;
@@ -1161,9 +1668,9 @@
             > :last-child {
               flex-grow: 1;
               margin-left: 18px;
-            }  
+            }
           }
-        } 
+        }
       }
 
       &-whoWeAre {
@@ -1221,15 +1728,15 @@
           }
         }
         &__cta {
-            display: flex;
-            margin-top: 22px;
+          display: flex;
+          margin-top: 22px;
           > :first-child {
-              width: 24%;
-            }
+            width: 24%;
+          }
           > :last-child {
             flex-grow: 1;
             margin-left: 18px;
-          }  
+          }
         }
       }
 

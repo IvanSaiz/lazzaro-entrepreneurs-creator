@@ -88,6 +88,10 @@ export default {
       title: "Contact Form",
       subtitle:
         "Allow a potential customer to contact you. Configure the title and subtitle of your contact page.",
+      form: {
+        title: "Title",
+        subtitle: "Subtitle",
+      },
       phone: "Phone no.",
       location: "Location"
     },
@@ -189,11 +193,18 @@ export default {
         logo: "Logo*",
         mainTypography: "Main Typography",
         secondTypography: "Secondary Typography",
+        fonts: {
+          label: "Font",
+          roboto: "Roboto",
+          arial: "Arial",
+        },
         buttonsColor: "Button color",
         menuColor: "Menu color",
         footerColor: "Footer color",
-        logoHelper: "60x60. Máx 25MB"
-      }
+        logoHelper: "60x60. Máx 25MB",
+
+      },
+
     },
 
     homepageForm: {
@@ -208,11 +219,11 @@ export default {
         subtitleHelper: "(Máx 140 characters)",
         buttons: {
           1: "Button 1*",
-          2: "Button 2",
+          2: "Button 2"
         },
         links: {
           1: "Link of button 1*",
-          2: "Link of button 2",
+          2: "Link of button 2"
         }
       }
     },
