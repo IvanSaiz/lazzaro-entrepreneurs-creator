@@ -7,7 +7,9 @@ section.choose-template
           
         .templates
           .template(v-for='(template) in computedTemplates' :style= 'template.style' :key='template.id')
-            input(type="radio" :value='template.id' v-model='template.id' @click="handleChooseTemplate")
+            input(type="radio" :value='template.id' v-model='template.id' @click="handleChooseTemplate"
+            :disabled="isTemplateDisabled(template.id)"
+            )
             .template__body(:style="template.backgroundImage")
             .template__footer
               p.text {{ template.text }} 
@@ -37,6 +39,7 @@ section.choose-template
     showModal = false;
     templates: TTemplate[] = [];
     modalImage = "";
+    modernTemplateId = "";
 
     @Prop({ required: true })
     protected readonly chosenTemplateId!: string;
@@ -46,17 +49,8 @@ section.choose-template
 
     async mounted() {
       const data = await apiOngs.getTemplates();
-
-      //TODO: remove this after uploading the images on S3.
-      const alterImages = [
-        "https://c.animaapp.com/sXxyCROv/img/rectangle-281.png",
-        "https://c.animaapp.com/sXxyCROv/img/rectangle-282.png",
-        "https://c.animaapp.com/sXxyCROv/img/rectangle-283.png"
-      ];
-      this.templates = data.reduce((acc, curr, index) => {
-        acc.push({ ...curr, image: alterImages[index] });
-        return acc;
-      }, []);
+      this.templates = data;
+      this.modernTemplateId = data.find(item => item.name === "modern").id;
     }
 
     openModal(clickedTemplateId = "") {
@@ -103,6 +97,10 @@ section.choose-template
         text: this.$t(`web.public.chooseTemplate.template${i + 1}`)
       }));
     }
+
+    isTemplateDisabled(templateId: string): boolean {
+      return templateId !== this.modernTemplateId;
+    }
   }
 </script>
 
@@ -118,6 +116,9 @@ section.choose-template
       flex-wrap: wrap;
     }
 
+    .disabled-input {
+      opacity: 0.5;
+    }
     .template {
       flex: 1;
       width: 358px;
@@ -133,6 +134,12 @@ section.choose-template
         opacity: 0;
         z-index: 99;
         cursor: pointer;
+      }
+      //TODO: to be modified
+      &.disabled-input {
+        filter: grayscale(100%);
+        background-color: #333;
+        opacity: 0.5;
       }
     }
 

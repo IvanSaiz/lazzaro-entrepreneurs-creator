@@ -17,7 +17,7 @@
                 name="logo"
                 :label="$t('auth.onboarding.stepStyle.form.logo.label')"
                 :help="$t('auth.onboarding.stepStyle.form.logo.help')"
-                validation="mime:image/jpeg"
+                validation="mime:image/jpeg,image/png"
               )
           .form__colors
             .form__row
@@ -76,12 +76,13 @@
 
     loadingPostStyle = false;
 
+    //TODO: show the styles but disable them
     styleOptions = {
-      classic: this.$t("auth.onboarding.stepStyle.form.styleOptions.classic"),
-      modern: this.$t("auth.onboarding.stepStyle.form.styleOptions.modern"),
-      minimalist: this.$t(
-        "auth.onboarding.stepStyle.form.styleOptions.minimalist"
-      )
+      // classic: this.$t("auth.onboarding.stepStyle.form.styleOptions.classic"),
+      modern: this.$t("auth.onboarding.stepStyle.form.styleOptions.modern")
+      // minimalist: this.$t(
+      //   "auth.onboarding.stepStyle.form.styleOptions.minimalist"
+      // )
     };
 
     private get disableStepStyleButton(): boolean {

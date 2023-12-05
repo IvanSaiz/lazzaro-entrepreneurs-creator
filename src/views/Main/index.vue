@@ -9,22 +9,22 @@
         @click="$router.push({ name: 'Home' })"
       )
 
-      //- ul.lz-nav__list
-      //-   router-link(
-      //-     tag="li"
-      //-     :to="{ name: lzModule.moduleName }"
-      //-     v-slot="{ navigate, isActive }"
-      //-     v-for="lzModule in visibleLzModules"
-      //-     :key="lzModule.moduleName"
-      //-     :title="lzModule.label"
-      //-   )
-      //-     lz-nav-icon.lz-nav__item(
-      //-       :active="isActive"
-      //-       @click="navigate"
-      //-     )
-      //-       template(slot="icon")
-      //-         component(:is="lzModule.icon")
-      //-       template(slot="label")  {{ $t(`common.nav.${lzModule.label}`) }}    
+      ul.lz-nav__list
+        router-link(
+          tag="li"
+          :to="{ name: lzModule.moduleName }"
+          v-slot="{ navigate, isActive }"
+          v-for="lzModule in visibleLzModules"
+          :key="lzModule.moduleName"
+          :title="lzModule.label"
+        )
+          lz-nav-icon.lz-nav__item(
+            :active="isActive"
+            @click="navigate"
+          )
+            template(slot="icon")
+              component(:is="lzModule.icon")
+            template(slot="label")  {{ $t(`common.nav.${lzModule.label}`) }}    
 
       ul.lz-nav__user
         lz-nav-icon.lz-nav__item(

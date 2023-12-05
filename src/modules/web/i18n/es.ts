@@ -82,7 +82,12 @@ export default {
     },
     contactForm: {
       title: "Formulario de contacto",
-      subtitle:"Permite que un posible cliente pueda ponerse en contacto contigo. Configura el título y subtítulo de tu página de contacto",
+      subtitle:
+        "Permite que un posible cliente pueda ponerse en contacto contigo. Configura el título y subtítulo de tu página de contacto",
+      form: {
+        title: "Título",
+        subtitle: "Subtítulo",
+      },
       phone: "Teléfono",
       location: "Ubicación"
     },
@@ -102,6 +107,7 @@ export default {
       partners: "Socios",
       market: "Tienda online",
       courses: "Cursos",
+      reviews: "Reseñas",
       impact: "Datos de impacto",
       events: "Eventos",
       volunteers: "Voluntarios"
@@ -128,10 +134,21 @@ export default {
         accountability: "Transparencia y rendición de cuentas"
       }
     },
+
     teamForm: {
       title: "Equipo",
-      subtitle:
-        "Configura y crea uno a uno cada miembro de tu equipo. Puedes verlos todos en el listado de abajo.",
+      subtitle: "Muestra a todo el mundo de que tipo de pasta estás hecho.",
+      header: {
+        title: "Título",
+        subtitle: "Subtítulo",
+        titleHelperText: "(Máx 80 caracteres)",
+        subtitleHelperText: "(Máx 180 caracteres)"
+      },
+      teamMembers: {
+        title: "Miembros del equipo",
+        subtitle:
+          "Crea el perfil de cada uno de los integrantes de tu empresa. Con el link a su Linkedin será mucha más fácil darle visibilidad a ellos y la empresa."
+      },
       photo: {
         label: "Foto de perfil",
         help: "180x60, máx 25MB"
@@ -143,6 +160,7 @@ export default {
       table: "Tu equipo",
       delete: ""
     },
+
     descriptionForm: {
       title: "Descripción",
       subtitle:
@@ -162,20 +180,155 @@ export default {
       },
       largeDescription: "Descripción larga"
     },
+
+    personalizeWebForm: {
+      title: "Personaliza tu web",
+      subtitle: "Elige los elementos que encajan contigo",
+      form: {
+        logo: "Logotipo*",
+        mainTypography: "Tipografía principal",
+        secondTypography: "Tipografía secundaria",
+        fonts: {
+          label: "Font",
+          roboto: "Roboto",
+          arial: "Arial",
+        },
+        buttonsColor: "Color botones",
+        menuColor: "Color menú",
+        footerColor: "Color Footer",
+        logoHelper: "60x60. Máx 25MB"
+      }
+    },
+
+    homepageForm: {
+      title: "Portada",
+      subtitle: "Las primeras impresiones son las que importan",
+      form: {
+        image: "Imagen principal*",
+        title: "Título",
+        subtitle: "Subtítulo",
+        imageHelper: "180x60. Máx 25MB",
+        titleHelper: "(Máx 80 characters)",
+        subtitleHelper: "(Máx 140 characters)",
+        buttons: {
+          1: "Boton 1*",
+          2: "Boton 2*"
+        },
+        links: {
+          1: "Link Botón 1*",
+          2: "Link Botón 2*"
+        }
+      }
+    },
+
+    whoWeAreForm: {
+      title: "Quienes somos",
+      subtitle: "Muestra lo que haces al mundo",
+      form: {
+        image: "Imagen principal**",
+        title: "Título",
+        subtitle: "Subtítulo",
+        imageHelper: "180x60. Máx 25MB",
+        titleHelper: "(Máx 80 caracteres)",
+        subtitleHelper: "(Máx 140 caracteres)",
+        description: "Descripción*"
+      },
+      features: {
+        title: "Características de la empresa",
+        icon: {
+          1: "Icon 1",
+          2: "Icon 2",
+          3: "Icon 3",
+          4: "Icon 4",
+          help: "60x60. Max 25MB"
+        },
+        titles: {
+          1: "Title 1*",
+          2: "Title 2*",
+          3: "Title 3",
+          4: "Title 4",
+          helper: "(Max 30 characters)"
+        },
+        descriptions: {
+          1: "Descriptive text 1*",
+          2: "Descriptive text 2*",
+          3: "Descriptive text 3",
+          4: "Descriptive text 4"
+        },
+        button: "Button",
+        link: "Link of the button"
+      }
+    },
+
+    whyChooseUsForm: {
+      title: "¿Por qué elegirnos?",
+      subtitle: "Escribe aquí lo que te diferencia del resto",
+      image: "Imagen principal*",
+      imageHelperText: "180x60. Máx 25MB",
+      formTitle: "Título",
+      titleHelperText: "(Máx 80 caracteres)",
+      description: "Descripción*",
+      titles: {
+        1: "Título 1*",
+        2: "Título 2*",
+        3: "Título 3",
+        4: "Título 4",
+        helper: "(Máx 30 caracteres)"
+      },
+      descriptions: {
+        1: "Texto descriptivo 1*",
+        2: "Texto descriptivo 2*",
+        3: "Texto descriptivo 3",
+        4: "Texto descriptivo 4"
+      }
+    },
+
+    bookingsForm: {
+      title: "Reservas",
+      subtitle:
+        "Dá la oportunidad a tus usuarios a que puedan reunirse contigo.",
+      image: "Imagen",
+      formTitle: "Título",
+      formSubtitle: "Subtítulo*",
+      imageHelper: "180x60. Máx 25MB",
+      titleHelper: "(Máx 80 caracteres)",
+      subtitleHelper: "(Máx 140 caracteres)",
+      button: "Botón* ",
+      link: "Link a tu página de reserva*"
+    },
+
+    reviewsForm: {
+      title: "Reseñas",
+      subtitle:
+        "Vincula tu web con tu perfil de Google y permite que tus usuarios vean tus reseñas.",
+      formTitle: "Título",
+      formSubtitle: "Subtítulo",
+      titleHelper: "(Máx 80 caracteres)",
+      subtitleHelper: "(Máx 140 caracteres)",
+      link: "Link a tu perfil de Google My Business*"
+    },
+
     impactForm: {
       title: "Datos de impacto",
       subtitle: "Modifica los datos de impacto visibles en la web.",
+      icon: {
+        1: "Icono 1",
+        2: "Icono 2",
+        3: "Icono 3",
+        4: "Icono 4",
+        help: "60x60. Máx 25MB"
+      },
       text: {
-        one: "Texto impacto 1",
-        two: "Texto impacto 2",
-        three: "Texto impacto 3",
-        four: "Texto impacto 4"
+        1: "Texto impacto 1",
+        2: "Texto impacto 2",
+        3: "Texto impacto 3",
+        4: "Texto impacto 4"
       },
       amount: {
-        one: "Cantidad impacto 1",
-        two: "Cantidad impacto 2",
-        three: "Cantidad impacto 3",
-        four: "Cantidad impacto 4"
+        1: "Cantidad impacto 1",
+        2: "Cantidad impacto 2",
+        3: "Cantidad impacto 3",
+        4: "Cantidad impacto 4"
       }
     },
     notify: {
