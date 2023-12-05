@@ -953,15 +953,15 @@
             data.properties?.aboutUs?.subTitleColor;
           this.publicWebForm.aboutUsDescription =
             data.properties?.aboutUs?.description;
-          this.publicWebForm.aboutUsFeaturesIcons = data.properties?.aboutUs?.features.icons?.map(icon => ({
+          this.publicWebForm.aboutUsFeaturesIcons = data.properties?.aboutUs?.features?.icons?.map(icon => ({
             id: icon.id,
             url: [{url: icon.url}], 
             title: icon.title,
             description: icon.description
           }));
 
-          this.publicWebForm.aboutUsReadMoreButtonText= data.properties?.aboutUs?.features.buttons[0].text,
-          this.publicWebForm.aboutUsReadMoreButtonLink= data.properties?.aboutUs?.features.buttons[0].link,
+          this.publicWebForm.aboutUsReadMoreButtonText= data.properties?.aboutUs?.features?.buttons[0]?.text,
+          this.publicWebForm.aboutUsReadMoreButtonLink= data.properties?.aboutUs?.features?.buttons[0]?.link,
 
 
           // WhyChooseUs section
