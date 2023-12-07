@@ -225,7 +225,7 @@ export default {
       title: "Quienes somos",
       subtitle: "Muestra lo que haces al mundo",
       form: {
-        image: "Imagen principal**",
+        image: "Imagen principal*",
         title: "Título",
         subtitle: "Subtítulo",
         imageHelper: "180x60. Máx 25MB",
