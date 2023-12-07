@@ -7,7 +7,7 @@
 
     .consultant-read__iframe
       iframe(
-        src="https://book.lazzaro.io/#/customer/consultoriaemprende"
+        src="https://book.lazzaro.io/portal-embed#/customer/consultoriaemprende"
         height="100%"
       )
 </template>
