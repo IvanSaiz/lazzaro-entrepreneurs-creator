@@ -1399,7 +1399,7 @@
 
       try {
         await apiWebsite.postWebsiteSection(postData);
-        // this.handlePublishWebsite(this.publicWebForm.active, this.websiteId);
+        this.handlePublishWebsite(this.publicWebForm.active, this.websiteId);
         this.$notify({
           type: "success",
           text: this.$tc("web.public.notify.success"),
