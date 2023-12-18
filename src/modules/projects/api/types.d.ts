@@ -13,6 +13,7 @@ declare type TProject = {
     donated: number;
     location: string;
     subtitle: string;
+    skills: string;
     catastrophe: string;
     isPremium: boolean;
     ods: [string, string];
@@ -46,16 +47,12 @@ declare type TProjectImages = {
 declare type TProjectForm = {
   title: string;
   description: string;
-  category: TProject["data"]["ambit"];
   status: "enabled" | "disabled";
-  active: boolean;
-  startDate: string;
-  limitDate: string;
-  amount: number;
+  date: string;
+  skills: string;
   imageUrlToConvert: { url: string }[];
   imagesToConvert: { url: string }[];
   ongId: string;
   imageUrl: string;
   images: string[];
-  isPremium: boolean;
 };

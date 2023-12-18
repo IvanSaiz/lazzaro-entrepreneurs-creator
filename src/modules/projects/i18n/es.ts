@@ -15,46 +15,7 @@ export default {
       },
       percent: "% conseguido",
       total: "Total",
-      status: {
-        label: "Estado",
-        options: {
-          enabled: "ACTIVADO",
-          disabled: "DESACTIVADO"
-        }
-      },
-      actions: "Acciones"
-    },
-    newProject: "Nuevo proyecto"
-  },
-  create: {
-    title: "Nuevo proyecto de recaudación",
-    subtitle:
-      "Configura aquí tu proyecto. Para cualquier duda o consulta contacta con tu asesor.",
-    highlight: {
-      label: "Destacar proyecto",
-      under: "Proyecto destacado"
-    },
-    mainImg: "Imagen principal",
-    images: {
-      label: "Imágenes",
-      add: "Añadir imagen"
-    },
-    form: {
-      name: "Nombre del proyecto",
-      description: "Descripción",
-      category: {
-        label: "Categoría",
-        options: {
-          children: "Infantil",
-          education: "Educación",
-          health: "Salud",
-          animals: "Animales",
-          environment: "Medio Ambiente",
-          naturalDisaster: "Catástrofe natural",
-          economicDev: "Desarrollo económico",
-          other: "Otro"
-        }
-      },
+      skills: "Competencias",
       status: {
         label: "Estado",
         options: {
@@ -62,20 +23,47 @@ export default {
           disabled: "Desactivado"
         }
       },
-      startDate: "Fecha de inicio",
-      limitDate: {
-        label: "Fecha final",
-        help: "Puede dejarlo sin fecha final"
-      },
-      amount: "Cantidad objetivo"
+      actions: "Acciones"
     },
-    notifications: {
-      projectCreated: "Proyecto creado con éxito",
-      projectEdited: "Cambios guardados con éxito",
-      projectRemoved: "Proyecto eliminado con éxito",
-      alreadyPremium: "ya tienes una sección destacada",
-      projectHasDonations:
-        "No puedes eliminar este proyecto porque ha recibido donaciones"
+    newProject: "Nuevo proyecto"
+  },
+  create: {
+    title: "Nuevo proyecto",
+    subtitle:
+      "Rellena todos los datos de tus proyectos ya realizados y muestra tu trabajo en tu web.",
+    mainImg: {
+      label: "Imagen principal",
+      maxSize: "Tamaño máximo: 100MB",
+      suportedFormats: "Archivos aceptados: JPG, PNG y GIF."
+    },
+    images: {
+      label: "Imágenes",
+      add: "Añadir imagen"
+    },
+    form: {
+      name: "Nombre del proyecto",
+      description: {
+        label: "Descripción",
+        subtitle:
+          "La decripción se incluirá en la página de detalles del proyecto debajo de las imágenes."
+      },
+      date: "Fecha",
+      skills: "Destrezas",
+      status: {
+        label: "Estado",
+        options: {
+          enabled: "Activado",
+          disabled: "Desactivado"
+        }
+      }
     }
+  },
+  notifications: {
+    projectCreated: "Proyecto creado con éxito",
+    projectEdited: "Cambios guardados con éxito",
+    projectRemoved: "Proyecto eliminado con éxito",
+    alreadyPremium: "ya tienes una sección destacada",
+    projectHasDonations:
+      "No puedes eliminar este proyecto porque ha recibido donaciones"
   }
 };

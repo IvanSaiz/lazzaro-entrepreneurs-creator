@@ -384,11 +384,11 @@
       .public-impact__header
         h2.h2--dash {{ $t('web.public.impactForm.title') }}
         p {{ $t('web.public.impactForm.subtitle') }}
-        .public-impact__content
+        .public-impact__content(v-for="(item, index) in publicWebForm.impactData" :key="index")
           formulate-input(
             type="group"
             name="impactData"
-          ).impact-item(v-for="(item, index) in publicWebForm.impactData" :key="index")
+          ).impact-item
             formulate-input(
               type="image"
               :name= "`url`"
@@ -1033,6 +1033,8 @@ export default class Public extends Vue {
           data.properties?.footer?.design.backgroundImage;
 
         console.log(this.publicWebForm)
+
+        console.log({ imactData: this.publicWebForm.impactData })
 
         this.loaded = true;
       })

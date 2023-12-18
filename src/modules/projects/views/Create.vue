@@ -1,11 +1,5 @@
 <template lang="pug">
 .projects-create
-  lz-confirm(
-    v-if="showDeleteModal"
-    @close='showDeleteModal = false'
-    @confirm='deleteProject'
-  )
-
   header
     h1 {{ $t('projects.create.title') }}
     p {{ $t('projects.create.subtitle') }}
@@ -17,33 +11,19 @@
       :keep-model-data="true"
     )
       section.projects-create__left
-        .form__row
-          formulate-input(
-            type="toggle"
-            name="isPremium"
-            :label="$t('projects.create.highlight.label')"
-            label-position="before"
-            :wrapper-class="['formulate-input-inline-toggle']"
-            :disabled='!isPremiumSubscription'
-            @click="popUpgradeToPremiumMessage"
-          )
-            template(#label="{ label }")
-              label
-                .formulate-input-label {{ label }}
-                  span
-                    crown-icon
-                .formulate-input-under-label {{ $t('projects.create.highlight.under') }}
-        .form__row
+        .form__col
           formulate-input(
             type="image"
             name="imageUrlToConvert"
-            :label="$t('projects.create.mainImg')"
+            :label="$t('projects.create.mainImg.label')"
             :label-class="['required']"
             validation="required|mime:image/jpeg,image/png"
-            :validation-name="$t('projects.create.mainImg')"
+            :validation-name="$t('projects.create.mainImg.label')"
             label-position="before"
             :value="proyectForm.imageUrlToConvert"
           )
+          p {{ $t('projects.create.mainImg.maxSize') }}
+          p {{ $t('projects.create.mainImg.suportedFormats') }}
         .form__row
           formulate-input.formulate-input-element--image-simple(
             type="image"
@@ -68,55 +48,45 @@
             validation="required"
             :validation-name="$t('projects.create.form.name')"
           )
-        .form__row
+        .form__col
           lz-editor-input(
-            :label="$t('projects.create.form.description')"
+            :label="$t('projects.create.form.description.label')"
+            :subtitle="$t('projects.create.form.description.subtitle')"
             v-model="proyectForm.description"
           )
 
         .form__row
           formulate-input(
-            type="select"
-            name="category"
-            :label="$t('projects.create.form.category.label')"
-            :options="categoryOptions"
-          )
-          formulate-input(
-            type="select"
-            name="status"
-            :label="$t('projects.create.form.status.label')"
-            :options="statusOptions"
-          )
-        .form__row
-          formulate-input(
             type="date"
-            name="startDate"
-            :label="$t('projects.create.form.startDate')"
+            name="date"
+            :label="$t('projects.create.form.date')"
             :label-class="['required']"
             validation="required"
-            :validation-name="$t('projects.create.form.startDate')"
-          )
-          formulate-input(
-            type="date"
-            name="limitDate"
-            :label="$t('projects.create.form.limitDate.label')"
-            :help="$t('projects.create.form.limitDate.help')"
+            :validation-name="$t('projects.create.form.date')"
           )
           formulate-input(
             type="text"
-            name="amount"
-            :label="$t('projects.create.form.amount')"
+            name="skills"
+            :label="$t('projects.create.form.skills')"
             :label-class="['required']"
             validation="required"
-            :validation-name="$t('projects.create.form.amount')"
+            :validation-name="$t('projects.create.form.skills')"
           )
+        .form__row
+          formulate-input(
+              type="select"
+              name="status"
+              :label="$t('projects.create.form.status.label')"
+              :options="statusOptions"
+            )
+          .form__col
 
       .projects-create__actions
-        lz-button(type="tertiary" @click.prevent="confirmDeleteProject") {{$t('common.actions.delete')}}
         lz-button(
           type="secondary"
           @click.prevent="$router.push({ name: 'projectsRead' })"
         ) {{ $t('common.actions.cancel') }}
+        
         lz-button(type="primary") {{ $t('common.actions.save') }}
 </template>
 
@@ -129,29 +99,21 @@
   import { apiProjects } from "../api";
   import { parseFile } from "@/utils/parseFile";
   import LzEditorInput from "@/components/EditorInput.vue";
-  import {
-    checkIsAlreadyPremiumSections,
-    inValidatePremiumSectionsCache,
-    checkSubscriptionPlan
-  } from "@/utils";
+  import { inValidatePremiumSectionsCache } from "@/utils";
 
   const auth = namespace("auth");
 
   type TProjectForm = {
     title: string;
     description: string;
-    category: TProject["data"]["ambit"];
+    date: string;
+    skills: string;
     status: "enabled" | "disabled";
-    active: boolean;
-    startDate: string;
-    limitDate: string;
-    amount: number;
     imageUrlToConvert: { url: string }[];
     imagesToConvert: { url: string }[];
     ongId: string;
     imageUrl: string;
     images: string[];
-    isPremium: boolean;
   };
 
   @Component({ components: { LzButton, LzTable, LzConfirm, LzEditorInput } })
@@ -161,43 +123,17 @@
     isAlreadyPremiumSection = false;
     isPremiumSubscription = false;
 
-    statusOptions = {
-      enabled: this.$t("projects.create.form.status.options.enabled"),
-      disabled: this.$t("projects.create.form.status.options.disabled")
-    };
-
-    categoryOptions = {
-      Infantil: this.$t("projects.create.form.category.options.children"),
-      Educación: this.$t("projects.create.form.category.options.education"),
-      Salud: this.$t("projects.create.form.category.options.health"),
-      Animales: this.$t("projects.create.form.category.options.animals"),
-      "Medio ambiente": this.$t(
-        "projects.create.form.category.options.environment"
-      ),
-      "Catástrofe natural": this.$t(
-        "projects.create.form.category.options.naturalDisaster"
-      ),
-      "Desarrollo económico": this.$t(
-        "projects.create.form.category.options.economicDev"
-      ),
-      Otro: this.$t("projects.create.form.category.options.other")
-    };
-
     proyectForm: TProjectForm = {
-      status: "disabled",
-      active: false,
       ongId: "",
       title: "",
       description: "",
+      status: "disabled",
+      skills: "",
       imageUrlToConvert: [],
       imageUrl: "",
-      amount: 0,
-      limitDate: "",
-      startDate: "",
+      date: "",
       imagesToConvert: [],
-      images: [],
-      category: "Otro",
-      isPremium: false
+      images: []
     };
 
     @auth.State("id")
@@ -206,18 +142,18 @@
     @Prop()
     projectId!: string;
 
+    statusOptions = {
+      enabled: this.$t("projects.create.form.status.options.enabled"),
+      disabled: this.$t("projects.create.form.status.options.disabled")
+    };
+
     async getProject() {
       const { data: project } = await apiProjects.getProject(this.projectId);
 
       this.proyectForm.title = project.title;
-      this.proyectForm.status = project.active ? "enabled" : "disabled";
       this.proyectForm.description = project.description;
       this.proyectForm.imageUrlToConvert = [{ url: project.imageURL }];
-      this.proyectForm.amount = project.amount;
-      this.proyectForm.limitDate = project.limitDate;
-      this.proyectForm.startDate = project.startDate;
-      this.proyectForm.category = project.ambit;
-      this.proyectForm.isPremium = project.isPremium;
+      this.proyectForm.date = project.startDate;
     }
 
     async getProjectImages() {
@@ -265,13 +201,10 @@
       }
     }
 
+    // Move this to actions in projects view
     async deleteProject() {
       try {
         await apiProjects.deleteProject(this.ongId, this.projectId);
-
-        if (this.proyectForm.isPremium) {
-          inValidatePremiumSectionsCache();
-        }
 
         this.$notify({
           type: "success",
@@ -303,24 +236,6 @@
 
     async onSubmit() {
       const isNewProject = !this.projectId;
-      const { isPremium } = this.proyectForm;
-
-      if (isPremium) {
-        const {
-          isAlreadyPremiumSection,
-          premiumProjectId
-        } = await checkIsAlreadyPremiumSections(this.ongId);
-
-        const inValidSubmit =
-          isAlreadyPremiumSection && premiumProjectId !== this.projectId;
-
-        if (inValidSubmit) {
-          return this.$notify({
-            type: "warn",
-            text: this.$tc("projects.create.notifications.alreadyPremium")
-          });
-        }
-      }
 
       const imageUrlToBase64 = await parseFile(
         this.proyectForm.imageUrlToConvert
@@ -332,7 +247,6 @@
 
       const body: TProjectForm = {
         ...this.proyectForm,
-        active: this.proyectForm.status == "enabled",
         imageUrl: imageUrlToBase64[0],
         images: Array.isArray(parsedImages) ? parsedImages : [parsedImages],
         imageUrlToConvert: [],
@@ -346,22 +260,8 @@
       inValidatePremiumSectionsCache();
     }
 
-    popUpgradeToPremiumMessage(): void {
-      if (this.isPremiumSubscription) return;
-
-      this.$notify({
-        type: "info",
-        text: this.$tc("common.notifications.upgradeToPremium"),
-        ignoreDuplicates: true
-      } as NotificationOptions);
-    }
-
     async mounted() {
       try {
-        this.isPremiumSubscription = (
-          await checkSubscriptionPlan(this.ongId)
-        ).isPremiumSubscription;
-
         if (!this.projectId) {
           this.loaded = true;
           return;

@@ -14,6 +14,7 @@ export default {
         }
       },
       percent: "% achieved",
+      skills: "Skills",
       total: "Total",
       status: {
         label: "Status",

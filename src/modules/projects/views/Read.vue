@@ -7,10 +7,7 @@
     section.projects-read__content
       lz-table(title="" :fields="listFields" :items="projects")
         template(#title="{ row: { title }}") {{ title }}
-        template(#remainingTime="{ row: { remainingTime }}") {{ remainingTime }}
-        template(#percentAchieve="{ row: { percentAchieve }}") {{ percentAchieve }}
-        template(#total="{ row: { total }}") {{ total }}
-        template(#status="{ row: { status }}") {{ status }}
+        template(#skills="{ row: { skills }}") {{ skills }}
         template(#actions="{ row }")
           eye-icon(@click="viewProyect(row)")
 
@@ -38,18 +35,12 @@
     projects: {
       id: string;
       title: string;
-      total: number;
-      remainingTime: number | VueI18n.TranslateResult;
-      percentAchieve: string | number;
-      status: VueI18n.TranslateResult;
+      skills: VueI18n.TranslateResult;
     }[] = [];
 
     listFields = [
       { id: "title", label: this.$t("projects.read.table.name") },
-      { id: "remainingTime", label: this.$t("projects.read.table.time.label") },
-      { id: "percentAchieve", label: this.$t("projects.read.table.percent") },
-      { id: "total", label: this.$t("projects.read.table.total") },
-      { id: "status", label: this.$t("projects.read.table.status.label") },
+      { id: "skills", label: this.$t("projects.read.table.skills") },
       { id: "actions", label: this.$t("projects.read.table.actions") }
     ];
 
@@ -61,36 +52,12 @@
     }
 
     mounted() {
-      const today = new Date();
       apiProjects.getProjects(this.ongId).then(({ data: projects }) => {
         projects.forEach(project => {
-          const date = new Date(project.limitDate);
-          const timeDiff = date.getTime() - today.getTime();
-          const remainingDays = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-
-          const daysToShow =
-            remainingDays > 0
-              ? `${remainingDays} ${this.$t(
-                  "projects.read.table.time.options.days"
-                )}`
-              : remainingDays === 0
-              ? this.$t("projects.read.table.time.options.today")
-              : this.$t("projects.read.table.time.options.expired");
-
-          const status = project.active
-            ? this.$t("projects.read.table.status.options.enabled")
-            : this.$t("projects.read.table.status.options.disabled");
-          const percentAchieve =
-            (project.donated * 100) / (project.amount || 1);
           const projectData = {
             id: project.id,
             title: project.title,
-            total: project.amount,
-            remainingTime: project.limitDate
-              ? daysToShow
-              : this.$t("projects.read.table.time.options.noLimit"),
-            percentAchieve: percentAchieve.toFixed(2),
-            status: status
+            skills: ""
           };
           this.projects.push(projectData);
         });
