@@ -7,13 +7,12 @@ export const LZ_MODULES = {
     active: true,
     icon: "device-laptop-icon"
   },
-  // projects: {
-  //   moduleName: "projects",
-  //   label: "Proyectos",
-  //   active: true,
-  //   icon: "clipboard-list-icon",
-  //   features: ["causes"]
-  // },
+  projects: {
+    moduleName: "projects",
+    label: "Portfolio",
+    active: true,
+    icon: "clipboard-list-icon",
+  },
   // shop: {
   //   moduleName: "shop",
   //   label: "Tienda",

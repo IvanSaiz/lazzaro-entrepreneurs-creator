@@ -36,7 +36,7 @@ export default {
   },
   nav: {
     Web: "Web",
-    Proyectos: "Projects",
+    Portfolio: "Portfolio",
     Tienda: "Shop",
     Calendario: "Calendar",
     Cuentas: "Accounts",

@@ -40,7 +40,7 @@ export default {
 
   nav: {
     Web: "Web",
-    Proyectos: "Proyectos",
+    Portfolio: "Portfolio",
     Tienda: "Tienda",
     Calendario: "Calendario",
     Cuentas: "Cuentas",
