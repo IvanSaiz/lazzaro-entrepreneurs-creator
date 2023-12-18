@@ -52,7 +52,7 @@
 
     async checkConnection(method: EthereumMethod) {
       // check if the current browser is chrome
-      if (!(window as CustomWindow).chrome) {
+      if (!((window as unknown) as CustomWindow).chrome) {
         this.$notify({
           title: this.$tc("NFTs.read.wallet.installChrome"),
           text: this.$tc("NFTs.read.wallet.installChromeText"),

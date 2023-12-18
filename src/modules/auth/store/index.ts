@@ -223,18 +223,16 @@ class Auth extends VuexModule {
   }
 
   @Action
-  public async getWebTemplateFeatures(): Promise<any> {
+  public async getWebTemplateFeatures() {
     if (this.id && this.section) {
       return await apiPlatform.get(this.section.websiteId, "web");
     }
   }
 
   @Action
-  public async refreshMemberData(): Promise<any> {
-    console.log(this.id);
+  public async refreshMemberData() {
     if (this.id) {
       return await apiOngs.getMember(this.id).then(data => {
-        console.log(data);
         this.context.commit("setData", data);
       });
     }

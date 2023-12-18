@@ -11,7 +11,7 @@ const putOrganization = function(ongId: string, body: any): Promise<any> {
 
 const getOrganizationPlan = function(
   memberId: string
-): Promise<TOrganizationPlan> {
+): Promise<OrganizationPlan> {
   return http.get(`/subscriptions/${memberId}/plan`, { noAuth: false });
 };
 

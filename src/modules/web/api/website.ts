@@ -10,8 +10,8 @@ const getWebsiteSection = (
 };
 
 const postWebsiteSection = (sectionBody: any): Promise<any> => {
-  return http.put("websites/section", sectionBody, {noAuth: false});
-}
+  return http.put("websites/section", sectionBody, { noAuth: false });
+};
 
 const publishWebsite = (websiteId: string): Promise<any> => {
   return http.post(`websites/${websiteId}/publish`, { noAuth: false });

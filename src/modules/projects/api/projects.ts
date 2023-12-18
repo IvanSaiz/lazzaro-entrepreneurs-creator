@@ -42,7 +42,7 @@ const postPlatformFeatures = function(ongId: string, body: any): Promise<any> {
 
 const getOrganizationPlan = function(
   ongId: string
-): Promise<TOrganizationPlan> {
+): Promise<OrganizationPlan> {
   return http.get(`private/ongs/${ongId}/subscription-plan`, { noAuth: false });
 };
 

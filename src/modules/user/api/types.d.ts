@@ -1,4 +1,4 @@
-declare type TOrganizationPlan = {
+declare type OrganizationPlan = {
   data: {
     id: string;
     ong_id: string;
@@ -7,6 +7,7 @@ declare type TOrganizationPlan = {
     payment_type: "monthly" | "yearly" | "semiannual";
     expiration_date: Date;
     PlatformSubscription: PlatformSubscription;
+    SubscriptionPlan: SubscriptionPlan;
     createdAt: string;
     updatedAt: string;
   };

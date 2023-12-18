@@ -15,11 +15,10 @@ module.exports = {
   },
   plugins: ["prettier"],
   rules: {
-    "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
-    "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
+    "no-console": process.env.NODE_ENV === "production" ? "error" : "warn",
+    "no-debugger": process.env.NODE_ENV === "production" ? "error" : "warn",
     camelcase: "off",
-    "@typescript-eslint/camelcase": "off",
-    "no-explicit-any": "off"
+    "@typescript-eslint/camelcase": "off"
   },
   overrides: [
     {

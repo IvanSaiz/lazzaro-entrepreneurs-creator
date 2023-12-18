@@ -72,7 +72,7 @@
 
     @store.Action
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    public getWebTemplateFeatures!: (payload: any) => void;
+    public getWebTemplateFeatures!: () => void;
 
     onSigninSubmit() {
       this.loadingPostLogin = true;

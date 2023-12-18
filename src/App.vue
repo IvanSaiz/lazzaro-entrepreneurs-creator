@@ -25,7 +25,7 @@
 
     @auth.Action
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    public refreshMemberData!: (payload: any) => void;
+    public refreshMemberData: () => Promise<void>;
 
     // @auth.State("id")
     // public memberId!: string;

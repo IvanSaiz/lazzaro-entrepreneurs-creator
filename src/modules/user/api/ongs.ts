@@ -19,7 +19,7 @@ const getWallet = function(walletId: string): Promise<any> {
 
 const getOrganizationPlan = function(
   orgId: string
-): Promise<TOrganizationPlan> {
+): Promise<OrganizationPlan> {
   return http.get(`/subscriptions/org/${orgId}/plan`, { noAuth: false });
 };
 
