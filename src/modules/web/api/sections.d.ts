@@ -89,7 +89,7 @@ declare namespace Section {
     id: string;
     text: string;
     ammount: string;
-    url: string;
+    url: { url: string }[];
   };
 
   type TeamMember = {

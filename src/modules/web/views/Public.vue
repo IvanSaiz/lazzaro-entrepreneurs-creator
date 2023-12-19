@@ -671,7 +671,15 @@
       whyChooseUsTitle: "",
       whyChooseUsTitleColor: "",
       whyChooseUsDescription: "",
-      whyChooseUsSubTitles: [],
+      whyChooseUsSubTitles: new Array(4).fill(0).map(
+        (_, i) =>
+          ({
+            id: i,
+            title: "",
+            url: "",
+            description: ""
+          } as SubTitle)
+      ),
       whyChooseUsDesignLayout: "right",
       whyChooseUsDesignBackgroundColor: "#F0F0F0",
       whyChooseUsDesignBackgroungImage: "",
@@ -702,7 +710,7 @@
             ammount: "",
             id: `${i}`,
             text: "",
-            url: ""
+            url: []
           } as Section.ImpactData)
       ),
       impactDesignBackgroundColor: "#FFF0F0",
@@ -988,7 +996,7 @@
               item =>
                 ({
                   id: item.id.toString(),
-                  url: item.url,
+                  url: [{ url: item.url }],
                   text: item.text,
                   ammount: item.amount
                 } as Section.ImpactData)
@@ -997,8 +1005,8 @@
               id: i.toString(),
               text: "",
               ammount: "",
-              url: ""
-            }));
+              url: []
+            } as Section.ImpactData));
           this.publicWebForm.impactDesignBackgroundColor =
             data.properties?.impact?.design.backgroundColor;
           this.publicWebForm.impactDesignBackgroundImage =
@@ -1265,7 +1273,10 @@
           // Impact properties
           //TODO: that logic is not the correct way to handle this
           impact: {
-            data: this.publicWebForm.impactData,
+            data: this.publicWebForm.impactData.map(i => ({
+              ...i,
+              url: i.url[0]?.url ?? ""
+            })),
             design: {
               backgroundColor: this.publicWebForm.impactDesignBackgroundColor,
               backgroundImage: this.publicWebForm.impactDesignBackgroundImage
