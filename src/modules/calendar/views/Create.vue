@@ -220,11 +220,7 @@
   import { apiEvents } from "../api";
   import { parseFile } from "@/utils/parseFile";
   import LzEditorInput from "@/components/EditorInput.vue";
-  import {
-    checkIsAlreadyPremiumSections,
-    checkSubscriptionPlan,
-    inValidatePremiumSectionsCache
-  } from "@/utils";
+  import { checkSubscriptionPlan } from "@/utils";
 
   const auth = namespace("auth");
 
@@ -405,24 +401,7 @@
 
     async onSave() {
       const isNewEvent = !this.eventId;
-      const { isPremium, location, link } = this.calendarForm;
-
-      if (isPremium) {
-        const {
-          isAlreadyPremiumSection,
-          premiumEventId
-        } = await checkIsAlreadyPremiumSections(this.ongId);
-
-        const inValidSubmit =
-          isAlreadyPremiumSection && premiumEventId !== this.eventId;
-
-        if (inValidSubmit) {
-          return this.$notify({
-            type: "warn",
-            text: this.$tc("projects.create.notifications.alreadyPremium")
-          });
-        }
-      }
+      const { location, link } = this.calendarForm;
 
       const imageUrlToBase64 = await parseFile(
         this.calendarForm.imageUrlToConvert
@@ -444,8 +423,6 @@
 
       if (isNewEvent) this.createEvent(body);
       else this.updateEvent(body);
-
-      inValidatePremiumSectionsCache();
     }
 
     onCreateTicket() {
@@ -479,10 +456,6 @@
       if (!this.eventId) return;
       try {
         await apiEvents.deleteEvent(this.ongId, this.eventId);
-
-        if (this.calendarForm.isPremium) {
-          inValidatePremiumSectionsCache();
-        }
 
         this.$notify({
           type: "success",

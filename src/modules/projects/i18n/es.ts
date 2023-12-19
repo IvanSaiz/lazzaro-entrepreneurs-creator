@@ -2,6 +2,7 @@ export default {
   read: {
     title: "Proyectos",
     subtitle: "Todos tus proyectos de recaudación",
+    design: "Diseño",
     table: {
       name: "Nombre",
       time: {

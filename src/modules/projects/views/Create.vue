@@ -59,6 +59,7 @@
           formulate-input(
             type="date"
             name="date"
+            :value="proyectForm.date"
             :label="$t('projects.create.form.date')"
             :label-class="['required']"
             validation="required"
@@ -67,6 +68,7 @@
           formulate-input(
             type="text"
             name="skills"
+            :value="proyectForm.skills"
             :label="$t('projects.create.form.skills')"
             :label-class="['required']"
             validation="required"
@@ -76,6 +78,7 @@
           formulate-input(
               type="select"
               name="status"
+              :value="proyectForm.status"
               :label="$t('projects.create.form.status.label')"
               :options="statusOptions"
             )
@@ -99,7 +102,6 @@
   import { apiProjects } from "../api";
   import { parseFile } from "@/utils/parseFile";
   import LzEditorInput from "@/components/EditorInput.vue";
-  import { inValidatePremiumSectionsCache } from "@/utils";
 
   const auth = namespace("auth");
 
@@ -148,28 +150,31 @@
     };
 
     async getProject() {
-      const { data: project } = await apiProjects.getProject(this.projectId);
+      const project = await apiProjects.getProject(this.projectId);
+
+      console.log(project);
 
       this.proyectForm.title = project.title;
       this.proyectForm.description = project.description;
-      this.proyectForm.imageUrlToConvert = [{ url: project.imageURL }];
-      this.proyectForm.date = project.startDate;
-    }
-
-    async getProjectImages() {
-      const { data: projectImages } = await apiProjects.getProjectImages(
-        this.projectId
-      );
-
-      this.proyectForm.imagesToConvert.length = 0;
-      projectImages.forEach(image => {
-        this.proyectForm.imagesToConvert.push({ url: image.img_url });
-      });
+      this.proyectForm.date = project.date.split("T")[0];
+      this.proyectForm.skills = project.skills;
+      this.proyectForm.status = project.status;
+      this.proyectForm.imageUrlToConvert = [{ url: project.image_url }];
+      this.proyectForm.imagesToConvert = project.images.map(url => ({ url }));
     }
 
     async createProject(payload: TProjectForm) {
       try {
-        await apiProjects.postProject(payload);
+        await apiProjects.postProject({
+          date: payload.date,
+          description: payload.description,
+          image_url: payload.imageUrl,
+          ong_id: payload.ongId,
+          skills: payload.skills,
+          status: payload.status,
+          images: payload.images,
+          title: payload.title
+        });
 
         this.$notify({
           type: "success",
@@ -186,7 +191,16 @@
 
     async updateProject(payload: TProjectForm) {
       try {
-        await apiProjects.updateProject(this.projectId, payload);
+        await apiProjects.updateProject(this.projectId, {
+          date: payload.date,
+          description: payload.description,
+          image_url: payload.imageUrl,
+          ong_id: payload.ongId,
+          skills: payload.skills,
+          status: payload.status,
+          images: payload.images,
+          title: payload.title
+        });
 
         this.$notify({
           type: "success",
@@ -249,15 +263,11 @@
         ...this.proyectForm,
         imageUrl: imageUrlToBase64[0],
         images: Array.isArray(parsedImages) ? parsedImages : [parsedImages],
-        imageUrlToConvert: [],
-        imagesToConvert: [],
         ongId: this.ongId
       };
 
       if (isNewProject) this.createProject(body);
       else this.updateProject(body);
-
-      inValidatePremiumSectionsCache();
     }
 
     async mounted() {
@@ -266,7 +276,7 @@
           this.loaded = true;
           return;
         }
-        await Promise.all([this.getProject(), this.getProjectImages()]);
+        await this.getProject();
       } catch (error) {
         this.$notify({
           type: "error",

@@ -1,37 +1,26 @@
 declare type TProject = {
-  data: {
-    title: string;
-    id: string;
-    active: boolean;
-    description: string;
-    imageURL: string;
-    amount: number;
-    limitDate: string;
-    startDate: string;
-    address: string;
-    beneficiaries: number;
-    donated: number;
-    location: string;
-    subtitle: string;
-    skills: string;
-    catastrophe: string;
-    isPremium: boolean;
-    ods: [string, string];
-    ambit:
-      | "Infantil"
-      | "Educación"
-      | "Salud"
-      | "Animales"
-      | "Otro"
-      | "Medio Ambiente"
-      | "Catástrofe natural"
-      | "Desarrollo económico";
-  };
+  id: string;
+  status: "enabled" | "disabled";
+  title: string;
+  description: string;
+  skills: string;
+  date: string;
+  image_url: string;
+  images: string[];
 };
 
-declare type TProjects = {
-  data: TProject["data"][];
+declare type TProjectPostBody = {
+  ong_id: string;
+  title: string;
+  description: string;
+  date: string;
+  skills: string;
+  status: "enabled" | "disabled";
+  image_url: string;
+  images: string[];
 };
+
+declare type TProjectPutBody = TProjectPostBody;
 
 declare type TProjectImage = {
   default: boolean;

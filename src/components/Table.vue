@@ -24,8 +24,8 @@
         v-for="(row, rowIdx) in pageItems"
         :key="rowIdx"
       )
-        th.lz-table__th(
-          :class="'lz-table__th--' + field.id"
+        td.lz-table__td(
+          :class="'lz-table__td--' + field.id"
           v-for="(field, fieldIdx) in fields"
           :key="fieldIdx"
         )
@@ -121,10 +121,13 @@
       }
     }
 
-    &__tr {
-      &--body {
-        border-bottom: 1px solid $color-black-04;
-      }
+    &__td {
+      color: $color-black-01;
+      font-size: 16px;
+      line-height: 1.25;
+      vertical-align: middle;
+      padding: 12px 24px;
+      border-bottom: 1px solid $color-black-04;
     }
 
     &__tools {
