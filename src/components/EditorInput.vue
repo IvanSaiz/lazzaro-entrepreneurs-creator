@@ -42,9 +42,6 @@
 
 <style lang="scss">
   .lz-editor-input {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
     margin: 8px 0;
 
     &__quill {

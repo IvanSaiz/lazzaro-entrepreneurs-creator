@@ -3,7 +3,7 @@ import http from "@/api/core/http";
 const getWebsiteSection = (
   websiteId: string,
   sectionType: string
-): Promise<any> => {
+): Promise<WebsiteData> => {
   return http.get(`websites/${websiteId}/section/${sectionType}`, {
     noAuth: false
   });

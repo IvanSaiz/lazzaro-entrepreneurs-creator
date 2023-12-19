@@ -269,3 +269,170 @@ declare interface PublicWebFormData {
     footer: FooterProperties;
   };
 }
+
+declare type WebsiteData = {
+  id: string;
+  websiteId: string;
+  templateId: string;
+  type: string;
+  properties: Properties;
+  createdAt: Date;
+  updatedAt: Date;
+  deleted: boolean;
+}
+
+interface Properties {
+  team: Team;
+  style: Style;
+  footer: Footer;
+  impact: Impact;
+  aboutUs: AboutUs;
+  contact: Contact;
+  general: General;
+  reviews: Reviews;
+  bookings: Bookings;
+  homePage: HomePage;
+  whyChooseUs: WhyChooseUs;
+}
+
+interface AboutUs {
+  title: string;
+  imgUrl: string;
+  features: Features;
+  subTitle: string;
+  titleColor: string;
+  description: string;
+  subTitleColor: string;
+}
+
+interface Features {
+  icons: SubTitle[];
+  buttons: Button[];
+}
+
+interface Button {
+  id: number;
+  link: string;
+  text: string;
+}
+
+interface SubTitle {
+  id: number;
+  url?: string;
+  title: string;
+  description: string;
+}
+
+interface Bookings {
+  title: string;
+  design: BookingsDesign;
+  imgUrl: string;
+  subtitle: string;
+  buttonUrl: string;
+  buttonText: string;
+  titleColor: string;
+  subtitleColor: string;
+}
+
+interface BookingsDesign {
+  layout: string;
+  backgroundColor: string;
+}
+
+interface Contact {
+  title: string;
+  design: ContactDesign;
+  subTitle: string;
+}
+
+interface ContactDesign {
+  backgroundColor: string;
+}
+
+interface Footer {
+  info: Info;
+  design: FooterDesign;
+  social: Social;
+}
+
+interface Info {
+  terms: string;
+  transparency: Transparency;
+}
+
+interface Transparency {
+  description: string;
+}
+
+interface Social {
+  twitter: string;
+  facebook: string;
+  linkedIn: string;
+  whatsapp: string;
+  instagram: string;
+  secondaryWeb: string;
+}
+
+interface General {
+  url: string;
+}
+
+interface HomePage {
+  title: string;
+  design: FooterDesign;
+  subTitle: string;
+  mainImage: string;
+  titleColor: string;
+  subTitleColor: string;
+  firstButtonLink: string;
+  firstButtonText: string;
+  secondButtonLink: string;
+  secondButtonText: string;
+}
+
+interface Impact {
+  data: Datum[];
+  design: FooterDesign;
+}
+
+interface Datum {
+  id: number;
+  url: string;
+  text: string;
+  amount: string;
+}
+
+interface Reviews {
+  url: string;
+  title: string;
+  subtitle: string;
+  titleColor: string;
+  subtitleColor: string;
+}
+
+interface Style {
+  logo: string;
+  menuColor: string;
+  buttonColor: string;
+  footerColor: string;
+  mainTypography: string;
+  secondaryTypography: string;
+}
+
+interface Team {
+  title: string;
+  design: FooterDesign;
+  members: Member[];
+  subTitle: string;
+  titleColor: string;
+  subtitleColor: string;
+}
+
+interface WhyChooseUs {
+  title: string;
+  design: BookingsDesign;
+  imgUrl: string;
+  subTitles: SubTitle[];
+  titleColor: string;
+  description: string;
+}
