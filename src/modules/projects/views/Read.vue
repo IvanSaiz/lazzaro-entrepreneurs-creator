@@ -1,21 +1,19 @@
 <template lang="pug">
-  .projects-read
-    header
-      h1 {{ $t('projects.read.title') }}
-      p {{ $t('projects.read.subtitle') }}
-
-    section.projects-read__content
-      lz-table(title="" :fields="listFields" :items="projects")
-        template(#title="{ row: { title }}") {{ title }}
-        template(#skills="{ row: { skills }}") {{ skills }}
-        template(#actions="{ row }")
-          eye-icon(@click="viewProyect(row)")
-
-      article.projects-read__create-btn
-        lz-button(
-          type="primary"
-          @click="$router.push({ name: 'projectsCreate' })"
-        ) {{ $t('projects.read.newProject') }}
+.projects-read
+  header
+    h1 {{ $t('projects.read.title') }}
+    p {{ $t('projects.read.subtitle') }}
+  section.projects-read__content
+    lz-table(title="" :fields="listFields" :items="projects" :downloable="false")
+      template(#title="{ row: { title }}") {{ title }}
+      template(#skills="{ row: { skills }}") {{ skills }}
+      template(#actions="{ row }")
+        eye-icon(@click="viewProject(row)")
+    article.projects-read__create-btn
+      lz-button(
+        type="primary"
+        @click="$router.push({ name: 'projectsCreate' })"
+      ) {{ $t('projects.read.newProject') }}
 </template>
 
 <script lang="ts">
@@ -44,7 +42,7 @@
       { id: "actions", label: this.$t("projects.read.table.actions") }
     ];
 
-    viewProyect(row: any) {
+    viewProject(row: any) {
       this.$router.push({
         name: "projectsCreate",
         params: { projectId: row.id }
@@ -77,7 +75,7 @@
 
         &__th--actions {
           display: flex;
-          justify-content: space-around;
+          justify-content: flex-end;
           text-align: right;
 
           svg:hover {
