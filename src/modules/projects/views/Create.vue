@@ -152,8 +152,6 @@
     async getProject() {
       const project = await apiProjects.getProject(this.projectId);
 
-      console.log(project);
-
       this.proyectForm.title = project.title;
       this.proyectForm.description = project.description;
       this.proyectForm.date = project.date.split("T")[0];
