@@ -18,6 +18,7 @@
         tr
           th.lz-table__th.lz-table__th--head(
             v-for="field in fields"
+            :class="'lz-table__th--' + field.id"
             :key="field.id"
           ) {{ field.label }}
 
