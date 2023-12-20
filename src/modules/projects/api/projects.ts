@@ -21,9 +21,9 @@ const getProjectImages = function(projectId: string): Promise<TProjectImages> {
 
 const updateProject = function(
   projectId: string,
-  body: TProjectPutBody
+  body: Partial<TProjectPutBody>
 ): Promise<any> {
-  return http.put(`private/projects/${projectId}`, body, { noAuth: false });
+  return http.put(`portfolio/${projectId}`, body, { noAuth: false });
 };
 
 const postProject = function(body: TProjectPostBody): Promise<any> {

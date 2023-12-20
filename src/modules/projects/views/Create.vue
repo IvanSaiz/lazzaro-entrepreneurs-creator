@@ -314,7 +314,7 @@
 
     &__actions {
       text-align: right;
-      margin-top: 100px;
+      margin-top: 40px;
       width: 100%;
     }
   }
