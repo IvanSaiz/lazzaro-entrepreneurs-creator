@@ -1,7 +1,8 @@
 export default {
   read: {
-    title: "Proyectos",
-    subtitle: "Todos tus proyectos de recaudación",
+    title: "Portfolio",
+    subtitle: "Todos tus proyectos para mostarlos a tus potenciales clientes.",
+    see: "Ver portfolio",
     design: "Diseño",
     table: {
       name: "Nombre",

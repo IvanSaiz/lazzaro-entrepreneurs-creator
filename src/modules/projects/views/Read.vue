@@ -1,13 +1,20 @@
 <template>
   <div class="projects-read">
-    <DesignModal />
     <header>
-      <h1>{{ $t("projects.read.title") }}</h1>
+      <div class="title">
+        <h1>
+          {{ $t("projects.read.title") }}
+        </h1>
+        <FormulateInput type="toggle" name="active" />
+        <div class="view-btn">
+          <a href="" target="_blank">
+            {{ $t("projects.read.see") }}
+            <ArrowUpRightIcon />
+          </a>
+        </div>
+      </div>
       <p>{{ $t("projects.read.subtitle") }}</p>
-      <LzButton class="design-btn" type="secondary">
-        {{ $t("projects.read.design") }}
-        <EditIcon size="28" stroke-width="1.5" />
-      </LzButton>
+      <DesignModal />
     </header>
     <section class="projectsRead__content">
       <LzTable :fields="listFields" :items="projects" :downloable="false">
@@ -80,32 +87,29 @@
     header {
       display: flex;
       flex-direction: column;
-    }
 
-    .lz-button.design-btn {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      justify-content: space-between;
-      margin-left: auto;
-      padding: 10px, 16px, 10px, 16px;
-      width: fit-content;
-      height: max-content;
-      color: $color-black-01;
-      font-weight: 500;
-      margin-block: 20px 0;
-      border: 1px solid $color-black-06;
-      border-radius: 10px;
-
-      svg {
-        margin: 0;
-        top: 0;
-        color: $color-black-02;
+      .title {
+        display: flex;
+        gap: 18px;
+        align-items: center;
       }
 
-      &:hover {
-        cursor: pointer;
-        background-color: $color-black-06;
+      .view-btn {
+        margin-left: auto;
+        justify-self: flex-end;
+        align-self: flex-end;
+        a {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          color: $color-black-02;
+          font-weight: 400;
+          font-size: 1.4rem;
+          line-height: 1.5rem;
+          svg {
+            stroke: $color-black-02;
+          }
+        }
       }
     }
 
