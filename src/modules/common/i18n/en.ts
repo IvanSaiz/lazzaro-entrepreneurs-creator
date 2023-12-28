@@ -45,7 +45,8 @@ export default {
     Asesor: "consultant",
     NFTs: "NFTs",
     Datos: "Data",
-    Mejora: "Improve"
+    Mejora: "Improve",
+    Servicios: "Services"
   },
   logout: "Logout"
 };

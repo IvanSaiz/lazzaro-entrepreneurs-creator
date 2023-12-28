@@ -10,7 +10,7 @@ declare type TProject = {
 };
 
 declare type TProjectPostBody = {
-  ong_id: string;
+  organization_id: string;
   title: string;
   description: string;
   date: string;

@@ -13,13 +13,13 @@ export const LZ_MODULES = {
     active: true,
     icon: "clipboard-list-icon"
   },
-  // shop: {
-  //   moduleName: "shop",
-  //   label: "Tienda",
-  //   active: true,
-  //   icon: "building-store-icon",
-  //   features: ["market"]
-  // },
+  shop: {
+    moduleName: "shop",
+    label: "Tienda",
+    active: true,
+    icon: "building-store-icon",
+    features: ["market"]
+  },
   events: {
     moduleName: "events",
     label: "Eventos",
@@ -46,6 +46,12 @@ export const LZ_MODULES = {
   //   active: true,
   //   icon: "building-warehouse-icon"
   // },
+  services: {
+    moduleName: "services",
+    label: "Servicios",
+    active: true,
+    icon: "file-like-icon"
+  },
   consultant: {
     moduleName: "consultant",
     label: "Asesor",

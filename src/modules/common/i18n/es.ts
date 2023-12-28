@@ -49,6 +49,7 @@ export default {
     Asesor: "Asesor",
     NFTs: "NFTs",
     Datos: "Datos",
-    Mejora: "Mejora"
+    Mejora: "Mejora",
+    Servicios: "Servicios"
   }
 };
