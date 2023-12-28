@@ -42,7 +42,7 @@ export default {
     Web: "Web",
     Portfolio: "Portfolio",
     Tienda: "Tienda",
-    Calendario: "Calendario",
+    Eventos: "Eventos",
     Cuentas: "Cuentas",
     Socios: "Socios",
     Organización: "Organización",

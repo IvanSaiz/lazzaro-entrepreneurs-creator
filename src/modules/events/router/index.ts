@@ -6,10 +6,10 @@ import { RouteConfig } from "vue-router/types/router";
  */
 const routes: Array<RouteConfig> = [
   {
-    path: "/calendar",
-    name: "calendar",
+    path: "/events",
+    name: "events",
     component: () =>
-      import(/* webpackChunkName: "calendar" */ "../views/Calendar.vue"),
+      import(/* webpackChunkName: "events" */ "../views/Events.vue"),
     redirect: { name: "calendarRead" },
     children: [
       {

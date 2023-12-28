@@ -39,7 +39,7 @@ class Auth extends VuexModule {
   dni = null;
   updatedAt = null;
   createdAt = null;
-  tools: string[] | null = null;
+  tools: string[] = [];
   imgUrl = null;
   styleId = null;
   stripeId = null;
@@ -61,18 +61,7 @@ class Auth extends VuexModule {
   nif = null;
   pk = null;
   type = null;
-  features = {
-    causes: false,
-    courses: false,
-    donations: false,
-    events: false,
-    impact: false,
-    market: false,
-    partners: false,
-    volunteers: false
-  };
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  ongConfiguration: any = {
+  ongConfiguration = {
     currency: this.currency,
     currency_symbol: this.currencySymbol
   };
@@ -91,14 +80,6 @@ class Auth extends VuexModule {
   public setData(payload: any): void {
     Object.keys(payload).forEach(v => {
       this[v] = payload[v];
-    });
-  }
-
-  @Mutation
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public setFeatures(payload: any): void {
-    Object.keys(payload).forEach(v => {
-      this.features[v] = payload[v];
     });
   }
 
@@ -153,60 +134,6 @@ class Auth extends VuexModule {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public updateData(payload: any): void {
     this.context.commit("setData", keysToCamel(payload));
-  }
-
-  @Action
-  public async updateFeatures(): Promise<void> {
-    if (this.id) {
-      return await apiOngs.getAllPlatformConfig(this.id).then(
-        ({
-          data: {
-            features: {
-              causes,
-              courses,
-              donations,
-              events,
-              impact,
-              market,
-              partners,
-              volunteers
-            },
-            platformConfig: {
-              currency,
-              currency_symbol,
-              language,
-              url,
-              payment_method,
-              active,
-              powered_by_lazzaro,
-              template_id
-            }
-          }
-        }: // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        any) => {
-          this.context.commit("setFeatures", {
-            causes,
-            courses,
-            donations,
-            events,
-            impact,
-            market,
-            partners,
-            volunteers
-          });
-          this.context.commit("setOngConfig", {
-            currency,
-            currency_symbol,
-            language,
-            url,
-            payment_method,
-            active,
-            powered_by_lazzaro,
-            template_id
-          });
-        }
-      );
-    }
   }
 
   @Action

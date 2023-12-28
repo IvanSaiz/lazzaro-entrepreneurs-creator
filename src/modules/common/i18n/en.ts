@@ -38,7 +38,7 @@ export default {
     Web: "Web",
     Portfolio: "Portfolio",
     Tienda: "Shop",
-    Calendario: "Calendar",
+    Eventos: "Events",
     Cuentas: "Accounts",
     Socios: "Partners",
     Organización: "Organization",

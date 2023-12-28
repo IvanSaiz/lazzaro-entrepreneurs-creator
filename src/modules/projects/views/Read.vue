@@ -5,7 +5,7 @@
         <h1>
           {{ $t("projects.read.title") }}
         </h1>
-        <FormulateInput type="toggle" name="active" />
+        <FormulateInput type="toggle" name="active" v-on="this.handleToggle" />
         <div class="view-btn">
           <a href="" target="_blank">
             {{ $t("projects.read.see") }}

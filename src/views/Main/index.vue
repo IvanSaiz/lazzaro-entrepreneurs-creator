@@ -49,24 +49,14 @@
 
   const auth = namespace("auth");
 
-  type Features = {
-    causes: boolean;
-    courses: boolean;
-    donations: boolean;
-    events: boolean;
-    impact: boolean;
-    market: boolean;
-    NFTs: boolean;
-    partners: boolean;
-    volunteers: boolean;
-  };
+  type Tools = string[];
 
   @Component({
     components: { LzNavIcon, DeviceLaptopIcon }
   })
   export default class Main extends Vue {
-    @auth.State("features")
-    public features!: Features;
+    @auth.State("tools")
+    public tools: Tools;
 
     get lzModules() {
       return LZ_MODULES;
@@ -75,7 +65,10 @@
     get visibleLzModules() {
       return Object.keys(this.lzModules).reduce((lzModules, moduleKey) => {
         const features = this.lzModules[moduleKey].features;
-        if (!features || features.some((key: string) => this.features[key])) {
+        if (
+          !features ||
+          features.some((key: string) => this.tools?.includes?.(key))
+        ) {
           lzModules[moduleKey] = this.lzModules[moduleKey];
         }
         return lzModules;

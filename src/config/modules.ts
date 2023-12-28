@@ -11,7 +11,7 @@ export const LZ_MODULES = {
     moduleName: "projects",
     label: "Portfolio",
     active: true,
-    icon: "clipboard-list-icon",
+    icon: "clipboard-list-icon"
   },
   // shop: {
   //   moduleName: "shop",
@@ -20,13 +20,13 @@ export const LZ_MODULES = {
   //   icon: "building-store-icon",
   //   features: ["market"]
   // },
-  // calendar: {
-  //   moduleName: "calendar",
-  //   label: "Calendario",
-  //   active: true,
-  //   icon: "calendar-event-icon",
-  //   features: ["events", "courses"]
-  // },
+  events: {
+    moduleName: "events",
+    label: "Eventos",
+    active: true,
+    icon: "calendar-event-icon",
+    features: ["events"]
+  },
   // accounts: {
   //   moduleName: "accounts",
   //   label: "Cuentas",
@@ -51,7 +51,7 @@ export const LZ_MODULES = {
     label: "Asesor",
     active: true,
     icon: "heart-icon"
-  },
+  }
   // NFTs: {
   //   moduleName: "NFTs",
   //   label: "NFTs",

@@ -4,7 +4,7 @@ import { organizationModuleI18n } from "@/modules/organization";
 import { partnersModuleI18n } from "@/modules/partners";
 import { shopModuleI18n } from "@/modules/shop";
 import { commonModuleI18n } from "@/modules/common";
-import { calendarModuleI18n } from "@/modules/calendar";
+import { eventsModuleI18n } from "@/modules/events";
 import { consultantModuleI18n } from "@/modules/consultant";
 import { NFTsModuleI18n } from "@/modules/NFT";
 import { dataModuleI18n } from "@/modules/data";
@@ -21,7 +21,7 @@ export const en = {
   partners: partnersModuleI18n.en,
   organization: organizationModuleI18n.en,
   common: commonModuleI18n.en,
-  calendar: calendarModuleI18n.en,
+  events: eventsModuleI18n.en,
   consultant: consultantModuleI18n.en,
   data: dataModuleI18n.en,
   error: errorModuleI18n.en,

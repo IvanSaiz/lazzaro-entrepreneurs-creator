@@ -9,7 +9,7 @@ import { projectsModuleRouter } from "@/modules/projects";
 import { shopModuleRouter } from "@/modules/shop";
 import { accountsModuleRouter } from "@/modules/accounts";
 import { partnersModuleRouter } from "@/modules/partners";
-import { calendarModuleRouter } from "@/modules/calendar";
+import { eventsModuleRouter } from "@/modules/events";
 import { userModuleRouter } from "@/modules/user";
 import { organizationModuleRouter } from "@/modules/organization";
 import {
@@ -42,7 +42,7 @@ const routes: Array<RouteConfig> = [
       ...shopModuleRouter,
       ...accountsModuleRouter,
       ...partnersModuleRouter,
-      ...calendarModuleRouter,
+      ...eventsModuleRouter,
       ...userModuleRouter,
       ...profileModuleRouter,
       ...organizationModuleRouter,
