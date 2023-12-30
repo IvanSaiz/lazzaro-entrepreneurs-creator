@@ -60,7 +60,7 @@
 
   @Component({ components: { LzButton, VCalendar, LzModal, SearchEvent } })
   export default class Read extends Vue {
-    @auth.State("id")
+    @auth.State("organizationId")
     public ongId!: string;
 
     getAttributeDescription(attribute: any) {

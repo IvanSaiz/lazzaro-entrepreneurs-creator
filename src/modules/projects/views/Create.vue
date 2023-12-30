@@ -113,7 +113,7 @@
     status: "enabled" | "disabled";
     imageUrlToConvert: { url: string }[];
     imagesToConvert: { url: string }[];
-    ongId: string;
+    organizationId: string;
     imageUrl: string;
     images: string[];
   };
@@ -126,7 +126,7 @@
     isPremiumSubscription = false;
 
     proyectForm: TProjectForm = {
-      ongId: "",
+      organizationId: "",
       title: "",
       description: "",
       status: "disabled",
@@ -138,8 +138,8 @@
       images: []
     };
 
-    @auth.State("id")
-    public ongId!: string;
+    @auth.State("organizationId")
+    public organizationId!: string;
 
     @Prop()
     projectId!: string;
@@ -167,7 +167,9 @@
           date: payload.date,
           description: payload.description,
           image_url: payload.imageUrl,
-          organization_id: payload.ongId,
+          // Check this relation, memberId comes from auth store, which gets the id from member table
+          // it should be organization_id, but organizations are not being created yet
+          organization_id: payload.organizationId,
           skills: payload.skills,
           status: payload.status,
           images: payload.images,
@@ -193,7 +195,7 @@
           date: payload.date,
           description: payload.description,
           image_url: payload.imageUrl,
-          organization_id: payload.ongId,
+          organization_id: payload.organizationId,
           skills: payload.skills,
           status: payload.status,
           images: payload.images,
@@ -216,7 +218,7 @@
     // Move this to actions in projects view
     async deleteProject() {
       try {
-        await apiProjects.deleteProject(this.ongId, this.projectId);
+        await apiProjects.deleteProject(this.organizationId, this.projectId);
 
         this.$notify({
           type: "success",
@@ -261,7 +263,7 @@
         ...this.proyectForm,
         imageUrl: imageUrlToBase64[0],
         images: Array.isArray(parsedImages) ? parsedImages : [parsedImages],
-        ongId: this.ongId
+        organizationId: this.organizationId
       };
 
       if (isNewProject) this.createProject(body);
@@ -284,7 +286,7 @@
 
       this.loaded = true;
 
-      this.proyectForm.ongId = this.ongId;
+      this.proyectForm.organizationId = this.organizationId;
     }
   }
 </script>

@@ -49,7 +49,7 @@
 
   @Component({ components: { LzButton, LzTable, DesignModal } })
   export default class Read extends Vue {
-    @auth.State("id")
+    @auth.State("organizationId")
     public ongId!: string;
     projects: {
       id: string;
