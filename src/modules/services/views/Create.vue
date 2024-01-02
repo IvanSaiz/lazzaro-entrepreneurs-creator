@@ -1,5 +1,5 @@
 <template lang="pug">
-.calendar-create
+.services-create
   lz-confirm(
     v-if="showDeleteModal"
     @close='showDeleteModal = false'
@@ -11,204 +11,77 @@
     p {{ $t('services.create.subtitle') }}
 
     formulate-form(v-model="calendarForm" @submit="onSave" v-if="loaded")
-      section.calendar-general
-        .calendar-general__header
-          h2.h2--dash {{ $t('services.create.generalForm.title') }}
-        .calendar-general__section
-          .calendar-general__section--left
-            .form__row
-              formulate-input(
-                type="toggle"
-                name="isPremium"
-                :disabled="!isPremiumSubscription"
-                :value="calendarForm.isPremium"
-                :label="$t('services.create.highlight.label')"
-                label-position="before"
-                :wrapper-class="['formulate-input-inline-toggle']"
-                @click='popUpgradeToPremiumMessage'
-              )
-                template(#label="{ label }")
-                  label
-                    .formulate-input-label {{ label }}
-                      span
-                        crown-icon
+      section.services-general
+        .services-general__header
+          h2.h2--dash {{ $t('services.create.form.title') }}
+          p {{ $t('services.create.form.subtitle') }}
+        .services-general__section
+          .services-general__section--left
             .form__row
               formulate-input(
                 type="image"
                 name="imageUrlToConvert"
-                :label="$t('services.create.generalForm.mainImg')"
+                :label="$t('services.create.form.image')"
                 :label-class="['required']"
                 validation="required|mime:image/jpeg,image/png"
-                :validation-name="$t('services.create.generalForm.mainImg')"
+                :validation-name="$t('services.create.form.image')"
                 label-position="before"
-                :value="calendarForm.imageUrlToConvert"
+                :value="calendarForm.image"
               )
-            .form__row
-              formulate-input(
-                type="image"
-                name="imagesToConvert"
-                :label="$t('services.create.generalForm.images.label')"
-                :label-class="['required']"
-                validation="required|mime:image/jpeg,image/png"
-                :validation-name="$t('services.create.generalForm.images.label')"
-                label-position="before"
-                multiple
-                :value="calendarForm.imagesToConvert"
-              )
-          .calendar-general__section--right
+          .services-general__section--right
             .form__row
               formulate-input(
                 type="text"
                 name="title"
-                :label="$t('services.create.generalForm.name')"
+                :label="$t('services.create.form.name')"
                 :label-class="['required']"
                 validation="required"
               )
             .form__row
               lz-editor-input(
-                :label="$t('services.create.generalForm.description')"
+                :label="$t('services.create.form.description.title')"
+                :subtitle="$t('services.create.form.description.subtitle')"
                 v-model="calendarForm.description"
               )
-            .form__row
-              formulate-input(
-                type="select"
-                name="type"
-                :label="$t('services.create.generalForm.type')"
-                :options="typeOptions"
-              )
-              formulate-input(
-                type="select"
-                name="mode"
-                :label="$t('services.create.generalForm.mode')"
-                :options="modeOptions"
-              )
-              formulate-input(
-                type="select"
-                name="status"
-                :label="$t('services.create.generalForm.status')"
-                :options="statusOptions"
-              )
-      section.calendar-dates
-        .calendar-dates__header
-          h2.h2--dash {{ $t('services.create.dateForm.title') }}
-        .calendar-dates__section
+      section.price
+        .price__header.dash
+          formulate-input(
+            type="toggle"
+            name="paymentInAdvance"
+          )
+          h2 {{ $t('services.create.price.title') }}
+        .price__section
           .form__row
             formulate-input(
-              type="date"
-              name="startInscriptionDate"
-              :label="$t('services.create.dateForm.startInscription')"
-              :label-class="['required']"
-              validation="required"
-              :validation-name="$t('services.create.dateForm.startInscription')"
-            )
-            formulate-input(
-              type="date"
-              name="endInscriptionDate"
-              :label="$t('services.create.dateForm.endInscription')"
-              :label-class="['required']"
-              validation="required"
-              :validation-name="$t('services.create.dateForm.endInscription')"
-            )
-            formulate-input(
-              type="date"
-              name="startEventDate"
-              :label="$t('services.create.dateForm.startEvent')"
-              :label-class="['required']"
-              validation="required"
-              :validation-name="$t('services.create.dateForm.startEvent')"
-            )
-            formulate-input(
-              type="date"
-              name="endEventDate"
-              :label="$t('services.create.dateForm.endEvent')"
-              :label-class="['required']"
-              validation="required"
-              :validation-name="$t('services.create.dateForm.endEvent')"
-            )
-          .form__row
-            formulate-input(
-              type="toggle"
-              :label="$t('services.create.dateForm.recurrent.label')"
-              :under-label="$t('services.create.dateForm.recurrent.under')"
-              name="recurrent"
-            )
-            formulate-input(
-              v-if="calendarForm.recurrent"
-              type="select"
-              name="frecuency"
-              :label="$t('services.create.dateForm.frequency.label')"
-              :options="frequencyOptions"
-            )
-
-      section.calendar-detail
-        .calendar-detail__header
-          h2.h2--dash {{ $t('services.create.locationForm.title') }}
-        .calendar-detail__section
-          .form__row
-            formulate-input(
-              v-if="calendarForm.mode === 'Online'"
               type="text"
-              name="link"
-              :label="$t('services.create.locationForm.link')"
+              name="price"
+              inputmode="numeric"
+              pattern="[0-9]*"
+              :label="$t('services.create.price.label')"
               :label-class="['required']"
-              validation="required"
-              :validation-name="$t('services.create.locationForm.link')"
+              validation="required|number"
+              :validation-name="$t('services.create.price.label')"
             )
+      section.bookings
+        .bookings__header
+          h2.h2--dash {{ $t('services.create.bookings.title') }}
+        .bookings__body
           .form__row
             formulate-input(
-              v-if="calendarForm.mode === 'Presencial'"
               type="text"
-              name="location"
-              :label="$t('services.create.locationForm.location')"
+              name="calendarLink"
+              :label="$t('services.create.bookings.label')"
               :label-class="['required']"
-              validation="required"
-              :validation-name="$t('services.create.locationForm.location')"
+              validation="required|url"
+              :validation-name="$t('services.create.bookings.label')"
             )
+      .services-create__actions
+        lz-button(type="primary") {{ $t('services.create.actions.add') }}
 
-      section.calendar-tickets
-        .calendar-tickets__header
-          h2.h2--dash {{ $t('services.create.ratesForm.title') }}
-        .calendar-tickets__section
-          formulate-input(
-            type="text"
-            :label="$t('services.create.ratesForm.amount')"
-            name="ticketAmount"
-            validation="required|number"
-          )
-          formulate-input(
-            type="text"
-            :label="$t('services.create.ratesForm.cost')"
-            name="ticketPrice"
-            validation="required|number"
-          )
-          formulate-input(
-            type="text"
-            :label="$t('services.create.ratesForm.name')"
-            name="ticketName"
-          )
-
-          lz-button.lz-button--form-inline(
-            type="primary"
-            @click.prevent="onCreateTicket"
-          ) {{ $t('common.actions.create') }}
-
-        .calendar-tickets__table
-          transition(name="fade")
-            lz-table(
-              v-if="calendarForm.tickets.length > 0"
-              :title="$t('services.create.ratesForm.rateTable')"
-              :fields="ticketsFields"
-              :items="calendarForm.tickets"
-            )
-              template(#ticketName="{ row: { ticketName } }") {{ ticketName }}
-              template(#ticketAmount="{ row: { ticketAmount } }") {{ ticketAmount }}
-              template(#ticketPrice="{ row: { ticketPrice } }") {{ ticketPrice }}
-              template(#delete="{ row }")
-                XIcon(@click.prevent="onRemoveTicket(row)")
-      .calendar-create__actions
-        lz-button(type="tertiary" @click.prevent="confirmDeleteEvent") {{$t('common.actions.delete')}}
-        lz-button(type="secondary" @click.prevent="onCancel") {{ $t('common.actions.cancel') }}
-        lz-button(type="primary") {{ $t('common.actions.save') }}
+      .services-table
+        lz-table(
+          title="Tus servicios"
+        )
 </template>
 
 <script lang="ts">
@@ -220,15 +93,13 @@
   import { apiServices } from "../api";
   import { parseFile } from "@/utils/parseFile";
   import LzEditorInput from "@/components/EditorInput.vue";
-  import { checkSubscriptionPlan } from "@/utils";
 
   const auth = namespace("auth");
 
   @Component({ components: { LzButton, LzTable, LzConfirm, LzEditorInput } })
-  export default class CalendarCreate extends Vue {
+  export default class ServiceCreate extends Vue {
     loaded = false;
     showDeleteModal = false;
-    isPremiumSubscription = false;
     ticketsFields = [
       {
         id: "ticketName",
@@ -246,53 +117,12 @@
     ];
     eventId = "";
     calendarForm = {
-      imageUrlToConvert: [] as any,
-      imageUrl: "",
-      imagesToConvert: [] as any,
-      images: [] as any,
+      image: "",
       title: "",
       description: "",
-      type: "Evento",
-      mode: "Presencial",
-      status: "Borrador",
-      startInscriptionDate: "",
-      endInscriptionDate: "",
-      startEventDate: "",
-      endEventDate: "",
-      recurrent: false,
-      frecuency: "weekly" as TEvent["data"]["frecuency"],
-      link: "",
-      location: "",
-      ticketName: "",
-      ticketAmount: 1,
-      ticketPrice: 0,
-      tickets: [] as {
-        ticketName: string;
-        ticketAmount: number;
-        ticketPrice: number;
-      }[],
-      isPremium: false
-    };
-
-    typeOptions = {
-      Evento: this.$t("services.create.generalForm.typeOptions.event"),
-      Formación: this.$t("services.create.generalForm.typeOptions.training")
-    };
-
-    modeOptions = {
-      Presencial: this.$t("services.create.generalForm.modeOptions.onsite"),
-      Online: this.$t("services.create.generalForm.modeOptions.online")
-    };
-
-    statusOptions = {
-      Borrador: this.$t("services.create.generalForm.statusOptions.draft"),
-      Activo: this.$t("services.create.generalForm.statusOptions.active")
-    };
-
-    frequencyOptions = {
-      Semanal: this.$t("services.create.dateForm.frequency.options.weekly"),
-      Mensual: this.$t("services.create.dateForm.frequency.options.monthly"),
-      Anual: this.$t("services.create.dateForm.frequency.options.annual")
+      price: "",
+      paymentInAdvance: false,
+      calendarLink: ""
     };
 
     @auth.State("id")
@@ -303,36 +133,7 @@
 
       this.calendarForm.title = event.title;
       this.calendarForm.description = event.description;
-      this.calendarForm.type = event.course ? "Formación" : "Evento";
-      this.calendarForm.mode = event.type;
-      this.calendarForm.status = event.status;
-      this.calendarForm.startInscriptionDate = event.salesStartDate;
-      this.calendarForm.endInscriptionDate = event.salesEndDate;
-      this.calendarForm.startEventDate = event.start_time;
-      this.calendarForm.endEventDate = event.end_time;
-      this.calendarForm.recurrent = event.recurrent;
-      this.calendarForm.frecuency = event.frecuency;
-      this.calendarForm.imageUrlToConvert = [{ url: event.imageURL }];
-      this.calendarForm.link = event.location;
-      this.calendarForm.location = event.location || event.link;
-      this.calendarForm.isPremium = event.isPremium ?? false;
-
-      this.calendarForm.tickets = event.EventTickets.map(ticket => ({
-        ticketName: ticket.type,
-        ticketAmount: ticket.stock,
-        ticketPrice: ticket.price
-      }));
-    }
-
-    async getEventImages(eventId: string) {
-      const { data: images } = await apiServices.getEventImages(eventId);
-      this.calendarForm.imagesToConvert.length = 0;
-
-      images.forEach(image => {
-        const isMainImage = image.img_url.includes("default");
-        if (isMainImage) return;
-        this.calendarForm.imagesToConvert.push({ url: image.img_url });
-      });
+      this.calendarForm.calendarLink = event.location;
     }
 
     async createEvent(body: any) {
@@ -372,19 +173,11 @@
       this.eventId = this.$route.params.eventId;
 
       try {
-        this.isPremiumSubscription = (
-          await checkSubscriptionPlan(this.ongId)
-        ).isPremiumSubscription;
-
         if (!this.eventId) {
           this.loaded = true;
           return;
         }
-        // get event data
-        await Promise.all([
-          this.getEvent(this.eventId),
-          this.getEventImages(this.eventId)
-        ]);
+        await this.getEvent(this.eventId);
 
         this.loaded = true;
       } catch (error) {
@@ -401,23 +194,13 @@
 
     async onSave() {
       const isNewEvent = !this.eventId;
-      const { location, link } = this.calendarForm;
+      const { calendarLink: link } = this.calendarForm;
 
-      const imageUrlToBase64 = await parseFile(
-        this.calendarForm.imageUrlToConvert
-      );
-
-      const images: any[] = await parseFile(this.calendarForm.imagesToConvert);
-      this.calendarForm.location = location || link;
-
+      // const imageUrlToBase64 = await parseFile();
+      // this.calendarForm.imageUrlToConvert
       const body = {
         ...this.calendarForm,
-        stock: this.calendarForm.ticketAmount,
-        amount: this.calendarForm.ticketPrice,
-        imageUrl: imageUrlToBase64[0],
-        images: Array.isArray(images) ? images : [images],
-        imageUrlToConvert: undefined,
-        imagesToConvert: undefined,
+        image: "", //imageUrlToBase64[0],
         ongId: this.ongId
       };
 
@@ -425,43 +208,18 @@
       else this.updateEvent(body);
     }
 
-    onCreateTicket() {
-      const { ticketAmount, ticketPrice, ticketName } = this.calendarForm;
-      if (isNaN(+ticketAmount) || isNaN(+ticketPrice)) return;
-      if (!ticketName.trim().length) return;
-
-      const ticket = {
-        ticketName: this.calendarForm.ticketName,
-        ticketAmount: +this.calendarForm.ticketAmount ?? 0,
-        ticketPrice: +this.calendarForm.ticketPrice ?? 0
-      };
-      this.calendarForm.tickets.push(ticket);
-
-      this.calendarForm.ticketName = "";
-      this.calendarForm.ticketAmount = 1;
-      this.calendarForm.ticketPrice = 0;
-    }
-
-    onRemoveTicket(row: any): void {
-      this.calendarForm.tickets = this.calendarForm.tickets.filter(
-        ticket => ticket !== row
-      );
-    }
-
     confirmDeleteEvent() {
       this.showDeleteModal = true;
     }
 
-    async deleteEvent() {
-      if (!this.eventId) return;
+    async deleteEvent(eventId: string) {
       try {
-        await apiServices.deleteEvent(this.ongId, this.eventId);
+        await apiServices.deleteEvent(this.ongId, eventId);
 
         this.$notify({
           type: "success",
           text: this.$tc("services.create.notifications.removedEvent")
         });
-        this.$router.push({ name: "calendarRead" });
       } catch (error) {
         this.$notify({
           type: "error",
@@ -470,21 +228,11 @@
       }
       this.showDeleteModal = false;
     }
-
-    popUpgradeToPremiumMessage(): void {
-      if (this.isPremiumSubscription) return;
-
-      this.$notify({
-        type: "info",
-        text: this.$tc("common.notifications.upgradeToPremium"),
-        ignoreDuplicates: true
-      } as NotificationOptions);
-    }
   }
 </script>
 
 <style lang="scss">
-  .calendar-create {
+  .services-create {
     font-size: 1rem;
 
     &__actions {
@@ -495,7 +243,17 @@
       margin-top: 40px;
     }
 
-    .calendar-general {
+    .price__header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      h2 {
+        margin: 0;
+      }
+    }
+
+    .services-general {
       &__section {
         display: flex;
 
@@ -510,25 +268,6 @@
       }
     }
 
-    .calendar-tickets {
-      &__table {
-        margin-top: 30px;
-      }
-
-      &__section {
-        display: flex;
-        justify-content: flex-start;
-        align-items: flex-end;
-
-        & > * ~ * {
-          margin-left: 15px;
-        }
-
-        button {
-          margin-left: 15px;
-        }
-      }
-    }
     &__form {
       display: flex;
       flex-wrap: wrap;
@@ -550,7 +289,7 @@
 
     &__actions {
       text-align: right;
-      margin-top: 100px;
+      margin-top: 2rem;
       width: 100%;
     }
   }

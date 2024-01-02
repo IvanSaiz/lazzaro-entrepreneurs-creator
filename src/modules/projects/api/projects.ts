@@ -40,8 +40,10 @@ const postPlatformFeatures = function(ongId: string, body: any): Promise<any> {
   });
 };
 
-const getOrganizationPlan = function(ongId: string): Promise<OrganizationPlan> {
-  return http.get(`private/ongs/${ongId}/subscription-plan`, { noAuth: false });
+const getOrganizationPlan = function(
+  memberId: string
+): Promise<OrganizationPlan> {
+  return http.get(`subscriptions/${memberId}/plan`, { noAuth: false });
 };
 
 export default {

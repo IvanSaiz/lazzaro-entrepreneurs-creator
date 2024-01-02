@@ -6,59 +6,36 @@ export default {
     createNewBtn: "New item"
   },
   create: {
-    title: "New event or training",
+    title: "Nuevo servicio",
     subtitle:
-      "Configure your project here. If you have any questions or doubts, please contact your advisor.",
-    generalForm: {
-      title: "General",
-      mainImg: "Primary image",
-      images: {
-        label: "Images",
-        add: "Add images"
-      },
-      name: "Name",
-      description: "Description"
-    },
-    dateForm: {
-      title: "Dates",
-      startInscription: "Start of registration",
-      endInscription: "End of registration",
-      startEvent: "Start of event",
-      endEvent: "End del event",
-      recurrent: {
-        label: "Is it recurrent?",
-        under: "Recurrent event"
-      },
-      frequency: {
-        label: "What is the frequency?",
-        options: {
-          weekly: "Weekly",
-          monthly: "Monthly",
-          annual: "Yearly"
-        }
+      "Rellena todos los datos de tus servicios y muestra tu trabajo en tu web.",
+    form: {
+      title: "Servicios que ofreces",
+      subtitle: "Define los servicios que marcan a tu empresa.",
+      image: "Icono",
+      name: "Nombre del servicio",
+      description: {
+        title: "Descripción",
+        subtitle:
+          "La decripción se incluirá justo debajo del título que cada servicio. Máx 200 caracteres"
       }
     },
-    locationForm: {
-      title: "Access / Location",
-      link: "Access link",
-      location: "Location"
+    price: {
+      title: "Pago por adelantado",
+      label: "Precio"
     },
-    ratesForm: {
-      title: "Rates",
-      amount: "Amount",
-      cost: "Price",
-      name: "Name",
-      rateTable: "Rates table",
-      delete: ""
+    bookings: {
+      title: "Reservas online",
+      label: "Link a Calendy / Google Calendar"
     },
     notifications: {
-      createdEvent: "Event successfully created",
-      editedEvent: "Event successfully updated",
-      removedEvent: "Event successfully removed"
+      createdEvent: "Servicio creado con éxito",
+      editedEvent: "Servicio actualizado con éxito",
+      removedEvent: "Servicio eliminado con éxito"
     },
     highlight: {
-      label: "Highlight Event",
-      under: "Highlighted Event"
+      label: "Destacar evento",
+      under: "Servicio destacado"
     }
   }
 };

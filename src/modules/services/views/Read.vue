@@ -41,7 +41,7 @@
     .calendar-read__create-btn
       lz-button(
         type="primary"
-        @click="() => { this.$router.push({ name: 'calendarCreate' }); }"
+        @click="() => { this.$router.push({ name: 'serviceCreate' }); }"
       )
         | {{ $t('services.read.createNewBtn') }}
 </template>
@@ -77,7 +77,7 @@
 
     showCalendarDetail(eventId: string) {
       this.$router.push({
-        name: "calendarCreate",
+        name: "serviceCreate",
         params: { eventId }
       });
     }
