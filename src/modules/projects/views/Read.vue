@@ -14,7 +14,7 @@
         </div>
       </div>
       <p>{{ $t("projects.read.subtitle") }}</p>
-      <DesignModal />
+      <DesignModal section="portfolio" />
     </header>
     <section class="projectsRead__content">
       <LzTable :fields="listFields" :items="projects" :downloable="false">

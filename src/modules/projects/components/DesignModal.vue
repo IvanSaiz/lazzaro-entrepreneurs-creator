@@ -42,7 +42,7 @@
 </template>
 
 <script lang="ts">
-  import { Component, Vue } from "vue-property-decorator";
+  import { Component, Vue, Prop } from "vue-property-decorator";
   import { namespace } from "vuex-class";
   import LzModal from "@/components/Modal.vue";
   import LzButton from "@/components/Button.vue";
@@ -54,6 +54,9 @@
   export default class DesignModal extends Vue {
     @auth.State("id")
     public ongId!: string;
+
+    @Prop({ type: String, required: true })
+    section!: string;
 
     visible = false;
 
