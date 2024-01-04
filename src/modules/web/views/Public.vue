@@ -876,8 +876,6 @@
       apiWebsite
         .getWebsiteSection(this.websiteId, "web")
         .then(data => {
-          console.log({ data });
-
           this.publicWebForm.chosenTemplateId = data?.templateId;
           this.publicWebForm.url = this.url;
 
@@ -1001,12 +999,15 @@
                   ammount: item.amount
                 } as Section.Web.ImpactData)
             ) ||
-            new Array(4).fill(0).map((_, i) => ({
-              id: i.toString(),
-              text: "",
-              ammount: "",
-              url: []
-            } as Section.Web.ImpactData));
+            new Array(4).fill(0).map(
+              (_, i) =>
+                ({
+                  id: i.toString(),
+                  text: "",
+                  ammount: "",
+                  url: []
+                } as Section.Web.ImpactData)
+            );
           this.publicWebForm.impactDesignBackgroundColor =
             data.properties?.impact?.design.backgroundColor;
           this.publicWebForm.impactDesignBackgroundImage =
@@ -1062,10 +1063,6 @@
             data.properties?.footer?.design.backgroundColor;
           this.publicWebForm.footerDesignBackgroundImage =
             data.properties?.footer?.design.backgroundImage;
-
-          console.log(this.publicWebForm);
-
-          console.log({ imactData: this.publicWebForm.impactData });
 
           this.loaded = true;
         })

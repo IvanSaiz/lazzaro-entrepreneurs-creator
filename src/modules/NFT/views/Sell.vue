@@ -74,7 +74,7 @@
   export default class Sell extends Vue {
     formValues = { price: "--", duration: "1 month" };
     putOnSale() {
-      console.log("sold");
+      // console.log("sold");
     }
 
     get nftImage() {

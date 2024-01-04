@@ -85,7 +85,6 @@
         type: this.section,
         properties: this.properties
       };
-      console.log(sectionBody);
 
       this.saving = true;
       apiWebsite

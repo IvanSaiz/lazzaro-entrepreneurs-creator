@@ -41,11 +41,11 @@
     public ongId!: string;
 
     deleteNFT() {
-      console.log("nft deleted");
+      // console.log("nft deleted");
     }
 
     closeNFT() {
-      console.log("nft deleted");
+      // console.log("nft deleted");
     }
 
     async mounted() {
