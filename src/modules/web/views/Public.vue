@@ -711,7 +711,7 @@
             id: `${i}`,
             text: "",
             url: []
-          } as Section.ImpactData)
+          } as Section.Web.ImpactData)
       ),
       impactDesignBackgroundColor: "#FFF0F0",
       impactDesignBackgroundImage: "",
@@ -999,14 +999,14 @@
                   url: [{ url: item.url }],
                   text: item.text,
                   ammount: item.amount
-                } as Section.ImpactData)
+                } as Section.Web.ImpactData)
             ) ||
             new Array(4).fill(0).map((_, i) => ({
               id: i.toString(),
               text: "",
               ammount: "",
               url: []
-            } as Section.ImpactData));
+            } as Section.Web.ImpactData));
           this.publicWebForm.impactDesignBackgroundColor =
             data.properties?.impact?.design.backgroundColor;
           this.publicWebForm.impactDesignBackgroundImage =
@@ -1331,7 +1331,7 @@
       };
 
       try {
-        await apiWebsite.postWebsiteSection(postData);
+        await apiWebsite.putWebsiteSection(postData);
         this.handlePublishWebsite(this.publicWebForm.active, this.websiteId);
         this.$notify({
           type: "success",

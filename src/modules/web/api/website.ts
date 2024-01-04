@@ -9,7 +9,7 @@ const getWebsiteSection = (
   });
 };
 
-const postWebsiteSection = (sectionBody: any): Promise<any> => {
+const putWebsiteSection = (sectionBody: any): Promise<any> => {
   return http.put("websites/section", sectionBody, { noAuth: false });
 };
 
@@ -23,7 +23,7 @@ const unpublishWebsite = (websiteId: string): Promise<any> => {
 
 export default {
   getWebsiteSection,
-  postWebsiteSection,
+  putWebsiteSection,
   publishWebsite,
   unpublishWebsite
 };

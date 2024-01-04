@@ -3,14 +3,14 @@ declare type Layout = "modern"; //| "classic" | "minimalist";
 
 declare type AllPlatformConfig = {
   data: {
-    team: Section.TeamMember[];
-    impactData: Section.ImpactDataProperties[];
-    rrss: Section.Rrss;
-    platformConfig: Section.PlatformConfig;
-    contact: Section.Contact;
-    brand: Section.Brand;
-    description: Section.PlatFormDescription;
-    features: Section.Features;
+    team: Section.Web.TeamMember[];
+    impactData: Section.Web.ImpactDataProperties[];
+    rrss: Section.Web.Rrss;
+    platformConfig: Section.Web.PlatformConfig;
+    contact: Section.Web.Contact;
+    brand: Section.Web.Brand;
+    description: Section.Web.PlatFormDescription;
+    features: Section.Web.Features;
   };
 };
 
@@ -279,7 +279,7 @@ declare type WebsiteData = {
   createdAt: Date;
   updatedAt: Date;
   deleted: boolean;
-}
+};
 
 interface Properties {
   team: Team;
