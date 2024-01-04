@@ -8,7 +8,12 @@
       ) {{ getAttributeDescription(itemAttr) }}
 
     header
-      h1 {{ $t('services.read.title') }}
+      .title
+        h1 {{ $t('services.read.title') }}
+        formulate-input(type="toggle" name="active" v-on="this.handleToggle")
+        .view-btn
+          a(href="" target="_blank") {{ $t('services.read.see') }}
+          arrow-up-right-icon
       p {{ $t('services.read.subtitle') }}
       SearchEvent(@search="handleSearchEvent")
 
@@ -168,47 +173,47 @@
 
         // COURSES
         /*
-        ...this.courses.map((event: any) =>
-          this.getCalendarItem(
-            event.id,
-            event.title,
-            event.salesStartDate,
-            "green",
-            event,
-            "ArrowBarToLeftIcon"
-          )
-        ),
-        ...this.courses.map((event: any) =>
-          this.getCalendarItem(
-            event.id,
-            event.title,
-            event.salesEndDate,
-            "green",
-            event,
-            "ArrowBarToRightIcon"
-          )
-        ),
-        ...this.courses.map((event: any) =>
-          this.getCalendarItem(
-            event.id,
-            event.title,
-            event.start_time,
-            "green",
-            event,
-            "ArrowBarRightIcon"
-          )
-        ),
-        ...this.courses.map((event: any) =>
-          this.getCalendarItem(
-            event.id,
-            event.title,
-            event.end_time,
-            "green",
-            event,
-            "ArrowBarLeftIcon"
-          )
+      ...this.courses.map((event: any) =>
+        this.getCalendarItem(
+          event.id,
+          event.title,
+          event.salesStartDate,
+          "green",
+          event,
+          "ArrowBarToLeftIcon"
         )
-        */
+      ),
+      ...this.courses.map((event: any) =>
+        this.getCalendarItem(
+          event.id,
+          event.title,
+          event.salesEndDate,
+          "green",
+          event,
+          "ArrowBarToRightIcon"
+        )
+      ),
+      ...this.courses.map((event: any) =>
+        this.getCalendarItem(
+          event.id,
+          event.title,
+          event.start_time,
+          "green",
+          event,
+          "ArrowBarRightIcon"
+        )
+      ),
+      ...this.courses.map((event: any) =>
+        this.getCalendarItem(
+          event.id,
+          event.title,
+          event.end_time,
+          "green",
+          event,
+          "ArrowBarLeftIcon"
+        )
+      )
+      */
       ];
     }
 
@@ -247,6 +252,7 @@
 
     searchText = "";
     filteredAttributes: any = [];
+
     handleSearchEvent(searchText: string) {
       this.searchText = searchText;
 
@@ -292,6 +298,22 @@
 
 <style lang="scss">
   .calendar-read {
+    header {
+      .title {
+        display: flex;
+        gap: 18px;
+        align-items: center;
+
+        .view-btn {
+          font-size: medium;
+          align-self: flex-end;
+          margin-left: auto;
+          display: flex;
+          align-items: center;
+        }
+      }
+    }
+
     &__content {
       height: 100%;
       margin-top: 40px;
@@ -413,6 +435,7 @@
     &__search-results {
       margin-bottom: 10px;
       width: 35rem;
+
       ul {
         display: grid;
         grid-template-columns: repeat(5, 1fr);
@@ -450,6 +473,7 @@
           text-overflow: ellipsis;
           white-space: nowrap;
         }
+
         .calendar-read__details-button {
           padding: 5px 0px;
           width: 100px;
@@ -466,6 +490,7 @@
             color: $color-pink;
             font-weight: bold;
           }
+
           &:focus {
             outline: none;
             box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5);

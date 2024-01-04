@@ -3,7 +3,8 @@ export default {
     title: "Servicios",
     subtitle:
       "Rellena todos los datos de tus servicios y muestra tu trabajo en tu web.",
-    createNewBtn: "Nuevo Servicio"
+    createNewBtn: "Nuevo Servicio",
+    see: "Ver servicios"
   },
   create: {
     title: "Nuevo servicio",

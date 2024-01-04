@@ -5,7 +5,7 @@
         <h2>Diseño</h2>
         <h4>Portfolio</h4>
       </div>
-      <FormulateForm>
+      <FormulateForm v-model="properties">
         <h2 class="h2--dash">Título</h2>
         <FormulateInput
           name="title"
@@ -29,7 +29,7 @@
           validation-name="Color"
           label="Color"
         />
-        <LzButton type="secondary">
+        <LzButton type="secondary" @click="save" v-disabled="saving">
           Guardar
         </LzButton>
       </FormulateForm>
@@ -46,6 +46,7 @@
   import { namespace } from "vuex-class";
   import LzModal from "@/components/Modal.vue";
   import LzButton from "@/components/Button.vue";
+  import { apiWebsite } from "@/modules/web/api";
   const auth = namespace("auth");
 
   @Component({
@@ -55,10 +56,20 @@
     @auth.State("id")
     public ongId!: string;
 
+    @auth.State("websiteId")
+    public websiteId!: string;
+
     @Prop({ type: String, required: true })
     section!: string;
 
     visible = false;
+    saving = false;
+
+    properties = {
+      title: "",
+      subtitle: "",
+      background: ""
+    };
 
     openModal() {
       this.visible = true;
@@ -66,6 +77,34 @@
 
     closeModal() {
       this.visible = false;
+    }
+
+    save() {
+      const sectionBody = {
+        websiteId: this.websiteId,
+        type: this.section,
+        properties: this.properties
+      };
+      console.log(sectionBody);
+
+      this.saving = true;
+      apiWebsite
+        .putWebsiteSection(sectionBody)
+        .then(() => {
+          this.saving = false;
+          this.$notify({
+            text: this.$tc("common.notifications.changeSuccess"),
+            type: "success"
+          });
+          this.closeModal();
+        })
+        .catch(() => {
+          this.saving = false;
+          this.$notify({
+            text: this.$tc("common.error.generic"),
+            type: "error"
+          });
+        });
     }
   }
 </script>
