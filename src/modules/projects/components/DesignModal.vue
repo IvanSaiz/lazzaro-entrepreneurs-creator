@@ -5,17 +5,17 @@
         <h2>Diseño</h2>
         <h4>Portfolio</h4>
       </div>
-      <FormulateForm v-model="properties">
+      <FormulateForm>
         <h2 class="h2--dash">Título</h2>
         <FormulateInput
-          name="title"
+          v-model="properties.title"
           type="text"
           validation="required"
           validation-name="Titulo"
           label="Título"
         />
         <FormulateInput
-          name="subtitle"
+          v-model="properties.subtitle"
           type="text"
           validation="required"
           validation-name="Subtítulo"
@@ -23,7 +23,7 @@
         />
         <h2 class="h2--dash">Fondo</h2>
         <FormulateInput
-          name="background"
+          v-model="properties.background"
           type="color"
           validation="required"
           validation-name="Color"
@@ -58,17 +58,15 @@
   @Component({ components: { LzModal, LzButton } })
   export default class DesignModal extends Vue {
     @auth.State("id")
-    public ongId!: string;
+    ongId!: string;
 
     @auth.State("websiteId")
-    public websiteId!: string;
-
-    @auth.State("templateId")
-    public templateId!: string;
+    websiteId!: string;
 
     @Prop({ type: String, required: true })
     section!: string;
 
+    templateId!: string;
     visible = false;
     saving = false;
     sectionExists = false;
@@ -108,7 +106,6 @@
             text: this.$tc("common.notifications.changeSuccess"),
             type: "success"
           });
-          this.closeModal();
         })
         .catch(() => {
           this.saving = false;
@@ -125,8 +122,8 @@
           this.websiteId,
           this.section
         );
-        console.log(section);
         this.properties = section.properties;
+        if (section.templateId) this.templateId = section.templateId;
         this.sectionExists = true;
       } catch {
         this.sectionExists = false;
