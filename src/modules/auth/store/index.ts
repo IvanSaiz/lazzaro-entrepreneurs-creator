@@ -1,6 +1,5 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import keysToCamel from "@/utils/keysToCamel";
 import store from "@/store";
 
 Vue.use(Vuex);
@@ -133,7 +132,7 @@ class Auth extends VuexModule {
   @Action
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public updateData(payload: any): void {
-    this.context.commit("setData", keysToCamel(payload));
+    this.context.commit("setData", payload);
   }
 
   @Action

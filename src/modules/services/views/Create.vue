@@ -3,7 +3,7 @@
   lz-confirm(
     v-if="showDeleteModal"
     @close='showDeleteModal = false'
-    @confirm='deleteEvent'
+    @confirm='deleteService'
   )
 
   header
@@ -91,7 +91,6 @@
   import LzConfirm from "@/components/Confirm.vue";
   import { namespace } from "vuex-class";
   import { apiServices } from "../api";
-  import { parseFile } from "@/utils/parseFile";
   import LzEditorInput from "@/components/EditorInput.vue";
 
   const auth = namespace("auth");
@@ -115,7 +114,7 @@
       },
       { id: "delete", label: this.$t("services.create.ratesForm.delete") }
     ];
-    eventId = "";
+    serviceId = "";
     calendarForm = {
       image: "",
       title: "",
@@ -128,20 +127,20 @@
     @auth.State("id")
     public ongId!: string;
 
-    async getEvent(eventId: string) {
-      const { data: event } = await apiServices.getEvent(eventId);
+    async loadServiceData(serviceId: string) {
+      const { data: event } = await apiServices.getById(serviceId);
 
       this.calendarForm.title = event.title;
       this.calendarForm.description = event.description;
       this.calendarForm.calendarLink = event.location;
     }
 
-    async createEvent(body: any) {
+    async createService(body: any) {
       try {
-        await apiServices.postEvent(this.ongId, body);
+        await apiServices.create(this.ongId, body);
         this.$notify({
           type: "success",
-          text: this.$tc("services.create.notifications.createdEvent")
+          text: this.$tc("services.create.notifications.created")
         });
         this.$router.push({ name: "calendar" });
       } catch (error) {
@@ -152,13 +151,13 @@
       }
     }
 
-    async updateEvent(body: any) {
+    async updateService(body: any) {
       try {
-        await apiServices.updateEvent(this.eventId, body);
+        await apiServices.update(this.serviceId, body);
 
         this.$notify({
           type: "success",
-          text: this.$tc("calendar.create.notifications.editedEvent")
+          text: this.$tc("calendar.create.notifications.edited")
         });
         this.$router.push({ name: "calendar" });
       } catch (error) {
@@ -170,14 +169,14 @@
     }
 
     async mounted() {
-      this.eventId = this.$route.params.eventId;
+      this.serviceId = this.$route.params.eventId;
 
       try {
-        if (!this.eventId) {
+        if (!this.serviceId) {
           this.loaded = true;
           return;
         }
-        await this.getEvent(this.eventId);
+        await this.loadServiceData(this.serviceId);
 
         this.loaded = true;
       } catch (error) {
@@ -193,7 +192,7 @@
     }
 
     async onSave() {
-      const isNewEvent = !this.eventId;
+      const isNewEvent = !this.serviceId;
       const { calendarLink: link } = this.calendarForm;
 
       // const imageUrlToBase64 = await parseFile();
@@ -204,21 +203,21 @@
         ongId: this.ongId
       };
 
-      if (isNewEvent) this.createEvent(body);
-      else this.updateEvent(body);
+      if (isNewEvent) this.createService(body);
+      else this.updateService(body);
     }
 
     confirmDeleteEvent() {
       this.showDeleteModal = true;
     }
 
-    async deleteEvent(eventId: string) {
+    async deleteService(serviceId: string) {
       try {
-        await apiServices.deleteEvent(this.ongId, eventId);
+        await apiServices.delete(this.ongId, serviceId);
 
         this.$notify({
           type: "success",
-          text: this.$tc("services.create.notifications.removedEvent")
+          text: this.$tc("services.create.notifications.removed")
         });
       } catch (error) {
         this.$notify({

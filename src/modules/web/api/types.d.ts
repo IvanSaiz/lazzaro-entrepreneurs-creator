@@ -270,18 +270,18 @@ declare interface PublicWebFormData {
   };
 }
 
-declare type WebsiteData = {
+declare type Section<Props> = {
   id: string;
   websiteId: string;
   templateId: string;
   type: string;
-  properties: Properties;
+  properties: Props;
   createdAt: Date;
   updatedAt: Date;
   deleted: boolean;
 };
 
-interface Properties {
+interface WebProps {
   team: Team;
   style: Style;
   footer: Footer;

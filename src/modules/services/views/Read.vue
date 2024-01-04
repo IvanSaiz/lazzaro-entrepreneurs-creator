@@ -283,14 +283,8 @@
     }
 
     mounted() {
-      const today = new Date();
-      apiServices.getEvents(this.ongId).then(({ data }) => {
+      apiServices.getAllByOngId(this.ongId).then(({ data }) => {
         this.events = data;
-        apiServices.getCourses(this.ongId).then(({ data }) => {
-          data.forEach((item: object) => {
-            this.events.push(item);
-          });
-        });
       });
     }
   }

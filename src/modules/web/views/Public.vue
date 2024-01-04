@@ -820,7 +820,7 @@
           };
 
           this.onModalOpen();
-          await apiWebsite.publishWebsite(websiteId);
+          await apiWebsite.website.publish(websiteId);
         } else {
           this.modalText = {
             title: this.$tc("web.public.websiteStatus.unpublishWebsite.title"),
@@ -831,7 +831,7 @@
 
           this.onModalOpen();
 
-          await apiWebsite.unpublishWebsite(websiteId);
+          await apiWebsite.website.unpublish(websiteId);
         }
 
         this.onModalClose();
@@ -873,8 +873,8 @@
     }
 
     mounted() {
-      apiWebsite
-        .getWebsiteSection(this.websiteId, "web")
+      apiWebsite.section
+        .get<WebProps>(this.websiteId, "web")
         .then(data => {
           this.publicWebForm.chosenTemplateId = data?.templateId;
           this.publicWebForm.url = this.url;
@@ -1328,7 +1328,7 @@
       };
 
       try {
-        await apiWebsite.putWebsiteSection(postData);
+        await apiWebsite.section.put(postData);
         this.handlePublishWebsite(this.publicWebForm.active, this.websiteId);
         this.$notify({
           type: "success",

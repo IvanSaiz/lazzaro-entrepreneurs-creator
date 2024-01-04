@@ -30,9 +30,9 @@ export default {
       label: "Link a Calendy / Google Calendar"
     },
     notifications: {
-      createdEvent: "Servicio creado con éxito",
-      editedEvent: "Servicio actualizado con éxito",
-      removedEvent: "Servicio eliminado con éxito"
+      created: "Servicio creado con éxito",
+      edited: "Servicio actualizado con éxito",
+      removed: "Servicio eliminado con éxito"
     },
     highlight: {
       label: "Destacar evento",

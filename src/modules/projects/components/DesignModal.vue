@@ -49,9 +49,13 @@
   import { apiWebsite } from "@/modules/web/api";
   const auth = namespace("auth");
 
-  @Component({
-    components: { LzModal, LzButton }
-  })
+  type Properties = {
+    title: string;
+    subtitle: string;
+    background: string;
+  };
+
+  @Component({ components: { LzModal, LzButton } })
   export default class DesignModal extends Vue {
     @auth.State("id")
     public ongId!: string;
@@ -59,13 +63,17 @@
     @auth.State("websiteId")
     public websiteId!: string;
 
+    @auth.State("templateId")
+    public templateId!: string;
+
     @Prop({ type: String, required: true })
     section!: string;
 
     visible = false;
     saving = false;
+    sectionExists = false;
 
-    properties = {
+    properties: Properties = {
       title: "",
       subtitle: "",
       background: ""
@@ -82,13 +90,18 @@
     save() {
       const sectionBody = {
         websiteId: this.websiteId,
+        templateId: this.templateId,
         type: this.section,
         properties: this.properties
       };
 
+      const process = (body: typeof sectionBody) =>
+        this.sectionExists
+          ? apiWebsite.section.put(body)
+          : apiWebsite.section.post(body);
+
       this.saving = true;
-      apiWebsite
-        .putWebsiteSection(sectionBody)
+      process(sectionBody)
         .then(() => {
           this.saving = false;
           this.$notify({
@@ -104,6 +117,24 @@
             type: "error"
           });
         });
+    }
+
+    async loadSection() {
+      try {
+        const section = await apiWebsite.section.get<Properties>(
+          this.websiteId,
+          this.section
+        );
+        console.log(section);
+        this.properties = section.properties;
+        this.sectionExists = true;
+      } catch {
+        this.sectionExists = false;
+      }
+    }
+
+    async mounted() {
+      await this.loadSection();
     }
   }
 </script>
