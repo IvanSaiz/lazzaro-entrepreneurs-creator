@@ -1,54 +1,50 @@
 <template lang="pug">
-  .calendar-read
-    lz-modal(v-if="showDayModal" @close="closeModal(); resetCurrentDay()")
-      h2 {{ this.currentDay.day.ariaLabel }}
-      .calendar-read__event(
-        v-for="itemAttr in this.currentDay.attributes"
-        @click="showCalendarDetail(itemAttr.key)"
-      ) {{ getAttributeDescription(itemAttr) }}
-
-    header
-      .title
-        h1 {{ $t('services.read.title') }}
-        formulate-input(type="toggle" name="active" v-on="this.handleToggle")
-        .view-btn
-          a(href="" target="_blank") {{ $t('services.read.see') }}
-          arrow-up-right-icon
-      p {{ $t('services.read.subtitle') }}
-      SearchEvent(@search="handleSearchEvent")
-
-    .calendar-read__content
-      ul.calendar-read__search-results
-        li.calendar-read__search-result(v-for="attribute in filteredAttributes" :key="attribute.key")
-          span.calendar-read__dot
-            component(:is="attribute.customData.icon" size=12 :stroke="getAttributeColor(attribute)")
-            span.calendar-read__title
-              | {{ getAttributeTitle(attribute) }} - {{ formatDate(attribute.dates) }}
-              button.calendar-read__details-button(@click.stop="showCalendarDetail(attribute.key)") Show Details 
-
-      v-calendar(
-        is-expanded
-        :first-day-of-week="2"
-        locale="es"
-        :attributes="attributes"
-      )
-        template(v-slot:day-content='{ day, attributes }')
-          article.calendar-read__day(
-            @click="() => { setCurrentDay(day, attributes); openModal(); }"
-            :class="{ 'calendar-read__day--attrs': attributes && attributes.length > 0 }"
-          )
-            .calendar-read__number {{ day.label }}
-            .calendar-read__item(v-for="itemAttr in attributes")
-              .calendar-read__dot
-                component(:is="itemAttr.customData.icon" size=12 :stroke="getAttributeColor(itemAttr)")
-              .calendar-read__title {{ getAttributeDescription(itemAttr) }}
-
-    .calendar-read__create-btn
-      lz-button(
-        type="primary"
-        @click="() => { this.$router.push({ name: 'serviceCreate' }); }"
-      )
-        | {{ $t('services.read.createNewBtn') }}
+.calendar-read
+  lz-modal(v-if="showDayModal" @close="closeModal(); resetCurrentDay()")
+    h2 {{ this.currentDay.day.ariaLabel }}
+    .calendar-read__event(
+      v-for="itemAttr in this.currentDay.attributes"
+      @click="showCalendarDetail(itemAttr.key)"
+    ) {{ getAttributeDescription(itemAttr) }}
+  header
+    .title
+      h1 {{ $t('services.read.title') }}
+      formulate-input(type="toggle" name="active" v-on="this.handleToggle")
+      .view-btn
+        a(href="" target="_blank") {{ $t('services.read.see') }}
+        arrow-up-right-icon
+    p {{ $t('services.read.subtitle') }}
+    SearchEvent(@search="handleSearchEvent")
+  .calendar-read__content
+    ul.calendar-read__search-results
+      li.calendar-read__search-result(v-for="attribute in filteredAttributes" :key="attribute.key")
+        span.calendar-read__dot
+          component(:is="attribute.customData.icon" size=12 :stroke="getAttributeColor(attribute)")
+          span.calendar-read__title
+            | {{ getAttributeTitle(attribute) }} - {{ formatDate(attribute.dates) }}
+            button.calendar-read__details-button(@click.stop="showCalendarDetail(attribute.key)") Show Details 
+    v-calendar(
+      is-expanded
+      :first-day-of-week="2"
+      locale="es"
+      :attributes="attributes"
+    )
+      template(v-slot:day-content='{ day, attributes }')
+        article.calendar-read__day(
+          @click="() => { setCurrentDay(day, attributes); openModal(); }"
+          :class="{ 'calendar-read__day--attrs': attributes && attributes.length > 0 }"
+        )
+          .calendar-read__number {{ day.label }}
+          .calendar-read__item(v-for="itemAttr in attributes")
+            .calendar-read__dot
+              component(:is="itemAttr.customData.icon" size=12 :stroke="getAttributeColor(itemAttr)")
+            .calendar-read__title {{ getAttributeDescription(itemAttr) }}
+  .calendar-read__create-btn
+    lz-button(
+      type="primary"
+      @click="() => { this.$router.push({ name: 'serviceCreate' }); }"
+    )
+      | {{ $t('services.read.createNewBtn') }}
 </template>
 
 <script lang="ts">
