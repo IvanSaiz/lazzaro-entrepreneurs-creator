@@ -7,7 +7,5 @@ export async function parseFiles(input: Input): Promise<string[]> {
 
   if (Array.isArray(input)) return input.map(({ url }) => url);
 
-  const filesToParse = input.files;
-
-  return Promise.all(filesToParse.map(({ file }) => toBase64(file)));
+  return Promise.all(input.files.map(({ file }) => toBase64(file)));
 }

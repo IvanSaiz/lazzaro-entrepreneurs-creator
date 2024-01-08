@@ -227,10 +227,9 @@
 
         this.$router.push({ name: "projectsRead" });
       } catch (error) {
-        const axiosError: any = error;
         this.showDeleteModal = false;
 
-        if (axiosError?.response?.status === 409) {
+        if (error?.response?.status === 409) {
           return this.$notify({
             type: "error",
             text: this.$tc("projects.create.notifications.projectHasDonations")
@@ -250,7 +249,6 @@
 
     async onSubmit() {
       const isNewProject = !this.projectId;
-      console.log("Submitting", this.proyectForm);
 
       const imageUrlToBase64 = await parseFiles(
         this.proyectForm.imageUrlToConvert
