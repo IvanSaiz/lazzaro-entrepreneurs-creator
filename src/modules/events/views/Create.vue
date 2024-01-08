@@ -218,7 +218,7 @@
   import LzConfirm from "@/components/Confirm.vue";
   import { namespace } from "vuex-class";
   import { apiEvents } from "../api";
-  import { parseFile } from "@/utils/parseFile";
+  import { parseFiles } from "@/utils/parseFile";
   import LzEditorInput from "@/components/EditorInput.vue";
   import { checkSubscriptionPlan } from "@/utils";
 
@@ -403,11 +403,11 @@
       const isNewEvent = !this.eventId;
       const { location, link } = this.calendarForm;
 
-      const imageUrlToBase64 = await parseFile(
+      const imageUrlToBase64 = await parseFiles(
         this.calendarForm.imageUrlToConvert
       );
 
-      const images: any[] = await parseFile(this.calendarForm.imagesToConvert);
+      const images = await parseFiles(this.calendarForm.imagesToConvert);
       this.calendarForm.location = location || link;
 
       const body = {

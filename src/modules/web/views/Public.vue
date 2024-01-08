@@ -595,7 +595,7 @@
   import LzModal from "@/components/Modal.vue";
   import { DotsIcon } from "@/components";
   import { checkSubscriptionPlan } from "@/utils";
-  import { parseFile } from "@/utils/parseFile";
+  import { parseFiles } from "@/utils/parseFile";
   import { apiBrand, apiWebsite } from "../api";
   import { ChooseTemplate } from "../components";
 
@@ -1083,7 +1083,7 @@
 
     async parseImageUrl(url) {
       if (url) {
-        const parsed = await parseFile(url);
+        const parsed = await parseFiles(url);
         return parsed[0] as string;
       }
       return null;
@@ -1093,7 +1093,7 @@
       const accountability =
         this.publicWebForm.footerTransparencyAccountability?.url &&
         (
-          await parseFile(this.publicWebForm.footerTransparencyAccountability)
+          await parseFiles(this.publicWebForm.footerTransparencyAccountability)
         ).map((file: any, key: any) => {
           return {
             file,
@@ -1108,7 +1108,7 @@
         for await (const member of this.publicWebForm.teamMembers) {
           let picture =
             member.picture && member.picture.files
-              ? (await parseFile(member.picture))[0]
+              ? (await parseFiles(member.picture))[0]
               : null;
           team.push({ ...member, picture });
         }

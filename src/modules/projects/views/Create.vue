@@ -100,7 +100,7 @@
   import LzConfirm from "@/components/Confirm.vue";
   import { namespace } from "vuex-class";
   import { apiProjects } from "../api";
-  import { parseFile } from "@/utils/parseFile";
+  import { parseFiles } from "@/utils/parseFile";
   import LzEditorInput from "@/components/EditorInput.vue";
 
   const auth = namespace("auth");
@@ -251,11 +251,11 @@
     async onSubmit() {
       const isNewProject = !this.projectId;
 
-      const imageUrlToBase64 = await parseFile(
+      const imageUrlToBase64 = await parseFiles(
         this.proyectForm.imageUrlToConvert
       );
 
-      const parsedImages: string[] = await parseFile(
+      const parsedImages: string[] = await parseFiles(
         this.proyectForm.imagesToConvert
       );
 

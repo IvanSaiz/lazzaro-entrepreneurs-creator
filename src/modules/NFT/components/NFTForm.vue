@@ -161,7 +161,7 @@
   import LzTable from "@/components/Table.vue";
   import InputLabel from "./InputLabel.vue";
   import NFTImageCard from "./NFTImageCard.vue";
-  import { parseFile } from "@/utils/parseFile";
+  import { parseFiles } from "@/utils/parseFile";
   import { isMetaMaskConnected } from "@/utils";
 
   @Component({
@@ -199,7 +199,7 @@
 
     async handleOnSubmit() {
       const uploadedImageFile = this.formValues.image;
-      const [parsedImage] = await parseFile(uploadedImageFile);
+      const [parsedImage] = await parseFiles(uploadedImageFile);
 
       this.onSubmit({
         ...this.formValues,

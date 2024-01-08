@@ -10,7 +10,7 @@
     h1 {{ $t('services.create.title') }}
     p {{ $t('services.create.subtitle') }}
 
-    formulate-form(v-model="calendarForm" @submit="onSave" v-if="loaded")
+    formulate-form(@submit="onSave" v-if="loaded" v-model="form")
       section.services-general
         .services-general__header
           h2.h2--dash {{ $t('services.create.form.title') }}
@@ -20,19 +20,21 @@
             .form__row
               formulate-input(
                 type="image"
-                name="imageUrlToConvert"
+                name="image_url"
+                v-model="form.image_url"
                 :label="$t('services.create.form.image')"
                 :label-class="['required']"
                 validation="required|mime:image/jpeg,image/png"
                 :validation-name="$t('services.create.form.image')"
                 label-position="before"
-                :value="calendarForm.image"
+                :uploader="uploadFile"
               )
           .services-general__section--right
             .form__row
               formulate-input(
                 type="text"
-                name="title"
+                name="service_name"
+                v-model="form.service_name"
                 :label="$t('services.create.form.name')"
                 :label-class="['required']"
                 validation="required"
@@ -41,13 +43,15 @@
               lz-editor-input(
                 :label="$t('services.create.form.description.title')"
                 :subtitle="$t('services.create.form.description.subtitle')"
-                v-model="calendarForm.description"
+                name="description"
+                v-model="form.description"
               )
       section.price
         .price__header.dash
           formulate-input(
             type="toggle"
-            name="paymentInAdvance"
+            name="payment_in_advance"
+            v-model="form.payment_in_advance"
           )
           h2 {{ $t('services.create.price.title') }}
         .price__section
@@ -55,6 +59,7 @@
             formulate-input(
               type="text"
               name="price"
+              v-model="form.price"
               inputmode="numeric"
               pattern="[0-9]*"
               :label="$t('services.create.price.label')"
@@ -69,18 +74,14 @@
           .form__row
             formulate-input(
               type="text"
-              name="calendarLink"
+              name="calendly_url"
+              v-model="form.calendly_url"
               :label="$t('services.create.bookings.label')"
               validation="url"
               :validation-name="$t('services.create.bookings.label')"
             )
       .services-create__actions
-        lz-button(type="primary") {{ $t('services.create.actions.add') }}
-
-      .services-table
-        lz-table(
-          title="Tus servicios"
-        )
+        lz-button(type="primary") {{ this.isNewEvent ? $t('services.create.actions.add') : $t('services.create.actions.save') }}
 </template>
 
 <script lang="ts">
@@ -91,8 +92,16 @@
   import { namespace } from "vuex-class";
   import { apiServices } from "../api";
   import LzEditorInput from "@/components/EditorInput.vue";
+  import toBase64 from "@/utils/toBase64";
 
   const auth = namespace("auth");
+
+  type Form = Omit<ServicePostDTO, "image_url"> & {
+    image_url: string | { url: string }[];
+  };
+  type FormSubmitData = Omit<ServicePostDTO, "image_url"> & {
+    image_url: { base64: string }[];
+  };
 
   @Component({ components: { LzButton, LzTable, LzConfirm, LzEditorInput } })
   export default class ServiceCreate extends Vue {
@@ -114,13 +123,16 @@
       { id: "delete", label: this.$t("services.create.ratesForm.delete") }
     ];
     serviceId = "";
-    calendarForm = {
-      image: "",
-      title: "",
+    isNewEvent = true;
+
+    form: Form = {
+      organization_id: "",
+      service_name: "",
       description: "",
       price: "",
-      paymentInAdvance: false,
-      calendarLink: ""
+      calendly_url: "",
+      payment_in_advance: false,
+      image_url: ""
     };
 
     @auth.State("organizationId")
@@ -128,10 +140,8 @@
 
     async loadServiceData(serviceId: string) {
       const service = await apiServices.getById(serviceId);
-
-      this.calendarForm.title = service.service_name;
-      this.calendarForm.description = service.description;
-      this.calendarForm.calendarLink = service.calendly_url;
+      this.form = service;
+      this.form.image_url = [{ url: service.image_url }];
     }
 
     async createService(body: ServicePostDTO) {
@@ -158,7 +168,7 @@
           type: "success",
           text: this.$tc("calendar.create.notifications.edited")
         });
-        this.$router.push({ name: "calendar" });
+        this.$router.push({ name: "services" });
       } catch (error) {
         this.$notify({
           type: "error",
@@ -177,6 +187,7 @@
         }
         await this.loadServiceData(this.serviceId);
 
+        this.isNewEvent = false;
         this.loaded = true;
       } catch (error) {
         this.$notify({
@@ -190,23 +201,18 @@
       this.$router.push({ name: "calendarRead" });
     }
 
-    async onSave() {
-      const isNewEvent = !this.serviceId;
-      const { calendarLink: link } = this.calendarForm;
+    async onSave(data: FormSubmitData) {
+      const image = Array.isArray(data.image_url)
+        ? data.image_url[0].base64
+        : data.image_url;
 
-      // const imageUrlToBase64 = await parseFile();
-      // this.calendarForm.imageUrlToConvert
       const body: ServicePostDTO = {
-        service_name: this.calendarForm.title,
-        description: this.calendarForm.description,
-        calendly_url: link,
-        payment_in_advance: this.calendarForm.paymentInAdvance,
-        price: this.calendarForm.price,
-        image_url: "", //imageUrlToBase64[0],
+        ...data,
+        image_url: image,
         organization_id: this.ongId
       };
 
-      if (isNewEvent) this.createService(body);
+      if (this.isNewEvent) this.createService(body);
       else this.updateService(body);
     }
 
@@ -229,6 +235,12 @@
         });
       }
       this.showDeleteModal = false;
+    }
+
+    async uploadFile(file: File, progress: (progress: number) => void) {
+      const base64 = await toBase64(file);
+      progress(100);
+      return { base64 };
     }
   }
 </script>

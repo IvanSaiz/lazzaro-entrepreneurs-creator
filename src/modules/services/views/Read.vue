@@ -128,6 +128,7 @@
           background-color: $color-black-06;
           align-items: center;
           cursor: pointer;
+          margin-bottom: 15px;
 
           .name {
             font-size: 14px;

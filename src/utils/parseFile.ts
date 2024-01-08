@@ -1,16 +1,11 @@
 import toBase64 from "./toBase64";
 
-export async function parseFile(file: any): Promise<any> {
-  if (!file || !file.files || !file.files.length) {
-    return Promise.resolve(file);
+export async function parseFiles(input: any): Promise<string[]> {
+  if (!input || !input.files || !input.files.length) {
+    throw new Error("No files to parse");
   }
 
-  const parsedFiles: any[] = [];
+  const filesToParse = Array.from(input.files);
 
-  for (const f of file.files) {
-    parsedFiles.push(
-      f.file instanceof Blob ? await toBase64(f.file) : f.file.url || ""
-    );
-  }
-  return Promise.resolve(parsedFiles);
+  return Promise.all(filesToParse.map(toBase64));
 }
