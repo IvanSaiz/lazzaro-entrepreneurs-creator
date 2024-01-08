@@ -90,7 +90,7 @@ export default {
         "Allow a potential customer to contact you. Configure the title and subtitle of your contact page.",
       form: {
         title: "Title",
-        subtitle: "Subtitle",
+        subtitle: "Subtitle"
       },
       phone: "Phone no.",
       location: "Location"
@@ -196,15 +196,13 @@ export default {
         fonts: {
           label: "Font",
           roboto: "Roboto",
-          arial: "Arial",
+          arial: "Arial"
         },
         buttonsColor: "Button color",
         menuColor: "Menu color",
         footerColor: "Footer color",
-        logoHelper: "60x60. Máx 25MB",
-
-      },
-
+        logoHelper: "60x60. Máx 25MB"
+      }
     },
 
     homepageForm: {
