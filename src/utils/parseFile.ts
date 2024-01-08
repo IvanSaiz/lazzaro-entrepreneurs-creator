@@ -1,11 +1,13 @@
 import toBase64 from "./toBase64";
 
-export async function parseFiles(input: any): Promise<string[]> {
-  if (!input || !input.files || !input.files.length) {
-    throw new Error("No files to parse");
-  }
+type Input = string | { files: { file: File }[] } | { url: string }[];
 
-  const filesToParse = Array.from(input.files);
+export async function parseFiles(input: Input): Promise<string[]> {
+  if (typeof input === "string") return [input];
 
-  return Promise.all(filesToParse.map(toBase64));
+  if (Array.isArray(input)) return input.map(({ url }) => url);
+
+  const filesToParse = input.files;
+
+  return Promise.all(filesToParse.map(({ file }) => toBase64(file)));
 }

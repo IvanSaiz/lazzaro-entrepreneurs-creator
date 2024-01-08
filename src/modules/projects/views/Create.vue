@@ -43,6 +43,7 @@
           formulate-input(
             type="text"
             name="title"
+            :value="proyectForm.title"
             :label="$t('projects.create.form.name')"
             :label-class="['required']"
             validation="required"
@@ -84,13 +85,12 @@
             )
           .form__col
 
-      .projects-create__actions
+      section.projects-create__actions
         lz-button(
           type="secondary"
           @click.prevent="$router.push({ name: 'projectsRead' })"
         ) {{ $t('common.actions.cancel') }}
-        
-        lz-button(type="primary") {{ $t('common.actions.save') }}
+        lz-button(type="primary" :submit="true") {{ $t('common.actions.save') }}
 </template>
 
 <script lang="ts">
@@ -250,24 +250,23 @@
 
     async onSubmit() {
       const isNewProject = !this.projectId;
+      console.log("Submitting", this.proyectForm);
 
       const imageUrlToBase64 = await parseFiles(
         this.proyectForm.imageUrlToConvert
       );
 
-      const parsedImages: string[] = await parseFiles(
-        this.proyectForm.imagesToConvert
-      );
+      const parsedImages = await parseFiles(this.proyectForm.imagesToConvert);
 
       const body: TProjectForm = {
         ...this.proyectForm,
         imageUrl: imageUrlToBase64[0],
-        images: Array.isArray(parsedImages) ? parsedImages : [parsedImages],
+        images: parsedImages,
         organizationId: this.organizationId
       };
 
-      if (isNewProject) this.createProject(body);
-      else this.updateProject(body);
+      if (isNewProject) await this.createProject(body);
+      else await this.updateProject(body);
     }
 
     async mounted() {

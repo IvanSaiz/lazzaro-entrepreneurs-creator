@@ -225,7 +225,7 @@
   const auth = namespace("auth");
 
   @Component({ components: { LzButton, LzTable, LzConfirm, LzEditorInput } })
-  export default class CalendarCreate extends Vue {
+  export default class EventsCreate extends Vue {
     loaded = false;
     showDeleteModal = false;
     isPremiumSubscription = false;

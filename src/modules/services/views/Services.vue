@@ -9,7 +9,7 @@ section
   import { Component, Vue } from "vue-property-decorator";
 
   @Component({})
-  export default class Calendar extends Vue {}
+  export default class Services extends Vue {}
 </script>
 
 <style lang="scss" scoped>

@@ -10,7 +10,7 @@
   import { Component, Vue } from "vue-property-decorator";
 
   @Component({})
-  export default class Calendar extends Vue {}
+  export default class Events extends Vue {}
 </script>
 
 <style lang="scss" scoped>
