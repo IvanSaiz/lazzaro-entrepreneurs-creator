@@ -9,7 +9,7 @@ const routes: Array<RouteConfig> = [
     path: "/services",
     name: "services",
     component: () =>
-      import(/* webpackChunkName: "services" */ "../views/Events.vue"),
+      import(/* webpackChunkName: "services" */ "../views/Services.vue"),
     redirect: { name: "serviceRead" },
     children: [
       {
