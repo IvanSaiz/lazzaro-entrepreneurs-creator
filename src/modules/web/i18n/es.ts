@@ -86,7 +86,7 @@ export default {
         "Permite que un posible cliente pueda ponerse en contacto contigo. Configura el título y subtítulo de tu página de contacto",
       form: {
         title: "Título",
-        subtitle: "Subtítulo",
+        subtitle: "Subtítulo"
       },
       phone: "Teléfono",
       location: "Ubicación"
@@ -191,7 +191,7 @@ export default {
         fonts: {
           label: "Font",
           roboto: "Roboto",
-          arial: "Arial",
+          arial: "Arial"
         },
         buttonsColor: "Color botones",
         menuColor: "Color menú",

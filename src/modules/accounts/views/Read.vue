@@ -222,7 +222,7 @@
           this.wallet = response;
         })
         .catch((err: any) => {
-          console.error(err);
+          //console.error(err);
         });
     }
 

@@ -266,7 +266,6 @@
             type: "error",
             text: this.$tc(error)
           });
-          console.error(err);
         })
         .finally(() => {
           this.loadingPostMember = false;
