@@ -4,7 +4,8 @@ export default {
     subtitle:
       "Fill in all the details of your services and show your work on your website.",
     createNewBtn: "New item",
-    see: "See services"
+    see: "See services",
+    details: "See calendar"
   },
   create: {
     title: "Nuevo servicio",

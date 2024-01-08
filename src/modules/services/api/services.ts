@@ -2,21 +2,31 @@
 import http from "@/api/core/http";
 
 export default {
-  getAllByOngId: function(ongId: string): Promise<TEvents> {
-    return http.get(`private/events/ong/${ongId}/all`, { noAuth: false }); //CHECK
+  getAllByOngId: function(ongId: string): Promise<Service[]> {
+    return http.get(`service/org/${ongId}`, { noAuth: false });
   },
-  getById: function(serviceId: string): Promise<TEvent> {
-    return http.get(`private/events/${serviceId}`, { noAuth: false });
+  getById: function(serviceId: string): Promise<Service> {
+    return http.get(`service/${serviceId}`, { noAuth: false });
   },
-  delete: function(ongId: string, serviceId: string): Promise<any> {
-    return http.delete(`private/ongs/${ongId}/events/${serviceId}`, {
+  delete: function(serviceId: string): Promise<[number]> {
+    return http.delete(`service/${serviceId}`, {
       noAuth: false
     });
   },
-  update: function(serviceId: string, body: any): Promise<any> {
-    return http.put(`private/events/${serviceId}`, body, { noAuth: false });
+  patch: function(serviceId: string, body: Partial<Service>): Promise<any> {
+    return http.patch(`service/${serviceId}`, body, { noAuth: false });
   },
-  create: function(ongId: string, body: any): Promise<any> {
-    return http.post(`private/events/ong/${ongId}`, body, { noAuth: false });
+  create: function(body: ServicePostDTO): Promise<any> {
+    return http.post(`service`, body, { noAuth: false });
+  },
+  reserve: {
+    create: function(body: Omit<Reservation, "id">): Promise<any> {
+      return http.post(`service/reserve`, body, { noAuth: false });
+    },
+    getByOngId: function(ongId: string): Promise<Reservation[]> {
+      return http.get(`service/${ongId}/reservations`, {
+        noAuth: false
+      });
+    }
   }
 };

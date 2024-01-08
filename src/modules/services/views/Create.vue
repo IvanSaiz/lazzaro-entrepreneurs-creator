@@ -71,8 +71,7 @@
               type="text"
               name="calendarLink"
               :label="$t('services.create.bookings.label')"
-              :label-class="['required']"
-              validation="required|url"
+              validation="url"
               :validation-name="$t('services.create.bookings.label')"
             )
       .services-create__actions
@@ -124,20 +123,20 @@
       calendarLink: ""
     };
 
-    @auth.State("id")
+    @auth.State("organizationId")
     public ongId!: string;
 
     async loadServiceData(serviceId: string) {
-      const { data: event } = await apiServices.getById(serviceId);
+      const service = await apiServices.getById(serviceId);
 
-      this.calendarForm.title = event.title;
-      this.calendarForm.description = event.description;
-      this.calendarForm.calendarLink = event.location;
+      this.calendarForm.title = service.service_name;
+      this.calendarForm.description = service.description;
+      this.calendarForm.calendarLink = service.calendly_url;
     }
 
-    async createService(body: any) {
+    async createService(body: ServicePostDTO) {
       try {
-        await apiServices.create(this.ongId, body);
+        await apiServices.create(body);
         this.$notify({
           type: "success",
           text: this.$tc("services.create.notifications.created")
@@ -151,9 +150,9 @@
       }
     }
 
-    async updateService(body: any) {
+    async updateService(body: Partial<Service>) {
       try {
-        await apiServices.update(this.serviceId, body);
+        await apiServices.patch(this.serviceId, body);
 
         this.$notify({
           type: "success",
@@ -169,7 +168,7 @@
     }
 
     async mounted() {
-      this.serviceId = this.$route.params.eventId;
+      this.serviceId = this.$route.params.serviceId;
 
       try {
         if (!this.serviceId) {
@@ -197,10 +196,14 @@
 
       // const imageUrlToBase64 = await parseFile();
       // this.calendarForm.imageUrlToConvert
-      const body = {
-        ...this.calendarForm,
-        image: "", //imageUrlToBase64[0],
-        ongId: this.ongId
+      const body: ServicePostDTO = {
+        service_name: this.calendarForm.title,
+        description: this.calendarForm.description,
+        calendly_url: link,
+        payment_in_advance: this.calendarForm.paymentInAdvance,
+        price: this.calendarForm.price,
+        image_url: "", //imageUrlToBase64[0],
+        organization_id: this.ongId
       };
 
       if (isNewEvent) this.createService(body);
@@ -213,7 +216,7 @@
 
     async deleteService(serviceId: string) {
       try {
-        await apiServices.delete(this.ongId, serviceId);
+        await apiServices.delete(serviceId);
 
         this.$notify({
           type: "success",

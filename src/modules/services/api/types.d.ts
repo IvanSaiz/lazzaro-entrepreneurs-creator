@@ -1,48 +1,31 @@
-declare type TEvent = {
-  data: {
-    course: boolean;
-    id: string;
-    title: string;
-    description: string;
-    imageURL: string;
-    start_time: string;
-    location: string;
-    link: string;
-    end_time: string;
-    stock: number;
-    amount: number;
-    price: number | null;
-    donated: number | null;
-    salesStartDate: string;
-    salesEndDate: string;
-    recurrent: boolean;
-    type: "Presencial" | "Online";
-    stripe_id: string;
-    video_url: string;
-    isPremium: boolean;
-    frecuency: "Semanal" | "weekly" | null;
-    status: "Activo";
-    EventTickets: {
-      amount: number;
-      id: string;
-      price: number;
-      type: string;
-      stock: number;
-    }[];
-  };
-};
+declare namespace Calendly {
+  function initInlineWidget(config: unknown): void;
+}
 
-declare type TEvents = {
-  data: TEvent["data"][];
-};
-
-declare type TEventImage = {
+declare type Service = {
   id: string;
-  event_id: string;
-  img_url: string;
-  default: string;
+  organization_id: string;
+  service_name: string;
+  description: string;
+  image_url: string;
+  payment_in_advance: boolean;
+  price: string;
+  calendly_url: string;
 };
 
-declare type TEventImages = {
-  data: TEventImage[];
+declare type ServicePostDTO = {
+  organization_id: string;
+  service_name: string;
+  description: string;
+  image_url: string;
+  payment_in_advance?: boolean;
+  price?: string;
+  calendly_url?: string;
+};
+
+declare type Reservation = {
+  id: string;
+  organization_id: string;
+  service_id: string;
+  reservation_date: Date;
 };
