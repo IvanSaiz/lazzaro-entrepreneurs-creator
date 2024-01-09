@@ -342,7 +342,7 @@
           type: "success",
           text: this.$tc("calendar.create.notifications.createdEvent")
         });
-        this.$router.push({ name: "calendar" });
+        this.$router.push({ name: "eventsRead" });
       } catch (error) {
         this.$notify({
           type: "error",
@@ -359,7 +359,7 @@
           type: "success",
           text: this.$tc("calendar.create.notifications.editedEvent")
         });
-        this.$router.push({ name: "calendar" });
+        this.$router.push({ name: "eventsRead" });
       } catch (error) {
         this.$notify({
           type: "error",
@@ -396,7 +396,7 @@
     }
 
     onCancel() {
-      this.$router.push({ name: "calendarRead" });
+      this.$router.push({ name: "eventsRead" });
     }
 
     async onSave() {

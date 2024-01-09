@@ -21,7 +21,7 @@
   .create-btn
     lz-button(
       type="primary"
-      @click="() => { this.$router.push({ name: 'serviceCreate' }); }"
+      @click="create"
     )
       | {{ $t('services.read.createNewBtn') }}
 </template>
@@ -73,9 +73,12 @@
       this.showDayModal = false;
     }
 
+    create() {
+      this.$router.push({ name: "servicesCreate" });
+    }
     edit(serviceId: string) {
       this.$router.push({
-        name: "serviceCreate",
+        name: "servicesCreate",
         params: { serviceId }
       });
     }

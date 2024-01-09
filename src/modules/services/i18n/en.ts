@@ -37,7 +37,8 @@ export default {
     },
     highlight: {
       label: "Destacar evento",
-      under: "Servicio destacado"
+      under: "Servicio destacado",
+      cancel: "Cancel"
     }
   }
 };

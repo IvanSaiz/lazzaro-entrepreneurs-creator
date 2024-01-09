@@ -10,17 +10,17 @@ const routes: Array<RouteConfig> = [
     name: "events",
     component: () =>
       import(/* webpackChunkName: "events" */ "../views/Events.vue"),
-    redirect: { name: "calendarRead" },
+    redirect: { name: "eventsRead" },
     children: [
       {
         path: "read",
-        name: "calendarRead",
+        name: "eventsRead",
         component: () =>
-          import(/* webpackChunkName: "calendarRead" */ "../views/Read.vue")
+          import(/* webpackChunkName: "eventsRead" */ "../views/Read.vue")
       },
       {
         path: "create/:eventId?",
-        name: "calendarCreate",
+        name: "eventsCreate",
         component: () =>
           import(/* webpackChunkName: "calendarCreate" */ "../views/Create.vue")
       }

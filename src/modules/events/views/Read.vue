@@ -77,7 +77,7 @@
 
     showCalendarDetail(eventId: string) {
       this.$router.push({
-        name: "calendarCreate",
+        name: "eventsCreate",
         params: { eventId }
       });
     }

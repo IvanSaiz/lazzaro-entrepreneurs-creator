@@ -44,7 +44,8 @@ export default {
     },
     actions: {
       add: "Añadir servicio",
-      save: "Guardar servicios"
+      save: "Guardar servicios",
+      cancel: "Cancelar"
     }
   }
 };

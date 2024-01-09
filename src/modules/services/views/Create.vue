@@ -81,7 +81,9 @@
               :validation-name="$t('services.create.bookings.label')"
             )
       .services-create__actions
+        lz-button(type="secondary" @click="onCancel") {{ $t('services.create.actions.cancel') }}
         lz-button(type="primary") {{ this.isNewEvent ? $t('services.create.actions.add') : $t('services.create.actions.save') }}
+
 </template>
 
 <script lang="ts">
@@ -151,7 +153,7 @@
           type: "success",
           text: this.$tc("services.create.notifications.created")
         });
-        this.$router.push({ name: "calendar" });
+        this.$router.push({ name: "servicesRead" });
       } catch (error) {
         this.$notify({
           type: "error",
@@ -198,7 +200,7 @@
     }
 
     onCancel() {
-      this.$router.push({ name: "calendarRead" });
+      this.$router.push({ name: "servicesRead" });
     }
 
     async onSave(data: FormSubmitData) {

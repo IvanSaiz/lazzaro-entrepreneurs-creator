@@ -10,17 +10,17 @@ const routes: Array<RouteConfig> = [
     name: "services",
     component: () =>
       import(/* webpackChunkName: "services" */ "../views/Services.vue"),
-    redirect: { name: "serviceRead" },
+    redirect: { name: "servicesRead" },
     children: [
       {
         path: "read",
-        name: "serviceRead",
+        name: "servicesRead",
         component: () =>
           import(/* webpackChunkName: "serviceRead" */ "../views/Read.vue")
       },
       {
         path: "create/:serviceId?",
-        name: "serviceCreate",
+        name: "servicesCreate",
         component: () =>
           import(/* webpackChunkName: "serviceCreate" */ "../views/Create.vue")
       }
