@@ -21,7 +21,7 @@
       section.organization-read__general(v-if="active === 'general'")
         formulate-form(
           v-model="generalForm"
-          @submit="onGeneralSubmit"
+          @submit="membereneralSubmit"
           :keep-model-data="true"
         )
         .form__row
@@ -45,47 +45,24 @@
             v-model="generalForm.mobilePhone"
           )
           formulate-input(
-            type="text"
-            name="address"
-            :label="$t('organization.read.generalForm.address')"
-            v-model="generalForm.address"
-          )
-        .form__row
-          formulate-input(
-            type="select"
-            name="orgType"
-            :label="$t('organization.read.generalForm.orgType.label')"
-            :options="typeOptions"
-            v-model="generalForm.type"
-          )
-          formulate-input(
-            type="select"
-            name="sector"
-            :label="$t('organization.read.generalForm.sector.label')"
-            :options="categoryOptions"
-            v-model="generalForm.ambit"
-          )
-        .form__row
-          formulate-input(
             type="select"
             name="currency"
             :options="currencyOptions"
             :label="$t('organization.read.generalForm.currency')"
             v-model="generalForm.currency"
           )
-
           div
 
         .organization-read__actions
           lz-button(type="secondary" @click="() => { this.$router.push({ name: 'Home' }) }" ) {{ $t('common.actions.cancel') }}
-          lz-button(type="primary" @click="onGeneralSubmit") {{ $t('common.actions.save') }}
+          lz-button(type="primary" @click="membereneralSubmit") {{ $t('common.actions.save') }}
 
       section.organization-read__payment-gateway(v-if="active === 'paymentGateway'")
         lz-payment-gateway
 
       section.organization-read__account(v-else-if="active === 'subscription'")
         p.organization-read__help {{ $t('organization.read.subscriptionForm.description') }}
-          lz-subscription(:ong-id="ongId" :currency-symbol="generalForm.currencySymbol")
+          lz-subscription(:member-id="memberId" :currency-symbol="generalForm.currencySymbol")
 </template>
 
 <script lang="ts">
@@ -125,7 +102,7 @@
     loaded = false;
 
     @auth.State("id")
-    public ongId!: string;
+    public memberId!: string;
 
     @auth.State("blockedBySubscriptionPlan")
     public blockedBySubscriptionPlan!: boolean;
@@ -161,7 +138,7 @@
     };
 
     typeOptions = {
-      ong: this.$t("organization.read.generalForm.orgType.options.ong"),
+      member: this.$t("organization.read.generalForm.orgType.options.member"),
       fundation: this.$t(
         "organization.read.generalForm.orgType.options.foundation"
       ),
@@ -211,28 +188,28 @@
       }
 
       await Promise.all([
-        apiOrganizations.getOrganization(this.ongId).then(response => {
-          const ong = response.data;
-          this.generalForm.name = ong.name;
-          this.generalForm.nif = ong.nif;
-          this.generalForm.mobilePhone = ong.mobilePhone;
-          this.generalForm.type = ong.type;
-          this.generalForm.ambit = ong.ambit;
-          this.generalForm.address = ong.address;
+        apiOrganizations.getOrganization(this.memberId).then(response => {
+          const member = response;
+          this.generalForm.name = member.companyName;
+          this.generalForm.nif = member.cif;
+          this.generalForm.mobilePhone = member.mobilePhone;
+          this.generalForm.type = member.type;
+          this.generalForm.ambit = member.ambit;
+          this.generalForm.address = member.address;
         }),
 
-        apiOrganizations.getOrganizationPlan(this.ongId).then(({ data }) => {
+        apiOrganizations.getOrganizationPlan(this.memberId).then(({ data }) => {
           this.organizationPlan.id = data?.id;
           this.organizationPlan.PlatformSubscription =
             data?.PlatformSubscription;
           this.organizationPlan.payment_type = data?.payment_type;
-        }),
-
-        apiOrganizations.getPlatformConfig(this.ongId).then(({ data }) => {
-          this.generalForm.currency = data.platformConfig.currency;
-          this.generalForm.currency_symbol =
-            data.platformConfig.currency_symbol;
         })
+
+        // apiOrganizations.getPlatformConfig(this.memberId).then(({ data }) => {
+        //   this.generalForm.currency = data.platformConfig.currency;
+        //   this.generalForm.currency_symbol =
+        //     data.platformConfig.currency_symbol;
+        // })
       ]);
 
       this.loaded = true;
@@ -246,17 +223,17 @@
       return this.SYMBOLS_CURRENCY[value];
     }
 
-    async onGeneralSubmit() {
+    async membereneralSubmit() {
       this.generalForm.currency_symbol = this.getSymbolCurrency(
         this.generalForm.currency
       );
       apiOrganizations
-        .putOrganization(this.ongId, this.generalForm)
+        .putOrganization(this.memberId, this.generalForm)
         .then(this.showSuccessNotification)
         .catch(this.showErrorNotification);
 
       apiOrganizations
-        .postCurrencyUpdate(this.ongId, {
+        .postCurrencyUpdate(this.memberId, {
           currency: this.generalForm.currency,
           currency_symbol: this.generalForm.currency_symbol
         })
@@ -270,7 +247,7 @@
 
     onSubscriptionSubmit(planId: string) {
       return apiOrganizations
-        .postOrganizationPlan(this.ongId, {
+        .postOrganizationPlan(this.memberId, {
           platform_subscription_id: planId
           //payment_type: this.organizationPlan.payment_type // todo ?
         })

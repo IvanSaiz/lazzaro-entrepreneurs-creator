@@ -40,12 +40,12 @@ export const LZ_MODULES = {
   //   icon: "users-icon",
   //   features: ["partners"]
   // },
-  // organization: {
-  //   moduleName: "organization",
-  //   label: "Organización",
-  //   active: true,
-  //   icon: "building-warehouse-icon"
-  // },
+  organization: {
+    moduleName: "organization",
+    label: "Organización",
+    active: true,
+    icon: "building-warehouse-icon"
+  },
   services: {
     moduleName: "services",
     label: "Servicios",

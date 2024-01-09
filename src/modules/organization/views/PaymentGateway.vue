@@ -20,18 +20,18 @@
   })
   export default class PaymentGateway extends Vue {
     paymentMethodsCards = [
-      {
-        title: "paypal",
-        features: [
-          this.$t("organization.read.paymentCards.Paypal.features[0]"),
-          this.$t("organization.read.paymentCards.Paypal.features[1]")
-        ],
-        odds: [
-          this.$t("organization.read.paymentCards.Paypal.odds[0]"),
-          this.$t("organization.read.paymentCards.Paypal.odds[1]"),
-          this.$t("organization.read.paymentCards.Paypal.odds[2]")
-        ]
-      },
+      // {
+      //   title: "paypal",
+      //   features: [
+      //     this.$t("organization.read.paymentCards.Paypal.features[0]"),
+      //     this.$t("organization.read.paymentCards.Paypal.features[1]")
+      //   ],
+      //   odds: [
+      //     this.$t("organization.read.paymentCards.Paypal.odds[0]"),
+      //     this.$t("organization.read.paymentCards.Paypal.odds[1]"),
+      //     this.$t("organization.read.paymentCards.Paypal.odds[2]")
+      //   ]
+      // },
       {
         title: "stripe",
         features: [
@@ -40,17 +40,17 @@
           this.$t("organization.read.paymentCards.Stripe.features[2]"),
           this.$t("organization.read.paymentCards.Stripe.features[3]")
         ]
-      },
-      {
-        title: "mollie",
-        features: [
-          this.$t("organization.read.paymentCards.Mollie.features[0]"),
-          this.$t("organization.read.paymentCards.Mollie.features[1]"),
-          this.$t("organization.read.paymentCards.Mollie.features[2]"),
-          this.$t("organization.read.paymentCards.Mollie.features[3]")
-        ],
-        odds: []
       }
+      // {
+      //   title: "mollie",
+      //   features: [
+      //     this.$t("organization.read.paymentCards.Mollie.features[0]"),
+      //     this.$t("organization.read.paymentCards.Mollie.features[1]"),
+      //     this.$t("organization.read.paymentCards.Mollie.features[2]"),
+      //     this.$t("organization.read.paymentCards.Mollie.features[3]")
+      //   ],
+      //   odds: []
+      // }
     ];
 
     @auth.State("id")
