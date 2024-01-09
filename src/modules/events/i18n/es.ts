@@ -1,12 +1,11 @@
 export default {
   read: {
-    title: "Calendario · Eventos y formaciones",
-    subtitle:
-      "Crea eventos o cursos en el calendario o formaciones sin fecha de caducidad",
-    createNewBtn: "Crear nuevo"
+    title: "Calendario de eventos",
+    subtitle: "Crea evento, cursos o formaciones en el calendario",
+    createNewBtn: "Nuevo evento"
   },
   create: {
-    title: "Nuevo evento o formación",
+    title: "Nuevo evento",
     subtitle:
       "Configura aquí tu proyecto. Para cualquier duda o consulta contacta con tu asesor.",
     generalForm: {
