@@ -1,5 +1,5 @@
 <template lang="pug">
-button(@click='onClick' class='lz-button' :class='buttonClass' :type='submit ? "submit" : "button"')
+button(@click='onClick' class='lz-button' :class='buttonClass')
   slot
 </template>
 
@@ -25,9 +25,6 @@ button(@click='onClick' class='lz-button' :class='buttonClass' :type='submit ? "
 
     @Prop({ default: false })
     protected readonly smaller!: boolean;
-
-    @Prop({ default: false })
-    readonly submit!: boolean;
     /**
      * Emits the button click event.
      * @returns Void.
