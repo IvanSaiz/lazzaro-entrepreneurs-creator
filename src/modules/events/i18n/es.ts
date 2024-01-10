@@ -2,7 +2,10 @@ export default {
   read: {
     title: "Calendario de eventos",
     subtitle: "Crea evento, cursos o formaciones en el calendario",
-    createNewBtn: "Nuevo evento"
+    createNewBtn: "Nuevo evento",
+    search: {
+      placeholder: "Buscar evento"
+    }
   },
   create: {
     title: "Nuevo evento",
@@ -19,18 +22,13 @@ export default {
       description: "Descripción",
       type: "Tipo",
       typeOptions: {
-        event: "Evento",
-        training: "Formación"
-      },
-      mode: "Medio",
-      modeOptions: {
         onsite: "Presencial",
         online: "Online"
       },
       status: "Estado",
       statusOptions: {
-        draft: "Borrador",
-        active: "Activo"
+        enabled: "Activo",
+        disabled: "Inactivo"
       }
     },
     dateForm: {
@@ -42,14 +40,6 @@ export default {
       recurrent: {
         label: "¿Es recurrente?",
         under: "Evento recurrente"
-      },
-      frequency: {
-        label: "¿Qué frecuencia tiene?",
-        options: {
-          weekly: "Semanal",
-          monthly: "Mensual",
-          annual: "Anual"
-        }
       }
     },
     locationForm: {
@@ -58,6 +48,7 @@ export default {
       location: "Añade la URL de acceso o localización"
     },
     ratesForm: {
+      add: "Añadir tarifa",
       title: "Tarifas",
       amount: "Cantidad",
       cost: "Precio",

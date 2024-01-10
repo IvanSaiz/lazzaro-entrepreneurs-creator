@@ -2,7 +2,10 @@ export default {
   read: {
     title: "Calendar of events",
     subtitle: "Create events or courses in the calendar or trainings",
-    createNewBtn: "New event"
+    createNewBtn: "New event",
+    search: {
+      placeholder: "Search event"
+    }
   },
   create: {
     title: "New event or training",

@@ -1,3 +1,3 @@
 import events from "./events";
 
-export const apiEvents = events;
+export const api = events;
