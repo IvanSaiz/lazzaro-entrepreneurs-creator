@@ -22,7 +22,7 @@ export const es = {
   partners: partnersModuleI18n.es,
   organization: organizationModuleI18n.es,
   common: commonModuleI18n.es,
-  calendar: eventsModuleI18n.es,
+  events: eventsModuleI18n.es,
   consultant: consultantModuleI18n.es,
   data: dataModuleI18n.es,
   error: errorModuleI18n.es,
