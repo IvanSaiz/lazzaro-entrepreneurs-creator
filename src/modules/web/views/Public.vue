@@ -29,7 +29,7 @@
               name="active"
             )
             .public-general__view-btn
-              a(:href="'https://' + publicWebForm.url" target="_blank")
+              a(:href="publicWebForm.url" target="_blank")
                 span {{ $t('web.public.generalForm.seeWeb') }}
                 ArrowUpRightIcon
           .form__row
