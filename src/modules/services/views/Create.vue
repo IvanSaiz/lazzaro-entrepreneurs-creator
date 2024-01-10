@@ -109,23 +109,8 @@
   export default class ServiceCreate extends Vue {
     loaded = false;
     showDeleteModal = false;
-    ticketsFields = [
-      {
-        id: "ticketName",
-        label: this.$t("services.create.ratesForm.name")
-      },
-      {
-        id: "ticketAmount",
-        label: this.$t("services.create.ratesForm.amount")
-      },
-      {
-        id: "ticketPrice",
-        label: this.$t("services.create.ratesForm.cost")
-      },
-      { id: "delete", label: this.$t("services.create.ratesForm.delete") }
-    ];
     serviceId = "";
-    isNewEvent = true;
+    isNewService = true;
 
     form: Form = {
       organization_id: "",
@@ -168,7 +153,7 @@
 
         this.$notify({
           type: "success",
-          text: this.$tc("calendar.create.notifications.edited")
+          text: this.$tc("services.create.notifications.edited")
         });
         this.$router.push({ name: "services" });
       } catch (error) {
@@ -189,7 +174,7 @@
         }
         await this.loadServiceData(this.serviceId);
 
-        this.isNewEvent = false;
+        this.isNewService = false;
         this.loaded = true;
       } catch (error) {
         this.$notify({
@@ -214,7 +199,7 @@
         organization_id: this.ongId
       };
 
-      if (this.isNewEvent) this.createService(body);
+      if (this.isNewService) this.createService(body);
       else this.updateService(body);
     }
 
