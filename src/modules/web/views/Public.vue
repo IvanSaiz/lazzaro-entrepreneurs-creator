@@ -905,6 +905,7 @@
         .then(data => {
           this.publicWebForm.chosenTemplateId = data?.templateId;
           this.publicWebForm.url = this.url;
+          this.publicWebForm.active = this.isActive;
 
           // Style section
           this.publicWebForm.styleLogo =[{ url: data?.properties?.style?.logo }] ;
