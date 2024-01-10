@@ -47,7 +47,7 @@ class HttpClient {
    * axios instance.
    * @returns {Promise}
    */
-  get(url, data, config = {}) {
+  get(url, data = { noAuth: "false" }, config = {}) {
     return this.request("get", url, data, config);
   }
 
@@ -95,7 +95,7 @@ class HttpClient {
    * axios instance.
    * @returns {Promise}
    */
-  delete(url, data, config = {}) {
+  delete(url, data = { noAuth: "false" }, config = {}) {
     return this.request("delete", url, data, config);
   }
 }
