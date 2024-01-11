@@ -8,6 +8,7 @@
         a(href="" target="_blank") {{ $t('services.read.see') }}
         arrow-up-right-icon
     p {{ $t('services.read.subtitle') }}
+    design-modal(section="services")
   .content
     .search
       SearchEvent(:placeholder="$t('services.read.search')" @search="handleSearch")
@@ -35,9 +36,12 @@
   import VCalendar from "v-calendar/lib/components/calendar.umd";
   import { apiServices } from "../api";
   import SearchEvent from "@/components/SearchEvent.vue";
+  import DesignModal from "../components/DesignModal.vue";
   const auth = namespace("auth");
 
-  @Component({ components: { LzButton, VCalendar, LzModal, SearchEvent } })
+  @Component({
+    components: { LzButton, VCalendar, LzModal, SearchEvent, DesignModal }
+  })
   export default class Read extends Vue {
     @auth.State("organizationId")
     private ongId!: string;
