@@ -312,7 +312,8 @@
     }
 
     onDelete(e) {
-      console.log("Deleting CalendarEvent", e);
+      //TODO: call to remove event
+      // console.log("Deleting CalendarEvent", e);
     }
 
     onCancel() {
