@@ -2,15 +2,19 @@
 .search-bar
   input(
     type="text"
-    placeholder="Busca tus servicios"
+    :placeholder="placeholder"
     v-model="searchText"
     @keyup.enter="submitSearch"
+    @input="$emit('search', searchText)"
   )
   search-icon
 </template>
 
 <script>
   export default {
+    props: {
+      placeholder: String
+    },
     data() {
       return { searchText: "" };
     },

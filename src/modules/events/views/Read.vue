@@ -1,15 +1,19 @@
 <template lang="pug">
-.calendar-read
+.events-read
   header
     h1 {{ $t('events.read.title') }}
     p {{ $t('events.read.subtitle') }}
-  .content
-    input.searchbar(
-      type="text"
-      :placeholder="$t('events.read.search.placeholder').toString()"
-      @keyup.enter="search"
-    )
-    ul.search-results
+  .content 
+    .search
+      SearchEvent(:placeholder="$t('events.read.search.placeholder')" @search="handleSearch")
+      ul.results
+        li(v-for="event in searchResults" :key="event.id")
+          p.name {{ event.name }}
+          .buttons
+            button.delete-button(@click="deleteEvent(event.id)")
+              trash-icon
+            button.edit-button(@click="edit(event.id)")
+              edit-icon
   .create-btn
     lz-button(
       type="primary"
@@ -32,36 +36,105 @@
     @auth.State("id")
     public memberId!: string;
 
+    public events: CalendarEvent[] = [];
+
+    async mounted() {
+      await this.loadEvents();
+    }
+
+    async loadEvents() {
+      if (!this.memberId) return;
+      const events = await Events.getAllByMemberId(this.memberId);
+      if (events) {
+        this.events = events;
+      }
+    }
+
+    query = "";
+    get searchResults() {
+      return this.events.filter(event =>
+        event.name.toLowerCase().includes(this.query.toLowerCase())
+      );
+    }
+    handleSearch(text: string) {
+      this.query = text;
+    }
+
     createEvent() {
       this.$router.push({
         name: ROUTES.CREATE
       });
     }
 
-    events: CalendarEvent[] = [];
-
-    search(e: KeyboardEvent) {
-      const target = e.target as HTMLInputElement;
-      const searchText = target.value;
-      console.log(searchText);
+    edit(eventId: string) {
+      this.$router.push({
+        name: ROUTES.CREATE,
+        params: { eventId }
+      });
     }
 
-    mounted() {
-      // apiEvents.getEvents(this.ongId).then(data => {
-      //   console.log(data);
-      // });
-      Events.getAllByMemberId(this.memberId).then(data => {
-        this.events = data;
-      });
+    deleteEvent(id: string) {
+      Events.delete(id)
+        .then(() => {
+          this.$notify({
+            type: "success",
+            text: this.$tc("common.success.delete")
+          });
+          this.loadEvents();
+        })
+        .catch(() => {
+          this.$notify({
+            type: "error",
+            text: this.$tc("common.error.generic")
+          });
+        });
     }
   }
 </script>
 
 <style lang="scss">
-  .calendar-read {
+  .events-read {
     .content {
       height: 100%;
       margin-top: 40px;
+
+      .search {
+        background-color: white;
+        padding: 34px;
+        border-radius: 2rem;
+
+        .results {
+          margin-top: 20px;
+
+          li {
+            display: flex;
+            padding: 20px 25px;
+            border-radius: 10px;
+            background-color: $color-black-06;
+            align-items: center;
+            margin-bottom: 15px;
+
+            .name {
+              font-size: 14px;
+              font-weight: bold;
+              user-select: none;
+              cursor: pointer;
+            }
+
+            .buttons {
+              margin-left: auto;
+              display: flex;
+              button {
+                display: flex;
+                align-items: center;
+                border: none;
+                background-color: transparent;
+                cursor: pointer;
+              }
+            }
+          }
+        }
+      }
     }
 
     .event {
@@ -76,168 +149,6 @@
 
       &:hover {
         color: $color-pink;
-      }
-    }
-
-    .search {
-      border: 1px solid $color-pink;
-    }
-
-    .day {
-      font-family: Muli;
-      font-size: 12px;
-      height: 80px;
-      overflow: hidden;
-      padding: 14px;
-      pointer-events: none;
-
-      &--attrs {
-        pointer-events: initial;
-
-        &:hover {
-          cursor: pointer;
-          border: 1px solid $color-pink;
-          background-color: $color-black-06;
-        }
-      }
-    }
-
-    .number {
-      color: $color-black-04;
-      margin-bottom: 10px;
-      position: relative;
-      text-align: right;
-    }
-
-    .item {
-      display: flex;
-      align-items: center;
-    }
-
-    .title {
-      overflow: hidden;
-      padding: 2px 0;
-      text-overflow: ellipsis;
-      width: 100%;
-      word-break: normal;
-      white-space: nowrap;
-    }
-
-    .dot {
-      margin-right: 5px;
-    }
-
-    .vc-day {
-      max-width: 100%;
-      overflow: hidden;
-      border-top: 1px solid $color-black-05;
-      border-left: 1px solid $color-black-05;
-
-      &.on-left {
-        border-left: 0px;
-      }
-    }
-
-    .vc-container {
-      width: 100%;
-      border-radius: 0px;
-    }
-
-    .vc-weeks {
-      padding: 0;
-    }
-
-    .vc-weekday {
-      padding: 15px 0;
-    }
-
-    .vc-dots {
-      display: none;
-    }
-
-    .in-next-month,
-    .in-previous-month {
-      .calendar-read {
-        .day,
-        .number {
-          opacity: 1;
-        }
-
-        .day {
-          background-color: $color-black-07;
-        }
-
-        .number {
-          color: $color-black-05;
-        }
-      }
-    }
-
-    .create-btn {
-      text-align: right;
-    }
-
-    .search-results {
-      margin-bottom: 10px;
-      width: 35rem;
-      ul {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        grid-template-rows: repeat(5, 1fr);
-        grid-column-gap: 0px;
-        grid-row-gap: 0px;
-      }
-
-      li {
-        display: flex;
-
-        align-items: center;
-        padding: 5px;
-        background-color: #ffffff;
-        border: 1px solid $color-black-04;
-        border-radius: 4px;
-        margin-bottom: 5px;
-
-        &:hover {
-          cursor: pointer;
-          border: 1px solid $color-pink;
-          background-color: $color-black-06;
-        }
-
-        .dot {
-          margin-right: 10px;
-        }
-
-        .title {
-          grid-area: 1 / 1 / 2 / 4;
-          flex-grow: 1;
-          border-radius: 8px;
-          padding: 8px;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-        }
-        .details-button {
-          padding: 5px 0px;
-          width: 100px;
-          grid-area: 1 / 5 / 2 / 6;
-
-          border: 1px solid $color-pink;
-          background-color: #fff;
-          color: $color-pink;
-          margin-left: 6rem;
-          border-radius: $border-radius-default;
-          cursor: pointer;
-
-          &:hover {
-            color: $color-pink;
-            font-weight: bold;
-          }
-          &:focus {
-            outline: none;
-            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5);
-          }
-        }
       }
     }
   }

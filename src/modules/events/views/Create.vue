@@ -14,23 +14,25 @@
               formulate-input(
                 type="image"
                 name="main_image"
-                :value="form.main_image"
+                :v-model="form.main_image"
                 :label="$t('events.create.generalForm.mainImg')"
                 :label-class="['required']"
                 validation="required|mime:image/jpeg,image/png"
                 :validation-name="$t('events.create.generalForm.mainImg')"
                 label-position="before"
+                :uploader="uploadFile"
               )
             .form__row
               formulate-input(
                 type="image"
                 name="images"
-                :value="form.images"
+                :v-model="form.images"
                 :label="$t('events.create.generalForm.images.label')"
                 :label-class="['required']"
                 validation="required|mime:image/jpeg,image/png"
                 :validation-name="$t('events.create.generalForm.images.label')"
                 label-position="before"
+                :uploader="uploadFile"
                 multiple
               )
           .calendar-general__section--right
@@ -180,6 +182,7 @@
   import { api } from "../api";
   import LzEditorInput from "@/components/EditorInput.vue";
   import { ROUTES } from "../router";
+  import toBase64 from "@/utils/toBase64";
 
   const auth = namespace("auth");
 
@@ -317,19 +320,17 @@
     }
 
     async onSave(event: CalendarEventForm) {
-      console.log("Saving CalendarEvent", event);
-
       const images: CalendarEventPostBody["images"] = [];
 
-      if (Array.isArray(this.form.main_image)) {
+      if (Array.isArray(event.main_image)) {
         images.push({
           default: true,
-          url: this.form.main_image[0].url
+          url: event.main_image[0].url
         });
       }
-      if (Array.isArray(this.form.images)) {
+      if (Array.isArray(event.images)) {
         images.push(
-          ...this.form.images.map(({ url }) => ({
+          ...event.images.map(({ url }) => ({
             default: false,
             url
           }))
@@ -349,6 +350,12 @@
 
       if (this.eventId) this.updateEvent(body);
       else this.createEvent(body);
+    }
+
+    async uploadFile(file: File, progress: (progress: number) => void) {
+      const base64 = await toBase64(file);
+      progress(100);
+      return { url: base64 };
     }
   }
 </script>
