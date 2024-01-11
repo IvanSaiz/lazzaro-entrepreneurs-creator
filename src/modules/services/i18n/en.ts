@@ -5,10 +5,28 @@ export default {
       "Fill in all the details of your services and show your work on your website.",
     createNewBtn: "New item",
     see: "See services",
-    details: "See calendar"
+    details: "See calendar",
+    modal: {
+      header: {
+        title: "Design",
+        section: "Services"
+      },
+      sections: {
+        title: {
+          separator: "Title",
+          titleLabel: "Title",
+          subtitleLabel: "Subtitle"
+        },
+        background: {
+          separator: "Background",
+          colorLabel: "Color"
+        }
+      },
+      save: "Save"
+    }
   },
   create: {
-    title: "Nuevo servicio",
+    title: "New service",
     subtitle:
       "Rellena todos los datos de tus servicios y muestra tu trabajo en tu web.",
     form: {

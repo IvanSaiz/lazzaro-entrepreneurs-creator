@@ -6,7 +6,25 @@ export default {
     createNewBtn: "Nuevo Servicio",
     search: "Buscar Servicios",
     see: "Ver servicios",
-    details: "Ver calendario"
+    details: "Ver calendario",
+    modal: {
+      header: {
+        title: "Diseño",
+        section: "Servicios"
+      },
+      sections: {
+        title: {
+          separator: "Título",
+          titleLabel: "Título",
+          subtitleLabel: "Subtítulo"
+        },
+        background: {
+          separator: "Fondo",
+          colorLabel: "Color"
+        }
+      },
+      save: "Guardar"
+    }
   },
   create: {
     title: "Nuevo servicio",
