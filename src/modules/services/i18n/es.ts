@@ -4,9 +4,7 @@ export default {
     subtitle:
       "Rellena todos los datos de tus servicios y muestra tu trabajo en tu web.",
     createNewBtn: "Nuevo Servicio",
-    search: {
-      title: "Servicios"
-    },
+    search: "Buscar Servicios",
     see: "Ver servicios",
     details: "Ver calendario"
   },
@@ -34,9 +32,9 @@ export default {
       label: "Link a Calendy / Google Calendar"
     },
     notifications: {
-      createdEvent: "Servicio creado con éxito",
-      editedEvent: "Servicio actualizado con éxito",
-      removedEvent: "Servicio eliminado con éxito"
+      created: "Servicio creado con éxito",
+      edited: "Servicio actualizado con éxito",
+      removed: "Servicio eliminado con éxito"
     },
     highlight: {
       label: "Destacar evento",
@@ -45,6 +43,7 @@ export default {
     actions: {
       add: "Añadir servicio",
       save: "Guardar servicios",
+      delete: "Eliminar servicio",
       cancel: "Cancelar"
     }
   }

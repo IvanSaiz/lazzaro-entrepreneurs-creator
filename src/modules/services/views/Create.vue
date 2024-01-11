@@ -81,8 +81,9 @@
               :validation-name="$t('services.create.bookings.label')"
             )
       .services-create__actions
+        lz-button(v-if="!isNewService" type="tertiary" @click="confirmDeleteService") {{ $t('services.create.actions.delete') }}
         lz-button(type="secondary" @click="onCancel") {{ $t('services.create.actions.cancel') }}
-        lz-button(type="primary") {{ this.isNewEvent ? $t('services.create.actions.add') : $t('services.create.actions.save') }}
+        lz-button(type="primary") {{ isNewService ? $t('services.create.actions.add') : $t('services.create.actions.save') }}
 
 </template>
 
@@ -189,6 +190,7 @@
     }
 
     async onSave(data: FormSubmitData) {
+      if (this.showDeleteModal) return;
       const image = Array.isArray(data.image_url)
         ? data.image_url[0].base64
         : data.image_url;
@@ -203,18 +205,18 @@
       else this.updateService(body);
     }
 
-    confirmDeleteEvent() {
+    confirmDeleteService() {
       this.showDeleteModal = true;
     }
 
-    async deleteService(serviceId: string) {
+    async deleteService() {
       try {
-        await apiServices.delete(serviceId);
-
+        await apiServices.delete(this.serviceId);
         this.$notify({
           type: "success",
           text: this.$tc("services.create.notifications.removed")
         });
+        this.$router.push({ name: "servicesRead" });
       } catch (error) {
         this.$notify({
           type: "error",

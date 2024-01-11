@@ -9,15 +9,16 @@
         arrow-up-right-icon
     p {{ $t('services.read.subtitle') }}
   .content
-    iframe.calendar(:src="selectedService.calendly_url" )
     .search
-      h2 {{ $t('services.read.search.title') }}
-      SearchEvent(@search="handleSearch")
+      SearchEvent(:placeholder="$t('services.read.search')" @search="handleSearch")
       ul.results
-        li(v-for="service in services" :key="service.id" @click="selectService(service)")
+        li(v-for="service in searchResults" :key="service.id")
           p.name {{ service.service_name }}
-          button.edit-button(@click="edit(service.id)")
-            edit-icon
+          .buttons
+            button.delete-button(@click="deleteService(service.id)")
+              trash-icon
+            button.edit-button(@click="edit(service.id)")
+              edit-icon
   .create-btn
     lz-button(
       type="primary"
@@ -62,17 +63,6 @@
       }
     }
 
-    showDayModal = false;
-    searchText = "";
-
-    showSearchModal = false;
-    openModal() {
-      this.showDayModal = true;
-    }
-    closeModal() {
-      this.showDayModal = false;
-    }
-
     create() {
       this.$router.push({ name: "servicesCreate" });
     }
@@ -82,18 +72,36 @@
         params: { serviceId }
       });
     }
+    async deleteService(serviceId: string) {
+      await apiServices
+        .delete(serviceId)
+        .then(() => {
+          this.loadServices();
+          this.$notify({
+            type: "success",
+            text: this.$tc("services.create.notifications.delete")
+          });
+        })
+        .catch(() => {
+          this.$notify({
+            type: "error",
+            text: this.$tc("common.error.generic")
+          });
+        });
+    }
 
     handleToggle() {
       // HANDLE TOGGLE
     }
 
-    handleSearch(text: string) {
-      // HANDLE SEARCH
+    query = "";
+    get searchResults() {
+      return this.services.filter(service =>
+        service.service_name.toLowerCase().includes(this.query.toLowerCase())
+      );
     }
-
-    selectedService = {} as Service;
-    selectService(service: Service) {
-      this.selectedService = service;
+    handleSearch(text: string) {
+      this.query = text;
     }
   }
 </script>
@@ -130,23 +138,25 @@
           border-radius: 10px;
           background-color: $color-black-06;
           align-items: center;
-          cursor: pointer;
           margin-bottom: 15px;
 
           .name {
             font-size: 14px;
             font-weight: bold;
             user-select: none;
+            cursor: pointer;
           }
 
-          .edit-button {
+          .buttons {
             margin-left: auto;
             display: flex;
-            align-items: center;
-            gap: 10px;
-            border: none;
-            background-color: transparent;
-            cursor: pointer;
+            button {
+              display: flex;
+              align-items: center;
+              border: none;
+              background-color: transparent;
+              cursor: pointer;
+            }
           }
         }
       }
@@ -158,13 +168,6 @@
 
     .content {
       margin-top: 40px;
-      display: grid;
-      grid-template-columns: 3fr 2fr;
-
-      .calendar {
-        min-width: 100%;
-        min-height: 700px;
-      }
     }
   }
 </style>
