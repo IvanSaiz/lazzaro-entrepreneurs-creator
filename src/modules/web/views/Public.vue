@@ -782,7 +782,7 @@
     public url!: string;
 
     @auth.State("isActive")
-    public isActive!: string;
+    public isActive!: boolean;
 
     handleChooseTemplate(e: Event & { target: HTMLInputElement }) {
       if (isObjectEmpty(this.prevForm)) return;
@@ -878,6 +878,7 @@
         .then(data => {
           this.publicWebForm.chosenTemplateId = data?.templateId;
           this.publicWebForm.url = this.url;
+          this.publicWebForm.active = this.isActive;
 
           // Style section
           this.publicWebForm.styleLogo = [
