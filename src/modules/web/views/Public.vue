@@ -110,7 +110,6 @@
             :help="$t('web.public.homepageForm.form.imageHelper')"
           )
           .form-section
-            .section-row
               formulate-input(
                 type="text"
                 name="homepageTitle"
@@ -123,7 +122,6 @@
                 :label="$t('auth.onboarding.stepStyle.form.textColour')"
                 value="#1081F2"
                 )
-            .section-row
               formulate-input(
                 type="text"
                 name="homepageSubtitle"
@@ -136,22 +134,28 @@
                 :label="$t('auth.onboarding.stepStyle.form.textColour')"
                 value="#1081F2"
                 )
-            .form-section__cta
-              formulate-input(
-                type="group"
-                name="homepageButton"
-              )       
+              .button-row
                 formulate-input(
                   type="text"
-                  :name="`text`"
+                  name="homepageFirstButtonText"
                   :label="$t(`web.public.homepageForm.form.buttons.1`)"
                 )
                 formulate-input(
                   type="text"
-                  :name="`link`"
+                  name="homepageFirstButtonLink"
                   :label="$t(`web.public.homepageForm.form.links.1`)"
                 )
-
+              .button-row
+                formulate-input(
+                  type="text"
+                  name="homepageSecondButtonText"
+                  :label="$t(`web.public.homepageForm.form.buttons.2`)"
+                )
+                formulate-input(
+                  type="text"
+                  name="homepageSecondButtonLink"
+                  :label="$t(`web.public.homepageForm.form.links.2`)"
+                )
     section.public-whoWeAre
       .public-whoWeAre__header
         h2.h2--dash {{ $t('web.public.whoWeAreForm.title') }}
@@ -195,7 +199,7 @@
             :label="$t('web.public.whoWeAreForm.form.description')"
             v-model="publicWebForm.aboutUsDescription"
             )
-    section.public-whoWeAre
+    section.public-features
       .public-whoWeAre__header
         h3.h3--dash {{ $t('web.public.whoWeAreForm.features.title') }}
         formulate-input.public-whoWeAre__content(
@@ -206,18 +210,18 @@
         )
           formulate-input.text-item(
             type="image"
-            :name="`url`"
+            name="url"
             :label="$t(`web.public.whoWeAreForm.features.icon.${index + 1}`)"
             :help="$t('web.public.whoWeAreForm.features.icon.help')"
           )
           formulate-input.text-item(
             type="text"
-            :name="`title`"
+            name="title"
             :label="$t(`web.public.whoWeAreForm.features.titles.${index + 1}`)"
           )
           formulate-input.text-item(
             type="text"
-            :name="`description`"
+            name="description"
             :label="$t(`web.public.whoWeAreForm.features.descriptions.${index+1}`)"
           )
 
@@ -234,7 +238,6 @@
           name="aboutUsReadMoreButtonLink"
           :label="$t('web.public.whoWeAreForm.features.link')"
         )
-
     section.public-whyUs
       .public-whyUs__header
         h2.h2--dash {{ $t('web.public.whyChooseUsForm.title') }}
@@ -274,16 +277,14 @@
           )
             formulate-input.text-item(
               type="text"
-              :name="`title`"
+              name="title"
               :label="$t(`web.public.whyChooseUsForm.titles.${index + 1}`)"
             )
             formulate-input.text-item(
               type="text"
-              :name="`description`"
+              name="description"
               :label="$t(`web.public.whyChooseUsForm.descriptions.${index + 1}`)"
             )
-
-
     section.public-bookings
       .public-bookings__header
         h2.h2--dash {{ $t('web.public.bookingsForm.title') }}
@@ -334,7 +335,6 @@
                 name="bookingsButtonUrl"
                 :label="$t('web.public.bookingsForm.link')"
               )
-
     section.public-reviews
       .public-reviews__header
         h2.h2--dash {{ $t('web.public.reviewsForm.title') }}
@@ -373,7 +373,6 @@
           name="reviewsUrl"
           :label="$t('web.public.reviewsForm.link')"
         )
-
     section.public-impact
       .public-impact__header
         h2.h2--dash {{ $t('web.public.impactForm.title') }}
@@ -400,7 +399,6 @@
               :name= "`ammount`"
               :label="$t(`web.public.impactForm.amount.${index+1}`)"
             )
-
     section.public-team
       .public-team__header
         h2.h2--dash {{ $t('web.public.teamForm.title') }}
@@ -486,7 +484,6 @@
             template(#linkedin="{ row: { linkedin } }") {{ linkedin }}
             template(#delete="{ row }")
               XIcon(@click="removeTeamMember(row)")
-
     section.public-contact
       .public-contact__header
         h2.h2--dash {{ $t('web.public.contactForm.title') }}
@@ -502,7 +499,6 @@
             name="contactSubTitle"
             :label="$t('web.public.contactForm.form.subtitle')"
           )
-
     section.public-footer
       .public-footer__header
         h2.h2--dash {{$t('web.public.footer.title')}}
@@ -569,7 +565,6 @@
             :add-label="$t('web.public.footer.termsForm.add')"
             :multiple="true"
           )
-
 
   .public-buttons
     lz-button(
@@ -647,10 +642,10 @@
       homepageTitleColor: "",
       homepageSubtitle: "",
       homepageSubtitleColor: "",
-      homepageButton1Text: "",
-      homepageButton1Link: "",
-      homepageButton2Text: "",
-      homepageButton2Link: "",
+      homepageFirstButtonText: "",
+      homepageFirstButtonLink: "",
+      homepageSecondButtonText: "",
+      homepageSecondButtonLink: "",
       homepageDesignLayout: "left",
       homepageDesignBackgroundColor: "#EFEFEF",
 
@@ -678,7 +673,7 @@
             title: "",
             url: "",
             description: ""
-          } as SubTitle)
+          } as Subtitle)
       ),
       whyChooseUsDesignLayout: "right",
       whyChooseUsDesignBackgroundColor: "#F0F0F0",
@@ -836,6 +831,7 @@
 
         this.onModalClose();
       } catch (err) {
+        console.error(err);
         this.$notify({
           type: "error",
           text: this.$tc("web.public.notify.error")
@@ -911,13 +907,13 @@
             data.properties?.homePage?.titleColor;
           this.publicWebForm.homepageSubtitleColor =
             data.properties?.homePage?.subTitleColor;
-          this.publicWebForm.homepageButton1Link =
+          this.publicWebForm.homepageFirstButtonLink =
             data.properties?.homePage?.firstButtonLink;
-          this.publicWebForm.homepageButton1Text =
+          this.publicWebForm.homepageFirstButtonText =
             data.properties?.homePage?.firstButtonText;
-          this.publicWebForm.homepageButton2Link =
+          this.publicWebForm.homepageSecondButtonLink =
             data.properties?.homePage?.secondButtonLink;
-          this.publicWebForm.homepageButton2Text =
+          this.publicWebForm.homepageSecondButtonText =
             data.properties?.homePage?.secondButtonText;
 
           // AboutUs section
@@ -957,7 +953,7 @@
           this.publicWebForm.whyChooseUsDescription =
             data.properties?.whyChooseUs?.description;
           this.publicWebForm.whyChooseUsSubTitles =
-            data.properties?.whyChooseUs?.subTitles?.map(subtitle => ({
+            data.properties?.whyChooseUs?.subtitles?.map(subtitle => ({
               id: subtitle.id,
               title: subtitle.title,
               description: subtitle.description
@@ -1124,36 +1120,21 @@
       const aboutUsImgUrlTrimmed =
         this.publicWebForm.aboutUsImgUrl &&
         (await this.parseImageUrl(this.publicWebForm.aboutUsImgUrl));
-      // const aboutUsFeature1UrlTrimmed = this.publicWebForm.aboutUsFeature1Url && await this.parseImageUrl(
-      //   this.publicWebForm.aboutUsFeature1Url
-      // );
-      // const aboutUsFeature2UrlTrimmed = this.publicWebForm.aboutUsFeature2Url && await this.parseImageUrl(
-      //   this.publicWebForm.aboutUsFeature2Url
-      // );
-      // const aboutUsFeature3UrlTrimmed = this.publicWebForm.aboutUsFeature3Url && await this.parseImageUrl(
-      //   this.publicWebForm.aboutUsFeature3Url
-      // );
-      // const aboutUsFeature4UrlTrimmed = this.publicWebForm.aboutUsFeature4Url && await this.parseImageUrl(
-      //   this.publicWebForm.aboutUsFeature4Url
-      // );
+
+      for (const icon of this.publicWebForm.aboutUsFeaturesIcons) {
+        icon.url = await this.parseImageUrl(icon.url);
+      }
+
       const whyChooseUsImgUrlTrimmed =
         this.publicWebForm.whyChooseUsImgUrl &&
         (await this.parseImageUrl(this.publicWebForm.whyChooseUsImgUrl));
       const bookingsImgUrlTrimmed =
         this.publicWebForm.bookingsImgUrl &&
         (await this.parseImageUrl(this.publicWebForm.bookingsImgUrl));
-      // const impactData1UrlTrimmed = this.publicWebForm.impactData1Url && await this.parseImageUrl(
-      //   this.publicWebForm.impactData1Url
-      // );
-      // const impactData2UrlTrimmed = this.publicWebForm.impactData2Url && await this.parseImageUrl(
-      //   this.publicWebForm.impactData2Url
-      // );
-      // const impactData3UrlTrimmed = this.publicWebForm.impactData3Url && await this.parseImageUrl(
-      //   this.publicWebForm.impactData3Url
-      // );
-      // const impactData4UrlTrimmed = this.publicWebForm.impactData4Url && await this.parseImageUrl(
-      //   this.publicWebForm.impactData4Url
-      // );
+
+      for (const impact of this.publicWebForm.impactData) {
+        impact.url = [{ url: await this.parseImageUrl(impact.url) }];
+      }
 
       const hasTemplateChanged =
         this.publicWebForm.chosenTemplateId !== this.templateId;
@@ -1203,10 +1184,10 @@
             moreImages: this.publicWebForm.homepageMoreImages,
             titleColor: this.publicWebForm.homepageTitleColor,
             subTitleColor: this.publicWebForm.homepageSubtitleColor,
-            firstButtonLink: this.publicWebForm.homepageButton1Link,
-            firstButtonText: this.publicWebForm.homepageButton1Text,
-            secondButtonLink: this.publicWebForm.homepageButton2Link,
-            secondButtonText: this.publicWebForm.homepageButton2Text
+            firstButtonLink: this.publicWebForm.homepageFirstButtonLink,
+            firstButtonText: this.publicWebForm.homepageFirstButtonText,
+            secondButtonLink: this.publicWebForm.homepageSecondButtonLink,
+            secondButtonText: this.publicWebForm.homepageSecondButtonText
           },
 
           aboutUs: {
@@ -1329,7 +1310,9 @@
       };
 
       try {
+        console.log("Updating website", postData);
         await apiWebsite.section.put(postData);
+        console.log("Publishing website");
         this.handlePublishWebsite(this.publicWebForm.active, this.websiteId);
         this.$notify({
           type: "success",
@@ -1339,6 +1322,7 @@
         // await this.updateFeatures();
         this.prevForm = cloneDeep(this.publicWebForm);
       } catch (error) {
+        console.error(error);
         this.$notify({
           type: "error",
           text: this.$tc("web.public.notify.error")
@@ -1573,15 +1557,12 @@
         }
 
         .form__row {
+          display: grid;
+          grid-template-columns: min-content auto;
           gap: 10px;
 
           > :first-child {
             min-width: 140px;
-
-            .formulate-input-element {
-              height: 148px;
-              width: 140px;
-            }
           }
         }
 
@@ -1600,6 +1581,16 @@
             > :last-child {
               flex-grow: 1;
               margin-left: 18px;
+            }
+          }
+
+          .button-row {
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+
+            .formulate-input {
+              flex-grow: 1;
             }
           }
 

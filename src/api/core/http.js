@@ -47,7 +47,7 @@ class HttpClient {
    * axios instance.
    * @returns {Promise}
    */
-  get(url, data = { noAuth: "false" }, config = {}) {
+  get(url, data, config = {}) {
     return this.request("get", url, data, config);
   }
 

@@ -1,7 +1,8 @@
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const reader = new FileReader();
 
-const toBase64 = (file: Blob): Promise<string> => {
+const toBase64 = (file: File | { url: string }): Promise<string> => {
+  if (!(file instanceof File)) return Promise.resolve(file?.url ?? "");
   reader.readAsDataURL(file);
   return new Promise((resolve, reject) => {
     reader.onload = () => {

@@ -306,7 +306,7 @@ interface AboutUs {
 }
 
 interface Features {
-  icons: SubTitle[];
+  icons: Subtitle[];
   buttons: Button[];
 }
 
@@ -316,7 +316,7 @@ interface Button {
   text: string;
 }
 
-interface SubTitle {
+interface Subtitle {
   id: number;
   url?: string;
   title: string;
@@ -432,7 +432,7 @@ interface WhyChooseUs {
   title: string;
   design: BookingsDesign;
   imgUrl: string;
-  subTitles: SubTitle[];
+  subtitles: Subtitle[];
   titleColor: string;
   description: string;
 }
