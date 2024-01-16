@@ -589,9 +589,8 @@
   import LzEditorInput from "@/components/EditorInput.vue";
   import LzModal from "@/components/Modal.vue";
   import { DotsIcon } from "@/components";
-  import { checkSubscriptionPlan } from "@/utils";
   import { parseFiles } from "@/utils/parseFile";
-  import { apiBrand, apiWebsite } from "../api";
+  import { apiWebsite } from "../api";
   import { ChooseTemplate } from "../components";
 
   const auth = namespace("auth");

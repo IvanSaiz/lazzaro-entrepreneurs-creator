@@ -1,6 +1,5 @@
 <template lang="pug">
 section
-  lz-level-up-button
   .grid-container
     transition(name="fade" mode="out-in")
       router-view

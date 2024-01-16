@@ -43,8 +43,8 @@
     components: { LzButton, VCalendar, LzModal, SearchEvent, DesignModal }
   })
   export default class Read extends Vue {
-    @auth.State("organizationId")
-    private ongId!: string;
+    @auth.State("id")
+    private memberId!: string;
 
     public services = [] as Service[];
 
@@ -53,14 +53,16 @@
     }
 
     async loadServices() {
-      if (!this.ongId) return;
+      if (!this.memberId) return;
 
-      const services = await apiServices.getAllByOngId(this.ongId).catch(() => {
-        this.$notify({
-          type: "error",
-          text: this.$tc("common.error.generic")
+      const services = await apiServices
+        .getAllByOngId(this.memberId)
+        .catch(() => {
+          this.$notify({
+            type: "error",
+            text: this.$tc("common.error.generic")
+          });
         });
-      });
 
       if (services) {
         this.services = services;

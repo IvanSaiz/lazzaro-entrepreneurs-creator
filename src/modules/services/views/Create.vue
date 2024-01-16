@@ -114,7 +114,7 @@
     isNewService = true;
 
     form: Form = {
-      organization_id: "",
+      member_id: "",
       service_name: "",
       description: "",
       price: "",
@@ -123,8 +123,8 @@
       image_url: ""
     };
 
-    @auth.State("organizationId")
-    public ongId!: string;
+    @auth.State("id")
+    public memberId!: string;
 
     async loadServiceData(serviceId: string) {
       const service = await apiServices.getById(serviceId);
@@ -198,7 +198,7 @@
       const body: ServicePostDTO = {
         ...data,
         image_url: image,
-        organization_id: this.ongId
+        member_id: this.memberId
       };
 
       if (this.isNewService) this.createService(body);

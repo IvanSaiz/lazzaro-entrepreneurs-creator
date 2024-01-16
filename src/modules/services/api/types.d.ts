@@ -4,7 +4,7 @@ declare namespace Calendly {
 
 declare type Service = {
   id: string;
-  organization_id: string;
+  member_id: string;
   service_name: string;
   description: string;
   image_url: string;
@@ -14,7 +14,7 @@ declare type Service = {
 };
 
 declare type ServicePostDTO = {
-  organization_id: string;
+  member_id: string;
   service_name: string;
   description: string;
   image_url: string;
@@ -25,7 +25,7 @@ declare type ServicePostDTO = {
 
 declare type Reservation = {
   id: string;
-  organization_id: string;
+  member_id: string;
   service_id: string;
   reservation_date: Date;
 };

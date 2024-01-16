@@ -113,7 +113,7 @@
     status: "enabled" | "disabled";
     imageUrlToConvert: { url: string }[];
     imagesToConvert: { url: string }[];
-    organizationId: string;
+    memberId: string;
     imageUrl: string;
     images: string[];
   };
@@ -126,7 +126,7 @@
     isPremiumSubscription = false;
 
     proyectForm: TProjectForm = {
-      organizationId: "",
+      memberId: "",
       title: "",
       description: "",
       status: "disabled",
@@ -138,8 +138,8 @@
       images: []
     };
 
-    @auth.State("organizationId")
-    public organizationId!: string;
+    @auth.State("id")
+    public memberId!: string;
 
     @Prop()
     projectId!: string;
@@ -167,9 +167,7 @@
           date: payload.date,
           description: payload.description,
           image_url: payload.imageUrl,
-          // Check this relation, memberId comes from auth store, which gets the id from member table
-          // it should be organization_id, but organizations are not being created yet
-          organization_id: payload.organizationId,
+          member_id: this.memberId,
           skills: payload.skills,
           status: payload.status,
           images: payload.images,
@@ -195,7 +193,7 @@
           date: payload.date,
           description: payload.description,
           image_url: payload.imageUrl,
-          organization_id: payload.organizationId,
+          member_id: this.memberId,
           skills: payload.skills,
           status: payload.status,
           images: payload.images,
@@ -218,7 +216,7 @@
     // Move this to actions in projects view
     async deleteProject() {
       try {
-        await apiProjects.deleteProject(this.organizationId, this.projectId);
+        await apiProjects.deleteProject(this.projectId);
 
         this.$notify({
           type: "success",
@@ -260,7 +258,7 @@
         ...this.proyectForm,
         imageUrl: imageUrlToBase64[0],
         images: parsedImages,
-        organizationId: this.organizationId
+        memberId: this.memberId
       };
 
       if (isNewProject) await this.createProject(body);
@@ -283,7 +281,7 @@
 
       this.loaded = true;
 
-      this.proyectForm.organizationId = this.organizationId;
+      this.proyectForm.memberId = this.memberId;
     }
   }
 </script>

@@ -49,8 +49,8 @@
 
   @Component({ components: { LzButton, LzTable, DesignModal } })
   export default class Read extends Vue {
-    @auth.State("organizationId")
-    public ongId!: string;
+    @auth.State("id")
+    public memberId!: string;
     projects: {
       id: string;
       title: string;
@@ -64,7 +64,7 @@
     ];
 
     mounted() {
-      apiProjects.getProjects(this.ongId).then(projects => {
+      apiProjects.getProjects(this.memberId).then(projects => {
         this.projects = projects.map(project => ({
           id: project.id,
           title: project.title,
