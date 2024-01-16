@@ -434,7 +434,7 @@
       .public-team__header
         h3.h3--dash {{ $t('web.public.teamForm.teamMembers.title') }}
         h4 {{ $t('web.public.teamForm.teamMembers.subtitle') }}
-      FormulateForm.public-team__form(
+      formulate-form.public-team__form(
         v-model="teamForm"
         @submit="onTeamSubmit"
         :keep-model-data="true"
@@ -848,9 +848,10 @@
 
     onTeamSubmit() {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const teamArr = this.publicWebForm.teamMembers as any[];
 
-      teamArr.push({
+      console.log("onTeamSubmit", this.teamForm);
+
+      this.publicWebForm.teamMembers.push({
         id: this.publicWebForm.teamMembers.length + 1,
         picture: this.teamForm.picture,
         name: this.teamForm.name,
@@ -928,14 +929,22 @@
             data.properties?.aboutUs?.subTitleColor;
           this.publicWebForm.aboutUsDescription =
             data.properties?.aboutUs?.description;
-          this.publicWebForm.aboutUsFeaturesIcons = data.properties?.aboutUs?.features?.icons?.map(
-            icon => ({
+          this.publicWebForm.aboutUsFeaturesIcons =
+            data.properties?.aboutUs?.features?.icons?.map(icon => ({
               id: icon.id,
               url: [{ url: icon.url }],
               title: icon.title,
               description: icon.description
-            })
-          );
+            })) ||
+            new Array(4).fill(0).map(
+              (_, i) =>
+                ({
+                  id: i,
+                  url: "",
+                  title: "",
+                  description: ""
+                } as Feature)
+            );
 
           (this.publicWebForm.aboutUsReadMoreButtonText =
             data.properties?.aboutUs?.features?.buttons[0]?.text),
@@ -956,7 +965,15 @@
               id: subtitle.id,
               title: subtitle.title,
               description: subtitle.description
-            })) ?? [];
+            })) ??
+            new Array(4).fill(0).map(
+              (_, i) =>
+                ({
+                  id: i,
+                  title: "",
+                  description: ""
+                } as Subtitle)
+            );
 
           // Bookings section
           this.publicWebForm.bookingsImgUrl = [
@@ -1015,15 +1032,14 @@
           this.publicWebForm.teamTitleColor = data.properties?.team?.titleColor;
           this.publicWebForm.teamSubtitleColor =
             data.properties?.team?.subtitleColor;
-          this.publicWebForm.teamMembers = data.properties?.team?.members?.map(
-            member => ({
+          this.publicWebForm.teamMembers =
+            data.properties?.team?.members?.map(member => ({
               id: member.id,
               picture: [{ url: member.picture }],
               name: member.name,
               linkedin: member.linkedin,
               position: member.position
-            })
-          );
+            })) ?? [];
           this.publicWebForm.teamDesignBackgroundColor =
             data.properties?.team?.design.backgroundColor;
 
