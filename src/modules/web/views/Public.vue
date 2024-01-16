@@ -824,7 +824,6 @@
           };
 
           this.onModalOpen();
-
           await apiWebsite.website.unpublish(websiteId);
         }
 
@@ -935,8 +934,9 @@
               url: [{ url: icon.url }],
               title: icon.title,
               description: icon.description
-            })) ||
-            new Array(4).fill(0).map(
+            })) ??
+            Array.from(
+              { length: 4 },
               (_, i) =>
                 ({
                   id: i,
