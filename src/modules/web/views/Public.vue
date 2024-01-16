@@ -803,7 +803,7 @@
     async handlePublishWebsite(active: boolean, websiteId: string) {
       try {
         //TODO: update the member to be active
-        // if (active === this.isActive) return;
+        if (active === this.isActive) return;
 
         if (active) {
           this.modalText = {
@@ -1327,12 +1327,12 @@
       try {
         console.log("Updating website", postData);
         await apiWebsite.section.put(postData);
-        console.log("Publishing website");
-        this.handlePublishWebsite(this.publicWebForm.active, this.websiteId);
         this.$notify({
           type: "success",
           text: this.$tc("web.public.notify.success")
         });
+        console.log("Publishing website");
+        this.handlePublishWebsite(this.publicWebForm.active, this.websiteId);
 
         // await this.updateFeatures();
         this.prevForm = cloneDeep(this.publicWebForm);
