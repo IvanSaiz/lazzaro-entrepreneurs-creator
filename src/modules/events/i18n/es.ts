@@ -5,6 +5,25 @@ export default {
     createNewBtn: "Nuevo evento",
     search: {
       placeholder: "Buscar evento"
+    },
+    notifications: {
+      deleted: "Evento eliminado con éxito"
+    },
+    design: {
+      button: "Diseño",
+      modal: {
+        title: "Diseño",
+        section: "Eventos",
+        form: {
+          title: "Titulo",
+          labels: {
+            title: "Titulo",
+            subtitle: "Subtitulo",
+            color: "Color"
+          },
+          save: "Guardar"
+        }
+      }
     }
   },
   create: {

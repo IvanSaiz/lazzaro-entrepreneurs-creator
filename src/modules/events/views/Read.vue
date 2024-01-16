@@ -3,6 +3,7 @@
   header
     h1 {{ $t('events.read.title') }}
     p {{ $t('events.read.subtitle') }}
+  DesignModal(section="events")
   .content 
     .search
       SearchEvent(:placeholder="$t('events.read.search.placeholder')" @search="handleSearch")
@@ -29,9 +30,10 @@
   import { namespace } from "vuex-class";
   import { api as Events } from "../api";
   import { ROUTES } from "../router";
+  import DesignModal from "../components/DesignModal.vue";
   const auth = namespace("auth");
 
-  @Component({ components: { LzButton, SearchEvent } })
+  @Component({ components: { LzButton, SearchEvent, DesignModal } })
   export default class Read extends Vue {
     @auth.State("id")
     public memberId!: string;
@@ -78,7 +80,7 @@
         .then(() => {
           this.$notify({
             type: "success",
-            text: this.$tc("common.success.delete")
+            text: this.$tc("events.read.notifications.removed")
           });
           this.loadEvents();
         })

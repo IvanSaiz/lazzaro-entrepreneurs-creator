@@ -56,7 +56,7 @@
       if (!this.memberId) return;
 
       const services = await apiServices
-        .getAllByOngId(this.memberId)
+        .getAllByMemberId(this.memberId)
         .catch(() => {
           this.$notify({
             type: "error",
@@ -85,7 +85,7 @@
           this.loadServices();
           this.$notify({
             type: "success",
-            text: this.$tc("services.create.notifications.delete")
+            text: this.$tc("services.create.notifications.removed")
           });
         })
         .catch(() => {

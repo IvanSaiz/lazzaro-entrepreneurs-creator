@@ -2,8 +2,8 @@
 import http from "@/api/core/http";
 
 export default {
-  getAllByOngId: function(ongId: string): Promise<Service[]> {
-    return http.get(`service/org/${ongId}`, { noAuth: false });
+  getAllByMemberId: function(memberId: string): Promise<Service[]> {
+    return http.get(`service/member/${memberId}`, { noAuth: false });
   },
   getById: function(serviceId: string): Promise<Service> {
     return http.get(`service/${serviceId}`, { noAuth: false });
