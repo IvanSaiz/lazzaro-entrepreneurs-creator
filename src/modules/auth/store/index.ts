@@ -1,6 +1,5 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import keysToCamel from "@/utils/keysToCamel";
 import store from "@/store";
 
 Vue.use(Vuex);
@@ -39,7 +38,7 @@ class Auth extends VuexModule {
   dni = null;
   updatedAt = null;
   createdAt = null;
-  tools: string[] | null = null;
+  tools: string[] = [];
   imgUrl = null;
   styleId = null;
   stripeId = null;
@@ -61,18 +60,7 @@ class Auth extends VuexModule {
   nif = null;
   pk = null;
   type = null;
-  features = {
-    causes: false,
-    courses: false,
-    donations: false,
-    events: false,
-    impact: false,
-    market: false,
-    partners: false,
-    volunteers: false
-  };
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  ongConfiguration: any = {
+  ongConfiguration = {
     currency: this.currency,
     currency_symbol: this.currencySymbol
   };
@@ -91,14 +79,6 @@ class Auth extends VuexModule {
   public setData(payload: any): void {
     Object.keys(payload).forEach(v => {
       this[v] = payload[v];
-    });
-  }
-
-  @Mutation
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public setFeatures(payload: any): void {
-    Object.keys(payload).forEach(v => {
-      this.features[v] = payload[v];
     });
   }
 
@@ -152,61 +132,7 @@ class Auth extends VuexModule {
   @Action
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public updateData(payload: any): void {
-    this.context.commit("setData", keysToCamel(payload));
-  }
-
-  @Action
-  public async updateFeatures(): Promise<void> {
-    if (this.id) {
-      return await apiOngs.getAllPlatformConfig(this.id).then(
-        ({
-          data: {
-            features: {
-              causes,
-              courses,
-              donations,
-              events,
-              impact,
-              market,
-              partners,
-              volunteers
-            },
-            platformConfig: {
-              currency,
-              currency_symbol,
-              language,
-              url,
-              payment_method,
-              active,
-              powered_by_lazzaro,
-              template_id
-            }
-          }
-        }: // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        any) => {
-          this.context.commit("setFeatures", {
-            causes,
-            courses,
-            donations,
-            events,
-            impact,
-            market,
-            partners,
-            volunteers
-          });
-          this.context.commit("setOngConfig", {
-            currency,
-            currency_symbol,
-            language,
-            url,
-            payment_method,
-            active,
-            powered_by_lazzaro,
-            template_id
-          });
-        }
-      );
-    }
+    this.context.commit("setData", payload);
   }
 
   @Action
@@ -223,18 +149,16 @@ class Auth extends VuexModule {
   }
 
   @Action
-  public async getWebTemplateFeatures(): Promise<any> {
+  public async getWebTemplateFeatures() {
     if (this.id && this.section) {
       return await apiPlatform.get(this.section.websiteId, "web");
     }
   }
 
   @Action
-  public async refreshMemberData(): Promise<any> {
-    console.log(this.id);
+  public async refreshMemberData() {
     if (this.id) {
       return await apiOngs.getMember(this.id).then(data => {
-        console.log(data);
         this.context.commit("setData", data);
       });
     }

@@ -7,27 +7,26 @@ export const LZ_MODULES = {
     active: true,
     icon: "device-laptop-icon"
   },
-  // projects: {
-  //   moduleName: "projects",
-  //   label: "Proyectos",
-  //   active: true,
-  //   icon: "clipboard-list-icon",
-  //   features: ["causes"]
-  // },
-  // shop: {
-  //   moduleName: "shop",
-  //   label: "Tienda",
-  //   active: true,
-  //   icon: "building-store-icon",
-  //   features: ["market"]
-  // },
-  // calendar: {
-  //   moduleName: "calendar",
-  //   label: "Calendario",
-  //   active: true,
-  //   icon: "calendar-event-icon",
-  //   features: ["events", "courses"]
-  // },
+  projects: {
+    moduleName: "projects",
+    label: "Portfolio",
+    active: true,
+    icon: "clipboard-list-icon"
+  },
+  shop: {
+    moduleName: "shop",
+    label: "Tienda",
+    active: true,
+    icon: "building-store-icon",
+    features: ["market"]
+  },
+  events: {
+    moduleName: "events",
+    label: "Eventos",
+    active: true,
+    icon: "calendar-event-icon",
+    features: ["events"]
+  },
   // accounts: {
   //   moduleName: "accounts",
   //   label: "Cuentas",
@@ -41,18 +40,24 @@ export const LZ_MODULES = {
   //   icon: "users-icon",
   //   features: ["partners"]
   // },
-  // organization: {
-  //   moduleName: "organization",
-  //   label: "Organización",
-  //   active: true,
-  //   icon: "building-warehouse-icon"
-  // },
+  organization: {
+    moduleName: "organization",
+    label: "Organización",
+    active: true,
+    icon: "building-warehouse-icon"
+  },
+  services: {
+    moduleName: "services",
+    label: "Servicios",
+    active: true,
+    icon: "file-like-icon"
+  },
   consultant: {
     moduleName: "consultant",
     label: "Asesor",
     active: true,
     icon: "heart-icon"
-  },
+  }
   // NFTs: {
   //   moduleName: "NFTs",
   //   label: "NFTs",

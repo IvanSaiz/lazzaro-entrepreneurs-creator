@@ -88,9 +88,16 @@
           FormulateInput(
             type="text"
             name="dni"
-            :disabled="!hasORG"
+            :label-class="['required']"
             :label="$t('auth.signup.form.dni')"
-            :class="{ 'inactive-field': !hasORG }"
+          )
+
+        .form__row
+          FormulateInput(
+            type="text"
+            name="mobilePhone"
+            :label-class="['required']"
+            :label="$t('auth.signup.form.mobilePhone')"
           )
 
         .form__row
@@ -152,6 +159,7 @@
       firstName: "",
       lastName: "",
       companyName: "",
+      mobilePhone: "",
       cif: "",
       email: "",
       gender: "",
@@ -213,6 +221,7 @@
         firstName: this.signupForm.firstName,
         lastName: this.signupForm.lastName,
         companyName: this.signupForm.companyName,
+        mobilePhone: this.signupForm.mobilePhone,
         cif: this.signupForm.cif,
         email: this.signupForm.email,
         gender: this.signupForm.gender,
@@ -247,8 +256,8 @@
               error = "common.error.companyAlreadyExists";
               break;
             case "Validation error":
-            error = "common.error.validationError";
-            break;
+              error = "common.error.validationError";
+              break;
             default:
               error = "common.error.generic";
               break;
@@ -257,7 +266,6 @@
             type: "error",
             text: this.$tc(error)
           });
-          console.error(err);
         })
         .finally(() => {
           this.loadingPostMember = false;

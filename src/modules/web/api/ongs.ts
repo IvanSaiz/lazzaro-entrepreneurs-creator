@@ -1,14 +1,6 @@
 /* eslint-disable */
 import http from "@/api/core/http";
 
-const getAllPlatformConfig = function(
-  ongId: string
-): Promise<AllPlatformConfig> {
-  return http.get(`public/ongs/${ongId}/all-platform-config`, {
-    noAuth: false
-  });
-};
-
 const getMember = function(memberId: string): Promise<any> {
   return http.get(`members/${memberId}`, { noAuth: false });
 };
@@ -121,7 +113,6 @@ const unpublishWebsite = function({
 };
 
 export default {
-  getAllPlatformConfig,
   postPlatformConfig,
   postPlatformInit,
   postContact,

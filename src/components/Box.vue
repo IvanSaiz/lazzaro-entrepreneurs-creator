@@ -13,7 +13,7 @@
     transition: height $transition-default, width $transition-default;
 
     &.lz-box--tight {
-      border-radius: $border-radius-default / 2;
+      border-radius: calc($border-radius-default / 2);
       padding: 15px 25px;
     }
   }

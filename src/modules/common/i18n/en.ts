@@ -36,16 +36,17 @@ export default {
   },
   nav: {
     Web: "Web",
-    Proyectos: "Projects",
+    Portfolio: "Portfolio",
     Tienda: "Shop",
-    Calendario: "Calendar",
+    Eventos: "Events",
     Cuentas: "Accounts",
     Socios: "Partners",
     Organización: "Organization",
     Asesor: "consultant",
     NFTs: "NFTs",
     Datos: "Data",
-    Mejora: "Improve"
+    Mejora: "Improve",
+    Servicios: "Services"
   },
   logout: "Logout"
 };

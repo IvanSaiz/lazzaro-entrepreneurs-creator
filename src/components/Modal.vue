@@ -1,9 +1,9 @@
 <template lang="pug">
-  .lz-modal
-    lz-box
-      .lz-modal__close(@click="() => { this.$emit('close'); }")
-        x-icon
-      slot
+.lz-modal
+  lz-box
+    .lz-modal__close(@click="() => { this.$emit('close'); }")
+      x-icon
+    slot
 </template>
 
 <script lang="ts">

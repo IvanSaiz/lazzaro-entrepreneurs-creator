@@ -1,17 +1,17 @@
 /* eslint-disable */
 import http from "@/api/core/http";
 
-const getOrganization = function(ongId: string): Promise<any> {
-  return http.get(`public/ongs/${ongId}`, { noAuth: false });
+const getOrganization = function(memberId: string): Promise<any> {
+  return http.get(`members/${memberId}`, { noAuth: false });
 };
 
-const putOrganization = function(ongId: string, body: any): Promise<any> {
-  return http.put(`public/ongs/${ongId}`, body, { noAuth: false });
+const putOrganization = function(memberId: string, body: any): Promise<any> {
+  return http.put(`members/${memberId}`, body, { noAuth: false });
 };
 
 const getOrganizationPlan = function(
   memberId: string
-): Promise<TOrganizationPlan> {
+): Promise<OrganizationPlan> {
   return http.get(`/subscriptions/${memberId}/plan`, { noAuth: false });
 };
 
@@ -19,20 +19,20 @@ const getSubscriptionPlans = function(): Promise<SubscriptionPlans> {
   return http.get(`/subscriptions/plans`, { noAuth: false });
 };
 
-const postOrganizationPlan = function(ongId: string, body: any): Promise<any> {
-  return http.post(`private/ongs/${ongId}/subscription-plan`, body, {
+const postOrganizationPlan = function(memberId: string, body: any): Promise<any> {
+  return http.post(`private/members/${memberId}/subscription-plan`, body, {
     noAuth: false
   });
 };
 
-const getPlatformConfig = function(ongId: string): Promise<any> {
-  return http.get(`public/ongs/${ongId}/all-platform-config`, {
+const getPlatformConfig = function(memberId: string): Promise<any> {
+  return http.get(`public/members/${memberId}/all-platform-config`, {
     noAuth: false
   });
 };
 
-const postCurrencyUpdate = function(ongId: string, body: any): Promise<any> {
-  return http.post(`private/ongs/${ongId}/update-currency`, body, {
+const postCurrencyUpdate = function(memberId: string, body: any): Promise<any> {
+  return http.post(`private/members/${memberId}/update-currency`, body, {
     noAuth: false
   });
 };

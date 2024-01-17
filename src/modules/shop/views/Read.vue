@@ -203,7 +203,7 @@
     }
 
     onModalPull(): void {
-      console.log("ww");
+      // console.log("ww");
     }
 
     mounted() {

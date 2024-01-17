@@ -15,7 +15,6 @@ import { es } from "@braid/vue-formulate-i18n";
 // components
 import FormulateInputToggle from "@/components/Input/FormulateInputToggle.vue";
 import FormulateInputTextColor from "@/components/Input/FormulateInputTextColor.vue";
-import FormulateInputFile from "@/components/Input/FormulateInputFile.vue";
 import LzLevelUpButton from "@/components/LevelUpButton.vue";
 import Mixin from "./mixin";
 

@@ -1,7 +1,8 @@
 <template lang="pug">
-    .lz-editor-input
-      .formulate-input-label {{ label }}
-      vue-editor.lz-editor-input__quill(@input="onInput" :value="value")
+.lz-editor-input
+  .formulate-input-label {{ label }}
+  label.formulate-input-subtitle {{ subtitle }}
+  vue-editor.lz-editor-input__quill(@input="onInput" :value="value")
 </template>
 
 <script lang="ts">
@@ -14,13 +15,19 @@
      * Input label.
      */
     @Prop({ default: "" })
-    protected readonly label!: string;
+    readonly label!: string;
 
     /**
      * Input label.
      */
     @Prop({ default: "" })
-    protected readonly value!: string;
+    readonly value!: string;
+
+    /**
+     * Subtitle
+     */
+    @Prop({ default: "" })
+    readonly subtitle!: string;
 
     /**
      * Emits the input event.

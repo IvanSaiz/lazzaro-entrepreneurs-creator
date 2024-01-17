@@ -1,39 +1,36 @@
 <template lang="pug">
-  .lz-table
-
-    .lz-table__tools
-      .lz-table__download.lz-table-download(v-if="downloable")
-        download-excel(
-          :data="items"
-          name="lazzaro-download.xls"
-          :fields="downloadFields"
+.lz-table
+  .lz-table__tools
+    .lz-table__download.lz-table-download(v-if="downloable")
+      download-excel(
+        :data="items"
+        name="lazzaro-download.xls"
+        :fields="downloadFields"
+      )
+        download-icon.lz-table-download__icon
+        span.lz-table-download__text {{ $t('common.actions.downloadData') }}
+  h3(v-if="title") {{ title }}
+  
+  table.lz-table__table
+    thead
+      tr
+        th.lz-table__th.lz-table__th--head(
+          v-for="field in fields"
+          :class="'lz-table__th--' + field.id"
+          :key="field.id"
+        ) {{ field.label }}
+    tbody
+      tr.lz-table__tr.lz-table__tr--body(
+        v-for="(row, rowIdx) in pageItems"
+        :key="rowIdx"
+      )
+        td.lz-table__td(
+          :class="'lz-table__td--' + field.id"
+          v-for="(field, fieldIdx) in fields"
+          :key="fieldIdx"
         )
-          download-icon.lz-table-download__icon
-          span.lz-table-download__text {{ $t('common.actions.downloadData') }}
-
-    h3(v-if="title") {{ title }}
-    
-    table.lz-table__table
-      thead
-        tr
-          th.lz-table__th.lz-table__th--head(
-            v-for="field in fields"
-            :key="field.id"
-          ) {{ field.label }}
-
-      tbody
-        tr.lz-table__tr.lz-table__tr--body(
-          v-for="(row, rowIdx) in pageItems"
-          :key="rowIdx"
-        )
-          th.lz-table__th(
-            :class="'lz-table__th--' + field.id"
-            v-for="(field, fieldIdx) in fields"
-            :key="fieldIdx"
-          )
-            slot(:name="field.id", :item="row[fieldIdx]", :row="row") {{ row[fieldIdx] }}
-
-    <Pagination v-if="items?.length > 10"  @onPageChange="handlePageChange" :items="items" :currentPageNumber='currentPageNumber'/>
+          slot(:name="field.id", :item="row[fieldIdx]", :row="row") {{ row[fieldIdx] }}
+  <Pagination v-if="items?.length > 10"  @onPageChange="handlePageChange" :items="items" :currentPageNumber='currentPageNumber'/>
 </template>
 
 <script lang="ts">
@@ -124,10 +121,13 @@
       }
     }
 
-    &__tr {
-      &--body {
-        border-bottom: 1px solid $color-black-04;
-      }
+    &__td {
+      color: $color-black-01;
+      font-size: 16px;
+      line-height: 1.25;
+      vertical-align: middle;
+      padding: 12px 24px;
+      border-bottom: 1px solid $color-black-04;
     }
 
     &__tools {

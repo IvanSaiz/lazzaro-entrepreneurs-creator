@@ -126,7 +126,7 @@
   import LzConfirm from "@/components/Confirm.vue";
   import { namespace } from "vuex-class";
   import { apiShop } from "../api";
-  import { parseFile } from "@/utils/parseFile";
+  import { parseFiles } from "@/utils/parseFile";
   import LzEditorInput from "@/components/EditorInput.vue";
 
   const auth = namespace("auth");
@@ -192,11 +192,11 @@
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     async onCreateSubmit(e: any) {
-      const imageUrlToBase64 = await parseFile(
+      const imageUrlToBase64 = await parseFiles(
         this.productForm.imageUrlToConvert
       );
 
-      const images: any[] = await parseFile(this.productForm.imagesToConvert);
+      const images: any[] = await parseFiles(this.productForm.imagesToConvert);
 
       const body = {
         ...this.productForm,

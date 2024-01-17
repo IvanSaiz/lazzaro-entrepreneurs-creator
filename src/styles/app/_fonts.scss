@@ -1,20 +1,22 @@
-html, body, * {
+html,
+body,
+* {
   color: $color-black-03;
-  font-family: 'Muli';
+  font-family: "Muli";
   font-size: 12px;
   font-weight: 400;
 }
 
 h1 {
   color: $color-black-01;
-  font-family: 'Jost';
+  font-family: "Jost";
   font-size: 35px;
   font-weight: 600;
 }
 
 header p {
   color: $color-black-03;
-  font-family: 'Muli';
+  font-family: "Muli";
   font-size: 18px;
   font-weight: 400;
   margin-top: 18px;
@@ -22,7 +24,7 @@ header p {
 
 h2 {
   color: $color-black-02;
-  font-family: 'Muli';
+  font-family: "Muli";
   font-size: 20px;
   font-weight: 700;
   margin-bottom: 18px;
@@ -32,7 +34,7 @@ h2 {
       display: flex;
       align-items: center;
       position: relative;
-      
+
       &:after {
         content: "";
         border-bottom: 1px dashed $color-black-02;
@@ -46,7 +48,7 @@ h2 {
 
 h3 {
   color: $color-black-02;
-  font-family: 'Muli';
+  font-family: "Muli";
   font-size: 15px;
   font-weight: 700;
   margin-bottom: 18px;
@@ -55,7 +57,7 @@ h3 {
       display: flex;
       align-items: center;
       position: relative;
-      
+
       &:after {
         content: "";
         border-bottom: 1px dashed $color-black-02;
@@ -69,7 +71,7 @@ h3 {
 
 h4 {
   color: $color-black-04;
-  font-family: 'Muli';
+  font-family: "Muli";
   font-size: 14px;
   font-weight: 400;
   margin-bottom: 18px;
@@ -77,10 +79,19 @@ h4 {
 
 hr {
   &.hr {
-    &--dash {      
+    &--dash {
       border: none;
       border-bottom: 1px dashed $color-black-02;
     }
+  }
+}
+
+.dash {
+  &::after {
+    content: "";
+    border-bottom: 1px dashed $color-black-02;
+    flex: 1;
+    padding-top: 5px
   }
 }
 
@@ -94,44 +105,44 @@ i {
 
 /* Muli */
 @font-face {
-  font-family: 'Muli';
-  src: url('../../assets/fonts/Muli-Regular.ttf') format('truetype');
+  font-family: "Muli";
+  src: url("../../assets/fonts/Muli-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Muli';
-  src: url('../../assets/fonts/Muli-Bold.ttf') format('truetype');
+  font-family: "Muli";
+  src: url("../../assets/fonts/Muli-Bold.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
 }
 
 /* Jost */
 @font-face {
-  font-family: 'Jost';
-  src: url('../../assets/fonts/Jost-Regular.ttf') format('truetype');
+  font-family: "Jost";
+  src: url("../../assets/fonts/Jost-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Jost';
-  src: url('../../assets/fonts/Jost-Medium.ttf') format('truetype');
+  font-family: "Jost";
+  src: url("../../assets/fonts/Jost-Medium.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Jost';
-  src: url('../../assets/fonts/Jost-SemiBold.ttf') format('truetype');
+  font-family: "Jost";
+  src: url("../../assets/fonts/Jost-SemiBold.ttf") format("truetype");
   font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Jost';
-  src: url('../../assets/fonts/Jost-ExtraBold.ttf') format('truetype');
+  font-family: "Jost";
+  src: url("../../assets/fonts/Jost-ExtraBold.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
 }

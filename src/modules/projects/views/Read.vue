@@ -1,99 +1,82 @@
-<template lang="pug">
-  .projects-read
-    header
-      h1 {{ $t('projects.read.title') }}
-      p {{ $t('projects.read.subtitle') }}
-
-    section.projects-read__content
-      lz-table(title="" :fields="listFields" :items="projects")
-        template(#title="{ row: { title }}") {{ title }}
-        template(#remainingTime="{ row: { remainingTime }}") {{ remainingTime }}
-        template(#percentAchieve="{ row: { percentAchieve }}") {{ percentAchieve }}
-        template(#total="{ row: { total }}") {{ total }}
-        template(#status="{ row: { status }}") {{ status }}
-        template(#actions="{ row }")
-          eye-icon(@click="viewProyect(row)")
-
-      article.projects-read__create-btn
-        lz-button(
-          type="primary"
-          @click="$router.push({ name: 'projectsCreate' })"
-        ) {{ $t('projects.read.newProject') }}
+<template>
+  <div class="projects-read">
+    <header>
+      <div class="title">
+        <h1>
+          {{ $t("projects.read.title") }}
+        </h1>
+        <FormulateInput type="toggle" name="active" v-on="this.handleToggle" />
+        <div class="view-btn">
+          <a href="" target="_blank">
+            {{ $t("projects.read.see") }}
+            <ArrowUpRightIcon />
+          </a>
+        </div>
+      </div>
+      <p>{{ $t("projects.read.subtitle") }}</p>
+      <DesignModal section="portfolio" />
+    </header>
+    <section class="projectsRead__content">
+      <LzTable :fields="listFields" :items="projects" :downloable="false">
+        <template #title="{ row: { title } }">{{ title }}</template>
+        <template #skills="{ row: { skills } }">{{ skills }}</template>
+        <template #actions="{ row }">
+          <EyeIcon id="eye-icon" @click="viewProject(row)"></EyeIcon>
+        </template>
+      </LzTable>
+    </section>
+    <article class="projectsRead__createBtn">
+      <LzButton
+        type="primary"
+        @click="$router.push({ name: 'projectsCreate' })"
+      >
+        {{ $t("projects.read.newProject") }}
+      </LzButton>
+    </article>
+  </div>
 </template>
 
 <script lang="ts">
   import { Component, Vue } from "vue-property-decorator";
   import LzButton from "@/components/Button.vue";
   import LzTable from "@/components/Table.vue";
+  import DesignModal from "../components/DesignModal.vue";
   import { apiProjects } from "../api";
   import { namespace } from "vuex-class";
   import VueI18n from "vue-i18n";
 
   const auth = namespace("auth");
 
-  @Component({ components: { LzButton, LzTable } })
+  @Component({ components: { LzButton, LzTable, DesignModal } })
   export default class Read extends Vue {
     @auth.State("id")
-    public ongId!: string;
+    public memberId!: string;
     projects: {
       id: string;
       title: string;
-      total: number;
-      remainingTime: number | VueI18n.TranslateResult;
-      percentAchieve: string | number;
-      status: VueI18n.TranslateResult;
+      skills: VueI18n.TranslateResult;
     }[] = [];
 
     listFields = [
       { id: "title", label: this.$t("projects.read.table.name") },
-      { id: "remainingTime", label: this.$t("projects.read.table.time.label") },
-      { id: "percentAchieve", label: this.$t("projects.read.table.percent") },
-      { id: "total", label: this.$t("projects.read.table.total") },
-      { id: "status", label: this.$t("projects.read.table.status.label") },
+      { id: "skills", label: this.$t("projects.read.table.skills") },
       { id: "actions", label: this.$t("projects.read.table.actions") }
     ];
 
-    viewProyect(row: any) {
-      this.$router.push({
-        name: "projectsCreate",
-        params: { projectId: row.id }
+    mounted() {
+      apiProjects.getProjects(this.memberId).then(projects => {
+        this.projects = projects.map(project => ({
+          id: project.id,
+          title: project.title,
+          skills: project.skills
+        }));
       });
     }
 
-    mounted() {
-      const today = new Date();
-      apiProjects.getProjects(this.ongId).then(({ data: projects }) => {
-        projects.forEach(project => {
-          const date = new Date(project.limitDate);
-          const timeDiff = date.getTime() - today.getTime();
-          const remainingDays = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-
-          const daysToShow =
-            remainingDays > 0
-              ? `${remainingDays} ${this.$t(
-                  "projects.read.table.time.options.days"
-                )}`
-              : remainingDays === 0
-              ? this.$t("projects.read.table.time.options.today")
-              : this.$t("projects.read.table.time.options.expired");
-
-          const status = project.active
-            ? this.$t("projects.read.table.status.options.enabled")
-            : this.$t("projects.read.table.status.options.disabled");
-          const percentAchieve =
-            (project.donated * 100) / (project.amount || 1);
-          const projectData = {
-            id: project.id,
-            title: project.title,
-            total: project.amount,
-            remainingTime: project.limitDate
-              ? daysToShow
-              : this.$t("projects.read.table.time.options.noLimit"),
-            percentAchieve: percentAchieve.toFixed(2),
-            status: status
-          };
-          this.projects.push(projectData);
-        });
+    viewProject(row: TProject) {
+      this.$router.push({
+        name: "projectsCreate",
+        params: { projectId: row.id }
       });
     }
   }
@@ -101,16 +84,44 @@
 
 <style lang="scss">
   .projects-read {
-    &__content {
+    header {
+      display: flex;
+      flex-direction: column;
+
+      .title {
+        display: flex;
+        gap: 18px;
+        align-items: center;
+      }
+
+      .view-btn {
+        margin-left: auto;
+        justify-self: flex-end;
+        align-self: flex-end;
+        a {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          color: $color-black-02;
+          font-weight: 400;
+          font-size: 1.4rem;
+          line-height: 1.5rem;
+          svg {
+            stroke: $color-black-02;
+          }
+        }
+      }
+    }
+
+    .projectsRead__content {
       height: 100%;
-      margin-top: 40px;
 
       .lz-table {
         text-align: left;
 
         &__th--actions {
           display: flex;
-          justify-content: space-around;
+          justify-content: flex-end;
           text-align: right;
 
           svg:hover {
@@ -118,10 +129,21 @@
             stroke: $color-black-01;
           }
         }
+
+        &__td--actions {
+          display: flex;
+          justify-content: flex-end;
+          text-align: right;
+        }
+
+        #eye-icon {
+          cursor: pointer;
+        }
       }
     }
 
-    &__create-btn {
+    .projectsRead__createBtn {
+      margin-top: 3rem;
       text-align: right;
     }
   }

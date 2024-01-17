@@ -1,6 +1,6 @@
 <template lang="pug">
-  button(@click='onClick' class='lz-button' :class='buttonClass')
-    slot
+button(@click='onClick' class='lz-button' :class='buttonClass')
+  slot
 </template>
 
 <script lang="ts">
@@ -25,7 +25,6 @@
 
     @Prop({ default: false })
     protected readonly smaller!: boolean;
-
     /**
      * Emits the button click event.
      * @returns Void.

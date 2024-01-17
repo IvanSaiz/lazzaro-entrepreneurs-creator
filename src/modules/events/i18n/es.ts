@@ -1,12 +1,33 @@
 export default {
   read: {
-    title: "Calendario · Eventos y formaciones",
-    subtitle:
-      "Crea eventos o cursos en el calendario o formaciones sin fecha de caducidad",
-    createNewBtn: "Crear nuevo"
+    title: "Calendario de eventos",
+    subtitle: "Crea evento, cursos o formaciones en el calendario",
+    createNewBtn: "Nuevo evento",
+    search: {
+      placeholder: "Buscar evento"
+    },
+    notifications: {
+      deleted: "Evento eliminado con éxito"
+    },
+    design: {
+      button: "Diseño",
+      modal: {
+        title: "Diseño",
+        section: "Eventos",
+        form: {
+          title: "Titulo",
+          labels: {
+            title: "Titulo",
+            subtitle: "Subtitulo",
+            color: "Color"
+          },
+          save: "Guardar"
+        }
+      }
+    }
   },
   create: {
-    title: "Nuevo evento o formación",
+    title: "Nuevo evento",
     subtitle:
       "Configura aquí tu proyecto. Para cualquier duda o consulta contacta con tu asesor.",
     generalForm: {
@@ -20,18 +41,13 @@ export default {
       description: "Descripción",
       type: "Tipo",
       typeOptions: {
-        event: "Evento",
-        training: "Formación"
-      },
-      mode: "Medio",
-      modeOptions: {
         onsite: "Presencial",
         online: "Online"
       },
       status: "Estado",
       statusOptions: {
-        draft: "Borrador",
-        active: "Activo"
+        enabled: "Activo",
+        disabled: "Inactivo"
       }
     },
     dateForm: {
@@ -43,14 +59,6 @@ export default {
       recurrent: {
         label: "¿Es recurrente?",
         under: "Evento recurrente"
-      },
-      frequency: {
-        label: "¿Qué frecuencia tiene?",
-        options: {
-          weekly: "Semanal",
-          monthly: "Mensual",
-          annual: "Anual"
-        }
       }
     },
     locationForm: {
@@ -59,6 +67,7 @@ export default {
       location: "Añade la URL de acceso o localización"
     },
     ratesForm: {
+      add: "Añadir tarifa",
       title: "Tarifas",
       amount: "Cantidad",
       cost: "Precio",

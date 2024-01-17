@@ -61,7 +61,7 @@
     private active: step = this.steps[0];
 
     @auth.Action
-    public setTemplateFeatures!: (payload: any) => void;
+    public setTemplateFeatures!: () => Promise<void>;
 
     private setActiveStep(step: step) {
       this.active = step;

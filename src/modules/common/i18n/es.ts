@@ -40,15 +40,16 @@ export default {
 
   nav: {
     Web: "Web",
-    Proyectos: "Proyectos",
+    Portfolio: "Portfolio",
     Tienda: "Tienda",
-    Calendario: "Calendario",
+    Eventos: "Eventos",
     Cuentas: "Cuentas",
     Socios: "Socios",
     Organización: "Organización",
     Asesor: "Asesor",
     NFTs: "NFTs",
     Datos: "Datos",
-    Mejora: "Mejora"
+    Mejora: "Mejora",
+    Servicios: "Servicios"
   }
 };

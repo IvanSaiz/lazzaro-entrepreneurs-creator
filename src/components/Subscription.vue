@@ -22,7 +22,7 @@
                 :class="{ 'organization-read__item--disabled': !item.status }"
               )
                 | {{ item.text }}
-            lz-button.organization-read__btn(type="primary" @click="redirectToPlan(plan.url)" disabled)
+            lz-button.organization-read__btn(type="primary" @click="redirectToPlan(plan.url)")
               | {{ plan.priceText }}
               .organization-read__tax {{ $t('organization.read.subscriptionForm.tax' )}}
 
@@ -118,9 +118,7 @@
 
               const [text, status] = current.replace(/\\n/g, "").split(", ");
               return acc.concat({
-                text: this.$t(
-                  `organization.read.planDescription.${text}`
-                ) as string,
+                text: this.$t(`${text}`) as string,
                 status: status === "true"
               });
             }, [] as PlanDescription[]);

@@ -1,29 +1,31 @@
 export default {
   read: {
-    title: "Calendar · Events and training",
-    subtitle:
-      "Create events or courses in the calendar or trainings without expiration date",
-    createNewBtn: "New item"
+    title: "Calendar of events",
+    subtitle: "Create events or courses in the calendar or trainings",
+    createNewBtn: "New event",
+    search: {
+      placeholder: "Search event"
+    }
   },
   create: {
     title: "New event or training",
     subtitle:
-      "Configure your project here. If you have any questions or doubts, please contact your advisor.",
+      "Configure your event or training here. If you have any doubts or queries, please contact your advisor.",
     generalForm: {
       title: "General",
-      mainImg: "Primary image",
+      mainImg: "Main image",
       images: {
         label: "Images",
-        add: "Add images"
+        add: "Add image"
       },
-      name: "Name",
+      name: "Name of the event",
       description: "Description",
       type: "Type",
       typeOptions: {
         event: "Event",
         training: "Training"
       },
-      mode: "Mode",
+      mode: "Way of doing the event",
       modeOptions: {
         onsite: "On site",
         online: "Online"
@@ -38,25 +40,16 @@ export default {
       title: "Dates",
       startInscription: "Start of registration",
       endInscription: "End of registration",
-      startEvent: "Start of event",
-      endEvent: "End del event",
+      startEvent: "Start of the event",
+      endEvent: "End of the event",
       recurrent: {
         label: "Is it recurrent?",
         under: "Recurrent event"
-      },
-      frequency: {
-        label: "What is the frequency?",
-        options: {
-          weekly: "Weekly",
-          monthly: "Monthly",
-          annual: "Yearly"
-        }
       }
     },
     locationForm: {
-      title: "Access / Location",
-      link: "Access link",
-      location: "Location"
+      title: "Online link / Location",
+      label: "Add the access URL or location"
     },
     ratesForm: {
       title: "Rates",

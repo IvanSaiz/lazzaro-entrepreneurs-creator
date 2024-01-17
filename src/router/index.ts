@@ -9,7 +9,7 @@ import { projectsModuleRouter } from "@/modules/projects";
 import { shopModuleRouter } from "@/modules/shop";
 import { accountsModuleRouter } from "@/modules/accounts";
 import { partnersModuleRouter } from "@/modules/partners";
-import { calendarModuleRouter } from "@/modules/calendar";
+import { eventsModuleRouter } from "@/modules/events";
 import { userModuleRouter } from "@/modules/user";
 import { organizationModuleRouter } from "@/modules/organization";
 import {
@@ -24,6 +24,7 @@ import { consultantModuleRouter } from "@/modules/consultant";
 import { NFTsModuleRouter } from "@/modules/NFT";
 import { dataModuleRouter } from "@/modules/data";
 import { improveModuleRouter } from "@/modules/improve";
+import { servicesModuleRouter } from "@/modules/services";
 
 Vue.use(VueRouter);
 
@@ -42,14 +43,15 @@ const routes: Array<RouteConfig> = [
       ...shopModuleRouter,
       ...accountsModuleRouter,
       ...partnersModuleRouter,
-      ...calendarModuleRouter,
+      ...eventsModuleRouter,
       ...userModuleRouter,
       ...profileModuleRouter,
       ...organizationModuleRouter,
       ...consultantModuleRouter,
       ...NFTsModuleRouter,
       ...dataModuleRouter,
-      ...improveModuleRouter
+      ...improveModuleRouter,
+      ...servicesModuleRouter
     ]
   },
   ...authModuleRouter,

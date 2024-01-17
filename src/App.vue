@@ -12,7 +12,6 @@
   import { getAuth, hasAuth } from "./api/core/auth";
   import LzLoader from "@/modules/loader/components/Loader.vue";
   import http from "@/api/core/http";
-  import { apiOngs } from "./modules/user/api";
   const auth = namespace("auth");
 
   @Component({
@@ -25,7 +24,7 @@
 
     @auth.Action
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    public refreshMemberData!: (payload: any) => void;
+    public refreshMemberData: () => Promise<void>;
 
     // @auth.State("id")
     // public memberId!: string;
@@ -35,7 +34,7 @@
     async mounted() {
       if (hasAuth()) {
         this.updateData(getAuth());
-        this.refreshMemberData();
+        await this.refreshMemberData();
         // await this.updateFeatures(this.memberId);
 
         //TODO: to be updated

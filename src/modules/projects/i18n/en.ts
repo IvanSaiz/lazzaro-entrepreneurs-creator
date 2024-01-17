@@ -1,7 +1,9 @@
 export default {
   read: {
-    title: "Projects",
-    subtitle: "Fundraising projects",
+    title: "Portfolio",
+    subtitle: "All your projects to show them to your potential clients.",
+    see: "See portfolio",
+    design: "Design",
     table: {
       name: "Name",
       time: {
@@ -14,6 +16,7 @@ export default {
         }
       },
       percent: "% achieved",
+      skills: "Skills",
       total: "Total",
       status: {
         label: "Status",
