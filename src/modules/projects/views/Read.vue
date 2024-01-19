@@ -1,5 +1,15 @@
 <template>
   <div class="projects-read">
+    <LzModal v-if="deleteModalOpen">
+      <h2>{{ $t("projects.read.deleteModal.title") }}</h2>
+
+      <LzButton type="secondary" @click="$emit('cancel')">
+        {{ $t("common.actions.cancel") }}
+      </LzButton>
+      <LzButton type="primary" @click="$emit('confirm')">
+        {{ $t("common.actions.delete") }}
+      </LzButton>
+    </LzModal>
     <header>
       <div class="title">
         <h1>
@@ -17,10 +27,16 @@
       <DesignModal section="portfolio" />
     </header>
     <section class="projectsRead__content">
-      <LzTable :fields="listFields" :items="projects" :downloable="false">
+      <LzTable
+        title="projects"
+        :fields="listFields"
+        :items="projects"
+        :downloable="false"
+      >
         <template #title="{ row: { title } }">{{ title }}</template>
         <template #skills="{ row: { skills } }">{{ skills }}</template>
         <template #actions="{ row }">
+          <TrashIcon id="trash-icon" @click="deleteProject(row)"></TrashIcon>
           <EyeIcon id="eye-icon" @click="viewProject(row)"></EyeIcon>
         </template>
       </LzTable>
@@ -40,6 +56,7 @@
   import { Component, Vue } from "vue-property-decorator";
   import LzButton from "@/components/Button.vue";
   import LzTable from "@/components/Table.vue";
+  import LzModal from "@/components/Modal.vue";
   import DesignModal from "../components/DesignModal.vue";
   import { apiProjects } from "../api";
   import { namespace } from "vuex-class";
@@ -47,10 +64,13 @@
 
   const auth = namespace("auth");
 
-  @Component({ components: { LzButton, LzTable, DesignModal } })
+  @Component({ components: { LzButton, LzTable, DesignModal, LzModal } })
   export default class Read extends Vue {
     @auth.State("id")
     public memberId!: string;
+
+    deleteModalOpen = false;
+
     projects: {
       id: string;
       title: string;
@@ -64,6 +84,10 @@
     ];
 
     mounted() {
+      this.loadProjects();
+    }
+
+    loadProjects() {
       apiProjects.getProjects(this.memberId).then(projects => {
         this.projects = projects.map(project => ({
           id: project.id,
@@ -73,11 +97,52 @@
       });
     }
 
-    viewProject(row: TProject) {
+    confirm(): Promise<boolean> {
+      this.deleteModalOpen = true;
+
+      return new Promise(res => {
+        this.$on("confirm", () => {
+          this.deleteModalOpen = false;
+          res(true);
+        });
+        this.$on("cancel", () => {
+          this.deleteModalOpen = false;
+          res(false);
+        });
+      });
+    }
+
+    async deleteProject({ id }: TProject) {
+      // If the user cancels, we don't want to delete the project
+      if (!(await this.confirm())) return;
+
+      apiProjects
+        .deleteProject(id)
+        .then(() => {
+          this.$notify({
+            type: "success",
+            text: this.$tc("projects.create.notifications.projectRemoved")
+          });
+          this.loadProjects();
+        })
+        .catch(error => {
+          console.error(error);
+          this.$notify({
+            type: "error",
+            text: this.$tc("projects.create.notifications.projectRemovedError")
+          });
+        });
+    }
+
+    viewProject({ id }: TProject) {
       this.$router.push({
         name: "projectsCreate",
-        params: { projectId: row.id }
+        params: { projectId: id }
       });
+    }
+
+    handleToggle() {
+      console.log("toggle");
     }
   }
 </script>
@@ -134,9 +199,10 @@
           display: flex;
           justify-content: flex-end;
           text-align: right;
+          gap: 1.5rem;
         }
 
-        #eye-icon {
+        .icon {
           cursor: pointer;
         }
       }

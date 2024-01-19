@@ -29,8 +29,7 @@
             type="image"
             name="imagesToConvert"
             :label="$t('projects.create.images.label')"
-            :label-class="['required']"
-            validation="required|mime:image/jpeg,image/png"
+            validation="mime:image/jpeg,image/png"
             :validation-name="$t('projects.create.images.label')"
             label-position="before"
             :add-label="$t('projects.create.images.add')"
@@ -121,7 +120,6 @@
   @Component({ components: { LzButton, LzTable, LzConfirm, LzEditorInput } })
   export default class ProjectsCreate extends Vue {
     loaded = false;
-    showDeleteModal = false;
     isAlreadyPremiumSection = false;
     isPremiumSubscription = false;
 
@@ -211,38 +209,6 @@
           text: this.$tc("common.error.generic")
         });
       }
-    }
-
-    // Move this to actions in projects view
-    async deleteProject() {
-      try {
-        await apiProjects.deleteProject(this.projectId);
-
-        this.$notify({
-          type: "success",
-          text: this.$tc("projects.create.notifications.projectRemoved")
-        });
-
-        this.$router.push({ name: "projectsRead" });
-      } catch (error) {
-        this.showDeleteModal = false;
-
-        if (error?.response?.status === 409) {
-          return this.$notify({
-            type: "error",
-            text: this.$tc("projects.create.notifications.projectHasDonations")
-          });
-        }
-
-        this.$notify({
-          type: "error",
-          text: this.$tc("common.error.generic")
-        });
-      }
-    }
-
-    confirmDeleteProject() {
-      this.showDeleteModal = true;
     }
 
     async onSubmit() {
