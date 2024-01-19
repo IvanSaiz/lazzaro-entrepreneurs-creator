@@ -1,14 +1,19 @@
 <template>
   <div class="projects-read">
-    <LzModal v-if="deleteModalOpen">
+    <LzModal
+      v-if="deleteModalOpen"
+      v-on:close="() => (this.deleteModalOpen = false)"
+    >
       <h2>{{ $t("projects.read.deleteModal.title") }}</h2>
-
-      <LzButton type="secondary" @click="$emit('cancel')">
-        {{ $t("common.actions.cancel") }}
-      </LzButton>
-      <LzButton type="primary" @click="$emit('confirm')">
-        {{ $t("common.actions.delete") }}
-      </LzButton>
+      <p>{{ $t("projects.read.deleteModal.subtitle") }}</p>
+      <div class="actions">
+        <LzButton type="secondary" @click="$emit('cancel')">
+          {{ $t("common.actions.cancel") }}
+        </LzButton>
+        <LzButton type="primary" @click="$emit('confirm')">
+          {{ $t("common.actions.delete") }}
+        </LzButton>
+      </div>
     </LzModal>
     <header>
       <div class="title">
