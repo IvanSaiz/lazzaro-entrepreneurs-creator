@@ -100,8 +100,10 @@
     section.public-homepage
       .public-homepage__header
         h2.h2--dash {{ $t('web.public.homepageForm.title') }}
-        h3 {{ $t('web.public.homepageForm.subtitle') }}
-        .form__row
+        .subtitle
+          h3 {{ $t('web.public.homepageForm.subtitle') }}
+          design-modal(section="homepage")
+      .form__row
           FormulateInput(
             type="image"
             :label="$t('web.public.homepageForm.form.image')"
@@ -159,7 +161,9 @@
     section.public-whoWeAre
       .public-whoWeAre__header
         h2.h2--dash {{ $t('web.public.whoWeAreForm.title') }}
-        h3 {{ $t('web.public.whoWeAreForm.subtitle') }}
+        .subtitle
+          h3 {{ $t('web.public.whoWeAreForm.subtitle') }}
+          design-modal(section="aboutUs")
         .form__row
           FormulateInput(
             type="image"
@@ -242,6 +246,7 @@
       .public-whyUs__header
         h2.h2--dash {{ $t('web.public.whyChooseUsForm.title') }}
         h3 {{ $t('web.public.whyChooseUsForm.subtitle') }}
+        design-modal(section="aboutUs")
         .form__row
           FormulateInput(
             type="image"
@@ -376,25 +381,43 @@
     section.public-impact
       .public-impact__header
         h2.h2--dash {{ $t('web.public.impactForm.title') }}
-        p {{ $t('web.public.impactForm.subtitle') }}
-          formulate-input(
-            type="group"
-            name="impactData"
-            :value="publicWebForm.impactData"
-            #default="{index}"
-          ).public-impact__content
-            formulate-input.impact-item(
+        .subtitle
+          p {{ $t('web.public.impactForm.subtitle') }}
+          design-modal(section="impact")
+            template(#header)
+              h4 {{ $t('web.public.impactForm.design.title') }}
+            template(#form)
+              h2.h2--dash {{ $t('web.public.impactForm.design.image') }}
+              formulate-input(
+                type="image"
+                name="impactDesignBackgroundImage"
+                v-model="publicWebForm.impactDesignBackgroundImage"
+                :help="$t('web.public.impactForm.design.imageHelper')"
+              )
+              h2.h2--dash {{ $t('web.public.impactForm.design.color') }}
+              formulate-input#primary-color(
+                type="textColor"
+                name="impactDesignBackgroundColor"
+                v-model="publicWebForm.impactDesignBackgroundColor"
+                )
+      formulate-input(
+        type="group"
+        name="impactData"
+        :value="publicWebForm.impactData"
+        #default="{index}"
+      ).public-impact__content
+        formulate-input.impact-item(
               type="image"
               :name= "`url`"
               :label="$t(`web.public.impactForm.icon.${index+1}`)"
               :help="$t('web.public.impactForm.icon.help')"
             )
-            formulate-input.impact-item(
+        formulate-input.impact-item(
               type="text"
               :name= "`text`"
               :label="$t(`web.public.impactForm.text.${index+1}`)"
             )
-            formulate-input.impact-item(
+        formulate-input.impact-item(
               type="text"
               :name= "`ammount`"
               :label="$t(`web.public.impactForm.amount.${index+1}`)"
@@ -577,8 +600,6 @@
 </template>
 
 <script lang="ts">
-  /* eslint-disable */
-
   import { Component, Vue } from "vue-property-decorator";
   import { namespace } from "vuex-class";
   import cloneDeep from "lodash/cloneDeep";
@@ -588,6 +609,7 @@
   import LzTable from "@/components/Table.vue";
   import LzEditorInput from "@/components/EditorInput.vue";
   import LzModal from "@/components/Modal.vue";
+  import DesignModal from "@/components/DesignModal.vue";
   import { DotsIcon } from "@/components";
   import { parseFiles } from "@/utils/parseFile";
   import { apiWebsite } from "../api";
@@ -602,7 +624,8 @@
       LzEditorInput,
       ChooseTemplate,
       LzModal,
-      DotsIcon
+      DotsIcon,
+      DesignModal
     }
   })
   export default class Public extends Vue {
@@ -1118,7 +1141,7 @@
       const team: TeamProperties["members"][] = [];
       if (this.publicWebForm.teamMembers) {
         for await (const member of this.publicWebForm.teamMembers) {
-          let picture =
+          const picture =
             member.picture && member.picture.files
               ? (await parseFiles(member.picture))[0]
               : null;
@@ -1337,7 +1360,6 @@
         // await this.updateFeatures();
         this.prevForm = cloneDeep(this.publicWebForm);
       } catch (error) {
-        console.error(error);
         this.$notify({
           type: "error",
           text: this.$tc("web.public.notify.error")
@@ -1351,6 +1373,11 @@
   #public {
     section {
       margin-top: 40px;
+
+      .subtitle {
+        display: flex;
+        justify-content: space-between;
+      }
     }
 
     .public {
@@ -1855,9 +1882,17 @@
       }
 
       &-impact {
+        &__header {
+          .subtitle {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            p {
+              font-size: 16px;
+            }
+          }
+        }
         &__content {
-          margin-top: 42px;
-
           .formulate-input-grouping {
             display: inline-flex;
             align-items: flex-start;

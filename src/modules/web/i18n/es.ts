@@ -236,18 +236,18 @@ export default {
       features: {
         title: "Características de la empresa",
         icon: {
-          1: "Icon 1",
-          2: "Icon 2",
-          3: "Icon 3",
-          4: "Icon 4",
+          1: "Icono 1",
+          2: "Icono 2",
+          3: "Icono 3",
+          4: "Icono 4",
           help: "60x60. Max 25MB"
         },
         titles: {
-          1: "Title 1*",
-          2: "Title 2*",
-          3: "Title 3",
-          4: "Title 4",
-          helper: "(Max 30 characters)"
+          1: "Titulo 1*",
+          2: "Titulo 2*",
+          3: "Titulo 3",
+          4: "Titulo 4",
+          helper: "(Maximo 30 caracteres)"
         },
         descriptions: {
           1: "Descriptive text 1*",
@@ -311,6 +311,12 @@ export default {
     impactForm: {
       title: "Datos de impacto",
       subtitle: "Modifica los datos de impacto visibles en la web.",
+      design: {
+        title: "Datos de impacto",
+        image: "Imagen de fondo",
+        imageHelper: "180x60. Máx 25MB",
+        color: "Fondo"
+      },
       icon: {
         1: "Icono 1",
         2: "Icono 2",
