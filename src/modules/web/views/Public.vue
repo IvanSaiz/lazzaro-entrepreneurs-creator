@@ -39,9 +39,7 @@
             name="url"
             disabled
           )            
-
     <choose-template :chosenTemplateId='publicWebForm.chosenTemplateId' :handleChooseTemplate='handleChooseTemplate' />
-
     section.public-personalizeWeb
       .public-personalizeWeb__header
         h2.h2--dash {{ $t('web.public.personalizeWebForm.title') }}
@@ -96,7 +94,6 @@
               :label="$t('web.public.personalizeWebForm.form.footerColor')"
               value="#1081F2"
               )
-
     section.public-homepage
       .public-homepage__header
         h2.h2--dash {{ $t('web.public.homepageForm.title') }}
@@ -245,8 +242,9 @@
     section.public-whyUs
       .public-whyUs__header
         h2.h2--dash {{ $t('web.public.whyChooseUsForm.title') }}
-        h3 {{ $t('web.public.whyChooseUsForm.subtitle') }}
-        design-modal(section="aboutUs")
+        .subtitle
+          h3 {{ $t('web.public.whyChooseUsForm.subtitle') }}
+          design-modal(section="whyUs")
         .form__row
           FormulateInput(
             type="image"
@@ -293,7 +291,9 @@
     section.public-bookings
       .public-bookings__header
         h2.h2--dash {{ $t('web.public.bookingsForm.title') }}
-        h3 {{ $t('web.public.bookingsForm.subtitle') }}
+        .subtitle
+          h3 {{ $t('web.public.bookingsForm.subtitle') }}
+          design-modal(section="bookings")
         .form__row
           FormulateInput(
             type="image"
@@ -425,7 +425,9 @@
     section.public-team
       .public-team__header
         h2.h2--dash {{ $t('web.public.teamForm.title') }}
-        h4 {{ $t('web.public.teamForm.subtitle') }}
+        .subtitle
+          h3 {{ $t('web.public.teamForm.subtitle') }}
+          design-modal(section="team")
         .public-team__title
           .team-section
             formulate-input(
@@ -525,11 +527,12 @@
     section.public-footer
       .public-footer__header
         h2.h2--dash {{$t('web.public.footer.title')}}
-        h4 {{ $t('web.public.footer.subtitle') }}
+        .subtitle
+          h4 {{ $t('web.public.footer.subtitle') }}
+          design-modal(section="footer")
       section.-public-footer__subSection
         .public-footer__header
           h3.h3--dash {{ $t('web.public.footer.socialForm.title') }}
-
         .public-networks__urls
           .form__row
             formulate-input(
@@ -564,12 +567,9 @@
               name="footerSocialInstagram"
               :label="$t('web.public.footer.socialForm.instagram')"
             )
-
-
       section.public-footer__subSection 
         .public-footer__header
           h3.h3--dash {{ $t('web.public.footer.termsForm.title') }}
-
         .form__row
           lz-editor-input(
             :label="$t('web.public.footer.termsForm.terms')"
@@ -588,7 +588,6 @@
             :add-label="$t('web.public.footer.termsForm.add')"
             :multiple="true"
           )
-
   .public-buttons
     lz-button(
       type="secondary"
