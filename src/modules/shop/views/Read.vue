@@ -139,15 +139,15 @@
         align-self: flex-end;
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: 6px;
         a {
           color: $color-black-02;
           font-weight: 400;
           font-size: 1.4rem;
           line-height: 1.5rem;
-          svg {
-            stroke: $color-black-02;
-          }
+        }
+        svg {
+          stroke: $color-black-02;
         }
       }
     }
