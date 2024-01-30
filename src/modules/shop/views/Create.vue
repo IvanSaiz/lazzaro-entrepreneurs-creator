@@ -166,7 +166,6 @@
       this.loaded = true;
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     async onSubmit(form: ProductForm) {
       const product: Omit<Product, "id"> = {
         title: form.title,
