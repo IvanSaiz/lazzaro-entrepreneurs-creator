@@ -1,5 +1,3 @@
-import { EthereumIcon } from "@/components";
-
 export const LZ_MODULES = {
   web: {
     moduleName: "web",
@@ -18,7 +16,7 @@ export const LZ_MODULES = {
     label: "Tienda",
     active: true,
     icon: "building-store-icon",
-    features: ["market"]
+    // features: ["market"]
   },
   events: {
     moduleName: "events",

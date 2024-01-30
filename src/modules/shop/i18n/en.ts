@@ -6,6 +6,10 @@ export default {
       products: "Products",
       orders: "Orders"
     },
+    status: {
+      enabled: "Enabled",
+      disabled: "Disabled"
+    },
     modalOrder: {
       title: "Order",
       delivery: "Delivery company",
@@ -67,16 +71,17 @@ export default {
       },
       mainImg: "Primary image",
       addImage: "Add image",
+      images: "Additional images",
       productName: "Product name",
       description: "Description",
-      price: "Price",
-      discount: "Discount",
+      price: "Price (€)",
+      discount: "Discount (%)",
       stock: "Stock",
       deliveryTime: "Delivery time"
     },
     notifications: {
       productSaved: "Product successfully saved",
-      productUpgrated: "Product successfully upgraded",
+      productUpdated: "Product successfully upgraded",
       productRemoved: "Product successfully removed"
     }
   }

@@ -4,7 +4,23 @@ import messages from "./messages";
 
 Vue.use(VueI18n);
 
+const numberFormats = {
+  en: {
+    currency: {
+      style: "currency",
+      currency: "EUR"
+    }
+  },
+  es: {
+    currency: {
+      style: "currency",
+      currency: "EUR"
+    }
+  }
+};
+
 export default new VueI18n({
   locale: navigator.language || "es",
-  messages
+  messages,
+  numberFormats
 });

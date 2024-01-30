@@ -419,7 +419,7 @@
             )
         formulate-input.impact-item(
               type="text"
-              :name= "`ammount`"
+              :name= "`amount`"
               :label="$t(`web.public.impactForm.amount.${index+1}`)"
             )
     section.public-team
@@ -723,7 +723,7 @@
       impactData: new Array(4).fill(null).map(
         (_, i) =>
           ({
-            ammount: "",
+            amount: "",
             id: `${i}`,
             text: "",
             url: []
@@ -1031,7 +1031,7 @@
                   id: item.id.toString(),
                   url: [{ url: item.url }],
                   text: item.text,
-                  ammount: item.amount
+                  amount: item.amount
                 } as Section.Web.ImpactData)
             ) ||
             new Array(4).fill(0).map(
@@ -1039,7 +1039,7 @@
                 ({
                   id: i.toString(),
                   text: "",
-                  ammount: "",
+                  amount: "",
                   url: []
                 } as Section.Web.ImpactData)
             );

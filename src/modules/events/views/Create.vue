@@ -153,7 +153,7 @@
               formulate-input(
                 type="text"
                 :label="$t('events.create.ratesForm.amount')"
-                name="ammount"
+                name="amount"
                 validation="required|number"
               )
               formulate-input(

@@ -32,4 +32,5 @@ export const es = {
   web: webModuleI18n.es,
   NFTs: NFTsModuleI18n.es,
   services: servicesModuleI18n.es
+  // Currency formatting
 };

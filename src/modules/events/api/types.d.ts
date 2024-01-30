@@ -27,7 +27,7 @@ declare type CalendarEventPostBody = Omit<CalendarEvent, "id">;
 
 declare interface EventTicket {
   name: string;
-  ammount: number;
+  amount: number;
   price: number;
 }
 
