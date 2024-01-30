@@ -1,8 +1,18 @@
 <template lang="pug">
 .shop-read
   header
-    h1 {{ $t('shop.read.title') }}
+    .title
+      h1 {{ $t('shop.read.title') }}
+      formulate-input(
+        type="toggle"
+        name="active"
+        @input="toggleProducts()"
+      )
+      .view-btn
+        a(href="" target="_blank") {{ $t('shop.read.see') }}
+        arrow-up-right-icon
     p {{ $t('shop.read.subtitle') }}
+  DesignModal(section="shop")
   .shop-read__stepper
     lz-stepper(
       :steps="['products', 'orders']"
@@ -46,18 +56,19 @@
   import Products from "../api";
   import { namespace } from "vuex-class";
   import { Product } from "../api/types";
+  import DesignModal from "../components/DesignModal.vue";
 
   const auth = namespace("auth");
 
-  @Component({ components: { LzButton, LzTable, LzStepper, LzModal } })
+  @Component({
+    components: { LzButton, LzTable, LzStepper, LzModal, DesignModal }
+  })
   export default class Read extends Vue {
     @auth.State("id")
     public memberId!: string;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     active = "products";
-    productsQuery = "";
     products: Product[] = [];
-    modalOrder = null;
 
     listFields = [
       { id: "title", label: this.$t("shop.read.productsTable.name") },
@@ -106,11 +117,41 @@
         this.products = res;
       });
     }
+
+    toggleProducts() {
+      console.log("Toggling products");
+    }
   }
 </script>
 
 <style lang="scss">
   .shop-read {
+    header {
+      .title {
+        display: flex;
+        align-items: end;
+        gap: 18px;
+      }
+
+      .view-btn {
+        margin-left: auto;
+        justify-self: flex-end;
+        align-self: flex-end;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        a {
+          color: $color-black-02;
+          font-weight: 400;
+          font-size: 1.4rem;
+          line-height: 1.5rem;
+          svg {
+            stroke: $color-black-02;
+          }
+        }
+      }
+    }
+
     .lz-table {
       &__td,
       &__th {

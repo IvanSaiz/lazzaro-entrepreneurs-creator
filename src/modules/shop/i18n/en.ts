@@ -2,6 +2,8 @@ export default {
   read: {
     title: "Shop",
     subtitle: "Manage your products and your orders here",
+    see: "See shop",
+    design: "Diseño",
     steps: {
       products: "Products",
       orders: "Orders"

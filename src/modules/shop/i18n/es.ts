@@ -2,6 +2,7 @@ export default {
   read: {
     title: "Productos",
     subtitle: "Todos tus productos para mostarlos a tus potenciales clientes.",
+    see: "Ver tienda",
     steps: {
       products: "Productos",
       orders: "Pedidos"
