@@ -46,7 +46,8 @@ export default {
     NFTs: "NFTs",
     Datos: "Data",
     Mejora: "Improve",
-    Servicios: "Services"
+    Servicios: "Services",
+    Blog: "Blog",
   },
   logout: "Logout"
 };

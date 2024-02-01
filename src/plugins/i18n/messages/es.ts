@@ -14,6 +14,7 @@ import { projectsModuleI18n } from "@/modules/projects";
 import { userModuleI18n } from "@/modules/user";
 import { webModuleI18n } from "@/modules/web";
 import { servicesModuleI18n } from "@/modules/services";
+import { blogModuleI18n } from "@/modules/blog";
 
 export const es = {
   auth: authModuleI18n.es,
@@ -31,6 +32,6 @@ export const es = {
   user: userModuleI18n.es,
   web: webModuleI18n.es,
   NFTs: NFTsModuleI18n.es,
-  services: servicesModuleI18n.es
-  // Currency formatting
+  services: servicesModuleI18n.es,
+  blog: blogModuleI18n.es
 };

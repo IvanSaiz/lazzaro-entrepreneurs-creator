@@ -15,7 +15,7 @@ export const LZ_MODULES = {
     moduleName: "shop",
     label: "Tienda",
     active: true,
-    icon: "building-store-icon",
+    icon: "building-store-icon"
     // features: ["market"]
   },
   events: {
@@ -49,6 +49,12 @@ export const LZ_MODULES = {
     label: "Servicios",
     active: true,
     icon: "file-like-icon"
+  },
+  blog: {
+    moduleName: "blog",
+    label: "Blog",
+    active: true,
+    icon: "browser-icon"
   },
   consultant: {
     moduleName: "consultant",
