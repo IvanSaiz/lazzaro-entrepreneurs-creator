@@ -1,5 +1,5 @@
 <template>
-  <section id="blog">
+  <section id="blog" v-if="loaded">
     <header>
       <h1>{{ $t("blog.read.title") }}</h1>
       <p>{{ $t("blog.read.subtitle") }}</p>
@@ -9,7 +9,7 @@
       <h4>{{ $t("blog.read.content.subtitle") }}</h4>
       <LzTable :fields="articleFields" :items="articles">
         <template #title="{row: {title}}"> {{ title }}</template>
-        <template #date="{row: {date}}"> {{ date }}</template>
+        <template #date="{row: {date}}"> {{ $d(date) }}</template>
         <template #status="{row: {status}}">
           {{ $t(`blog.read.table.item.status.${status}`) }}
         </template>
@@ -36,6 +36,9 @@
   import { Component, Vue } from "vue-property-decorator";
   import LzTable from "@/components/Table.vue";
   import LzButton from "@/components/Button.vue";
+  import Articles from "../api";
+  import { namespace } from "vuex-class";
+  const auth = namespace("auth");
 
   type Article = {
     id: string;
@@ -46,28 +49,13 @@
     icon: string;
   };
 
-  // TODO: Replace with real data when the API is ready
-  const mockArtiles: Article[] = [
-    {
-      id: "1",
-      title: "Article 1",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      status: "enabled",
-      date: "2024-01-01",
-      icon: "eye"
-    },
-    {
-      id: "2",
-      title: "Article 2",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      status: "disabled",
-      date: "2024-01-02",
-      icon: "eye"
-    }
-  ];
-
   @Component({ components: { LzTable, LzButton } })
   export default class Read extends Vue {
+    @auth.State("id")
+    memberId!: string;
+
+    loaded = false;
+
     articleFields = [
       { id: "title", label: this.$t("blog.read.table.headers.title") },
       {
@@ -82,7 +70,17 @@
     ];
 
     // TODO: Replace with real data when the API is ready
-    articles: Article[] = mockArtiles;
+    articles: Article[] = [];
+
+    mounted() {
+      Articles.getArticlesByMemberId(this.memberId)
+        .then(articles => {
+          this.articles = articles;
+        })
+        .finally(() => {
+          this.loaded = true;
+        });
+    }
   }
 </script>
 
