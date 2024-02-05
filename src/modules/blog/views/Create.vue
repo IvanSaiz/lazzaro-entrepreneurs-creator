@@ -96,7 +96,7 @@
       title: "",
       icon: "" as string | { url: string }[],
       description: "",
-      status: "enabled"
+      status: "enabled" as "enabled" | "disabled"
     };
 
     statusOptions = {
@@ -116,7 +116,7 @@
       const body: ArticlePostDTO = {
         title,
         // TODO: add status to form
-        status: "enabled",
+        status: this.form.status,
         member_id: this.memberId,
         icon: url,
         description: this.form.description
