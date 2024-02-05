@@ -1,5 +1,13 @@
 <template lang="pug">
 .shop-read
+  lz-confirm(
+      v-if="deleteModal"
+      @close="deleteModal = false"
+      @confirm="deleteItem"
+      :descriptionLabel="$t('blog.create.modal.content', { title: itemToDelete.title })"
+      :cancelLabel="$t('common.actions.no')"
+      :confirmLabel="$t('common.actions.yes')"
+  )
   header
     .title
       h1 {{ $t('shop.read.title') }}
@@ -28,6 +36,9 @@
         template(#price="{ row: { price }}") {{ $n(price, "currency") }}
         template(#status="{ row: { active }}") {{ active ? $t("shop.read.status.enabled") : $t("shop.read.status.disabled") }}
         template(#actions="{ row }")
+          x-icon(
+            @click="deleteModal = true; itemToDelete = row"
+          )
           eye-icon(
             @click="$router.push({ name: 'shopCreate', params: { productId: row.id } })"
           )
@@ -57,11 +68,19 @@
   import { namespace } from "vuex-class";
   import { Product } from "../api/types";
   import DesignModal from "../components/DesignModal.vue";
+  import LzConfirm from "@/components/Confirm.vue";
 
   const auth = namespace("auth");
 
   @Component({
-    components: { LzButton, LzTable, LzStepper, LzModal, DesignModal }
+    components: {
+      LzButton,
+      LzTable,
+      LzStepper,
+      LzModal,
+      DesignModal,
+      LzConfirm
+    }
   })
   export default class Read extends Vue {
     @auth.State("id")
@@ -112,9 +131,36 @@
       delivered: this.$t("shop.read.modalOrder.status.options.delivered")
     };
 
+    deleteModal = false;
+    itemToDelete: Product;
+
     mounted() {
       Products.getAllByMemberId(this.memberId).then(res => {
         this.products = res;
+      });
+    }
+
+    async deleteItem() {
+      if (!this.itemToDelete) return;
+
+      await Products.delete(this.itemToDelete.id)
+        .then(() => {
+          this.$notify({
+            type: "success",
+            text: this.$tc("shop.create.notifications.deleted")
+          });
+          this.$router.push({ name: "shopRead" });
+        })
+        .catch(() => {
+          this.$notify({
+            type: "error",
+            text: this.$tc("common.error.generic")
+          });
+        });
+
+      await Products.getAllByMemberId(this.memberId).then(res => {
+        this.products = res;
+        this.deleteModal = false;
       });
     }
 
@@ -160,9 +206,11 @@
 
       &__th--actions,
       &__td--actions {
-        display: flex;
-        justify-content: space-around;
         text-align: end;
+
+        & > * {
+          margin-left: 10px;
+        }
 
         svg:hover {
           cursor: pointer;
