@@ -4,7 +4,7 @@
       v-if="deleteModal"
       @close="deleteModal = false"
       @confirm="deleteItem"
-      :descriptionLabel="$t('blog.create.modal.content', { title: itemToDelete.title })"
+      :descriptionLabel="$t('shop.read.modalDelete.content', { title: itemToDelete.title })"
       :cancelLabel="$t('common.actions.no')"
       :confirmLabel="$t('common.actions.yes')"
   )

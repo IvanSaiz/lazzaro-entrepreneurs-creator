@@ -33,6 +33,9 @@ export default {
         total: "Total"
       }
     },
+    modalDelete: {
+      content: '¿Estás seguro de que quieres eliminar el producto "{title}"?'
+    },
     currency: {
       euro: "€"
     },
