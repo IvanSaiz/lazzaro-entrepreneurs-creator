@@ -27,7 +27,6 @@
                 validation="required|mime:image/jpeg,image/png"
                 :validation-name="$t('services.create.form.image')"
                 label-position="before"
-                :uploader="uploadFile"
               )
           .services-general__section--right
             .form__row
@@ -224,12 +223,6 @@
         });
       }
       this.showDeleteModal = false;
-    }
-
-    async uploadFile(file: File, progress: (progress: number) => void) {
-      const base64 = await toBase64(file);
-      progress(100);
-      return { base64 };
     }
   }
 </script>

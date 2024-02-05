@@ -21,5 +21,21 @@ export default {
       }
     },
     newArticle: "New article"
+  },
+  create: {
+    title: "Create article",
+    subtitle: "Complete your blog with new articles",
+    form: {
+      article: "Article",
+      title: "Title",
+      subtitle: "First impressions are what matters",
+      description: "Description",
+      mainImg: "Image",
+      status: "Status",
+      publish: "Publicar",
+      submit: "Save",
+      cancel: "Cancel",
+      delete: "Delete"
+    }
   }
 };

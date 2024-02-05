@@ -1,5 +1,13 @@
 <template>
   <section id="blog" v-if="loaded">
+    <LzConfirm
+      v-if="deleteModal"
+      @close="deleteModal = false"
+      @confirm="deleteArticle"
+      :descriptionLabel="$t('blog.create.modal.content', { title: form.title })"
+      :cancelLabel="$t('common.actions.no')"
+      :confirmLabel="$t('common.actions.yes')"
+    />
     <header>
       <h1>{{ $t("blog.read.title") }}</h1>
       <p>{{ $t("blog.read.subtitle") }}</p>
@@ -9,11 +17,12 @@
       <h4>{{ $t("blog.read.content.subtitle") }}</h4>
       <LzTable :fields="articleFields" :items="articles">
         <template #title="{row: {title}}"> {{ title }}</template>
-        <template #date="{row: {date}}"> {{ $d(date) }}</template>
+        <template #date="{row: {date}}"> {{ $d(new Date(date)) }}</template>
         <template #status="{row: {status}}">
           {{ $t(`blog.read.table.item.status.${status}`) }}
         </template>
         <template #actions="{row: {id}}">
+          <XIcon @click="openDeleteModal(id)" />
           <EyeIcon
             @click="
               $router.push({
@@ -38,6 +47,7 @@
   import LzButton from "@/components/Button.vue";
   import Articles from "../api";
   import { namespace } from "vuex-class";
+  import LzConfirm from "@/components/Confirm.vue";
   const auth = namespace("auth");
 
   type Article = {
@@ -49,7 +59,7 @@
     icon: string;
   };
 
-  @Component({ components: { LzTable, LzButton } })
+  @Component({ components: { LzTable, LzButton, LzConfirm } })
   export default class Read extends Vue {
     @auth.State("id")
     memberId!: string;
@@ -79,6 +89,31 @@
         })
         .finally(() => {
           this.loaded = true;
+        });
+    }
+
+    deleteModal = false;
+    articleToDelete = "";
+    openDeleteModal(id: string) {
+      this.deleteModal = true;
+      this.articleToDelete = id;
+    }
+    deleteArticle() {
+      if (!this.articleToDelete) return;
+
+      Articles.delete(this.articleToDelete)
+        .then(() => {
+          this.$notify({
+            type: "success",
+            text: this.$tc("blog.create.notifications.deleted")
+          });
+          this.$router.push({ name: "blogRead" });
+        })
+        .catch(() => {
+          this.$notify({
+            type: "error",
+            text: this.$tc("common.error.generic")
+          });
         });
     }
   }

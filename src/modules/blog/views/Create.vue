@@ -1,5 +1,13 @@
 <template>
-  <section id="blog-create">
+  <section id="blog-create" v-if="loaded">
+    <LzConfirm
+      v-if="deleteModal"
+      @close="deleteModal = false"
+      @confirm="deleteArticle"
+      :descriptionLabel="$t('blog.create.modal.content', { title: form.title })"
+      :cancelLabel="$t('common.actions.no')"
+      :confirmLabel="$t('common.actions.yes')"
+    />
     <header>
       <h1>{{ $t("blog.create.title") }}</h1>
       <p>{{ $t("blog.create.subtitle") }}</p>
@@ -7,11 +15,12 @@
     <div class="content">
       <h2 class="h2--dash">{{ $t("blog.create.form.article") }}</h2>
       <p>{{ $t("blog.create.form.subtitle") }}</p>
-      <FormulateForm @submit="onSave" v-if="loaded" v-model="form">
+      <FormulateForm @submit="onSave" v-model="form">
         <div class="left">
           <FormulateInput
             type="image"
             name="icon"
+            :v-model="form.icon"
             :label="$t('blog.create.form.mainImg')"
             :label-class="['required']"
             validation="required|mime:image/jpeg,image/png"
@@ -30,10 +39,17 @@
           <LzEditorInput
             :label="$t('blog.create.form.description')"
             name="description"
-            v-model="description"
+            v-model="form.description"
           />
         </div>
         <div class="actions">
+          <LzButton
+            type="tertiary"
+            @click.prevent="openDeleteModal"
+            v-if="this.articleId"
+          >
+            {{ $t("blog.create.form.delete") }}
+          </LzButton>
           <LzButton type="secondary" @click.prevent="onCancel">{{
             $t("blog.create.form.cancel")
           }}</LzButton>
@@ -52,12 +68,14 @@
   import LzButton from "@/components/Button.vue";
   import { namespace } from "vuex-class";
   import Article from "../api";
+  import LzConfirm from "@/components/Confirm.vue";
   const auth = namespace("auth");
 
   @Component({
     components: {
       LzEditorInput,
-      LzButton
+      LzButton,
+      LzConfirm
     }
   })
   export default class BlogCreate extends Vue {
@@ -65,12 +83,12 @@
     memberId!: string;
 
     articleId = "";
-    description = "";
     loaded = false;
+    deleteModal = false;
 
     form = {
       title: "",
-      icon: "",
+      icon: "" as string | { url: string }[],
       description: ""
     };
 
@@ -89,7 +107,7 @@
         status: "enabled",
         member_id: this.memberId,
         icon: url,
-        description: this.description
+        description: this.form.description
       };
       try {
         if (this.articleId) {
@@ -110,20 +128,44 @@
       }
     }
 
+    openDeleteModal() {
+      this.deleteModal = true;
+    }
+
+    deleteArticle() {
+      if (!this.articleId) return;
+
+      Article.delete(this.articleId)
+        .then(() => {
+          this.$notify({
+            type: "success",
+            text: this.$tc("blog.create.notifications.deleted")
+          });
+          this.$router.push({ name: "blogRead" });
+        })
+        .catch(() => {
+          this.$notify({
+            type: "error",
+            text: this.$tc("common.error.generic")
+          });
+        });
+    }
+
     async mounted() {
       this.articleId = this.$route.params.articleId;
       if (this.articleId) {
         await Article.getById(this.articleId).then(article => {
           this.form = article;
-          this.description = article.description;
+          this.form.icon = [{ url: article.icon }];
         });
+        console.log(this.form);
       }
       this.loaded = true;
     }
   }
 </script>
 
-<style>
+<style lang="scss">
   #blog-create {
     .formulate-form {
       display: grid;

@@ -13,7 +13,7 @@ export default {
   delete: async (articleId: string) => {
     return http.delete(`/blog/${articleId}`, { noAuth: true });
   },
-  getById: async (articleId: string) => {
+  getById: async (articleId: string): Promise<Article> => {
     return http.get(`/blog/${articleId}`, { noAuth: true });
   }
 };

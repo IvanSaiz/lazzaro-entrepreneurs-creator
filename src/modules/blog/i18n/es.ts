@@ -34,7 +34,18 @@ export default {
       status: "Estado",
       publish: "Publicar",
       submit: "Guardar",
-      cancel: "Cancelar"
+      cancel: "Cancelar",
+      delete: "Eliminar"
+    },
+    notifications: {
+      created: "Artículo guardado con éxito",
+      deleted: "Artículo eliminado con éxito"
+    },
+    modal: {
+      title: "Eliminar artículo",
+      content: '¿Seguro que quieres eliminar el articulo "{title}"?',
+      cancel: "Cancelar",
+      delete: "Eliminar"
     }
   }
 };
