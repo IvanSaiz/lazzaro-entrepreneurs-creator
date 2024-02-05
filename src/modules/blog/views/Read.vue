@@ -4,7 +4,9 @@
       v-if="deleteModal"
       @close="deleteModal = false"
       @confirm="deleteArticle"
-      :descriptionLabel="$t('blog.create.modal.content', { title: form.title })"
+      :descriptionLabel="
+        $t('blog.create.modal.content', { title: articleToDelete.title })
+      "
       :cancelLabel="$t('common.actions.no')"
       :confirmLabel="$t('common.actions.yes')"
     />
@@ -21,13 +23,13 @@
         <template #status="{row: {status}}">
           {{ $t(`blog.read.table.item.status.${status}`) }}
         </template>
-        <template #actions="{row: {id}}">
-          <XIcon @click="openDeleteModal(id)" />
+        <template #actions="{row}">
+          <XIcon @click="openDeleteModal(row)" />
           <EyeIcon
             @click="
               $router.push({
                 name: 'blogCreate',
-                params: { articleId: id }
+                params: { articleId: row.id }
               })
             "
           >
@@ -83,25 +85,27 @@
     articles: Article[] = [];
 
     mounted() {
-      Articles.getArticlesByMemberId(this.memberId)
-        .then(articles => {
-          this.articles = articles;
-        })
-        .finally(() => {
-          this.loaded = true;
-        });
+      this.getArticles().finally(() => {
+        this.loaded = true;
+      });
+    }
+
+    async getArticles() {
+      await Articles.getArticlesByMemberId(this.memberId).then(articles => {
+        this.articles = articles;
+      });
     }
 
     deleteModal = false;
-    articleToDelete = "";
-    openDeleteModal(id: string) {
+    articleToDelete: Article;
+    openDeleteModal(item: Article) {
       this.deleteModal = true;
-      this.articleToDelete = id;
+      this.articleToDelete = item;
     }
-    deleteArticle() {
+    async deleteArticle() {
       if (!this.articleToDelete) return;
 
-      Articles.delete(this.articleToDelete)
+      await Articles.delete(this.articleToDelete.id)
         .then(() => {
           this.$notify({
             type: "success",
@@ -115,6 +119,10 @@
             text: this.$tc("common.error.generic")
           });
         });
+
+      await this.getArticles().finally(() => {
+        this.deleteModal = false;
+      });
     }
   }
 </script>
@@ -134,6 +142,7 @@
           &:last-child {
             display: flex;
             justify-content: flex-end;
+            gap: 0.8rem;
           }
         }
 
