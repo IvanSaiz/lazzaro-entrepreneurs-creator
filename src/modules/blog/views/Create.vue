@@ -41,6 +41,12 @@
             name="description"
             v-model="form.description"
           />
+          <FormulateInput
+            type="select"
+            name="status"
+            :options="statusOptions"
+            :label="$t('blog.create.form.status')"
+          />
         </div>
         <div class="actions">
           <LzButton
@@ -89,7 +95,13 @@
     form = {
       title: "",
       icon: "" as string | { url: string }[],
-      description: ""
+      description: "",
+      status: "enabled"
+    };
+
+    statusOptions = {
+      enabled: this.$t("blog.read.table.item.status.enabled"),
+      disabled: this.$t("blog.read.table.item.status.disabled")
     };
 
     onCancel() {
@@ -158,7 +170,6 @@
           this.form = article;
           this.form.icon = [{ url: article.icon }];
         });
-        console.log(this.form);
       }
       this.loaded = true;
     }
