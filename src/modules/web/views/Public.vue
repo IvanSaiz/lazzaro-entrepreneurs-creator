@@ -1289,10 +1289,12 @@
           // Impact properties
           //TODO: that logic is not the correct way to handle this
           impact: {
-            data: this.publicWebForm.impactData.map(i => ({
-              ...i,
-              url: i.url[0]?.url ?? ""
-            })),
+            data: this.publicWebForm.impactData
+              .map(i => ({
+                ...i,
+                url: i.url[0]?.url ?? ""
+              }))
+              .filter(i => !!i.text),
             design: {
               backgroundColor: this.publicWebForm.impactDesignBackgroundColor,
               backgroundImage: this.publicWebForm.impactDesignBackgroundImage
@@ -1339,7 +1341,7 @@
               secondaryWeb: this.publicWebForm.footerSocialSecondaryWeb
             },
             design: {
-              backgroundColor: this.publicWebForm.footerDesignBackgroundColor,
+              backgroundColor: this.publicWebForm.styleFooterColor,
               backgroundImage: this.publicWebForm.footerDesignBackgroundImage
             }
           }
