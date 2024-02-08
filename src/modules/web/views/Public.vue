@@ -277,7 +277,6 @@
               FormulateInput#primary-color(
                 type="textColor"
                 name="whyChooseUsTitleColor"
-                :label="$t('auth.onboarding.stepStyle.form.textColour')"
                 value="#1081F2"
                 )
             lz-editor-input(
@@ -1791,6 +1790,7 @@
           .section-row {
             display: flex;
             width: 970px;
+            align-items: center;
 
             > :first-child {
               width: 82%;
