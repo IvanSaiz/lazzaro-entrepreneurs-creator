@@ -325,7 +325,6 @@
               FormulateInput#primary-color(
                 type="textColor"
                 name="bookingsTitleColor"
-                :label="$t('auth.onboarding.stepStyle.form.textColour')"
                 value="#1081F2"
                 )
             .section-row
@@ -338,7 +337,6 @@
               FormulateInput#primary-color(
                 type="textColor"
                 name="bookingsSubtitleColor"
-                :label="$t('auth.onboarding.stepStyle.form.textColour')"
                 value="#1081F2"
                 )
             .links-row
@@ -367,7 +365,6 @@
           FormulateInput#primary-color(
             type="textColor"
             name="reviewsTitleColor"
-            :label="$t('auth.onboarding.stepStyle.form.textColour')"
             value="#1081F2"
             )
 
@@ -381,7 +378,6 @@
           FormulateInput#primary-color(
             type="textColor"
             name="reviewsSubtitleColor"
-            :label="$t('auth.onboarding.stepStyle.form.textColour')"
             value="#1081F2"
             )
       .form__row
@@ -451,7 +447,6 @@
             FormulateInput#primary-color(
               type="textColor"
               name="teamTitleColor"
-              :label="$t('auth.onboarding.stepStyle.form.textColour')"
               value="#1081F2"
               )
           .team-section
@@ -464,7 +459,6 @@
             FormulateInput#primary-color(
               type="textColor"
               name="teamSubtitleColor"
-              :label="$t('auth.onboarding.stepStyle.form.textColour')"
               value="#1081F2"
               )
 
@@ -1854,6 +1848,7 @@
           .section-row {
             display: flex;
             width: 970px;
+            align-items: center;
 
             > :first-child {
               width: 82%;
@@ -1901,6 +1896,7 @@
             display: flex;
             width: 563px;
             gap: 18px;
+            align-items: center;
 
             .formulate-input-element--text {
               width: 382px;
@@ -2029,6 +2025,7 @@
             display: flex;
             width: 563px;
             gap: 18px;
+            align-items: center;
 
             .formulate-input-element--text {
               width: 382px;
