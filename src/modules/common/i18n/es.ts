@@ -38,6 +38,8 @@ export default {
   design: {
     layout: {
       title: "Disposición",
+      heading: "Título principal",
+      subtitle: "Subtítulo",
       options: {
         left: "Alineado a la izquierda",
         right: "Alineado a la derecha",
