@@ -95,11 +95,26 @@
               value="#1081F2"
               )
     section.public-homepage
+
       .public-homepage__header
         h2.h2--dash {{ $t('web.public.homepageForm.title') }}
         .subtitle
           h3 {{ $t('web.public.homepageForm.subtitle') }}
           design-modal(section="homepage")
+            template(#header)
+              h4 {{ $t('web.public.homepageForm.title') }}
+            template(#form)
+              h2.h2--dash {{ $t('web.public.homepageForm.design.layout') }}
+              layout-select(
+                :value="publicWebForm.homepageDesignLayout"
+                name="homepageDesignLayout"
+              )
+              h2.h2--dash {{ $t('web.public.homepageForm.design.color') }}
+              FormulateInput#primary-color(
+                type="textColor"
+                name="homepageDesignBackgroundColor"
+                value="#EFEFEF"
+                )
       .form__row
           FormulateInput(
             type="image"
@@ -613,6 +628,7 @@
   import { parseFiles } from "@/utils/parseFile";
   import { apiWebsite } from "../api";
   import { ChooseTemplate } from "../components";
+  import LayoutSelect from "@/components/LayoutSelect.vue";
 
   const auth = namespace("auth");
 
@@ -624,7 +640,8 @@
       ChooseTemplate,
       LzModal,
       DotsIcon,
-      DesignModal
+      DesignModal,
+      LayoutSelect
     }
   })
   export default class Public extends Vue {

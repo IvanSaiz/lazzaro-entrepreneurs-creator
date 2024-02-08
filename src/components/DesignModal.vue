@@ -38,6 +38,7 @@
   .design-modal {
     .lz-box {
       min-width: 600px;
+      background-color: $color-black-07;
     }
 
     form {

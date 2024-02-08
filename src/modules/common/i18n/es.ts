@@ -35,9 +35,19 @@ export default {
     companyAlreadyExists: "Ya existe una empresa con este nombre",
     validationError: "Asegúrese de que su CIF / DNI sea correcto"
   },
-
-  logout: "cerrar sesión",
-
+  design: {
+    layout: {
+      title: "Disposición",
+      options: {
+        left: "Alineado a la izquierda",
+        right: "Alineado a la derecha",
+        center: "Centrado al completo",
+        "left-fill": "Alineado a la izquierda al completo",
+        "right-fill": "Alineado a la derecha al completo"
+      }
+    }
+  },
+  logout: "Cerrar Sesión",
   nav: {
     Web: "Web",
     Portfolio: "Portfolio",

@@ -203,6 +203,10 @@ export default {
     homepageForm: {
       title: "Portada",
       subtitle: "Las primeras impresiones son las que importan",
+      design: {
+        layout: "Disposición",
+        color: "Fondo"
+      },
       form: {
         image: "Imagen principal*",
         title: "Título",
