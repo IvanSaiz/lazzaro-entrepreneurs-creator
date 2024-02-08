@@ -124,42 +124,42 @@
             :help="$t('web.public.homepageForm.form.imageHelper')"
           )
           .form-section
+            .text-color-row
               formulate-input(
-                type="text"
-                name="homepageTitle"
-                :label="$t('web.public.homepageForm.form.title')"
-                :help="$t('web.public.homepageForm.form.titleHelper')"
-              )
+                  type="text"
+                  name="homepageTitle"
+                  :label="$t('web.public.homepageForm.form.title')"
+                  :help="$t('web.public.homepageForm.form.titleHelper')"
+                )
               formulate-input#primary-color(
                 type="textColor"
                 name="homepageTitleColor"
-                :label="$t('auth.onboarding.stepStyle.form.textColour')"
                 value="#1081F2"
                 )
+            .text-color-row
               formulate-input(
-                type="text"
-                name="homepageSubtitle"
-                :label="$t('web.public.homepageForm.form.subtitle')"
-                :help="$t('web.public.homepageForm.form.subtitleHelper')"
-                )
+                  type="text"
+                  name="homepageSubtitle"
+                  :label="$t('web.public.homepageForm.form.subtitle')"
+                  :help="$t('web.public.homepageForm.form.subtitleHelper')"
+                  )
               FormulateInput#primary-color(
                 type="textColor"
                 name="homepageSubtitleColor"
-                :label="$t('auth.onboarding.stepStyle.form.textColour')"
                 value="#1081F2"
                 )
-              .button-row
-                formulate-input(
+            .button-row
+              formulate-input(
                   type="text"
                   name="homepageFirstButtonText"
                   :label="$t(`web.public.homepageForm.form.buttons.1`)"
                 )
-                formulate-input(
+              formulate-input(
                   type="text"
                   name="homepageFirstButtonLink"
                   :label="$t(`web.public.homepageForm.form.links.1`)"
                 )
-              .button-row
+            .button-row
                 formulate-input(
                   type="text"
                   name="homepageSecondButtonText"
@@ -195,7 +195,6 @@
               FormulateInput#primary-color(
                 type="textColor"
                 name="aboutUsTitleColor"
-                :label="$t('auth.onboarding.stepStyle.form.textColour')"
                 value="#1081F2"
                 )
             .section-row
@@ -208,7 +207,6 @@
               FormulateInput#primary-color(
                 type="textColor"
                 name="aboutUsSubtitleColor"
-                :label="$t('auth.onboarding.stepStyle.form.textColour')"
                 value="#1081F2"
                 )
             lz-editor-input(
@@ -1654,6 +1652,21 @@
             }
           }
 
+          .text-color-row {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+
+            > :first-child {
+              flex-grow: 1;
+            }
+
+            > :last-child {
+              max-width: fit-content;
+            }
+          }
+
           &__cta {
             display: flex;
             margin-top: 10px;
@@ -1699,6 +1712,7 @@
           .section-row {
             display: flex;
             width: 970px;
+            align-items: center;
 
             > :first-child {
               width: 82%;

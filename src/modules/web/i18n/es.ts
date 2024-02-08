@@ -141,8 +141,8 @@ export default {
       header: {
         title: "Título",
         subtitle: "Subtítulo",
-        titleHelperText: "(Máx 80 caracteres)",
-        subtitleHelperText: "(Máx 180 caracteres)"
+        titleHelperText: "(Máx 80 carácteres)",
+        subtitleHelperText: "(Máx 180 carácteres)"
       },
       teamMembers: {
         title: "Miembros del equipo",
@@ -167,12 +167,12 @@ export default {
         "Acompaña la web de una descripción de tu organización, de tu visión, de tu misión y de tus valores.",
       motto: {
         label: "Lema de la organización",
-        help: "Máx. 40 caracteres."
+        help: "Máx. 40 carácteres."
       },
       description: "Descripción corta de la organización",
       titleDescription: {
         label: "Título de la descripción",
-        help: "Máx. 40 caracteres."
+        help: "Máx. 40 carácteres."
       },
       secondaryImg: {
         label: "Imagen secundaria",
@@ -212,11 +212,11 @@ export default {
         title: "Título",
         subtitle: "Subtítulo",
         imageHelper: "180x60. Máx 25MB",
-        titleHelper: "(Máx 80 characters)",
-        subtitleHelper: "(Máx 140 characters)",
+        titleHelper: "(Máx 80 carácteres)",
+        subtitleHelper: "(Máx 140 carácteres)",
         buttons: {
-          1: "Boton 1*",
-          2: "Boton 2*"
+          1: "Botón 1*",
+          2: "Botón 2*"
         },
         links: {
           1: "Link Botón 1*",
@@ -233,8 +233,8 @@ export default {
         title: "Título",
         subtitle: "Subtítulo",
         imageHelper: "180x60. Máx 25MB",
-        titleHelper: "(Máx 80 caracteres)",
-        subtitleHelper: "(Máx 140 caracteres)",
+        titleHelper: "(Máx 80 carácteres)",
+        subtitleHelper: "(Máx 140 carácteres)",
         description: "Descripción*"
       },
       features: {
@@ -251,16 +251,16 @@ export default {
           2: "Titulo 2*",
           3: "Titulo 3",
           4: "Titulo 4",
-          helper: "(Maximo 30 caracteres)"
+          helper: "(Máximo 30 carácteres)"
         },
         descriptions: {
-          1: "Descriptive text 1*",
-          2: "Descriptive text 2*",
-          3: "Descriptive text 3",
-          4: "Descriptive text 4"
+          1: "Texto descriptivo 1*",
+          2: "Texto descriptivo 2*",
+          3: "Texto descriptivo 3",
+          4: "Texto descriptivo 4"
         },
-        button: "Button",
-        link: "Link of the button"
+        button: "Botón",
+        link: "Link del botón"
       }
     },
 
@@ -270,14 +270,14 @@ export default {
       image: "Imagen principal*",
       imageHelperText: "180x60. Máx 25MB",
       formTitle: "Título",
-      titleHelperText: "(Máx 80 caracteres)",
+      titleHelperText: "(Máx 80 carácteres)",
       description: "Descripción*",
       titles: {
         1: "Título 1*",
         2: "Título 2*",
         3: "Título 3",
         4: "Título 4",
-        helper: "(Máx 30 caracteres)"
+        helper: "(Máx 30 carácteres)"
       },
       descriptions: {
         1: "Texto descriptivo 1*",
@@ -295,8 +295,8 @@ export default {
       formTitle: "Título",
       formSubtitle: "Subtítulo*",
       imageHelper: "180x60. Máx 25MB",
-      titleHelper: "(Máx 80 caracteres)",
-      subtitleHelper: "(Máx 140 caracteres)",
+      titleHelper: "(Máx 80 carácteres)",
+      subtitleHelper: "(Máx 140 carácteres)",
       button: "Botón* ",
       link: "Link a tu página de reserva*"
     },
@@ -307,8 +307,8 @@ export default {
         "Vincula tu web con tu perfil de Google y permite que tus usuarios vean tus reseñas.",
       formTitle: "Título",
       formSubtitle: "Subtítulo",
-      titleHelper: "(Máx 80 caracteres)",
-      subtitleHelper: "(Máx 140 caracteres)",
+      titleHelper: "(Máx 80 carácteres)",
+      subtitleHelper: "(Máx 140 carácteres)",
       link: "Link a tu perfil de Google My Business*"
     },
 
