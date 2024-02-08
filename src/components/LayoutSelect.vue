@@ -77,7 +77,6 @@
       flex-direction: column;
       align-items: stretch;
       gap: 0.5rem;
-      cursor: pointer;
 
       .layout {
         width: 100%;
@@ -154,6 +153,7 @@
         margin: 0;
         width: 100%;
         height: 100%;
+        cursor: pointer;
       }
 
       .checkmark {
