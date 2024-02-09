@@ -878,8 +878,6 @@
     onTeamSubmit() {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
 
-      console.log("onTeamSubmit", this.teamForm);
-
       this.publicWebForm.teamMembers.push({
         id: this.publicWebForm.teamMembers.length + 1,
         picture: this.teamForm.picture,
@@ -1357,13 +1355,11 @@
       };
 
       try {
-        console.log("Updating website", postData);
         await apiWebsite.section.put(postData);
         this.$notify({
           type: "success",
           text: this.$tc("web.public.notify.success")
         });
-        console.log("Publishing website");
         this.handlePublishWebsite(this.publicWebForm.active, this.websiteId);
 
         // await this.updateFeatures();

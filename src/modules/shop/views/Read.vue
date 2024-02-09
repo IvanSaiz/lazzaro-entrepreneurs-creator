@@ -165,7 +165,8 @@
     }
 
     toggleProducts() {
-      console.log("Toggling products");
+      // console.log("Toggling products");
+      return;
     }
   }
 </script>

@@ -147,7 +147,9 @@
     }
 
     handleToggle() {
-      console.log("toggle");
+      // console.log("toggle");
+      // TODO: Implement toggle
+      return;
     }
   }
 </script>
