@@ -858,8 +858,7 @@
         }
 
         this.onModalClose();
-      } catch (err) {
-        console.error(err);
+      } catch {
         this.$notify({
           type: "error",
           text: this.$tc("web.public.notify.error")
@@ -1106,8 +1105,7 @@
 
           this.loaded = true;
         })
-        .catch(error => {
-          console.error("Error fetching data:", error);
+        .catch(() => {
           this.$notify({
             type: "error",
             text: this.$tc("web.public.notify.error")
