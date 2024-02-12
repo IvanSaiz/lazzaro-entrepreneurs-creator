@@ -63,6 +63,7 @@ export default {
     Datos: "Datos",
     Mejora: "Mejora",
     Servicios: "Servicios",
-    Blog: "Blog"
+    Blog: "Blog",
+    Formación: "Formación"
   }
 };

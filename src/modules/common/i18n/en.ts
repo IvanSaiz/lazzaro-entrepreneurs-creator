@@ -22,7 +22,7 @@ export default {
     close: "Close",
     alreadyConnected: "Already connected",
     connectToStripe: "Connect to Stripe",
-    goToLogin: "go to login"
+    goToLogin: "Go to Log In"
   },
   notifications: {
     changeSuccess: "Successfully saved changes",
@@ -49,12 +49,13 @@ export default {
     Cuentas: "Accounts",
     Socios: "Partners",
     Organización: "Organization",
-    Asesor: "consultant",
+    Asesor: "Consultant",
     NFTs: "NFTs",
     Datos: "Data",
     Mejora: "Improve",
     Servicios: "Services",
-    Blog: "Blog"
+    Blog: "Blog",
+    Formación: "Training"
   },
   logout: "Logout"
 };

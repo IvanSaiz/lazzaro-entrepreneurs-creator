@@ -56,6 +56,12 @@ export const LZ_MODULES = {
     active: true,
     icon: "browser-icon"
   },
+  training: {
+    moduleName: "training",
+    label: "Formación",
+    active: true,
+    icon: "certificate-icon"
+  },
   consultant: {
     moduleName: "consultant",
     label: "Asesor",
