@@ -130,8 +130,7 @@
           });
           this.loadProjects();
         })
-        .catch(error => {
-          console.error(error);
+        .catch(() => {
           this.$notify({
             type: "error",
             text: this.$tc("projects.create.notifications.projectRemovedError")
