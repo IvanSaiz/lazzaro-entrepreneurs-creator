@@ -399,7 +399,6 @@
               formulate-input(
                 type="image"
                 name="impactDesignBackgroundImage"
-                v-model="publicWebForm.impactDesignBackgroundImage"
                 :help="$t('web.public.impactForm.design.imageHelper')"
               )
               h2.h2--dash {{ $t('web.public.impactForm.design.color') }}
@@ -738,7 +737,7 @@
           } as Section.Web.ImpactData)
       ),
       impactDesignBackgroundColor: "#FFF0F0",
-      impactDesignBackgroundImage: "",
+      impactDesignBackgroundImage: [] as any,
 
       // team properties
       teamTitle: "",
@@ -1050,8 +1049,10 @@
             );
           this.publicWebForm.impactDesignBackgroundColor =
             data.properties?.impact?.design.backgroundColor;
-          this.publicWebForm.impactDesignBackgroundImage =
-            data.properties?.impact?.design.backgroundImage;
+          this.publicWebForm.impactDesignBackgroundImage = data.properties
+            ?.impact?.design.backgroundImage
+            ? [{ url: data.properties?.impact?.design.backgroundImage }]
+            : "";
 
           // Team section
           this.publicWebForm.teamTitle = data.properties?.team?.title;
@@ -1121,6 +1122,7 @@
 
     async parseImageUrl(url) {
       if (url) {
+        console.log(url);
         const parsed = await parseFiles(url);
         return parsed[0] as string;
       }
@@ -1301,7 +1303,9 @@
               .filter(i => !!i.text),
             design: {
               backgroundColor: this.publicWebForm.impactDesignBackgroundColor,
-              backgroundImage: this.publicWebForm.impactDesignBackgroundImage
+              backgroundImage: await this.parseImageUrl(
+                this.publicWebForm.impactDesignBackgroundImage
+              )
             }
           },
           // Team properties
@@ -1366,6 +1370,8 @@
         // await this.updateFeatures();
         this.prevForm = cloneDeep(this.publicWebForm);
       } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error(error);
         this.$notify({
           type: "error",
           text: this.$tc("web.public.notify.error")
