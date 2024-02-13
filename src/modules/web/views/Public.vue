@@ -1358,7 +1358,10 @@
           type: "success",
           text: this.$tc("web.public.notify.success")
         });
-        this.handlePublishWebsite(this.publicWebForm.active, this.websiteId);
+        await this.handlePublishWebsite(
+          this.publicWebForm.active,
+          this.websiteId
+        );
 
         // await this.updateFeatures();
         this.prevForm = cloneDeep(this.publicWebForm);
