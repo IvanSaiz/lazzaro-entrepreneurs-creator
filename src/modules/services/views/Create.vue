@@ -27,7 +27,6 @@
                 validation="required|mime:image/jpeg,image/png"
                 :validation-name="$t('services.create.form.image')"
                 label-position="before"
-                :uploader="uploadFile"
               )
           .services-general__section--right
             .form__row
@@ -64,7 +63,7 @@
               pattern="[0-9]*"
               :label="$t('services.create.price.label')"
               :label-class="['required']"
-              validation="required|number"
+              :validation="form.payment_in_advance ? 'required|number' : 'number'"
               :validation-name="$t('services.create.price.label')"
             )
       section.bookings
@@ -95,7 +94,6 @@
   import { namespace } from "vuex-class";
   import { apiServices } from "../api";
   import LzEditorInput from "@/components/EditorInput.vue";
-  import toBase64 from "@/utils/toBase64";
 
   const auth = namespace("auth");
 
@@ -224,12 +222,6 @@
         });
       }
       this.showDeleteModal = false;
-    }
-
-    async uploadFile(file: File, progress: (progress: number) => void) {
-      const base64 = await toBase64(file);
-      progress(100);
-      return { base64 };
     }
   }
 </script>

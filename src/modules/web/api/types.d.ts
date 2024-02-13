@@ -115,7 +115,7 @@ interface DataItem {
   id: string | number;
   url: string;
   text: string;
-  ammount: string | number;
+  amount: string | number;
 }
 
 interface Design {

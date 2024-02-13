@@ -25,7 +25,12 @@ export default {
           disabled: "Disabled"
         }
       },
-      actions: "Actions"
+      actions: "Actions",
+      deleteModal: {
+        title: "Delete Project",
+        subtitle:
+          "Are you sure you want to delete this project? This action cannot be undone."
+      }
     },
     newProject: "New project"
   },

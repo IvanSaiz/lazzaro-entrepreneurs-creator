@@ -25,6 +25,7 @@ import { NFTsModuleRouter } from "@/modules/NFT";
 import { dataModuleRouter } from "@/modules/data";
 import { improveModuleRouter } from "@/modules/improve";
 import { servicesModuleRouter } from "@/modules/services";
+import { blogModuleRouter } from "@/modules/blog";
 
 Vue.use(VueRouter);
 
@@ -51,7 +52,8 @@ const routes: Array<RouteConfig> = [
       ...NFTsModuleRouter,
       ...dataModuleRouter,
       ...improveModuleRouter,
-      ...servicesModuleRouter
+      ...servicesModuleRouter,
+      ...blogModuleRouter
     ]
   },
   ...authModuleRouter,

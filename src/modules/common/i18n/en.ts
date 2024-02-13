@@ -34,6 +34,13 @@ export default {
     companyAlreadyExists: "A company with this name already exists",
     validationError: "Please make sure your CIF/DNI are correct"
   },
+  design: {
+    layout: {
+      title: "Layout",
+      heading: "Heading",
+      subtitle: "Subtitle"
+    }
+  },
   nav: {
     Web: "Web",
     Portfolio: "Portfolio",
@@ -46,7 +53,8 @@ export default {
     NFTs: "NFTs",
     Datos: "Data",
     Mejora: "Improve",
-    Servicios: "Services"
+    Servicios: "Services",
+    Blog: "Blog"
   },
   logout: "Logout"
 };

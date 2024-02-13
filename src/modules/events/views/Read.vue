@@ -3,6 +3,14 @@
   header
     h1 {{ $t('events.read.title') }}
     p {{ $t('events.read.subtitle') }}
+  LzModal(v-if="deleteModalOpen" @close="() => (this.deleteModalOpen = false)")
+    h2 {{ $t('events.read.deleteModal.title') }}
+    p {{ $t('events.read.deleteModal.subtitle') }}
+    .actions
+      LzButton(type="secondary" @click="$emit('cancel')")
+        | {{ $t('common.actions.cancel') }}
+      LzButton(type="primary" @click="$emit('confirm')")
+        | {{ $t('common.actions.delete') }}
   DesignModal(section="events")
   .content 
     .search
@@ -31,14 +39,15 @@
   import { api as Events } from "../api";
   import { ROUTES } from "../router";
   import DesignModal from "../components/DesignModal.vue";
+  import LzModal from "@/components/Modal.vue";
   const auth = namespace("auth");
 
-  @Component({ components: { LzButton, SearchEvent, DesignModal } })
+  @Component({ components: { LzButton, SearchEvent, DesignModal, LzModal } })
   export default class Read extends Vue {
     @auth.State("id")
     public memberId!: string;
-
     public events: CalendarEvent[] = [];
+    deleteModalOpen = false;
 
     async mounted() {
       await this.loadEvents();
@@ -75,7 +84,25 @@
       });
     }
 
-    deleteEvent(id: string) {
+    async confirm(): Promise<boolean> {
+      this.deleteModalOpen = true;
+
+      return new Promise(res => {
+        this.$on("confirm", () => {
+          this.deleteModalOpen = false;
+          res(true);
+        });
+        this.$on("cancel", () => {
+          this.deleteModalOpen = false;
+          res(false);
+        });
+      });
+    }
+
+    async deleteEvent(id: string) {
+      // If the user cancels, we don't want to delete the event
+      if (!(await this.confirm())) return;
+
       Events.delete(id)
         .then(() => {
           this.$notify({

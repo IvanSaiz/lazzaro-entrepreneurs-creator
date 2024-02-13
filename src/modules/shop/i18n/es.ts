@@ -1,10 +1,15 @@
 export default {
   read: {
-    title: "Tienda",
-    subtitle: "Gestiona tus productos y tus pedidos en esta sección",
+    title: "Productos",
+    subtitle: "Todos tus productos para mostarlos a tus potenciales clientes.",
+    see: "Ver tienda",
     steps: {
       products: "Productos",
       orders: "Pedidos"
+    },
+    status: {
+      enabled: "Activado",
+      disabled: "Desactivado"
     },
     modalOrder: {
       title: "Pedido",
@@ -27,6 +32,9 @@ export default {
         price: "Precio",
         total: "Total"
       }
+    },
+    modalDelete: {
+      content: '¿Estás seguro de que quieres eliminar el producto "{title}"?'
     },
     currency: {
       euro: "€"
@@ -67,16 +75,17 @@ export default {
       },
       mainImg: "Imagen principal",
       addImage: "Añadir imagen",
+      images: "Imágenes Adicionales",
       productName: "Nombre del producto",
       description: "Descripción",
-      price: "Precio",
-      discount: "Descuento",
+      price: "Precio (€)",
+      discount: "Descuento (%)",
       stock: "Stock",
       deliveryTime: "Tiempo de entrega"
     },
     notifications: {
       productSaved: "Producto guardado con éxito",
-      productUpgrated: "Producto actualizado con éxito",
+      productUpdated: "Producto actualizado con éxito",
       productRemoved: "Producto eliminado con éxito"
     }
   }

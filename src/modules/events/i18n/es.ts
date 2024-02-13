@@ -24,6 +24,11 @@ export default {
           save: "Guardar"
         }
       }
+    },
+    deleteModal: {
+      title: "Eliminar evento",
+      subtitle:
+        "¿Estás seguro de que quieres eliminar este evento? Esta acción no se puede deshacer."
     }
   },
   create: {

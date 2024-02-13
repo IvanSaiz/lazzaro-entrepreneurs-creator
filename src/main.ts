@@ -11,6 +11,7 @@ import "vue-tel-input/dist/vue-tel-input.css";
 // config
 import i18nConfig from "@/plugins/i18n/config";
 import { es } from "@braid/vue-formulate-i18n";
+import uploader from "@/plugins/formulate/uploader";
 
 // components
 import FormulateInputToggle from "@/components/Input/FormulateInputToggle.vue";
@@ -30,6 +31,7 @@ Vue.component("FormulateInputTextColor", FormulateInputTextColor);
 Vue.use(VueFormulate, {
   plugins: [es],
   locale: "es",
+  uploader,
   library: {
     toggle: {
       classification: "toggle",

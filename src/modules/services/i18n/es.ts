@@ -38,7 +38,7 @@ export default {
       description: {
         title: "Descripción",
         subtitle:
-          "La decripción se incluirá justo debajo del título que cada servicio. Máx 200 caracteres"
+          "La decripción se incluirá justo debajo del título que cada servicio. Máx 200 carácteres"
       }
     },
     price: {

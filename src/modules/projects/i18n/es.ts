@@ -27,6 +27,11 @@ export default {
       },
       actions: "Acciones"
     },
+    deleteModal: {
+      title: "Eliminar proyecto",
+      subtitle:
+        "¿Estás seguro de que quieres eliminar este proyecto? Esta acción no se puede deshacer."
+    },
     newProject: "Nuevo proyecto"
   },
   create: {

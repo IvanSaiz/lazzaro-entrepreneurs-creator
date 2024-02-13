@@ -29,7 +29,7 @@
                 :v-model="form.images"
                 :label="$t('events.create.generalForm.images.label')"
                 :label-class="['required']"
-                validation="required|mime:image/jpeg,image/png"
+                validation="mime:image/jpeg,image/png"
                 :validation-name="$t('events.create.generalForm.images.label')"
                 label-position="before"
                 :uploader="uploadFile"
@@ -153,7 +153,7 @@
               formulate-input(
                 type="text"
                 :label="$t('events.create.ratesForm.amount')"
-                name="ammount"
+                name="amount"
                 validation="required|number"
               )
               formulate-input(
@@ -168,7 +168,6 @@
                 name="name"
               )
       .calendar-create__actions
-        lz-button(type="tertiary" @click.prevent="onDelete") {{$t('common.actions.delete')}}
         lz-button(type="secondary" @click.prevent="onCancel") {{ $t('common.actions.cancel') }}
         lz-button(type="primary") {{ $t('common.actions.save') }}
 </template>
@@ -226,9 +225,6 @@
       Presencial: this.$t("events.create.generalForm.modeOptions.onsite"),
       Online: this.$t("events.create.generalForm.modeOptions.online")
     };
-
-    @auth.State("id")
-    public ongId!: string;
 
     async getEvent(eventId: string) {
       const event = await api.get(eventId);
@@ -309,11 +305,6 @@
           text: this.$tc("common.error.generic")
         });
       }
-    }
-
-    onDelete(e) {
-      //TODO: call to remove event
-      // console.log("Deleting CalendarEvent", e);
     }
 
     onCancel() {

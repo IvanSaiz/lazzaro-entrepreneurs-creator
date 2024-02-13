@@ -2,9 +2,15 @@ export default {
   read: {
     title: "Shop",
     subtitle: "Manage your products and your orders here",
+    see: "See shop",
+    design: "Diseño",
     steps: {
       products: "Products",
       orders: "Orders"
+    },
+    status: {
+      enabled: "Enabled",
+      disabled: "Disabled"
     },
     modalOrder: {
       title: "Order",
@@ -67,16 +73,17 @@ export default {
       },
       mainImg: "Primary image",
       addImage: "Add image",
+      images: "Additional images",
       productName: "Product name",
       description: "Description",
-      price: "Price",
-      discount: "Discount",
+      price: "Price (€)",
+      discount: "Discount (%)",
       stock: "Stock",
       deliveryTime: "Delivery time"
     },
     notifications: {
       productSaved: "Product successfully saved",
-      productUpgrated: "Product successfully upgraded",
+      productUpdated: "Product successfully upgraded",
       productRemoved: "Product successfully removed"
     }
   }

@@ -5,6 +5,30 @@ export default {
     createNewBtn: "New event",
     search: {
       placeholder: "Search event"
+    },
+    notifications: {
+      deleted: "Event successfully deleted"
+    },
+    design: {
+      button: "Design",
+      modal: {
+        title: "Design",
+        section: "Events",
+        form: {
+          title: "Title",
+          labels: {
+            title: "Title",
+            subtitle: "Subtitle",
+            color: "Color"
+          },
+          save: "Save"
+        }
+      }
+    },
+    deleteModal: {
+      title: "Delete event",
+      subtitle:
+        "Are you sure you want to delete this event? This action cannot be undone."
     }
   },
   create: {

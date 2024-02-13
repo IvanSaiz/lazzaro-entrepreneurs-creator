@@ -89,7 +89,7 @@ declare namespace Section {
     type ImpactData = {
       id: string;
       text: string;
-      ammount: string;
+      amount: string;
       url: { url: string }[];
     };
 

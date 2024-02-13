@@ -39,9 +39,7 @@
             name="url"
             disabled
           )            
-
     <choose-template :chosenTemplateId='publicWebForm.chosenTemplateId' :handleChooseTemplate='handleChooseTemplate' />
-
     section.public-personalizeWeb
       .public-personalizeWeb__header
         h2.h2--dash {{ $t('web.public.personalizeWebForm.title') }}
@@ -96,12 +94,28 @@
               :label="$t('web.public.personalizeWebForm.form.footerColor')"
               value="#1081F2"
               )
-
     section.public-homepage
+
       .public-homepage__header
         h2.h2--dash {{ $t('web.public.homepageForm.title') }}
-        h3 {{ $t('web.public.homepageForm.subtitle') }}
-        .form__row
+        .subtitle
+          h3 {{ $t('web.public.homepageForm.subtitle') }}
+          design-modal(section="homepage")
+            template(#header)
+              h4 {{ $t('web.public.homepageForm.title') }}
+            template(#form)
+              h2.h2--dash {{ $t('web.public.homepageForm.design.layout') }}
+              layout-select(
+                :value="publicWebForm.homepageDesignLayout"
+                name="homepageDesignLayout"
+              )
+              h2.h2--dash {{ $t('web.public.homepageForm.design.color') }}
+              FormulateInput#primary-color(
+                type="textColor"
+                name="homepageDesignBackgroundColor"
+                value="#EFEFEF"
+                )
+      .form__row
           FormulateInput(
             type="image"
             :label="$t('web.public.homepageForm.form.image')"
@@ -110,42 +124,42 @@
             :help="$t('web.public.homepageForm.form.imageHelper')"
           )
           .form-section
+            .text-color-row
               formulate-input(
-                type="text"
-                name="homepageTitle"
-                :label="$t('web.public.homepageForm.form.title')"
-                :help="$t('web.public.homepageForm.form.titleHelper')"
-              )
+                  type="text"
+                  name="homepageTitle"
+                  :label="$t('web.public.homepageForm.form.title')"
+                  :help="$t('web.public.homepageForm.form.titleHelper')"
+                )
               formulate-input#primary-color(
                 type="textColor"
                 name="homepageTitleColor"
-                :label="$t('auth.onboarding.stepStyle.form.textColour')"
                 value="#1081F2"
                 )
+            .text-color-row
               formulate-input(
-                type="text"
-                name="homepageSubtitle"
-                :label="$t('web.public.homepageForm.form.subtitle')"
-                :help="$t('web.public.homepageForm.form.subtitleHelper')"
-                )
+                  type="text"
+                  name="homepageSubtitle"
+                  :label="$t('web.public.homepageForm.form.subtitle')"
+                  :help="$t('web.public.homepageForm.form.subtitleHelper')"
+                  )
               FormulateInput#primary-color(
                 type="textColor"
                 name="homepageSubtitleColor"
-                :label="$t('auth.onboarding.stepStyle.form.textColour')"
                 value="#1081F2"
                 )
-              .button-row
-                formulate-input(
+            .button-row
+              formulate-input(
                   type="text"
                   name="homepageFirstButtonText"
                   :label="$t(`web.public.homepageForm.form.buttons.1`)"
                 )
-                formulate-input(
+              formulate-input(
                   type="text"
                   name="homepageFirstButtonLink"
                   :label="$t(`web.public.homepageForm.form.links.1`)"
                 )
-              .button-row
+            .button-row
                 formulate-input(
                   type="text"
                   name="homepageSecondButtonText"
@@ -159,7 +173,9 @@
     section.public-whoWeAre
       .public-whoWeAre__header
         h2.h2--dash {{ $t('web.public.whoWeAreForm.title') }}
-        h3 {{ $t('web.public.whoWeAreForm.subtitle') }}
+        .subtitle
+          h3 {{ $t('web.public.whoWeAreForm.subtitle') }}
+          design-modal(section="aboutUs")
         .form__row
           FormulateInput(
             type="image"
@@ -179,7 +195,6 @@
               FormulateInput#primary-color(
                 type="textColor"
                 name="aboutUsTitleColor"
-                :label="$t('auth.onboarding.stepStyle.form.textColour')"
                 value="#1081F2"
                 )
             .section-row
@@ -192,7 +207,6 @@
               FormulateInput#primary-color(
                 type="textColor"
                 name="aboutUsSubtitleColor"
-                :label="$t('auth.onboarding.stepStyle.form.textColour')"
                 value="#1081F2"
                 )
             lz-editor-input(
@@ -241,7 +255,9 @@
     section.public-whyUs
       .public-whyUs__header
         h2.h2--dash {{ $t('web.public.whyChooseUsForm.title') }}
-        h3 {{ $t('web.public.whyChooseUsForm.subtitle') }}
+        .subtitle
+          h3 {{ $t('web.public.whyChooseUsForm.subtitle') }}
+          design-modal(section="whyUs")
         .form__row
           FormulateInput(
             type="image"
@@ -261,7 +277,6 @@
               FormulateInput#primary-color(
                 type="textColor"
                 name="whyChooseUsTitleColor"
-                :label="$t('auth.onboarding.stepStyle.form.textColour')"
                 value="#1081F2"
                 )
             lz-editor-input(
@@ -288,7 +303,9 @@
     section.public-bookings
       .public-bookings__header
         h2.h2--dash {{ $t('web.public.bookingsForm.title') }}
-        h3 {{ $t('web.public.bookingsForm.subtitle') }}
+        .subtitle
+          h3 {{ $t('web.public.bookingsForm.subtitle') }}
+          design-modal(section="bookings")
         .form__row
           FormulateInput(
             type="image"
@@ -308,7 +325,6 @@
               FormulateInput#primary-color(
                 type="textColor"
                 name="bookingsTitleColor"
-                :label="$t('auth.onboarding.stepStyle.form.textColour')"
                 value="#1081F2"
                 )
             .section-row
@@ -321,7 +337,6 @@
               FormulateInput#primary-color(
                 type="textColor"
                 name="bookingsSubtitleColor"
-                :label="$t('auth.onboarding.stepStyle.form.textColour')"
                 value="#1081F2"
                 )
             .links-row
@@ -350,7 +365,6 @@
           FormulateInput#primary-color(
             type="textColor"
             name="reviewsTitleColor"
-            :label="$t('auth.onboarding.stepStyle.form.textColour')"
             value="#1081F2"
             )
 
@@ -364,7 +378,6 @@
           FormulateInput#primary-color(
             type="textColor"
             name="reviewsSubtitleColor"
-            :label="$t('auth.onboarding.stepStyle.form.textColour')"
             value="#1081F2"
             )
       .form__row
@@ -376,33 +389,52 @@
     section.public-impact
       .public-impact__header
         h2.h2--dash {{ $t('web.public.impactForm.title') }}
-        p {{ $t('web.public.impactForm.subtitle') }}
-          formulate-input(
-            type="group"
-            name="impactData"
-            :value="publicWebForm.impactData"
-            #default="{index}"
-          ).public-impact__content
-            formulate-input.impact-item(
+        .subtitle
+          p {{ $t('web.public.impactForm.subtitle') }}
+          design-modal(section="impact")
+            template(#header)
+              h4 {{ $t('web.public.impactForm.design.title') }}
+            template(#form)
+              h2.h2--dash {{ $t('web.public.impactForm.design.image') }}
+              formulate-input(
+                type="image"
+                name="impactDesignBackgroundImage"
+                :help="$t('web.public.impactForm.design.imageHelper')"
+              )
+              h2.h2--dash {{ $t('web.public.impactForm.design.color') }}
+              formulate-input#primary-color(
+                type="textColor"
+                name="impactDesignBackgroundColor"
+                v-model="publicWebForm.impactDesignBackgroundColor"
+                )
+      formulate-input(
+        type="group"
+        name="impactData"
+        :value="publicWebForm.impactData"
+        #default="{index}"
+      ).public-impact__content
+        formulate-input.impact-item(
               type="image"
               :name= "`url`"
               :label="$t(`web.public.impactForm.icon.${index+1}`)"
               :help="$t('web.public.impactForm.icon.help')"
             )
-            formulate-input.impact-item(
+        formulate-input.impact-item(
               type="text"
               :name= "`text`"
               :label="$t(`web.public.impactForm.text.${index+1}`)"
             )
-            formulate-input.impact-item(
+        formulate-input.impact-item(
               type="text"
-              :name= "`ammount`"
+              :name= "`amount`"
               :label="$t(`web.public.impactForm.amount.${index+1}`)"
             )
     section.public-team
       .public-team__header
         h2.h2--dash {{ $t('web.public.teamForm.title') }}
-        h4 {{ $t('web.public.teamForm.subtitle') }}
+        .subtitle
+          h3 {{ $t('web.public.teamForm.subtitle') }}
+          design-modal(section="team")
         .public-team__title
           .team-section
             formulate-input(
@@ -414,7 +446,6 @@
             FormulateInput#primary-color(
               type="textColor"
               name="teamTitleColor"
-              :label="$t('auth.onboarding.stepStyle.form.textColour')"
               value="#1081F2"
               )
           .team-section
@@ -427,7 +458,6 @@
             FormulateInput#primary-color(
               type="textColor"
               name="teamSubtitleColor"
-              :label="$t('auth.onboarding.stepStyle.form.textColour')"
               value="#1081F2"
               )
 
@@ -502,11 +532,12 @@
     section.public-footer
       .public-footer__header
         h2.h2--dash {{$t('web.public.footer.title')}}
-        h4 {{ $t('web.public.footer.subtitle') }}
+        .subtitle
+          h4 {{ $t('web.public.footer.subtitle') }}
+          design-modal(section="footer")
       section.-public-footer__subSection
         .public-footer__header
           h3.h3--dash {{ $t('web.public.footer.socialForm.title') }}
-
         .public-networks__urls
           .form__row
             formulate-input(
@@ -541,12 +572,9 @@
               name="footerSocialInstagram"
               :label="$t('web.public.footer.socialForm.instagram')"
             )
-
-
       section.public-footer__subSection 
         .public-footer__header
           h3.h3--dash {{ $t('web.public.footer.termsForm.title') }}
-
         .form__row
           lz-editor-input(
             :label="$t('web.public.footer.termsForm.terms')"
@@ -565,7 +593,6 @@
             :add-label="$t('web.public.footer.termsForm.add')"
             :multiple="true"
           )
-
   .public-buttons
     lz-button(
       type="secondary"
@@ -577,8 +604,6 @@
 </template>
 
 <script lang="ts">
-  /* eslint-disable */
-
   import { Component, Vue } from "vue-property-decorator";
   import { namespace } from "vuex-class";
   import cloneDeep from "lodash/cloneDeep";
@@ -588,10 +613,12 @@
   import LzTable from "@/components/Table.vue";
   import LzEditorInput from "@/components/EditorInput.vue";
   import LzModal from "@/components/Modal.vue";
+  import DesignModal from "@/components/DesignModal.vue";
   import { DotsIcon } from "@/components";
   import { parseFiles } from "@/utils/parseFile";
   import { apiWebsite } from "../api";
   import { ChooseTemplate } from "../components";
+  import LayoutSelect from "@/components/LayoutSelect.vue";
 
   const auth = namespace("auth");
 
@@ -602,7 +629,9 @@
       LzEditorInput,
       ChooseTemplate,
       LzModal,
-      DotsIcon
+      DotsIcon,
+      DesignModal,
+      LayoutSelect
     }
   })
   export default class Public extends Vue {
@@ -701,14 +730,14 @@
       impactData: new Array(4).fill(null).map(
         (_, i) =>
           ({
-            ammount: "",
+            amount: "",
             id: `${i}`,
             text: "",
             url: []
           } as Section.Web.ImpactData)
       ),
       impactDesignBackgroundColor: "#FFF0F0",
-      impactDesignBackgroundImage: "",
+      impactDesignBackgroundImage: [] as any,
 
       // team properties
       teamTitle: "",
@@ -828,8 +857,7 @@
         }
 
         this.onModalClose();
-      } catch (err) {
-        console.error(err);
+      } catch {
         this.$notify({
           type: "error",
           text: this.$tc("web.public.notify.error")
@@ -847,8 +875,6 @@
 
     onTeamSubmit() {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-
-      console.log("onTeamSubmit", this.teamForm);
 
       this.publicWebForm.teamMembers.push({
         id: this.publicWebForm.teamMembers.length + 1,
@@ -1009,7 +1035,7 @@
                   id: item.id.toString(),
                   url: [{ url: item.url }],
                   text: item.text,
-                  ammount: item.amount
+                  amount: item.amount
                 } as Section.Web.ImpactData)
             ) ||
             new Array(4).fill(0).map(
@@ -1017,14 +1043,16 @@
                 ({
                   id: i.toString(),
                   text: "",
-                  ammount: "",
+                  amount: "",
                   url: []
                 } as Section.Web.ImpactData)
             );
           this.publicWebForm.impactDesignBackgroundColor =
             data.properties?.impact?.design.backgroundColor;
-          this.publicWebForm.impactDesignBackgroundImage =
-            data.properties?.impact?.design.backgroundImage;
+          this.publicWebForm.impactDesignBackgroundImage = data.properties
+            ?.impact?.design.backgroundImage
+            ? [{ url: data.properties?.impact?.design.backgroundImage }]
+            : "";
 
           // Team section
           this.publicWebForm.teamTitle = data.properties?.team?.title;
@@ -1078,8 +1106,7 @@
 
           this.loaded = true;
         })
-        .catch(error => {
-          console.error("Error fetching data:", error);
+        .catch(() => {
           this.$notify({
             type: "error",
             text: this.$tc("web.public.notify.error")
@@ -1118,7 +1145,7 @@
       const team: TeamProperties["members"][] = [];
       if (this.publicWebForm.teamMembers) {
         for await (const member of this.publicWebForm.teamMembers) {
-          let picture =
+          const picture =
             member.picture && member.picture.files
               ? (await parseFiles(member.picture))[0]
               : null;
@@ -1267,13 +1294,17 @@
           // Impact properties
           //TODO: that logic is not the correct way to handle this
           impact: {
-            data: this.publicWebForm.impactData.map(i => ({
-              ...i,
-              url: i.url[0]?.url ?? ""
-            })),
+            data: this.publicWebForm.impactData
+              .map(i => ({
+                ...i,
+                url: i.url[0]?.url ?? ""
+              }))
+              .filter(i => !!i.text),
             design: {
               backgroundColor: this.publicWebForm.impactDesignBackgroundColor,
-              backgroundImage: this.publicWebForm.impactDesignBackgroundImage
+              backgroundImage: await this.parseImageUrl(
+                this.publicWebForm.impactDesignBackgroundImage
+              )
             }
           },
           // Team properties
@@ -1317,7 +1348,7 @@
               secondaryWeb: this.publicWebForm.footerSocialSecondaryWeb
             },
             design: {
-              backgroundColor: this.publicWebForm.footerDesignBackgroundColor,
+              backgroundColor: this.publicWebForm.styleFooterColor,
               backgroundImage: this.publicWebForm.footerDesignBackgroundImage
             }
           }
@@ -1325,18 +1356,20 @@
       };
 
       try {
-        console.log("Updating website", postData);
         await apiWebsite.section.put(postData);
         this.$notify({
           type: "success",
           text: this.$tc("web.public.notify.success")
         });
-        console.log("Publishing website");
-        this.handlePublishWebsite(this.publicWebForm.active, this.websiteId);
+        await this.handlePublishWebsite(
+          this.publicWebForm.active,
+          this.websiteId
+        );
 
         // await this.updateFeatures();
         this.prevForm = cloneDeep(this.publicWebForm);
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error(error);
         this.$notify({
           type: "error",
@@ -1351,6 +1384,11 @@
   #public {
     section {
       margin-top: 40px;
+
+      .subtitle {
+        display: flex;
+        justify-content: space-between;
+      }
     }
 
     .public {
@@ -1609,6 +1647,21 @@
             }
           }
 
+          .text-color-row {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+
+            > :first-child {
+              flex-grow: 1;
+            }
+
+            > :last-child {
+              max-width: fit-content;
+            }
+          }
+
           &__cta {
             display: flex;
             margin-top: 10px;
@@ -1654,6 +1707,7 @@
           .section-row {
             display: flex;
             width: 970px;
+            align-items: center;
 
             > :first-child {
               width: 82%;
@@ -1732,6 +1786,7 @@
           .section-row {
             display: flex;
             width: 970px;
+            align-items: center;
 
             > :first-child {
               width: 82%;
@@ -1795,6 +1850,7 @@
           .section-row {
             display: flex;
             width: 970px;
+            align-items: center;
 
             > :first-child {
               width: 82%;
@@ -1842,6 +1898,7 @@
             display: flex;
             width: 563px;
             gap: 18px;
+            align-items: center;
 
             .formulate-input-element--text {
               width: 382px;
@@ -1855,9 +1912,17 @@
       }
 
       &-impact {
+        &__header {
+          .subtitle {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            p {
+              font-size: 16px;
+            }
+          }
+        }
         &__content {
-          margin-top: 42px;
-
           .formulate-input-grouping {
             display: inline-flex;
             align-items: flex-start;
@@ -1962,6 +2027,7 @@
             display: flex;
             width: 563px;
             gap: 18px;
+            align-items: center;
 
             .formulate-input-element--text {
               width: 382px;
