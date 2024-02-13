@@ -1122,7 +1122,6 @@
 
     async parseImageUrl(url) {
       if (url) {
-        console.log(url);
         const parsed = await parseFiles(url);
         return parsed[0] as string;
       }
