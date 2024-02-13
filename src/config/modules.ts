@@ -50,12 +50,12 @@ export const LZ_MODULES = {
     active: true,
     icon: "file-like-icon"
   },
-  blog: {
-    moduleName: "blog",
-    label: "Blog",
-    active: true,
-    icon: "browser-icon"
-  },
+  // blog: {
+  //   moduleName: "blog",
+  //   label: "Blog",
+  //   active: true,
+  //   icon: "browser-icon"
+  // },
   consultant: {
     moduleName: "consultant",
     label: "Asesor",
