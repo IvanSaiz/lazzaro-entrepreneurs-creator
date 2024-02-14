@@ -63,7 +63,7 @@
               pattern="[0-9]*"
               :label="$t('services.create.price.label')"
               :label-class="['required']"
-              validation="required|number"
+              :validation="form.payment_in_advance ? 'required|number' : 'number'"
               :validation-name="$t('services.create.price.label')"
             )
       section.bookings
@@ -94,7 +94,6 @@
   import { namespace } from "vuex-class";
   import { apiServices } from "../api";
   import LzEditorInput from "@/components/EditorInput.vue";
-  import toBase64 from "@/utils/toBase64";
 
   const auth = namespace("auth");
 
