@@ -4,16 +4,25 @@
       <h1>{{ $t("training.home.title") }}</h1>
       <p>{{ $t("training.home.subtitle") }}</p>
     </header>
+    <dialog class="video-modal" @mousedown="handleBackdropClick">
+      <form method="dialog" class="container">
+        <button @click="closeDialog"><x-icon :size="30" /></button>
+        <video controls :src="selectedVideo" autoplay type="video/mp4" />
+      </form>
+    </dialog>
     <div class="cols">
       <div v-for="card in cards" :key="card.title.toString()" class="card">
         <h2>{{ card.title }}</h2>
         <p>{{ card.subtitle }}</p>
         <div class="buttons">
           <router-link :to="{ name: card.buttons.link }">
-            <file-text-icon :size="20" />
+            <file-text-icon size="20" />
           </router-link>
-          <button>
-            <player-play-icon :size="20" />
+          <button
+            v-if="card.buttons.video"
+            @click="selectVideo(card.buttons.video)"
+          >
+            <player-play-icon size="20" />
           </button>
         </div>
       </div>
@@ -37,16 +46,42 @@
 
   @Component
   export default class Home extends Vue {
-    // Add data, methods, etc. here
+    videos = {
+      Support: require("../assets/videos/support.mp4"),
+      Advisor: require("../assets/videos/advisor.mp4"),
+      Portfolio: require("../assets/videos/portfolio.mp4")
+    };
 
     cards = sections.map(section => ({
       title: this.$t(`training.home.cards.${section}.title`),
       subtitle: this.$t(`training.home.cards.${section}.subtitle`),
       buttons: {
         link: `Training${section}`,
-        video: section // TODO: replace with actual video link when available
+        video: this.videos[section] // TODO: replace with actual video link when available
       }
     }));
+
+    selectedVideo = "";
+    selectVideo(src: string) {
+      this.selectedVideo = src;
+      const dialog = this.$el.querySelector(
+        ".video-modal"
+      ) as HTMLDialogElement;
+      dialog.showModal();
+    }
+    handleBackdropClick(e: MouseEvent) {
+      if (e.target === e.currentTarget) {
+        this.selectedVideo = "";
+        (e.currentTarget as HTMLDialogElement).close();
+      }
+    }
+    closeDialog() {
+      this.selectedVideo = "";
+      const dialog = this.$el.querySelector(
+        ".video-modal"
+      ) as HTMLDialogElement;
+      dialog.close();
+    }
   }
 </script>
 
@@ -108,8 +143,74 @@
             background-color: $color-black-07;
             border-radius: 100%;
             padding: 5px;
+            cursor: pointer;
           }
         }
+      }
+    }
+    dialog.video-modal {
+      padding: 0;
+      border: none;
+      background-color: transparent;
+      max-width: 80%;
+      overflow: hidden;
+
+      &::backdrop {
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: transparent;
+        border: none;
+
+        button {
+          padding: 0;
+          border: 0;
+          background-color: transparent;
+          cursor: pointer;
+          align-self: flex-end;
+
+          svg * {
+            color: $color-white;
+          }
+        }
+      }
+
+      video {
+        max-width: 100%;
+        max-height: 100%;
+      }
+    }
+  }
+
+  section.training {
+    section {
+      margin-top: 2.2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 30px;
+
+      h2 {
+        margin-bottom: 8px;
+        font-size: 19px;
+        font-weight: 400;
+        text-transform: uppercase;
+        line-height: normal;
+        color: $color-black-02;
+      }
+
+      p {
+        font-size: 16px;
+        line-height: normal;
+        color: $color-black-03;
+      }
+
+      img {
+        max-width: 70%;
       }
     }
   }
