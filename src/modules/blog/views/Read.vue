@@ -11,7 +11,10 @@
       :confirmLabel="$t('common.actions.yes')"
     />
     <header>
-      <h1>{{ $t("blog.read.title") }}</h1>
+      <div class="title">
+        <h1>{{ $t("blog.read.title") }}</h1>
+        <SectionToggle section="blog" />
+      </div>
       <p>{{ $t("blog.read.subtitle") }}</p>
     </header>
     <div class="content">
@@ -50,6 +53,7 @@
   import Articles from "../api";
   import { namespace } from "vuex-class";
   import LzConfirm from "@/components/Confirm.vue";
+  import SectionToggle from "@/components/SectionToggle.vue";
   const auth = namespace("auth");
 
   type Article = {
@@ -61,7 +65,7 @@
     icon: string;
   };
 
-  @Component({ components: { LzTable, LzButton, LzConfirm } })
+  @Component({ components: { LzTable, LzButton, LzConfirm, SectionToggle } })
   export default class Read extends Vue {
     @auth.State("id")
     memberId!: string;
@@ -131,6 +135,12 @@
   #blog {
     header {
       margin-bottom: 4rem;
+
+      .title {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
     }
 
     .content {

@@ -4,9 +4,16 @@ export default {
   section: {
     get: <Props = Record<string, unknown>>(
       websiteId: string,
-      sectionType: string
+      sectionType: string,
+      attributes?: (keyof Section<Props>)[]
     ): Promise<Section<Props>> => {
-      return http.get(`websites/${websiteId}/section/${sectionType}`, {
+      let url = `websites/${websiteId}/section/${sectionType}`;
+
+      if (attributes) {
+        url += `?attributes=${attributes.join(",")}`;
+      }
+
+      return http.get(url, {
         noAuth: false
       });
     },
@@ -15,6 +22,11 @@ export default {
     },
     put: (sectionBody: any): Promise<any> => {
       return http.put("websites/section", sectionBody, { noAuth: false });
+    },
+    toggle: (websiteId: string, section: string): Promise<any> => {
+      return http.patch(`websites/${websiteId}/section/toggle/${section}`, {
+        noAuth: false
+      });
     }
   },
   website: {

@@ -279,6 +279,7 @@ declare type Section<Props> = {
   createdAt: Date;
   updatedAt: Date;
   deleted: boolean;
+  active: boolean;
 };
 
 interface WebProps {

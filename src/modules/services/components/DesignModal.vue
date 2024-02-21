@@ -124,7 +124,8 @@
       try {
         const section = await apiWebsite.section.get<Properties>(
           this.websiteId,
-          this.section
+          this.section,
+          ["properties", "templateId"]
         );
         this.properties = section.properties;
         if (section.templateId) this.templateId = section.templateId;

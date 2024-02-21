@@ -3,9 +3,9 @@
   header
     .title
       h1 {{ $t('services.read.title') }}
-      formulate-input(type="toggle" name="active" v-on="handleToggle")
+      section-toggle(section="services")
       .view-btn
-        a(href="" target="_blank") {{ $t('services.read.see') }}
+        a(:href="`${websiteURL}#servicios`" target="_blank") {{ $t('services.read.see') }}
         arrow-up-right-icon
     p {{ $t('services.read.subtitle') }}
     design-modal(section="services")
@@ -37,14 +37,22 @@
   import { apiServices } from "../api";
   import SearchEvent from "@/components/SearchEvent.vue";
   import DesignModal from "../components/DesignModal.vue";
+  import SectionToggle from "@/components/SectionToggle.vue";
   const auth = namespace("auth");
 
   @Component({
-    components: { LzButton, VCalendar, LzModal, SearchEvent, DesignModal }
+    components: {
+      LzButton,
+      VCalendar,
+      LzModal,
+      SearchEvent,
+      DesignModal,
+      SectionToggle
+    }
   })
   export default class Read extends Vue {
-    @auth.State("id")
-    private memberId!: string;
+    @auth.State("id") private memberId!: string;
+    @auth.State("url") websiteURL!: string;
 
     public services = [] as Service[];
 
@@ -94,10 +102,6 @@
             text: this.$tc("common.error.generic")
           });
         });
-    }
-
-    handleToggle() {
-      // HANDLE TOGGLE
     }
 
     query = "";

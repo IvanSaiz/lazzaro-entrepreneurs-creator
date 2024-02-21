@@ -1,7 +1,9 @@
 <template lang="pug">
 .events-read
   header
-    h1 {{ $t('events.read.title') }}
+    .title
+      h1 {{ $t('events.read.title') }}
+      SectionToggle(section="events")
     p {{ $t('events.read.subtitle') }}
   LzModal(v-if="deleteModalOpen" @close="() => (this.deleteModalOpen = false)")
     h2 {{ $t('events.read.deleteModal.title') }}
@@ -40,9 +42,12 @@
   import { ROUTES } from "../router";
   import DesignModal from "../components/DesignModal.vue";
   import LzModal from "@/components/Modal.vue";
+  import SectionToggle from "@/components/SectionToggle.vue";
   const auth = namespace("auth");
 
-  @Component({ components: { LzButton, SearchEvent, DesignModal, LzModal } })
+  @Component({
+    components: { LzButton, SearchEvent, DesignModal, LzModal, SectionToggle }
+  })
   export default class Read extends Vue {
     @auth.State("id")
     public memberId!: string;
@@ -123,6 +128,14 @@
 
 <style lang="scss">
   .events-read {
+    header {
+      .title {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+    }
+
     .content {
       height: 100%;
       margin-top: 40px;
