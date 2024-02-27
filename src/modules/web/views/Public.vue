@@ -106,15 +106,15 @@
             template(#form)
               h2.h2--dash {{ $t('web.public.homepageForm.design.layout') }}
               layout-select(
-                :value="publicWebForm.homepageDesignLayout"
                 name="homepageDesignLayout"
+                v-model="publicWebForm.homepageDesignLayout"
               )
               h2.h2--dash {{ $t('web.public.homepageForm.design.color') }}
               FormulateInput#primary-color(
                 type="textColor"
                 name="homepageDesignBackgroundColor"
-                value="#EFEFEF"
-                )
+                :value="publicWebForm.homepageDesignBackgroundColor"
+              )
       .form__row
           FormulateInput(
             type="image"
@@ -219,7 +219,6 @@
         formulate-input.public-whoWeAre__content(
           type="group"
           name="aboutUs"
-          :value="publicWebForm.aboutUsFeaturesIcons"
           #default="{index}"
         )
           formulate-input.text-item(
@@ -238,9 +237,7 @@
             name="description"
             :label="$t(`web.public.whoWeAreForm.features.descriptions.${index+1}`)"
           )
-
       hr.hr--dash
-
       .public-whoWeAre__cta
         formulate-input(
           type="text"
@@ -287,7 +284,6 @@
           formulate-input(
             type="group"
             name="whyChooseUsSubTitles"
-            :value="publicWebForm.whyChooseUsSubTitles"
             #default="{index}"
           )
             formulate-input.text-item(
@@ -593,14 +589,14 @@
             :add-label="$t('web.public.footer.termsForm.add')"
             :multiple="true"
           )
-  .public-buttons
-    lz-button(
-      type="secondary"
-      class='cancel-btn'
-      @click.prevent="$router.push({ name: 'Home' })"
-    ) {{ $t('common.actions.cancel') }}
+    .public-buttons
+      lz-button(
+        type="secondary"
+        class='cancel-btn'
+        @click.prevent="$router.push({ name: 'Home' })"
+      ) {{ $t('common.actions.cancel') }}
 
-    lz-button(type="primary" class="save-btn" @click.prevent="onPublicWebSubmit" :disabled='!isFormChanged') {{ $t('common.actions.save') }}
+      lz-button(type="primary" class="save-btn" :disabled='!isFormChanged') {{ $t('common.actions.save') }}
 </template>
 
 <script lang="ts">
@@ -894,68 +890,69 @@
     }
 
     mounted() {
+      // TODO: fetch template and load initial values from there, then load values from the
+      // user configuration
       apiWebsite.section
         .get<WebProps>(this.websiteId, "web")
         .then(data => {
-          this.publicWebForm.chosenTemplateId = data?.templateId;
+          const {
+            templateId,
+            properties: {
+              style,
+              aboutUs,
+              bookings,
+              contact,
+              footer,
+              homePage,
+              impact,
+              reviews,
+              team,
+              whyChooseUs
+            }
+          } = data;
+
+          this.publicWebForm.chosenTemplateId = templateId;
           this.publicWebForm.url = this.url;
           this.publicWebForm.active = this.isActive;
 
           // Style section
-          this.publicWebForm.styleLogo = [
-            { url: data?.properties?.style?.logo }
-          ];
-          this.publicWebForm.styleMenuColor = data.properties?.style?.menuColor;
-          this.publicWebForm.styleButtonColor =
-            data.properties?.style?.buttonColor;
-          this.publicWebForm.styleFooterColor =
-            data.properties?.style?.footerColor;
-          this.publicWebForm.styleMainTypography =
-            data.properties?.style?.mainTypography;
+          this.publicWebForm.styleLogo = [{ url: style?.logo }];
+          this.publicWebForm.styleMenuColor = style?.menuColor;
+          this.publicWebForm.styleButtonColor = style?.buttonColor;
+          this.publicWebForm.styleFooterColor = style?.footerColor;
+          this.publicWebForm.styleMainTypography = style?.mainTypography;
           this.publicWebForm.styleSecondaryTypography =
-            data.properties?.style?.secondaryTypography;
+            style?.secondaryTypography;
 
           // HomePage section
-          this.publicWebForm.homepageTitle = data.properties?.homePage?.title;
-          this.publicWebForm.homepageDesignLayout =
-            data.properties?.homePage?.design.layout;
+          this.publicWebForm.homepageTitle = homePage?.title;
+          this.publicWebForm.homepageDesignLayout = homePage?.design.layout;
           this.publicWebForm.homepageDesignBackgroundColor =
-            data.properties?.homePage?.design.backgroundColor;
-          this.publicWebForm.homepageSubtitle =
-            data.properties?.homePage?.subTitle;
-          this.publicWebForm.homepageMainImage = [
-            { url: data.properties?.homePage?.mainImage }
-          ];
+            homePage?.design.backgroundColor;
+          this.publicWebForm.homepageSubtitle = homePage?.subTitle;
+          this.publicWebForm.homepageMainImage = [{ url: homePage?.mainImage }];
           // this.publicWebForm.homepageMoreImages =
-          //   data.properties?.homePage?.moreImages;
-          this.publicWebForm.homepageTitleColor =
-            data.properties?.homePage?.titleColor;
-          this.publicWebForm.homepageSubtitleColor =
-            data.properties?.homePage?.subTitleColor;
+          //   homePage?.moreImages;
+          this.publicWebForm.homepageTitleColor = homePage?.titleColor;
+          this.publicWebForm.homepageSubtitleColor = homePage?.subTitleColor;
           this.publicWebForm.homepageFirstButtonLink =
-            data.properties?.homePage?.firstButtonLink;
+            homePage?.firstButtonLink;
           this.publicWebForm.homepageFirstButtonText =
-            data.properties?.homePage?.firstButtonText;
+            homePage?.firstButtonText;
           this.publicWebForm.homepageSecondButtonLink =
-            data.properties?.homePage?.secondButtonLink;
+            homePage?.secondButtonLink;
           this.publicWebForm.homepageSecondButtonText =
-            data.properties?.homePage?.secondButtonText;
+            homePage?.secondButtonText;
 
           // AboutUs section
-          this.publicWebForm.aboutUsTitle = data.properties?.aboutUs?.title;
-          this.publicWebForm.aboutUsImgUrl = [
-            { url: data.properties?.aboutUs?.imgUrl }
-          ];
-          this.publicWebForm.aboutUsSubtitle =
-            data.properties?.aboutUs?.subTitle;
-          this.publicWebForm.aboutUsTitleColor =
-            data.properties?.aboutUs?.titleColor;
-          this.publicWebForm.aboutUsSubtitleColor =
-            data.properties?.aboutUs?.subTitleColor;
-          this.publicWebForm.aboutUsDescription =
-            data.properties?.aboutUs?.description;
+          this.publicWebForm.aboutUsTitle = aboutUs?.title;
+          this.publicWebForm.aboutUsImgUrl = [{ url: aboutUs?.imgUrl }];
+          this.publicWebForm.aboutUsSubtitle = aboutUs?.subTitle;
+          this.publicWebForm.aboutUsTitleColor = aboutUs?.titleColor;
+          this.publicWebForm.aboutUsSubtitleColor = aboutUs?.subTitleColor;
+          this.publicWebForm.aboutUsDescription = aboutUs?.description;
           this.publicWebForm.aboutUsFeaturesIcons =
-            data.properties?.aboutUs?.features?.icons?.map(icon => ({
+            aboutUs?.features?.icons?.map(icon => ({
               id: icon.id,
               url: [{ url: icon.url }],
               title: icon.title,
@@ -973,21 +970,16 @@
             );
 
           (this.publicWebForm.aboutUsReadMoreButtonText =
-            data.properties?.aboutUs?.features?.buttons[0]?.text),
+            aboutUs?.features?.buttons[0]?.text),
             (this.publicWebForm.aboutUsReadMoreButtonLink =
-              data.properties?.aboutUs?.features?.buttons[0]?.link),
+              aboutUs?.features?.buttons[0]?.link),
             // WhyChooseUs section
-            (this.publicWebForm.whyChooseUsTitle =
-              data.properties?.whyChooseUs?.title);
-          this.publicWebForm.whyChooseUsImgUrl = [
-            { url: data.properties?.whyChooseUs?.imgUrl }
-          ];
-          this.publicWebForm.whyChooseUsTitleColor =
-            data.properties?.whyChooseUs?.titleColor;
-          this.publicWebForm.whyChooseUsDescription =
-            data.properties?.whyChooseUs?.description;
+            (this.publicWebForm.whyChooseUsTitle = whyChooseUs?.title);
+          this.publicWebForm.whyChooseUsImgUrl = [{ url: whyChooseUs?.imgUrl }];
+          this.publicWebForm.whyChooseUsTitleColor = whyChooseUs?.titleColor;
+          this.publicWebForm.whyChooseUsDescription = whyChooseUs?.description;
           this.publicWebForm.whyChooseUsSubTitles =
-            data.properties?.whyChooseUs?.subtitles?.map(subtitle => ({
+            whyChooseUs?.subtitles?.map(subtitle => ({
               id: subtitle.id,
               title: subtitle.title,
               description: subtitle.description
@@ -1002,34 +994,24 @@
             );
 
           // Bookings section
-          this.publicWebForm.bookingsImgUrl = [
-            { url: data.properties?.bookings?.imgUrl }
-          ];
-          this.publicWebForm.bookingsTitle = data.properties?.bookings?.title;
-          this.publicWebForm.bookingsTitleColor =
-            data.properties?.bookings?.titleColor;
-          this.publicWebForm.bookingsSubtitle =
-            data.properties?.bookings?.subtitle;
-          this.publicWebForm.bookingsSubtitleColor =
-            data.properties?.bookings?.subtitleColor;
-          this.publicWebForm.bookingsButtonUrl =
-            data.properties?.bookings?.buttonUrl;
-          this.publicWebForm.bookingsButtonText =
-            data.properties?.bookings?.buttonText;
+          this.publicWebForm.bookingsImgUrl = [{ url: bookings?.imgUrl }];
+          this.publicWebForm.bookingsTitle = bookings?.title;
+          this.publicWebForm.bookingsTitleColor = bookings?.titleColor;
+          this.publicWebForm.bookingsSubtitle = bookings?.subtitle;
+          this.publicWebForm.bookingsSubtitleColor = bookings?.subtitleColor;
+          this.publicWebForm.bookingsButtonUrl = bookings?.buttonUrl;
+          this.publicWebForm.bookingsButtonText = bookings?.buttonText;
 
           // Reviews section
-          this.publicWebForm.reviewsTitle = data.properties?.reviews?.title;
-          this.publicWebForm.reviewsTitleColor =
-            data.properties?.reviews?.titleColor;
-          this.publicWebForm.reviewsSubtitle =
-            data.properties?.reviews?.subtitle;
-          this.publicWebForm.reviewsSubtitleColor =
-            data.properties?.reviews?.subtitleColor;
-          this.publicWebForm.reviewsUrl = data.properties?.reviews?.url;
+          this.publicWebForm.reviewsTitle = reviews?.title;
+          this.publicWebForm.reviewsTitleColor = reviews?.titleColor;
+          this.publicWebForm.reviewsSubtitle = reviews?.subtitle;
+          this.publicWebForm.reviewsSubtitleColor = reviews?.subtitleColor;
+          this.publicWebForm.reviewsUrl = reviews?.url;
 
           // Impact section
           this.publicWebForm.impactData =
-            data.properties?.impact?.data?.map(
+            impact?.data?.map(
               item =>
                 ({
                   id: item.id.toString(),
@@ -1048,20 +1030,19 @@
                 } as Section.Web.ImpactData)
             );
           this.publicWebForm.impactDesignBackgroundColor =
-            data.properties?.impact?.design.backgroundColor;
+            impact?.design.backgroundColor;
           this.publicWebForm.impactDesignBackgroundImage = data.properties
             ?.impact?.design.backgroundImage
-            ? [{ url: data.properties?.impact?.design.backgroundImage }]
+            ? [{ url: impact?.design.backgroundImage }]
             : "";
 
           // Team section
-          this.publicWebForm.teamTitle = data.properties?.team?.title;
-          this.publicWebForm.teamSubtitle = data.properties?.team?.subTitle;
-          this.publicWebForm.teamTitleColor = data.properties?.team?.titleColor;
-          this.publicWebForm.teamSubtitleColor =
-            data.properties?.team?.subtitleColor;
+          this.publicWebForm.teamTitle = team?.title;
+          this.publicWebForm.teamSubtitle = team?.subTitle;
+          this.publicWebForm.teamTitleColor = team?.titleColor;
+          this.publicWebForm.teamSubtitleColor = team?.subtitleColor;
           this.publicWebForm.teamMembers =
-            data.properties?.team?.members?.map(member => ({
+            team?.members?.map(member => ({
               id: member.id,
               picture: [{ url: member.picture }],
               name: member.name,
@@ -1069,40 +1050,34 @@
               position: member.position
             })) ?? [];
           this.publicWebForm.teamDesignBackgroundColor =
-            data.properties?.team?.design.backgroundColor;
+            team?.design.backgroundColor;
 
           // Contact section
-          this.publicWebForm.contactTitle = data.properties?.contact?.title;
-          this.publicWebForm.contactSubTitle =
-            data.properties?.contact?.subTitle;
+          this.publicWebForm.contactTitle = contact?.title;
+          this.publicWebForm.contactSubTitle = contact?.subTitle;
           // this.publicWebForm.contactTitleColor =
-          //   data.properties?.contact?.titleColor;
+          //   contact?.titleColor;
           // this.publicWebForm.contactSubtitleColor =
-          //   data.properties?.contact?.subtitleColor;
+          //   contact?.subtitleColor;
 
           // Footer section
-          this.publicWebForm.footerTerms = data.properties?.footer?.info.terms;
+          this.publicWebForm.footerTerms = footer?.info.terms;
           // this.publicWebForm.footerTransparencyAccountability = [
-          //   { url: data.properties?.footer?.info.transparency.data }
+          //   { url: footer?.info.transparency.data }
           // ];
           this.publicWebForm.footerTransparencyDescription =
-            data.properties?.footer?.info.transparency?.data?.description?.transparency_description;
-          this.publicWebForm.footerSocialFacebook =
-            data.properties?.footer?.social.facebook;
-          this.publicWebForm.footerSocialTwitter =
-            data.properties?.footer?.social.twitter;
-          this.publicWebForm.footerSocialLinkedIn =
-            data.properties?.footer?.social.linkedIn;
-          this.publicWebForm.footerSocialWhatsapp =
-            data.properties?.footer?.social.whatsapp;
+            footer?.info.transparency?.data?.description?.transparency_description;
+          this.publicWebForm.footerSocialFacebook = footer?.social.facebook;
+          this.publicWebForm.footerSocialTwitter = footer?.social.twitter;
+          this.publicWebForm.footerSocialLinkedIn = footer?.social.linkedIn;
+          this.publicWebForm.footerSocialWhatsapp = footer?.social.whatsapp;
           this.publicWebForm.footerSocialSecondaryWeb =
-            data.properties?.footer?.social.secondaryWeb;
-          this.publicWebForm.footerSocialInstagram =
-            data.properties?.footer?.social.instagram;
+            footer?.social.secondaryWeb;
+          this.publicWebForm.footerSocialInstagram = footer?.social.instagram;
           this.publicWebForm.footerDesignBackgroundColor =
-            data.properties?.footer?.design.backgroundColor;
+            footer?.design.backgroundColor;
           this.publicWebForm.footerDesignBackgroundImage =
-            data.properties?.footer?.design.backgroundImage;
+            footer?.design.backgroundImage;
 
           this.loaded = true;
         })
@@ -1128,7 +1103,7 @@
       return null;
     }
 
-    async onPublicWebSubmit() {
+    async onPublicWebSubmit(form) {
       const accountability =
         this.publicWebForm.footerTransparencyAccountability?.url &&
         (
@@ -1198,54 +1173,54 @@
       this.prevForm = {};
 
       const postData: PublicWebFormData = {
-        active: this.publicWebForm.active,
-        templateId: this.publicWebForm.chosenTemplateId,
+        active: form.active,
+        templateId: form.chosenTemplateId,
         websiteId: this.websiteId,
         type: "web",
         properties: {
           general: {
-            url: this.publicWebForm.url
+            url: form.url
           },
           style: {
             logo: styleLogoTrimmed,
-            menuColor: this.publicWebForm.styleMenuColor,
-            buttonColor: this.publicWebForm.styleButtonColor,
-            footerColor: this.publicWebForm.styleFooterColor,
-            mainTypography: this.publicWebForm.styleMainTypography,
-            secondaryTypography: this.publicWebForm.styleSecondaryTypography
+            menuColor: form.styleMenuColor,
+            buttonColor: form.styleButtonColor,
+            footerColor: form.styleFooterColor,
+            mainTypography: form.styleMainTypography,
+            secondaryTypography: form.styleSecondaryTypography
           },
 
           homePage: {
-            title: this.publicWebForm.homepageTitle,
+            title: form.homepageTitle,
             design: {
-              layout: this.publicWebForm.homepageDesignLayout,
-              backgroundColor: this.publicWebForm.homepageDesignBackgroundColor
+              layout: form.homepageDesignLayout,
+              backgroundColor: form.homepageDesignBackgroundColor
             },
-            subTitle: this.publicWebForm.homepageSubtitle,
+            subTitle: form.homepageSubtitle,
             mainImage: homepageMainImageTrimmed,
-            moreImages: this.publicWebForm.homepageMoreImages,
-            titleColor: this.publicWebForm.homepageTitleColor,
-            subTitleColor: this.publicWebForm.homepageSubtitleColor,
-            firstButtonLink: this.publicWebForm.homepageFirstButtonLink,
-            firstButtonText: this.publicWebForm.homepageFirstButtonText,
-            secondButtonLink: this.publicWebForm.homepageSecondButtonLink,
-            secondButtonText: this.publicWebForm.homepageSecondButtonText
+            moreImages: form.homepageMoreImages,
+            titleColor: form.homepageTitleColor,
+            subTitleColor: form.homepageSubtitleColor,
+            firstButtonLink: form.homepageFirstButtonLink,
+            firstButtonText: form.homepageFirstButtonText,
+            secondButtonLink: form.homepageSecondButtonLink,
+            secondButtonText: form.homepageSecondButtonText
           },
 
           aboutUs: {
-            title: this.publicWebForm.aboutUsTitle,
-            imgUrl: aboutUsImgUrlTrimmed,
-            subTitle: this.publicWebForm.aboutUsSubtitle,
-            titleColor: this.publicWebForm.aboutUsTitleColor,
-            subTitleColor: this.publicWebForm.aboutUsSubtitleColor,
-            description: this.publicWebForm.aboutUsDescription,
+            title: form.aboutUsTitle,
+            imgUrl: form.aboutUsImgUrl[0].url,
+            subTitle: form.aboutUsSubtitle,
+            titleColor: form.aboutUsTitleColor,
+            subTitleColor: form.aboutUsSubtitleColor,
+            description: form.aboutUsDescription,
             features: {
-              icons: this.publicWebForm.aboutUsFeaturesIcons,
+              icons: form.aboutUsFeaturesIcons,
               buttons: [
                 {
-                  id: this.publicWebForm.aboutUsReadMoreButtonId,
-                  text: this.publicWebForm.aboutUsReadMoreButtonText,
-                  link: this.publicWebForm.aboutUsReadMoreButtonLink
+                  id: form.aboutUsReadMoreButtonId,
+                  text: form.aboutUsReadMoreButtonText,
+                  link: form.aboutUsReadMoreButtonLink
                 }
               ]
             }
@@ -1253,107 +1228,108 @@
 
           // WhyChooseUs properties
           whyChooseUs: {
-            title: this.publicWebForm.whyChooseUsTitle,
+            title: form.whyChooseUsTitle,
             imgUrl: whyChooseUsImgUrlTrimmed,
-            titleColor: this.publicWebForm.whyChooseUsTitleColor,
-            description: this.publicWebForm.whyChooseUsDescription,
-            subtitles: this.publicWebForm.whyChooseUsSubTitles,
+            titleColor: form.whyChooseUsTitleColor,
+            description: form.whyChooseUsDescription,
+            subtitles: form.whyChooseUsSubTitles,
             design: {
-              layout: this.publicWebForm.whyChooseUsDesignLayout,
-              backgroundColor: this.publicWebForm
-                .whyChooseUsDesignBackgroundColor,
-              backgroundImage: this.publicWebForm
-                .whyChooseUsDesignBackgroungImage
+              layout: form.whyChooseUsDesignLayout,
+              backgroundColor: form.whyChooseUsDesignBackgroundColor,
+              backgroundImage: form.whyChooseUsDesignBackgroungImage
             }
           },
 
           // Bookings properties
           bookings: {
             imgUrl: bookingsImgUrlTrimmed,
-            title: this.publicWebForm.bookingsTitle,
-            titleColor: this.publicWebForm.bookingsTitleColor,
-            subtitle: this.publicWebForm.bookingsSubtitle,
-            subtitleColor: this.publicWebForm.bookingsSubtitleColor,
-            buttonUrl: this.publicWebForm.bookingsButtonUrl,
-            buttonText: this.publicWebForm.bookingsButtonText,
+            title: form.bookingsTitle,
+            titleColor: form.bookingsTitleColor,
+            subtitle: form.bookingsSubtitle,
+            subtitleColor: form.bookingsSubtitleColor,
+            buttonUrl: form.bookingsButtonUrl,
+            buttonText: form.bookingsButtonText,
             design: {
-              layout: this.publicWebForm.bookingsDesignLayout,
-              backgroundColor: this.publicWebForm.bookingsDesignBackgroundColor
+              layout: form.bookingsDesignLayout,
+              backgroundColor: form.bookingsDesignBackgroundColor
             }
           },
 
           // Reviews properties
           reviews: {
-            title: this.publicWebForm.reviewsTitle,
-            titleColor: this.publicWebForm.reviewsTitleColor,
-            subtitle: this.publicWebForm.reviewsSubtitle,
-            subtitleColor: this.publicWebForm.reviewsSubtitleColor,
-            url: this.publicWebForm.reviewsUrl
+            title: form.reviewsTitle,
+            titleColor: form.reviewsTitleColor,
+            subtitle: form.reviewsSubtitle,
+            subtitleColor: form.reviewsSubtitleColor,
+            url: form.reviewsUrl
           },
 
           // Impact properties
           //TODO: that logic is not the correct way to handle this
           impact: {
-            data: this.publicWebForm.impactData
+            data: form.impactData
               .map(i => ({
                 ...i,
                 url: i.url[0]?.url ?? ""
               }))
               .filter(i => !!i.text),
             design: {
-              backgroundColor: this.publicWebForm.impactDesignBackgroundColor,
+              backgroundColor: form.impactDesignBackgroundColor,
               backgroundImage: await this.parseImageUrl(
-                this.publicWebForm.impactDesignBackgroundImage
+                form.impactDesignBackgroundImage
               )
             }
           },
           // Team properties
           team: {
-            title: this.publicWebForm.teamTitle,
-            subTitle: this.publicWebForm.teamSubtitle,
-            titleColor: this.publicWebForm.teamTitleColor,
-            subtitleColor: this.publicWebForm.teamSubtitleColor,
+            title: form.teamTitle,
+            subTitle: form.teamSubtitle,
+            titleColor: form.teamTitleColor,
+            subtitleColor: form.teamSubtitleColor,
             members: team,
             design: {
-              backgroundColor: this.publicWebForm.teamDesignBackgroundColor
+              backgroundColor: form.teamDesignBackgroundColor
             }
           },
 
           // Contact properties
           contact: {
-            title: this.publicWebForm.contactTitle,
-            subTitle: this.publicWebForm.contactSubTitle,
-            titleColor: this.publicWebForm.contactTitleColor,
-            subtitleColor: this.publicWebForm.contactSubtitleColor,
+            title: form.contactTitle,
+            subTitle: form.contactSubTitle,
+            titleColor: form.contactTitleColor,
+            subtitleColor: form.contactSubtitleColor,
             design: {
-              backgroundColor: this.publicWebForm.contactDesignBackgroundColor
+              backgroundColor: form.contactDesignBackgroundColor
             }
           },
 
           // Footer properties
           footer: {
             info: {
-              terms: this.publicWebForm.footerTerms,
+              terms: form.footerTerms,
               transparency: {
                 fileUrl: accountability && accountability[0]?.file,
-                description: this.publicWebForm.footerTransparencyDescription
+                description: form.footerTransparencyDescription
               }
             },
             social: {
-              twitter: this.publicWebForm.footerSocialTwitter,
-              facebook: this.publicWebForm.footerSocialFacebook,
-              linkedIn: this.publicWebForm.footerSocialLinkedIn,
-              whatsapp: this.publicWebForm.footerSocialWhatsapp,
-              instagram: this.publicWebForm.footerSocialInstagram,
-              secondaryWeb: this.publicWebForm.footerSocialSecondaryWeb
+              twitter: form.footerSocialTwitter,
+              facebook: form.footerSocialFacebook,
+              linkedIn: form.footerSocialLinkedIn,
+              whatsapp: form.footerSocialWhatsapp,
+              instagram: form.footerSocialInstagram,
+              secondaryWeb: form.footerSocialSecondaryWeb
             },
             design: {
-              backgroundColor: this.publicWebForm.styleFooterColor,
-              backgroundImage: this.publicWebForm.footerDesignBackgroundImage
+              backgroundColor: form.styleFooterColor,
+              backgroundImage: form.footerDesignBackgroundImage
             }
           }
         }
       };
+
+      console.log("postData", postData);
+      console.log("form", form);
 
       try {
         await apiWebsite.section.put(postData);
@@ -1365,8 +1341,6 @@
           this.publicWebForm.active,
           this.websiteId
         );
-
-        // await this.updateFeatures();
         this.prevForm = cloneDeep(this.publicWebForm);
       } catch (error) {
         // eslint-disable-next-line no-console
@@ -2129,15 +2103,19 @@
     }
 
     .public-buttons {
-      margin-top: 5.6rem;
-    }
+      position: fixed;
+      display: flex;
+      gap: 2rem;
+      width: max-content;
+      z-index: 100;
+      bottom: 20px;
+      right: 9rem;
 
-    .public-buttons .save-btn {
-      right: 8.7rem;
-    }
-
-    .public-buttons .cancel-btn {
-      right: 30.7rem;
+      > * {
+        padding-inline: 4rem;
+        width: max-content;
+        margin: 0;
+      }
     }
   }
 </style>

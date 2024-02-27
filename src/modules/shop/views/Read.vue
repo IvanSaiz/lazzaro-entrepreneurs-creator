@@ -97,7 +97,7 @@
       {
         id: "status",
         label: this.$t("shop.read.productsTable.status.label")
-      },
+      }, 
       { id: "actions", label: this.$t("shop.read.productsTable.actions") }
     ];
 
