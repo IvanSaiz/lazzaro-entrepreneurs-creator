@@ -33,7 +33,6 @@
         class='cancel-btn'
         @click.prevent="$router.push({ name: 'Home' })"
       ) {{ $t('common.actions.cancel') }}
-
       lz-button(type="primary" class="save-btn" :disabled='!isFormChanged') {{ $t('common.actions.save') }}
 </template>
 
@@ -319,7 +318,7 @@
 
     async onPublicWebSubmit(form) {
       const hasTemplateChanged =
-        this.form.general.templateId !== this.templateId;
+        this.form.general.templateId !== this.initialForm.general.templateId;
 
       if (hasTemplateChanged) {
         this.modalText = {
@@ -344,9 +343,13 @@
 
       // See https://vueformulate.com/guide/inputs/types/file/#upload-results-with-v-model-on-formulateinput
       // to check an example of the code below
-      const getImgURL = async img => {
+      const getImgURL = async (img): Promise<string | string[]> => {
         if (typeof img?.upload === "function") {
-          return img.upload().then(([res]) => res.url);
+          return img.upload().then(([res]) => {
+            if (res && "url" in res) return res.url;
+
+            return "";
+          });
         }
         if (typeof img === "string") {
           return img;
