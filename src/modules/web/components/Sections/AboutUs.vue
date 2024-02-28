@@ -19,25 +19,27 @@ section.public-whoWeAre
           formulate-input(
             type="text"
             name="aboutUsTitle"
+            v-model="props.title"
             :label="$t('web.public.whoWeAreForm.form.title')"
             :help="$t('web.public.whoWeAreForm.form.titleHelper')"
             )
           FormulateInput#primary-color(
             type="textColor"
             name="aboutUsTitleColor"
-            value="#1081F2"
+            v-model="props.titleColor"
             )
         .section-row
           formulate-input(
             type="text"
             name="aboutUsSubtitle"
+            v-model="props.subTitle"
             :label="$t('web.public.whoWeAreForm.form.subtitle')"
             :help="$t('web.public.whoWeAreForm.form.subtitleHelper')"
             )
           FormulateInput#primary-color(
             type="textColor"
+            v-model="props.subTitleColor"
             name="aboutUsSubtitleColor"
-            value="#1081F2"
             )
         lz-editor-input(
         :label="$t('web.public.whoWeAreForm.form.description')"
