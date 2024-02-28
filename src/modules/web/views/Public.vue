@@ -289,22 +289,22 @@
           this.form.general.active = this.isActive;
 
           // Map images to correctly display initial values
-          this.form.style.logo = [{ url: properties.style.logo as string }];
-          this.form.homePage.mainImage = [
-            { url: properties.homePage.mainImage as string }
-          ];
-          this.form.aboutUs.imgUrl = [
-            { url: properties.aboutUs.imgUrl as string }
-          ];
-          this.form.aboutUs.features.icons = this.form.aboutUs.features.icons.map(
-            v => ({ ...v, url: [{ url: v.url as string }] })
-          );
-          this.form.whyChooseUs.imgUrl = [
-            { url: properties.whyChooseUs.imgUrl as string }
-          ];
-          this.form.bookings.imgUrl = [
-            { url: properties.bookings.imgUrl as string }
-          ];
+          // See https://vueformulate.com/guide/inputs/types/file/#setting-initial-values for more info
+          const mapImageField = <O extends object>(obj: O, field: keyof O) => {
+            if (typeof obj[field] === "string" && !!obj[field]) {
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              obj[field] = [{ url: obj[field] }] as any;
+            }
+          };
+
+          mapImageField(this.form.style, "logo");
+          mapImageField(this.form.homePage, "mainImage");
+          mapImageField(this.form.aboutUs, "imgUrl");
+          this.form.aboutUs.features.icons.map(i => mapImageField(i, "url"));
+          mapImageField(this.form.whyChooseUs, "imgUrl");
+          mapImageField(this.form.bookings, "imgUrl");
+          this.form.impact.data.map(i => mapImageField(i, "url"));
+          mapImageField(this.form.impact.design, "backgroundImage");
 
           this.initialForm = _.cloneDeep(this.form);
           this.loaded = true;
@@ -334,56 +334,67 @@
         this.onModalOpen();
       }
 
+      const postData: PublicWebFormData = {
+        active: form.active,
+        templateId: form.chosenTemplateId,
+        websiteId: this.websiteId,
+        type: "web",
+        properties: _.cloneDeep(this.form)
+      };
+
       // See https://vueformulate.com/guide/inputs/types/file/#upload-results-with-v-model-on-formulateinput
       // to check an example of the code below
-      const getImgURL = async img =>
-        img?.upload?.().then(([res]) => res.url) ?? img;
-
+      const getImgURL = async img => {
+        if (typeof img?.upload === "function") {
+          return img.upload().then(([res]) => res.url);
+        }
+        if (typeof img === "string") {
+          return img;
+        }
+        if (Array.isArray(img)) {
+          if (img.length === 1 && "url" in img[0]) {
+            return img[0].url;
+          } else if (img.every(pic => "url" in pic)) {
+            return img.map(({ url }) => url);
+          }
+        }
+        return "";
+      };
+      const mapImgURL = async <T extends object>(obj: T, field: keyof T) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        obj[field] = (await getImgURL(obj[field])) as any;
+      };
       const {
         aboutUs,
         style,
         homePage,
         whyChooseUs,
         bookings,
-        team,
-        impact
-      } = this.form;
+        impact,
+        team
+      } = postData.properties;
 
-      aboutUs.imgUrl = await getImgURL(aboutUs.imgUrl);
-      style.logo = await getImgURL(style.logo);
-      homePage.mainImage = await getImgURL(homePage.mainImage);
-      whyChooseUs.imgUrl = await getImgURL(whyChooseUs.imgUrl);
-      bookings.imgUrl = await getImgURL(bookings.imgUrl);
-      for (const member of team.members) {
-        member.picture = await getImgURL(member.picture);
-      }
-      for (const icon of aboutUs.features.icons) {
-        icon.url = await getImgURL(icon.url);
-      }
-      for (const item of impact.data) {
-        item.url = await getImgURL(item.url);
-      }
-
-      const postData: PublicWebFormData = {
-        active: form.active,
-        templateId: form.chosenTemplateId,
-        websiteId: this.websiteId,
-        type: "web",
-        properties: this.form
-      };
-
-      console.log("postData", postData);
+      await Promise.all([
+        mapImgURL(aboutUs, "imgUrl"),
+        mapImgURL(style, "logo"),
+        mapImgURL(homePage, "mainImage"),
+        mapImgURL(whyChooseUs, "imgUrl"),
+        mapImgURL(bookings, "imgUrl"),
+        mapImgURL(impact.design, "backgroundImage"),
+        Promise.all(aboutUs.features.icons.map(i => mapImgURL(i, "url"))),
+        Promise.all(impact.data.map(i => mapImgURL(i, "url"))),
+        Promise.all(team.members.map(m => mapImgURL(m, "picture")))
+      ]);
 
       try {
-        await apiWebsite.section.put(postData);
+        await Promise.all([
+          apiWebsite.section.put(postData),
+          this.handlePublishWebsite(this.form.general.active, this.websiteId)
+        ]);
         this.$notify({
           type: "success",
           text: this.$tc("web.public.notify.success")
         });
-        await this.handlePublishWebsite(
-          this.form.general.active,
-          this.websiteId
-        );
       } catch (error) {
         // eslint-disable-next-line no-console
         console.error(error);

@@ -11,13 +11,12 @@ section.public-impact
           h2.h2--dash {{ $t('web.public.impactForm.design.image') }}
           formulate-input(
             type="image"
-            name="impactDesignBackgroundImage"
+            v-model="props.design.backgroundImage"
             :help="$t('web.public.impactForm.design.imageHelper')"
           )
           h2.h2--dash {{ $t('web.public.impactForm.design.color') }}
           formulate-input#primary-color(
             type="textColor"
-            name="impactDesignBackgroundColor"
             v-model="props.design.backgroundColor"
             )
   formulate-input(
@@ -28,18 +27,18 @@ section.public-impact
   ).public-impact__content
     formulate-input.impact-item(
           type="image"
-          :name= "`url`"
+          name= "url"
           :label="$t(`web.public.impactForm.icon.${index+1}`)"
           :help="$t('web.public.impactForm.icon.help')"
         )
     formulate-input.impact-item(
           type="text"
-          :name= "`text`"
+          name= "text"
           :label="$t(`web.public.impactForm.text.${index+1}`)"
         )
     formulate-input.impact-item(
           type="text"
-          :name= "`amount`"
+          name= "amount"
           :label="$t(`web.public.impactForm.amount.${index+1}`)"
         )
   

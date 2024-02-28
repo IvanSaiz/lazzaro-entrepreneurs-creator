@@ -147,13 +147,13 @@ interface Impact {
   data: Datum[];
   design: {
     backgroundColor: string;
-    backgroundImage: string;
+    backgroundImage: Image;
   };
 }
 
 interface Datum {
   id: number;
-  url: string;
+  url: Image;
   text: string;
   amount: string;
 }
