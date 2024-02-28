@@ -334,6 +334,8 @@
         this.onModalOpen();
       }
 
+      // See https://vueformulate.com/guide/inputs/types/file/#upload-results-with-v-model-on-formulateinput
+      // to check an example of the code below
       const getImgURL = async img =>
         img?.upload?.().then(([res]) => res.url) ?? img;
 

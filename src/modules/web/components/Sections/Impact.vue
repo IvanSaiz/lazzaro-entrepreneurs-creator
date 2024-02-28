@@ -47,10 +47,11 @@ section.public-impact
 
 <script lang="ts">
   import { Component, Vue, VModel } from "vue-property-decorator";
+  import DesignModal from "@/components/DesignModal.vue";
 
   type ImpactProps = WebProps["impact"];
 
-  @Component({ name: "Impact" })
+  @Component({ name: "Impact", components: { DesignModal } })
   export default class Impact extends Vue {
     @VModel() props!: ImpactProps; // TODO: Map to inputs
   }
