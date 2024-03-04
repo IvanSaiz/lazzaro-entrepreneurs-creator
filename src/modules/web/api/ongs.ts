@@ -34,10 +34,6 @@ const postTermsAndConditions = function(
   });
 };
 
-const getLogos = function(ongId: string): Promise<Logos> {
-  return http.get(`public/ongs/${ongId}/logos`, { noAuth: false });
-};
-
 const postLogos = function(
   ongId: string,
   body: { logo: string }
@@ -127,7 +123,6 @@ export default {
   postImpactData,
   getTemplates,
   postLogos,
-  getLogos,
   deleteLogo,
   publishWebsite,
   unpublishWebsite,

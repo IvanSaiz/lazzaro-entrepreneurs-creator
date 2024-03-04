@@ -20,7 +20,7 @@
         <h1>
           {{ $t("projects.read.title") }}
         </h1>
-        <FormulateInput type="toggle" name="active" v-on="this.handleToggle" />
+        <SectionToggle section="portfolio" />
         <div class="view-btn">
           <a href="" target="_blank">
             {{ $t("projects.read.see") }}
@@ -66,10 +66,13 @@
   import { apiProjects } from "../api";
   import { namespace } from "vuex-class";
   import VueI18n from "vue-i18n";
+  import SectionToggle from "@/components/SectionToggle.vue";
 
   const auth = namespace("auth");
 
-  @Component({ components: { LzButton, LzTable, DesignModal, LzModal } })
+  @Component({
+    components: { LzButton, LzTable, DesignModal, LzModal, SectionToggle }
+  })
   export default class Read extends Vue {
     @auth.State("id")
     public memberId!: string;

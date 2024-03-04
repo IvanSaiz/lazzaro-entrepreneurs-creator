@@ -26,6 +26,7 @@ import { dataModuleRouter } from "@/modules/data";
 import { improveModuleRouter } from "@/modules/improve";
 import { servicesModuleRouter } from "@/modules/services";
 import { blogModuleRouter } from "@/modules/blog";
+import { trainingModuleRouter } from "@/modules/training";
 
 Vue.use(VueRouter);
 
@@ -53,7 +54,8 @@ const routes: Array<RouteConfig> = [
       ...dataModuleRouter,
       ...improveModuleRouter,
       ...servicesModuleRouter,
-      ...blogModuleRouter
+      ...blogModuleRouter,
+      ...trainingModuleRouter
     ]
   },
   ...authModuleRouter,

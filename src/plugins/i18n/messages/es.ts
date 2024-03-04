@@ -15,6 +15,7 @@ import { userModuleI18n } from "@/modules/user";
 import { webModuleI18n } from "@/modules/web";
 import { servicesModuleI18n } from "@/modules/services";
 import { blogModuleI18n } from "@/modules/blog";
+import { trainingModuleI18n } from "@/modules/training";
 
 export const es = {
   auth: authModuleI18n.es,
@@ -33,5 +34,6 @@ export const es = {
   web: webModuleI18n.es,
   NFTs: NFTsModuleI18n.es,
   services: servicesModuleI18n.es,
-  blog: blogModuleI18n.es
+  blog: blogModuleI18n.es,
+  training: trainingModuleI18n.es
 };

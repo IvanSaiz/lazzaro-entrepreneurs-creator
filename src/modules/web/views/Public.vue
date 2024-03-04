@@ -12,786 +12,77 @@
     p {{ $t('web.public.subtitle') }}
 
   formulate-form(
-    v-model="publicWebForm"
     @submit="onPublicWebSubmit"
     :keep-model-data="true"
     v-if="loaded"
   )
-    section.public-general
-      .public-general__header
-        h2.h2--dash {{ $t('web.public.generalForm.title') }}
-      .public-general__publish
-        .form__row
-          formulate-input(
-            type="toggle"
-            :label="$t('web.public.generalForm.publicate')"
-            :under-label="$t('web.public.generalForm.status.label')"
-            name="active"
-          )
-          .public-general__view-btn
-            a(:href="publicWebForm.url" target="_blank")
-              span {{ $t('web.public.generalForm.seeWeb') }}
-              ArrowUpRightIcon
-        .form__row
-          formulate-input(
-            type="url"
-            :label="$t('web.public.generalForm.url')"
-            name="url"
-            disabled
-          )            
-    <choose-template :chosenTemplateId='publicWebForm.chosenTemplateId' :handleChooseTemplate='handleChooseTemplate' />
-    section.public-personalizeWeb
-      .public-personalizeWeb__header
-        h2.h2--dash {{ $t('web.public.personalizeWebForm.title') }}
-        h3 {{ $t('web.public.personalizeWebForm.subtitle') }}
-
-      .form__row
-        FormulateInput(
-          type="image"
-          :label="$t('web.public.personalizeWebForm.form.logo')"
-          label-position="before"
-          name="styleLogo"
-          @change="handleImageUpload($event, 'publicWebForm.styleLogo')"
-          :help="$t('web.public.personalizeWebForm.form.logoHelper')"
-        )
-        .form-section
-          FormulateInput(
-            type="select"
-            name="styleMainTypography"
-            :label="$t('web.public.personalizeWebForm.form.mainTypography')"
-            :label-class="['required']"
-            :options="fontOptions"
-            validation="required"
-            :validation-name="$t('web.public.personalizeWebForm.form.fonts.label')"
-            :placeholder="$t('auth.signup.form.choose')"
-          )  
-          FormulateInput(
-            type="select"
-            name="styleSecondaryTypography"
-            :label="$t('web.public.personalizeWebForm.form.secondTypography')"
-            :label-class="['required']"
-            :options="fontOptions"
-            validation="required"
-            :validation-name="$t('auth.onboarding.stepStyle.form.style')"
-            :placeholder="$t('auth.signup.form.choose')"
-          )
-          .form-colors
-            FormulateInput#primary-color(
-              type="textColor"
-              name="styleButtonColor"
-              :label="$t('web.public.personalizeWebForm.form.buttonsColor')"
-              value="#1081F2"
-              )
-            FormulateInput#primary-color(
-              type="textColor"
-              name="styleMenuColor"
-              :label="$t('web.public.personalizeWebForm.form.menuColor')"
-              value="#1081F2"
-              )
-            FormulateInput#primary-color(
-              type="textColor"
-              name="styleFooterColor"
-              :label="$t('web.public.personalizeWebForm.form.footerColor')"
-              value="#1081F2"
-              )
-    section.public-homepage
-
-      .public-homepage__header
-        h2.h2--dash {{ $t('web.public.homepageForm.title') }}
-        .subtitle
-          h3 {{ $t('web.public.homepageForm.subtitle') }}
-          design-modal(section="homepage")
-            template(#header)
-              h4 {{ $t('web.public.homepageForm.title') }}
-            template(#form)
-              h2.h2--dash {{ $t('web.public.homepageForm.design.layout') }}
-              layout-select(
-                :value="publicWebForm.homepageDesignLayout"
-                name="homepageDesignLayout"
-              )
-              h2.h2--dash {{ $t('web.public.homepageForm.design.color') }}
-              FormulateInput#primary-color(
-                type="textColor"
-                name="homepageDesignBackgroundColor"
-                value="#EFEFEF"
-                )
-      .form__row
-          FormulateInput(
-            type="image"
-            :label="$t('web.public.homepageForm.form.image')"
-            label-position="before"
-            name="homepageMainImage"
-            :help="$t('web.public.homepageForm.form.imageHelper')"
-          )
-          .form-section
-            .text-color-row
-              formulate-input(
-                  type="text"
-                  name="homepageTitle"
-                  :label="$t('web.public.homepageForm.form.title')"
-                  :help="$t('web.public.homepageForm.form.titleHelper')"
-                )
-              formulate-input#primary-color(
-                type="textColor"
-                name="homepageTitleColor"
-                value="#1081F2"
-                )
-            .text-color-row
-              formulate-input(
-                  type="text"
-                  name="homepageSubtitle"
-                  :label="$t('web.public.homepageForm.form.subtitle')"
-                  :help="$t('web.public.homepageForm.form.subtitleHelper')"
-                  )
-              FormulateInput#primary-color(
-                type="textColor"
-                name="homepageSubtitleColor"
-                value="#1081F2"
-                )
-            .button-row
-              formulate-input(
-                  type="text"
-                  name="homepageFirstButtonText"
-                  :label="$t(`web.public.homepageForm.form.buttons.1`)"
-                )
-              formulate-input(
-                  type="text"
-                  name="homepageFirstButtonLink"
-                  :label="$t(`web.public.homepageForm.form.links.1`)"
-                )
-            .button-row
-                formulate-input(
-                  type="text"
-                  name="homepageSecondButtonText"
-                  :label="$t(`web.public.homepageForm.form.buttons.2`)"
-                )
-                formulate-input(
-                  type="text"
-                  name="homepageSecondButtonLink"
-                  :label="$t(`web.public.homepageForm.form.links.2`)"
-                )
-    section.public-whoWeAre
-      .public-whoWeAre__header
-        h2.h2--dash {{ $t('web.public.whoWeAreForm.title') }}
-        .subtitle
-          h3 {{ $t('web.public.whoWeAreForm.subtitle') }}
-          design-modal(section="aboutUs")
-        .form__row
-          FormulateInput(
-            type="image"
-            :label="$t('web.public.whoWeAreForm.form.image')"
-            label-position="before"
-            name="aboutUsImgUrl"
-            :help="$t('web.public.whoWeAreForm.form.imageHelper')"
-          )
-          .form-section
-            .section-row
-              formulate-input(
-                type="text"
-                name="aboutUsTitle"
-                :label="$t('web.public.whoWeAreForm.form.title')"
-                :help="$t('web.public.whoWeAreForm.form.titleHelper')"
-                )
-              FormulateInput#primary-color(
-                type="textColor"
-                name="aboutUsTitleColor"
-                value="#1081F2"
-                )
-            .section-row
-              formulate-input(
-                type="text"
-                name="aboutUsSubtitle"
-                :label="$t('web.public.whoWeAreForm.form.subtitle')"
-                :help="$t('web.public.whoWeAreForm.form.subtitleHelper')"
-                )
-              FormulateInput#primary-color(
-                type="textColor"
-                name="aboutUsSubtitleColor"
-                value="#1081F2"
-                )
-            lz-editor-input(
-            :label="$t('web.public.whoWeAreForm.form.description')"
-            v-model="publicWebForm.aboutUsDescription"
-            )
-    section.public-features
-      .public-whoWeAre__header
-        h3.h3--dash {{ $t('web.public.whoWeAreForm.features.title') }}
-        formulate-input.public-whoWeAre__content(
-          type="group"
-          name="aboutUs"
-          :value="publicWebForm.aboutUsFeaturesIcons"
-          #default="{index}"
-        )
-          formulate-input.text-item(
-            type="image"
-            name="url"
-            :label="$t(`web.public.whoWeAreForm.features.icon.${index + 1}`)"
-            :help="$t('web.public.whoWeAreForm.features.icon.help')"
-          )
-          formulate-input.text-item(
-            type="text"
-            name="title"
-            :label="$t(`web.public.whoWeAreForm.features.titles.${index + 1}`)"
-          )
-          formulate-input.text-item(
-            type="text"
-            name="description"
-            :label="$t(`web.public.whoWeAreForm.features.descriptions.${index+1}`)"
-          )
-
-      hr.hr--dash
-
-      .public-whoWeAre__cta
-        formulate-input(
-          type="text"
-          name="aboutUsReadMoreButtonText"
-          :label="$t('web.public.whoWeAreForm.features.button')"
-        )
-        formulate-input(
-          type="text"
-          name="aboutUsReadMoreButtonLink"
-          :label="$t('web.public.whoWeAreForm.features.link')"
-        )
-    section.public-whyUs
-      .public-whyUs__header
-        h2.h2--dash {{ $t('web.public.whyChooseUsForm.title') }}
-        .subtitle
-          h3 {{ $t('web.public.whyChooseUsForm.subtitle') }}
-          design-modal(section="whyUs")
-        .form__row
-          FormulateInput(
-            type="image"
-            :label="$t('web.public.whyChooseUsForm.image')"
-            label-position="before"
-            name="whyChooseUsImgUrl"
-            :help="$t('web.public.whyChooseUsForm.imageHelperText')"
-          )
-          .form-section
-            .section-row
-              formulate-input(
-                type="text"
-                name="whyChooseUsTitle"
-                :label="$t('web.public.whyChooseUsForm.formTitle')"
-                :help="$t('web.public.whyChooseUsForm.titleHelperText')"
-                )
-              FormulateInput#primary-color(
-                type="textColor"
-                name="whyChooseUsTitleColor"
-                value="#1081F2"
-                )
-            lz-editor-input(
-            :label="$t('web.public.whyChooseUsForm.description')"
-            v-model="publicWebForm.whyChooseUsDescription"
-            )
-        .public-whyUs__content
-          formulate-input(
-            type="group"
-            name="whyChooseUsSubTitles"
-            :value="publicWebForm.whyChooseUsSubTitles"
-            #default="{index}"
-          )
-            formulate-input.text-item(
-              type="text"
-              name="title"
-              :label="$t(`web.public.whyChooseUsForm.titles.${index + 1}`)"
-            )
-            formulate-input.text-item(
-              type="text"
-              name="description"
-              :label="$t(`web.public.whyChooseUsForm.descriptions.${index + 1}`)"
-            )
-    section.public-bookings
-      .public-bookings__header
-        h2.h2--dash {{ $t('web.public.bookingsForm.title') }}
-        .subtitle
-          h3 {{ $t('web.public.bookingsForm.subtitle') }}
-          design-modal(section="bookings")
-        .form__row
-          FormulateInput(
-            type="image"
-            :label="$t('web.public.brandForm.logo.label')"
-            label-position="before"
-            name="bookingsImgUrl"
-            :help="$t('web.public.brandForm.logo.help')"
-          )
-          .form-section
-            .section-row
-              formulate-input(
-                type="text"
-                name="bookingsTitle"
-                :label="$t('web.public.bookingsForm.formTitle')"
-                :help="$t('web.public.bookingsForm.titleHelper')"
-                )
-              FormulateInput#primary-color(
-                type="textColor"
-                name="bookingsTitleColor"
-                value="#1081F2"
-                )
-            .section-row
-              formulate-input(
-                type="text"
-                name="bookingsSubtitle"
-                :label="$t('web.public.bookingsForm.formSubtitle')"
-                :help="$t('web.public.bookingsForm.subtitleHelper')"
-                )
-              FormulateInput#primary-color(
-                type="textColor"
-                name="bookingsSubtitleColor"
-                value="#1081F2"
-                )
-            .links-row
-              formulate-input(
-                type="text"
-                name="bookingsButtonText"
-                :label="$t('web.public.bookingsForm.button')"
-              )
-              formulate-input(
-                type="text"
-                name="bookingsButtonUrl"
-                :label="$t('web.public.bookingsForm.link')"
-              )
-    section.public-reviews
-      .public-reviews__header
-        h2.h2--dash {{ $t('web.public.reviewsForm.title') }}
-        h3 {{ $t('web.public.reviewsForm.subtitle') }}
-      .public-reviews__title
-        .reviews-section
-          formulate-input(
-            type="text"
-            name="reviewsTitle"
-            :label="$t('web.public.reviewsForm.formTitle')"
-            :help="$t('web.public.reviewsForm.titleHelper')"
-          )
-          FormulateInput#primary-color(
-            type="textColor"
-            name="reviewsTitleColor"
-            value="#1081F2"
-            )
-
-        .reviews-section
-          formulate-input(
-            type="text"
-            name="reviewsSubtitle"
-            :label="$t('web.public.reviewsForm.formSubtitle')"
-            :help="$t('web.public.reviewsForm.subtitleHelper')"
-          )
-          FormulateInput#primary-color(
-            type="textColor"
-            name="reviewsSubtitleColor"
-            value="#1081F2"
-            )
-      .form__row
-        formulate-input(
-          type="text"
-          name="reviewsUrl"
-          :label="$t('web.public.reviewsForm.link')"
-        )
-    section.public-impact
-      .public-impact__header
-        h2.h2--dash {{ $t('web.public.impactForm.title') }}
-        .subtitle
-          p {{ $t('web.public.impactForm.subtitle') }}
-          design-modal(section="impact")
-            template(#header)
-              h4 {{ $t('web.public.impactForm.design.title') }}
-            template(#form)
-              h2.h2--dash {{ $t('web.public.impactForm.design.image') }}
-              formulate-input(
-                type="image"
-                name="impactDesignBackgroundImage"
-                :help="$t('web.public.impactForm.design.imageHelper')"
-              )
-              h2.h2--dash {{ $t('web.public.impactForm.design.color') }}
-              formulate-input#primary-color(
-                type="textColor"
-                name="impactDesignBackgroundColor"
-                v-model="publicWebForm.impactDesignBackgroundColor"
-                )
-      formulate-input(
-        type="group"
-        name="impactData"
-        :value="publicWebForm.impactData"
-        #default="{index}"
-      ).public-impact__content
-        formulate-input.impact-item(
-              type="image"
-              :name= "`url`"
-              :label="$t(`web.public.impactForm.icon.${index+1}`)"
-              :help="$t('web.public.impactForm.icon.help')"
-            )
-        formulate-input.impact-item(
-              type="text"
-              :name= "`text`"
-              :label="$t(`web.public.impactForm.text.${index+1}`)"
-            )
-        formulate-input.impact-item(
-              type="text"
-              :name= "`amount`"
-              :label="$t(`web.public.impactForm.amount.${index+1}`)"
-            )
-    section.public-team
-      .public-team__header
-        h2.h2--dash {{ $t('web.public.teamForm.title') }}
-        .subtitle
-          h3 {{ $t('web.public.teamForm.subtitle') }}
-          design-modal(section="team")
-        .public-team__title
-          .team-section
-            formulate-input(
-              type="text"
-              name="teamTitle"
-              :label="$t('web.public.teamForm.header.title')"
-              :help="$t('web.public.teamForm.header.titleHelperText')"
-            )
-            FormulateInput#primary-color(
-              type="textColor"
-              name="teamTitleColor"
-              value="#1081F2"
-              )
-          .team-section
-            formulate-input(
-              type="text"
-              name="teamSubtitle"
-              :label="$t('web.public.teamForm.header.subtitle')"
-              :help="$t('web.public.teamForm.header.subtitleHelperText')"
-            )
-            FormulateInput#primary-color(
-              type="textColor"
-              name="teamSubtitleColor"
-              value="#1081F2"
-              )
-
-      .public-team__header
-        h3.h3--dash {{ $t('web.public.teamForm.teamMembers.title') }}
-        h4 {{ $t('web.public.teamForm.teamMembers.subtitle') }}
-      formulate-form.public-team__form(
-        v-model="teamForm"
-        @submit="onTeamSubmit"
-        :keep-model-data="true"
-      )
-        .public-team__image
-          formulate-input(
-            type="image"
-            name="picture"
-            :label="$t('web.public.teamForm.photo.label')"
-            :help="$t('web.public.teamForm.photo.help')"
-          )
-        .public-team__texts
-          .form__row
-            formulate-input(
-              type="text"
-              name="name"
-              :label="$t('web.public.teamForm.name')"
-            )
-            formulate-input(
-              type="text"
-              name="position"
-              :label="$t('web.public.teamForm.position')"
-            )
-          .form__row
-            formulate-input(
-              type="text"
-              name="linkedin"
-              :label="$t('web.public.teamForm.linkedin')"
-            )
-          .form__row  
-            lz-button(type="secondary") {{ $t('web.public.teamForm.newMember') }}
-
-      hr.hr--dash
-      transition(name="fade")
-        .title-table-container   
-          lz-table(
-            class="lz-table"
-            v-if="publicWebForm.teamMembers && publicWebForm.teamMembers.length > 0"
-            :fields="teamFields"
-            :items="publicWebForm.teamMembers"
-            :title="$t('web.public.teamForm.table')"
-          )
-            template(#dot="{ row }")
-              DotsIcon        
-            template(#name="{ row: { name } }") {{ name }}
-            template(#position="{ row: { position } }") {{ position }}
-            template(#linkedin="{ row: { linkedin } }") {{ linkedin }}
-            template(#delete="{ row }")
-              XIcon(@click="removeTeamMember(row)")
-    section.public-contact
-      .public-contact__header
-        h2.h2--dash {{ $t('web.public.contactForm.title') }}
-        h4 {{ $t('web.public.contactForm.subtitle') }}
-        .public-contact__content
-          formulate-input(
-            type="text"
-            name="contactTitle"
-            :label="$t('web.public.contactForm.form.title')"
-          )
-          formulate-input(
-            type="text"
-            name="contactSubTitle"
-            :label="$t('web.public.contactForm.form.subtitle')"
-          )
-    section.public-footer
-      .public-footer__header
-        h2.h2--dash {{$t('web.public.footer.title')}}
-        .subtitle
-          h4 {{ $t('web.public.footer.subtitle') }}
-          design-modal(section="footer")
-      section.-public-footer__subSection
-        .public-footer__header
-          h3.h3--dash {{ $t('web.public.footer.socialForm.title') }}
-        .public-networks__urls
-          .form__row
-            formulate-input(
-              type="text"
-              name="footerSocialFacebook"
-              :label="$t('web.public.footer.socialForm.facebook')"
-            )
-            formulate-input(
-              type="text"
-              name="footerSocialTwitter"
-              :label="$t('web.public.footer.socialForm.twitter')"
-            )
-          .form__row  
-            formulate-input(
-              type="text"
-              name="footerSocialLinkedIn"
-              :label="$t('web.public.footer.socialForm.linkedin')"
-            )
-            formulate-input(
-              type="text"
-              name="footerSocialWhatsapp"
-              :label="$t('web.public.footer.socialForm.whatsapp')"
-            )
-          .form__row  
-            formulate-input(
-              type="text"
-              name="footerSocialSecondaryWeb"
-              :label="$t('web.public.footer.socialForm.web')"
-            )
-            formulate-input(
-              type="text"
-              name="footerSocialInstagram"
-              :label="$t('web.public.footer.socialForm.instagram')"
-            )
-      section.public-footer__subSection 
-        .public-footer__header
-          h3.h3--dash {{ $t('web.public.footer.termsForm.title') }}
-        .form__row
-          lz-editor-input(
-            :label="$t('web.public.footer.termsForm.terms')"
-            v-model="publicWebForm.footerTerms"
-          )
-        .form__row
-          lz-editor-input(
-            :label="$t('web.public.footer.termsForm.transparencyDescription')"
-            v-model="publicWebForm.footerTransparencyDescription"
-          )
-        .form__row
-          formulate-input(
-            type="file"
-            name="footerTransparencyAccountability"
-            :label="$t('web.public.footer.termsForm.accountability')"
-            :add-label="$t('web.public.footer.termsForm.add')"
-            :multiple="true"
-          )
-  .public-buttons
-    lz-button(
-      type="secondary"
-      class='cancel-btn'
-      @click.prevent="$router.push({ name: 'Home' })"
-    ) {{ $t('common.actions.cancel') }}
-
-    lz-button(type="primary" class="save-btn" @click.prevent="onPublicWebSubmit" :disabled='!isFormChanged') {{ $t('common.actions.save') }}
+    <General v-model:props="form.general"/>
+    <Personalize v-model:props="form.style"/>
+    <Homepage v-model:props="form.homePage"/>
+    <AboutUs v-model:props="form.aboutUs"/>
+    <WhyChooseUs v-model:props="form.whyChooseUs"/>
+    <Bookings v-model:props="form.bookings"/>
+    <Reviews v-model:props="form.reviews"/>
+    <Impact v-model:props="form.impact"/>
+    <Team v-model:props="form.team"/>
+    <Contact v-model:props="form.contact"/>
+    <Footer v-model:props="form.footer"/>
+    .public-buttons
+      lz-button(
+        type="secondary"
+        class='cancel-btn'
+        @click.prevent="$router.push({ name: 'Home' })"
+      ) {{ $t('common.actions.cancel') }}
+      lz-button(type="primary" class="save-btn" :disabled='!isFormChanged') {{ $t('common.actions.save') }}
 </template>
 
 <script lang="ts">
   import { Component, Vue } from "vue-property-decorator";
   import { namespace } from "vuex-class";
-  import cloneDeep from "lodash/cloneDeep";
-  import isObjectEmpty from "lodash/isEmpty";
-  import isEqual from "lodash/isEqual";
   import LzButton from "@/components/Button.vue";
-  import LzTable from "@/components/Table.vue";
-  import LzEditorInput from "@/components/EditorInput.vue";
   import LzModal from "@/components/Modal.vue";
-  import DesignModal from "@/components/DesignModal.vue";
   import { DotsIcon } from "@/components";
-  import { parseFiles } from "@/utils/parseFile";
   import { apiWebsite } from "../api";
   import { ChooseTemplate } from "../components";
-  import LayoutSelect from "@/components/LayoutSelect.vue";
+  import {
+    AboutUs,
+    Bookings,
+    Contact,
+    Features,
+    Footer,
+    General,
+    Homepage,
+    Impact,
+    Personalize,
+    Reviews,
+    Team,
+    WhyChooseUs
+  } from "../components/Sections";
+  import _ from "lodash";
 
   const auth = namespace("auth");
 
   @Component({
     components: {
       LzButton,
-      LzTable,
-      LzEditorInput,
       ChooseTemplate,
       LzModal,
       DotsIcon,
-      DesignModal,
-      LayoutSelect
+      General,
+      Personalize,
+      Homepage,
+      AboutUs,
+      WhyChooseUs,
+      Bookings,
+      Reviews,
+      Team,
+      Contact,
+      Features,
+      Impact,
+      Footer
     }
   })
   export default class Public extends Vue {
-    showModal = false;
-    modalText = {
-      title: "",
-      subtitle: ""
-    };
-
-    prevForm: PublicWebForm | {} = {};
-    imageChanged: {
-      styleLogo: false;
-      homepageMainImage: false;
-      aboutUsImgUrl: false;
-      whyChooseUsImgUrl: false;
-      bookingsImgUrl: false;
-    };
-
-    publicWebForm = {
-      active: false,
-      url: "",
-      chosenTemplateId: "",
-
-      // style properties
-      styleLogo: [] as any,
-      styleMainTypography: "",
-      styleSecondaryTypography: "",
-      styleButtonColor: "",
-      styleMenuColor: "",
-      styleFooterColor: "",
-
-      // homepage properties
-      homepageMainImage: [] as any,
-      homepageMoreImages: [] as any,
-      homepageTitle: "",
-      homepageTitleColor: "",
-      homepageSubtitle: "",
-      homepageSubtitleColor: "",
-      homepageFirstButtonText: "",
-      homepageFirstButtonLink: "",
-      homepageSecondButtonText: "",
-      homepageSecondButtonLink: "",
-      homepageDesignLayout: "left",
-      homepageDesignBackgroundColor: "#EFEFEF",
-
-      // aboutUs properties
-      aboutUsImgUrl: [] as any,
-      aboutUsTitle: "",
-      aboutUsTitleColor: "",
-      aboutUsSubtitle: "",
-      aboutUsSubtitleColor: "",
-      aboutUsDescription: "",
-      aboutUsFeaturesIcons: [],
-      aboutUsReadMoreButtonId: 1,
-      aboutUsReadMoreButtonText: "",
-      aboutUsReadMoreButtonLink: "",
-
-      // whyChooseUs properties
-      whyChooseUsImgUrl: [] as any,
-      whyChooseUsTitle: "",
-      whyChooseUsTitleColor: "",
-      whyChooseUsDescription: "",
-      whyChooseUsSubTitles: new Array(4).fill(0).map(
-        (_, i) =>
-          ({
-            id: i,
-            title: "",
-            url: "",
-            description: ""
-          } as Subtitle)
-      ),
-      whyChooseUsDesignLayout: "right",
-      whyChooseUsDesignBackgroundColor: "#F0F0F0",
-      whyChooseUsDesignBackgroungImage: "",
-
-      // bookings properties
-      bookingsImgUrl: [] as any,
-      bookingsTitle: "",
-      bookingsTitleColor: "",
-      bookingsSubtitle: "",
-      bookingsSubtitleColor: "",
-      bookingsButtonUrl: "",
-      bookingsButtonText: "",
-      bookingsDesignLayout: "center",
-      bookingsDesignBackgroundColor: "#F0F0F0",
-
-      // reviews properties
-      reviewsTitle: "",
-      reviewsTitleColor: "",
-      reviewsSubtitle: "",
-      reviewsSubtitleColor: "",
-      reviewsUrl: "",
-
-      // impact properties
-      // TODO:remove that and kept the impactData only
-      impactData: new Array(4).fill(null).map(
-        (_, i) =>
-          ({
-            amount: "",
-            id: `${i}`,
-            text: "",
-            url: []
-          } as Section.Web.ImpactData)
-      ),
-      impactDesignBackgroundColor: "#FFF0F0",
-      impactDesignBackgroundImage: [] as any,
-
-      // team properties
-      teamTitle: "",
-      teamSubtitle: "",
-      teamTitleColor: "",
-      teamSubtitleColor: "",
-      teamMembers: [],
-      teamDesignBackgroundColor: "#F0F0F0",
-
-      // contact properties
-      contactTitle: "",
-      contactSubTitle: "",
-      contactTitleColor: "",
-      contactSubtitleColor: "",
-      contactDesignBackgroundColor: "#EFEFEF",
-
-      // footer properties
-      footerTerms: "",
-      footerTransparencyAccountability: [] as any,
-      footerTransparencyDescription: "",
-      footerSocialFacebook: "",
-      footerSocialTwitter: "",
-      footerSocialLinkedIn: "",
-      footerSocialWhatsapp: "",
-      footerSocialSecondaryWeb: "",
-      footerSocialInstagram: "",
-      footerDesignBackgroundColor: "",
-      footerDesignBackgroundImage: ""
-    };
-
-    fontOptions = {
-      roboto: this.$t("web.public.personalizeWebForm.form.fonts.roboto")
-      //TODO: uncomment it when the template project is adopted to that feature
-      // arial: this.$t("web.public.personalizeWebForm.form.fonts.arial")
-    };
-
-    teamForm = {
-      id: "",
-      picture: null,
-      name: "",
-      position: "",
-      linkedin: ""
-    };
-
-    teamFields = [
-      { id: "dot", label: this.$t("web.public.teamForm.delete") },
-      { id: "name", label: this.$t("web.public.teamForm.name") },
-      { id: "position", label: this.$t("web.public.teamForm.position") },
-      { id: "linkedin", label: this.$t("web.public.teamForm.linkedin") },
-      { id: "delete", label: this.$t("web.public.teamForm.delete") }
-    ];
-
-    loaded = false;
-
     @auth.State("id")
     public memberId!: string;
 
@@ -807,26 +98,143 @@
     @auth.State("isActive")
     public isActive!: boolean;
 
-    handleChooseTemplate(e: Event & { target: HTMLInputElement }) {
-      if (isObjectEmpty(this.prevForm)) return;
-      this.publicWebForm.chosenTemplateId = e.target.value;
+    form: WebProps = {
+      general: {
+        active: true,
+        url: "",
+        templateId: ""
+      },
+      style: {
+        buttonColor: "",
+        footerColor: "",
+        logo: "",
+        mainTypography: "",
+        menuColor: "",
+        secondaryTypography: ""
+      },
+      homePage: {
+        design: {
+          layout: "left",
+          backgroundColor: "#EFEFEF"
+        },
+        title: "",
+        titleColor: "",
+        subTitle: "",
+        subTitleColor: "",
+        mainImage: "",
+        firstButtonLink: "",
+        firstButtonText: "",
+        secondButtonLink: "",
+        secondButtonText: ""
+      },
+      aboutUs: {
+        imgUrl: "",
+        title: "",
+        titleColor: "",
+        subTitle: "",
+        subTitleColor: "",
+        description: "",
+        features: {
+          icons: [],
+          buttons: []
+        }
+      },
+      whyChooseUs: {
+        imgUrl: "",
+        title: "",
+        titleColor: "",
+        description: "",
+        subtitles: [],
+        design: {
+          layout: "right",
+          backgroundColor: "#F0F0F0"
+        }
+      },
+      bookings: {
+        imgUrl: "",
+        title: "",
+        titleColor: "",
+        subtitle: "",
+        subtitleColor: "",
+        buttonUrl: "",
+        buttonText: "",
+        design: {
+          layout: "center",
+          backgroundColor: "#F0F0F0"
+        }
+      },
+      reviews: {
+        title: "",
+        titleColor: "",
+        subtitle: "",
+        subtitleColor: "",
+        url: ""
+      },
+      impact: {
+        data: [],
+        design: {
+          backgroundColor: "#FFF0F0",
+          backgroundImage: ""
+        }
+      },
+      team: {
+        title: "",
+        titleColor: "",
+        subTitle: "",
+        subtitleColor: "",
+        members: [],
+        design: {
+          backgroundColor: "#F0F0F0"
+        }
+      },
+      contact: {
+        title: "",
+        subTitle: "",
+        titleColor: "",
+        subTitleColor: "",
+        design: {
+          backgroundColor: "#EFEFEF"
+        }
+      },
+      footer: {
+        info: {
+          terms: "",
+          transparency: {
+            description: "",
+            accountability: ""
+          }
+        },
+        social: {
+          facebook: "",
+          twitter: "",
+          linkedIn: "",
+          whatsapp: "",
+          secondaryWeb: "",
+          instagram: ""
+        },
+        design: {
+          backgroundColor: "",
+          backgroundImage: ""
+        }
+      }
+    };
+    initialForm: WebProps;
+    get isFormChanged() {
+      return !_.isEqual(this.form, this.initialForm);
     }
 
+    loaded = false;
+
+    showModal = false;
+    modalText = {
+      title: "",
+      subtitle: ""
+    };
     onModalClose(): void {
       this.showModal = false;
     }
-
     onModalOpen(): void {
       this.showModal = true;
-    }
-
-    handleImageUpload(event, fieldName): void {
-      this.imageChanged[fieldName] = true;
-    }
-
-    get isFormChanged(): boolean {
-      if (isObjectEmpty(this.prevForm)) return false;
-      return !isEqual(this.prevForm, this.publicWebForm);
     }
 
     async handlePublishWebsite(active: boolean, websiteId: string) {
@@ -866,244 +274,38 @@
       }
     }
 
-    removeTeamMember(e: any) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const teamArr = this.publicWebForm.teamMembers as any[];
-      const memberIdx = teamArr.findIndex(el => el === e);
-      teamArr.splice(memberIdx, 1);
-    }
-
-    onTeamSubmit() {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-
-      this.publicWebForm.teamMembers.push({
-        id: this.publicWebForm.teamMembers.length + 1,
-        picture: this.teamForm.picture,
-        name: this.teamForm.name,
-        position: this.teamForm.position,
-        linkedin: this.teamForm.linkedin
-      });
-
-      this.teamForm = {
-        id: "",
-        picture: null,
-        name: "",
-        position: "",
-        linkedin: ""
-      };
-    }
-
     mounted() {
+      // TODO: fetch template and load initial values from there, then load values from the
+      // user configuration
       apiWebsite.section
         .get<WebProps>(this.websiteId, "web")
         .then(data => {
-          this.publicWebForm.chosenTemplateId = data?.templateId;
-          this.publicWebForm.url = this.url;
-          this.publicWebForm.active = this.isActive;
+          const { templateId, properties } = data;
 
-          // Style section
-          this.publicWebForm.styleLogo = [
-            { url: data?.properties?.style?.logo }
-          ];
-          this.publicWebForm.styleMenuColor = data.properties?.style?.menuColor;
-          this.publicWebForm.styleButtonColor =
-            data.properties?.style?.buttonColor;
-          this.publicWebForm.styleFooterColor =
-            data.properties?.style?.footerColor;
-          this.publicWebForm.styleMainTypography =
-            data.properties?.style?.mainTypography;
-          this.publicWebForm.styleSecondaryTypography =
-            data.properties?.style?.secondaryTypography;
+          this.form = properties;
+          this.form.general.templateId = templateId;
+          this.form.general.url = this.url;
+          this.form.general.active = this.isActive;
 
-          // HomePage section
-          this.publicWebForm.homepageTitle = data.properties?.homePage?.title;
-          this.publicWebForm.homepageDesignLayout =
-            data.properties?.homePage?.design.layout;
-          this.publicWebForm.homepageDesignBackgroundColor =
-            data.properties?.homePage?.design.backgroundColor;
-          this.publicWebForm.homepageSubtitle =
-            data.properties?.homePage?.subTitle;
-          this.publicWebForm.homepageMainImage = [
-            { url: data.properties?.homePage?.mainImage }
-          ];
-          // this.publicWebForm.homepageMoreImages =
-          //   data.properties?.homePage?.moreImages;
-          this.publicWebForm.homepageTitleColor =
-            data.properties?.homePage?.titleColor;
-          this.publicWebForm.homepageSubtitleColor =
-            data.properties?.homePage?.subTitleColor;
-          this.publicWebForm.homepageFirstButtonLink =
-            data.properties?.homePage?.firstButtonLink;
-          this.publicWebForm.homepageFirstButtonText =
-            data.properties?.homePage?.firstButtonText;
-          this.publicWebForm.homepageSecondButtonLink =
-            data.properties?.homePage?.secondButtonLink;
-          this.publicWebForm.homepageSecondButtonText =
-            data.properties?.homePage?.secondButtonText;
+          // Map images to correctly display initial values
+          // See https://vueformulate.com/guide/inputs/types/file/#setting-initial-values for more info
+          const mapImageField = <O extends object>(obj: O, field: keyof O) => {
+            if (typeof obj[field] === "string" && !!obj[field]) {
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              obj[field] = [{ url: obj[field] }] as any;
+            }
+          };
 
-          // AboutUs section
-          this.publicWebForm.aboutUsTitle = data.properties?.aboutUs?.title;
-          this.publicWebForm.aboutUsImgUrl = [
-            { url: data.properties?.aboutUs?.imgUrl }
-          ];
-          this.publicWebForm.aboutUsSubtitle =
-            data.properties?.aboutUs?.subTitle;
-          this.publicWebForm.aboutUsTitleColor =
-            data.properties?.aboutUs?.titleColor;
-          this.publicWebForm.aboutUsSubtitleColor =
-            data.properties?.aboutUs?.subTitleColor;
-          this.publicWebForm.aboutUsDescription =
-            data.properties?.aboutUs?.description;
-          this.publicWebForm.aboutUsFeaturesIcons =
-            data.properties?.aboutUs?.features?.icons?.map(icon => ({
-              id: icon.id,
-              url: [{ url: icon.url }],
-              title: icon.title,
-              description: icon.description
-            })) ??
-            Array.from(
-              { length: 4 },
-              (_, i) =>
-                ({
-                  id: i,
-                  url: "",
-                  title: "",
-                  description: ""
-                } as Feature)
-            );
+          mapImageField(this.form.style, "logo");
+          mapImageField(this.form.homePage, "mainImage");
+          mapImageField(this.form.aboutUs, "imgUrl");
+          this.form.aboutUs.features.icons.map(i => mapImageField(i, "url"));
+          mapImageField(this.form.whyChooseUs, "imgUrl");
+          mapImageField(this.form.bookings, "imgUrl");
+          this.form.impact.data.map(i => mapImageField(i, "url"));
+          mapImageField(this.form.impact.design, "backgroundImage");
 
-          (this.publicWebForm.aboutUsReadMoreButtonText =
-            data.properties?.aboutUs?.features?.buttons[0]?.text),
-            (this.publicWebForm.aboutUsReadMoreButtonLink =
-              data.properties?.aboutUs?.features?.buttons[0]?.link),
-            // WhyChooseUs section
-            (this.publicWebForm.whyChooseUsTitle =
-              data.properties?.whyChooseUs?.title);
-          this.publicWebForm.whyChooseUsImgUrl = [
-            { url: data.properties?.whyChooseUs?.imgUrl }
-          ];
-          this.publicWebForm.whyChooseUsTitleColor =
-            data.properties?.whyChooseUs?.titleColor;
-          this.publicWebForm.whyChooseUsDescription =
-            data.properties?.whyChooseUs?.description;
-          this.publicWebForm.whyChooseUsSubTitles =
-            data.properties?.whyChooseUs?.subtitles?.map(subtitle => ({
-              id: subtitle.id,
-              title: subtitle.title,
-              description: subtitle.description
-            })) ??
-            new Array(4).fill(0).map(
-              (_, i) =>
-                ({
-                  id: i,
-                  title: "",
-                  description: ""
-                } as Subtitle)
-            );
-
-          // Bookings section
-          this.publicWebForm.bookingsImgUrl = [
-            { url: data.properties?.bookings?.imgUrl }
-          ];
-          this.publicWebForm.bookingsTitle = data.properties?.bookings?.title;
-          this.publicWebForm.bookingsTitleColor =
-            data.properties?.bookings?.titleColor;
-          this.publicWebForm.bookingsSubtitle =
-            data.properties?.bookings?.subtitle;
-          this.publicWebForm.bookingsSubtitleColor =
-            data.properties?.bookings?.subtitleColor;
-          this.publicWebForm.bookingsButtonUrl =
-            data.properties?.bookings?.buttonUrl;
-          this.publicWebForm.bookingsButtonText =
-            data.properties?.bookings?.buttonText;
-
-          // Reviews section
-          this.publicWebForm.reviewsTitle = data.properties?.reviews?.title;
-          this.publicWebForm.reviewsTitleColor =
-            data.properties?.reviews?.titleColor;
-          this.publicWebForm.reviewsSubtitle =
-            data.properties?.reviews?.subtitle;
-          this.publicWebForm.reviewsSubtitleColor =
-            data.properties?.reviews?.subtitleColor;
-          this.publicWebForm.reviewsUrl = data.properties?.reviews?.url;
-
-          // Impact section
-          this.publicWebForm.impactData =
-            data.properties?.impact?.data?.map(
-              item =>
-                ({
-                  id: item.id.toString(),
-                  url: [{ url: item.url }],
-                  text: item.text,
-                  amount: item.amount
-                } as Section.Web.ImpactData)
-            ) ||
-            new Array(4).fill(0).map(
-              (_, i) =>
-                ({
-                  id: i.toString(),
-                  text: "",
-                  amount: "",
-                  url: []
-                } as Section.Web.ImpactData)
-            );
-          this.publicWebForm.impactDesignBackgroundColor =
-            data.properties?.impact?.design.backgroundColor;
-          this.publicWebForm.impactDesignBackgroundImage = data.properties
-            ?.impact?.design.backgroundImage
-            ? [{ url: data.properties?.impact?.design.backgroundImage }]
-            : "";
-
-          // Team section
-          this.publicWebForm.teamTitle = data.properties?.team?.title;
-          this.publicWebForm.teamSubtitle = data.properties?.team?.subTitle;
-          this.publicWebForm.teamTitleColor = data.properties?.team?.titleColor;
-          this.publicWebForm.teamSubtitleColor =
-            data.properties?.team?.subtitleColor;
-          this.publicWebForm.teamMembers =
-            data.properties?.team?.members?.map(member => ({
-              id: member.id,
-              picture: [{ url: member.picture }],
-              name: member.name,
-              linkedin: member.linkedin,
-              position: member.position
-            })) ?? [];
-          this.publicWebForm.teamDesignBackgroundColor =
-            data.properties?.team?.design.backgroundColor;
-
-          // Contact section
-          this.publicWebForm.contactTitle = data.properties?.contact?.title;
-          this.publicWebForm.contactSubTitle =
-            data.properties?.contact?.subTitle;
-          // this.publicWebForm.contactTitleColor =
-          //   data.properties?.contact?.titleColor;
-          // this.publicWebForm.contactSubtitleColor =
-          //   data.properties?.contact?.subtitleColor;
-
-          // Footer section
-          this.publicWebForm.footerTerms = data.properties?.footer?.info.terms;
-          // this.publicWebForm.footerTransparencyAccountability = [
-          //   { url: data.properties?.footer?.info.transparency.data }
-          // ];
-          this.publicWebForm.footerTransparencyDescription =
-            data.properties?.footer?.info.transparency?.data?.description?.transparency_description;
-          this.publicWebForm.footerSocialFacebook =
-            data.properties?.footer?.social.facebook;
-          this.publicWebForm.footerSocialTwitter =
-            data.properties?.footer?.social.twitter;
-          this.publicWebForm.footerSocialLinkedIn =
-            data.properties?.footer?.social.linkedIn;
-          this.publicWebForm.footerSocialWhatsapp =
-            data.properties?.footer?.social.whatsapp;
-          this.publicWebForm.footerSocialSecondaryWeb =
-            data.properties?.footer?.social.secondaryWeb;
-          this.publicWebForm.footerSocialInstagram =
-            data.properties?.footer?.social.instagram;
-          this.publicWebForm.footerDesignBackgroundColor =
-            data.properties?.footer?.design.backgroundColor;
-          this.publicWebForm.footerDesignBackgroundImage =
-            data.properties?.footer?.design.backgroundImage;
-
+          this.initialForm = _.cloneDeep(this.form);
           this.loaded = true;
         })
         .catch(() => {
@@ -1112,74 +314,11 @@
             text: this.$tc("web.public.notify.error")
           });
         });
-
-      // not perfect but it works for now
-      const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
-      delay(1000).then(() => {
-        this.prevForm = cloneDeep(this.publicWebForm);
-      });
     }
 
-    async parseImageUrl(url) {
-      if (url) {
-        const parsed = await parseFiles(url);
-        return parsed[0] as string;
-      }
-      return null;
-    }
-
-    async onPublicWebSubmit() {
-      const accountability =
-        this.publicWebForm.footerTransparencyAccountability?.url &&
-        (
-          await parseFiles(this.publicWebForm.footerTransparencyAccountability)
-        ).map((file: any, key: any) => {
-          return {
-            file,
-            title: this.publicWebForm.footerTransparencyAccountability.files[
-              key
-            ].name
-          };
-        });
-
-      const team: TeamProperties["members"][] = [];
-      if (this.publicWebForm.teamMembers) {
-        for await (const member of this.publicWebForm.teamMembers) {
-          const picture =
-            member.picture && member.picture.files
-              ? (await parseFiles(member.picture))[0]
-              : null;
-          team.push({ ...member, picture });
-        }
-      }
-
-      const styleLogoTrimmed = await this.parseImageUrl(
-        this.publicWebForm.styleLogo
-      );
-      const homepageMainImageTrimmed =
-        this.publicWebForm.homepageMainImage &&
-        (await this.parseImageUrl(this.publicWebForm.homepageMainImage));
-      const aboutUsImgUrlTrimmed =
-        this.publicWebForm.aboutUsImgUrl &&
-        (await this.parseImageUrl(this.publicWebForm.aboutUsImgUrl));
-
-      for (const icon of this.publicWebForm.aboutUsFeaturesIcons) {
-        icon.url = await this.parseImageUrl(icon.url);
-      }
-
-      const whyChooseUsImgUrlTrimmed =
-        this.publicWebForm.whyChooseUsImgUrl &&
-        (await this.parseImageUrl(this.publicWebForm.whyChooseUsImgUrl));
-      const bookingsImgUrlTrimmed =
-        this.publicWebForm.bookingsImgUrl &&
-        (await this.parseImageUrl(this.publicWebForm.bookingsImgUrl));
-
-      for (const impact of this.publicWebForm.impactData) {
-        impact.url = [{ url: await this.parseImageUrl(impact.url) }];
-      }
-
+    async onPublicWebSubmit(form) {
       const hasTemplateChanged =
-        this.publicWebForm.chosenTemplateId !== this.templateId;
+        this.form.general.templateId !== this.initialForm.general.templateId;
 
       if (hasTemplateChanged) {
         this.modalText = {
@@ -1194,180 +333,71 @@
         this.onModalOpen();
       }
 
-      // to disable submit button
-      this.prevForm = {};
-
       const postData: PublicWebFormData = {
-        active: this.publicWebForm.active,
-        templateId: this.publicWebForm.chosenTemplateId,
+        active: form.active,
+        templateId: form.chosenTemplateId,
         websiteId: this.websiteId,
         type: "web",
-        properties: {
-          general: {
-            url: this.publicWebForm.url
-          },
-          style: {
-            logo: styleLogoTrimmed,
-            menuColor: this.publicWebForm.styleMenuColor,
-            buttonColor: this.publicWebForm.styleButtonColor,
-            footerColor: this.publicWebForm.styleFooterColor,
-            mainTypography: this.publicWebForm.styleMainTypography,
-            secondaryTypography: this.publicWebForm.styleSecondaryTypography
-          },
-
-          homePage: {
-            title: this.publicWebForm.homepageTitle,
-            design: {
-              layout: this.publicWebForm.homepageDesignLayout,
-              backgroundColor: this.publicWebForm.homepageDesignBackgroundColor
-            },
-            subTitle: this.publicWebForm.homepageSubtitle,
-            mainImage: homepageMainImageTrimmed,
-            moreImages: this.publicWebForm.homepageMoreImages,
-            titleColor: this.publicWebForm.homepageTitleColor,
-            subTitleColor: this.publicWebForm.homepageSubtitleColor,
-            firstButtonLink: this.publicWebForm.homepageFirstButtonLink,
-            firstButtonText: this.publicWebForm.homepageFirstButtonText,
-            secondButtonLink: this.publicWebForm.homepageSecondButtonLink,
-            secondButtonText: this.publicWebForm.homepageSecondButtonText
-          },
-
-          aboutUs: {
-            title: this.publicWebForm.aboutUsTitle,
-            imgUrl: aboutUsImgUrlTrimmed,
-            subTitle: this.publicWebForm.aboutUsSubtitle,
-            titleColor: this.publicWebForm.aboutUsTitleColor,
-            subTitleColor: this.publicWebForm.aboutUsSubtitleColor,
-            description: this.publicWebForm.aboutUsDescription,
-            features: {
-              icons: this.publicWebForm.aboutUsFeaturesIcons,
-              buttons: [
-                {
-                  id: this.publicWebForm.aboutUsReadMoreButtonId,
-                  text: this.publicWebForm.aboutUsReadMoreButtonText,
-                  link: this.publicWebForm.aboutUsReadMoreButtonLink
-                }
-              ]
-            }
-          },
-
-          // WhyChooseUs properties
-          whyChooseUs: {
-            title: this.publicWebForm.whyChooseUsTitle,
-            imgUrl: whyChooseUsImgUrlTrimmed,
-            titleColor: this.publicWebForm.whyChooseUsTitleColor,
-            description: this.publicWebForm.whyChooseUsDescription,
-            subtitles: this.publicWebForm.whyChooseUsSubTitles,
-            design: {
-              layout: this.publicWebForm.whyChooseUsDesignLayout,
-              backgroundColor: this.publicWebForm
-                .whyChooseUsDesignBackgroundColor,
-              backgroundImage: this.publicWebForm
-                .whyChooseUsDesignBackgroungImage
-            }
-          },
-
-          // Bookings properties
-          bookings: {
-            imgUrl: bookingsImgUrlTrimmed,
-            title: this.publicWebForm.bookingsTitle,
-            titleColor: this.publicWebForm.bookingsTitleColor,
-            subtitle: this.publicWebForm.bookingsSubtitle,
-            subtitleColor: this.publicWebForm.bookingsSubtitleColor,
-            buttonUrl: this.publicWebForm.bookingsButtonUrl,
-            buttonText: this.publicWebForm.bookingsButtonText,
-            design: {
-              layout: this.publicWebForm.bookingsDesignLayout,
-              backgroundColor: this.publicWebForm.bookingsDesignBackgroundColor
-            }
-          },
-
-          // Reviews properties
-          reviews: {
-            title: this.publicWebForm.reviewsTitle,
-            titleColor: this.publicWebForm.reviewsTitleColor,
-            subtitle: this.publicWebForm.reviewsSubtitle,
-            subtitleColor: this.publicWebForm.reviewsSubtitleColor,
-            url: this.publicWebForm.reviewsUrl
-          },
-
-          // Impact properties
-          //TODO: that logic is not the correct way to handle this
-          impact: {
-            data: this.publicWebForm.impactData
-              .map(i => ({
-                ...i,
-                url: i.url[0]?.url ?? ""
-              }))
-              .filter(i => !!i.text),
-            design: {
-              backgroundColor: this.publicWebForm.impactDesignBackgroundColor,
-              backgroundImage: await this.parseImageUrl(
-                this.publicWebForm.impactDesignBackgroundImage
-              )
-            }
-          },
-          // Team properties
-          team: {
-            title: this.publicWebForm.teamTitle,
-            subTitle: this.publicWebForm.teamSubtitle,
-            titleColor: this.publicWebForm.teamTitleColor,
-            subtitleColor: this.publicWebForm.teamSubtitleColor,
-            members: team,
-            design: {
-              backgroundColor: this.publicWebForm.teamDesignBackgroundColor
-            }
-          },
-
-          // Contact properties
-          contact: {
-            title: this.publicWebForm.contactTitle,
-            subTitle: this.publicWebForm.contactSubTitle,
-            titleColor: this.publicWebForm.contactTitleColor,
-            subtitleColor: this.publicWebForm.contactSubtitleColor,
-            design: {
-              backgroundColor: this.publicWebForm.contactDesignBackgroundColor
-            }
-          },
-
-          // Footer properties
-          footer: {
-            info: {
-              terms: this.publicWebForm.footerTerms,
-              transparency: {
-                fileUrl: accountability && accountability[0]?.file,
-                description: this.publicWebForm.footerTransparencyDescription
-              }
-            },
-            social: {
-              twitter: this.publicWebForm.footerSocialTwitter,
-              facebook: this.publicWebForm.footerSocialFacebook,
-              linkedIn: this.publicWebForm.footerSocialLinkedIn,
-              whatsapp: this.publicWebForm.footerSocialWhatsapp,
-              instagram: this.publicWebForm.footerSocialInstagram,
-              secondaryWeb: this.publicWebForm.footerSocialSecondaryWeb
-            },
-            design: {
-              backgroundColor: this.publicWebForm.styleFooterColor,
-              backgroundImage: this.publicWebForm.footerDesignBackgroundImage
-            }
-          }
-        }
+        properties: _.cloneDeep(this.form)
       };
 
+      // See https://vueformulate.com/guide/inputs/types/file/#upload-results-with-v-model-on-formulateinput
+      // to check an example of the code below
+      const getImgURL = async (img): Promise<string | string[]> => {
+        if (typeof img?.upload === "function") {
+          return img.upload().then(([res]) => {
+            if (res && "url" in res) return res.url;
+
+            return "";
+          });
+        }
+        if (typeof img === "string") {
+          return img;
+        }
+        if (Array.isArray(img)) {
+          if (img.length === 1 && "url" in img[0]) {
+            return img[0].url;
+          } else if (img.every(pic => "url" in pic)) {
+            return img.map(({ url }) => url);
+          }
+        }
+        return "";
+      };
+      const mapImgURL = async <T extends object>(obj: T, field: keyof T) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        obj[field] = (await getImgURL(obj[field])) as any;
+      };
+      const {
+        aboutUs,
+        style,
+        homePage,
+        whyChooseUs,
+        bookings,
+        impact,
+        team
+      } = postData.properties;
+
+      await Promise.all([
+        mapImgURL(aboutUs, "imgUrl"),
+        mapImgURL(style, "logo"),
+        mapImgURL(homePage, "mainImage"),
+        mapImgURL(whyChooseUs, "imgUrl"),
+        mapImgURL(bookings, "imgUrl"),
+        mapImgURL(impact.design, "backgroundImage"),
+        Promise.all(aboutUs.features.icons.map(i => mapImgURL(i, "url"))),
+        Promise.all(impact.data.map(i => mapImgURL(i, "url"))),
+        Promise.all(team.members.map(m => mapImgURL(m, "picture")))
+      ]);
+
       try {
-        await apiWebsite.section.put(postData);
+        await Promise.all([
+          apiWebsite.section.put(postData),
+          this.handlePublishWebsite(this.form.general.active, this.websiteId)
+        ]);
         this.$notify({
           type: "success",
           text: this.$tc("web.public.notify.success")
         });
-        await this.handlePublishWebsite(
-          this.publicWebForm.active,
-          this.websiteId
-        );
-
-        // await this.updateFeatures();
-        this.prevForm = cloneDeep(this.publicWebForm);
       } catch (error) {
         // eslint-disable-next-line no-console
         console.error(error);
@@ -1392,36 +422,6 @@
     }
 
     .public {
-      &-general {
-        & > * {
-          margin-bottom: 20px;
-        }
-
-        &__view-btn {
-          text-align: right;
-
-          span {
-            color: $color-black-01;
-            font-size: 16px;
-            text-decoration: underline;
-
-            &:hover {
-              cursor: pointer;
-            }
-          }
-
-          svg {
-            stroke: $color-black-01;
-          }
-
-          a {
-            display: flex;
-            justify-content: end;
-            align-items: center;
-          }
-        }
-      }
-
       &-logos {
         &__header {
           display: flex;
@@ -1564,38 +564,6 @@
                 width: calc(50% - 12px);
               }
             }
-          }
-        }
-      }
-
-      &-personalizeWeb {
-        &__header {
-          h3 {
-            color: $color-black-03;
-            font-size: 16px;
-            font-weight: 400;
-          }
-        }
-
-        .form__row {
-          > :first-child {
-            flex-basis: 16.2%;
-
-            .formulate-input-element {
-              height: 148px;
-            }
-          }
-        }
-
-        .form-section {
-          display: flex;
-          flex-direction: column;
-          gap: 18px;
-
-          .form-colors {
-            display: flex;
-            gap: 42px;
-            flex-wrap: wrap;
           }
         }
       }
@@ -2129,15 +1097,19 @@
     }
 
     .public-buttons {
-      margin-top: 5.6rem;
-    }
+      position: fixed;
+      display: flex;
+      gap: 2rem;
+      width: max-content;
+      z-index: 100;
+      bottom: 20px;
+      right: 9rem;
 
-    .public-buttons .save-btn {
-      right: 8.7rem;
-    }
-
-    .public-buttons .cancel-btn {
-      right: 30.7rem;
+      > * {
+        padding-inline: 4rem;
+        width: max-content;
+        margin: 0;
+      }
     }
   }
 </style>

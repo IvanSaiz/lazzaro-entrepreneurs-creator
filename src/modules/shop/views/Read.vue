@@ -11,11 +11,7 @@
   header
     .title
       h1 {{ $t('shop.read.title') }}
-      formulate-input(
-        type="toggle"
-        name="active"
-        @input="toggleProducts()"
-      )
+      section-toggle(section="shop")
       .view-btn
         a(href="" target="_blank") {{ $t('shop.read.see') }}
         arrow-up-right-icon
@@ -69,6 +65,7 @@
   import { Product } from "../api/types";
   import DesignModal from "../components/DesignModal.vue";
   import LzConfirm from "@/components/Confirm.vue";
+  import SectionToggle from "@/components/SectionToggle.vue";
 
   const auth = namespace("auth");
 
@@ -79,7 +76,8 @@
       LzStepper,
       LzModal,
       DesignModal,
-      LzConfirm
+      LzConfirm,
+      SectionToggle
     }
   })
   export default class Read extends Vue {
@@ -99,7 +97,7 @@
       {
         id: "status",
         label: this.$t("shop.read.productsTable.status.label")
-      },
+      }, 
       { id: "actions", label: this.$t("shop.read.productsTable.actions") }
     ];
 

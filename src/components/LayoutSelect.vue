@@ -1,5 +1,5 @@
 <template>
-  <fieldset class="layout-select">
+  <div class="layout-select">
     <div class="option" v-for="option in options" :key="option.value">
       <div :class="`layout ${option.value}`">
         <div>
@@ -16,23 +16,24 @@
         :id="option.value"
         :value="option.value"
         :name="name"
-        v-model="value"
+        :checked="option.value === modelValue"
+        @input="handleSelect"
       />
       <span class="checkmark"></span>
     </div>
-  </fieldset>
+  </div>
 </template>
 
 <script lang="ts">
-  import { Component, Vue, Prop } from "vue-property-decorator";
+  import { Component, Vue, Prop, VModel } from "vue-property-decorator";
 
   @Component
   export default class LayoutSelect extends Vue {
-    @Prop({ type: String, default: "left" })
-    value!: string;
-
     @Prop({ type: String })
     name!: string;
+
+    @VModel({ type: String })
+    modelValue!: string;
 
     locale = this.$i18n.locale.split("-")[0];
 
@@ -58,6 +59,10 @@
         label: this.$t("common.design.layout.options.right-fill")
       }
     ];
+
+    handleSelect(e) {
+      this.$emit("input", e.target.value);
+    }
   }
 </script>
 
