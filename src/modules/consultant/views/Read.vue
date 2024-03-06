@@ -1,22 +1,20 @@
 <template lang="pug">
-  .consultant-read
-    header
-      h1 {{ $t('consultant.read.title') }}
-      p {{ $t('consultant.read.availability') }}
-      p {{ $t('consultant.read.premium') }}
-
-    .consultant-read__iframe
-      iframe(
-        src="https://book.lazzaro.io/portal-embed#/customer/consultoriaemprende"
-        height="100%"
-      )
+.consultant-read
+  header
+    h1 {{ $t('consultant.read.title') }}
+    p {{ $t('consultant.read.subtitle') }}
+  .consultant-read__iframe
+    iframe(
+      width='100%' 
+      height='750px' 
+      src='https://book.lazzaro.io/portal-embed#/consultoriaemprende' 
+      frameborder='0' 
+      allowfullscreen=''
+    )
 </template>
 
 <script lang="ts">
   import { Component, Vue } from "vue-property-decorator";
-  import { namespace } from "vuex-class";
-
-  const auth = namespace("auth");
 
   @Component
   export default class Read extends Vue {}
