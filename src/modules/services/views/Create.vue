@@ -97,12 +97,10 @@
 
   const auth = namespace("auth");
 
-  type Form = Omit<ServicePostDTO, "image_url"> & {
-    image_url: string | { url: string }[];
-  };
-  type FormSubmitData = Omit<ServicePostDTO, "image_url"> & {
-    image_url: { base64: string }[];
-  };
+  type Image = { url: string }[] | "" | ImageVModel;
+
+  type Form = Omit<ServicePostDTO, "image_url"> & { image_url: Image };
+  type FormSubmitData = ServicePostDTO;
 
   @Component({ components: { LzButton, LzTable, LzConfirm, LzEditorInput } })
   export default class ServiceCreate extends Vue {
@@ -126,8 +124,7 @@
 
     async loadServiceData(serviceId: string) {
       const service = await apiServices.getById(serviceId);
-      this.form = service;
-      this.form.image_url = [{ url: service.image_url }];
+      this.form = { ...service, image_url: [{ url: service.image_url }] };
     }
 
     async createService(body: ServicePostDTO) {
@@ -189,16 +186,11 @@
 
     async onSave(data: FormSubmitData) {
       if (this.showDeleteModal) return;
-      const image = Array.isArray(data.image_url)
-        ? data.image_url[0].base64
-        : data.image_url;
-
       const body: ServicePostDTO = {
         ...data,
-        image_url: image,
+        image_url: await this.handleImage(this.form.image_url),
         member_id: this.memberId
       };
-
       if (this.isNewService) this.createService(body);
       else this.updateService(body);
     }
@@ -222,6 +214,12 @@
         });
       }
       this.showDeleteModal = false;
+    }
+
+    async handleImage(image: Image): Promise<string> {
+      if (typeof image === "string") return image;
+      if (Array.isArray(image)) return image[0].url;
+      return await image.upload().then(([{ url }]) => url);
     }
   }
 </script>

@@ -305,6 +305,32 @@
           this.form.impact.data.map(i => mapImageField(i, "url"));
           mapImageField(this.form.impact.design, "backgroundImage");
 
+          // If there are less than 4 impact data items, add the missing ones to compensate
+          // this is a hack, this should be fixed on the backend
+          if (this.form.impact.data.length < 4) {
+            const missingItems = 4 - this.form.impact.data.length;
+            this.form.impact.data = this.form.impact.data.concat(
+              Array.from({ length: missingItems }, (_, i) => ({
+                id: this.form.impact.data.length + 1 + i,
+                amount: "",
+                text: "",
+                url: ""
+              }))
+            );
+          }
+
+          if (this.form.aboutUs.features.icons.length < 4) {
+            const missingItems = 4 - this.form.aboutUs.features.icons.length;
+            this.form.aboutUs.features.icons = this.form.aboutUs.features.icons.concat(
+              Array.from({ length: missingItems }, (_, i) => ({
+                id: this.form.aboutUs.features.icons.length + 1 + i,
+                description: "",
+                title: "",
+                url: ""
+              }))
+            );
+          }
+
           this.initialForm = _.cloneDeep(this.form);
           this.loaded = true;
         })
