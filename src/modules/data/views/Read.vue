@@ -1,59 +1,53 @@
 <template lang="pug">
-  .data-read
-    header
-      h1 {{ $t('data.read.title') }}
-      p {{ $t('data.read.subtitle') }}
-
-    .data-read__grid
-      lz-box.data-read__incomes-bar(:tight="true")
-        h3 {{ $t('data.read.incomeOverTime') }}
-        canvas#incomesBar
-      lz-box.data-read__incomes-donut(:tight="true")
-        h3 {{ $t('data.read.totalIncome') }}
-        canvas#incomesDonut
-      lz-box.data-read__mid.data-read__mid-a(:tight="true")
-        .data-read__mid-number {{ projectsCount }}
-        .data-read__mid-text {{ $t('data.read.createdProjects') }}
-        .data-read__mid-icon
-          award-icon(size=35)
-
-      lz-box.data-read__mid.data-read__mid-b(:tight="true")
-        .data-read__mid-number {{ eventsCount }}
-        .data-read__mid-text {{ $t('data.read.newEvents') }}
-        .data-read__mid-icon
-          calendar-icon(size=35)
-
-      lz-box.data-read__mid.data-read__mid-c(:tight="true")
-        .data-read__mid-number {{ coursesCount }}
-        .data-read__mid-text {{ $t('data.read.newCourses') }}
-        .data-read__mid-icon
-          certificate-icon(size=35)
-
-      lz-box.data-read__mid.data-read__mid-d(:tight="true")
-        .data-read__mid-number {{ subscriptionsCount }}
-        .data-read__mid-text {{ $t('data.read.totalPartners') }}
-        .data-read__mid-icon
-          user-plus-icon(size=35)
-
-      lz-box.data-read__mid.data-read__mid-e(:tight="true")
-        .data-read__mid-number {{ donationsCount }}
-        .data-read__mid-text {{ $t('data.read.newDonations') }}
-        .data-read__mid-icon
-          currency-bitcoin-icon(size=35)
-      //- lz-box.data-read__bottom-a(:tight="true")
-      lz-box.data-read__bottom-b(:tight="true")
-        h3 {{ $t('data.read.collected') }}
-        .bottom-b
-          .bottom-b__icon
-            wallet-icon(size=100)
-          .bottom-b__count
-            .bottom-b__count-total {{ (currentMonth * 0.95).toFixed(2) }}€
-            .bottom-b__count-detail {{ currentMonth.toFixed(2) }} {{ $t('data.read.currentCollected') }}
-            .bottom-b__link(@click="$router.push({ name: 'accountsRead' })") {{ $t('data.read.withdraw') }}
-
-      lz-box.data-read__bottom-c(:tight="true")
-        h3 {{ $t('data.read.totalDonors') }}
-        canvas#donationsDonut
+.data-read
+  header
+    h1 {{ $t('data.read.title') }}
+    p {{ $t('data.read.subtitle') }}
+  .data-read__grid
+    lz-box.incomes-bar(:tight="true")
+      h3 {{ $t('data.read.incomeOverTime') }}
+      canvas#incomesBar
+    lz-box.data.incomes-donut(:tight="true")
+      h3 {{ $t('data.read.totalIncome') }}
+      canvas#incomesDonut
+    lz-box.data.mid.projects(:tight="true")
+      .number {{ projects }}
+      .text {{ $t('data.read.createdProjects') }}
+      .icon
+        award-icon(size=35)
+    lz-box.data.mid.events(:tight="true")
+      .number {{ events }}
+      .text {{ $t('data.read.newEvents') }}
+      .icon
+        calendar-icon(size=35)
+    lz-box.data.mid.services(:tight="true")
+      .number {{ services }}
+      .text {{ $t('data.read.services') }}
+      .icon
+        file-like-icon(size=35)
+    lz-box.data.mid.reviews(:tight="true")
+      .number {{ reviews }}
+      .text {{ $t('data.read.reviews') }}
+      .icon
+        user-plus-icon(size=35)
+    lz-box.data.mid.bookings(:tight="true")
+      .number {{ bookings }}
+      .text {{ $t('data.read.bookings') }}
+      .icon
+        clipboard-check-icon(size=35)
+    lz-box.data.mid.articles
+      .number {{ articles }}
+      .text {{ $t('data.read.articles') }}
+      .icon
+        browser-icon(size=35)
+    lz-box.data.google-analytics(:tight="true")
+    lz-box.data.earnings(:tight="true")
+      h3 {{ $t('data.read.collected') }}
+      .bottom-b
+        .bottom-b__icon
+          wallet-icon(size=100)
+        .bottom-b__count
+          .bottom-b__count-total {{ (currentMonth * 0.95).toFixed(2) }}€
 </template>
 
 <script lang="ts">
@@ -71,81 +65,50 @@
     @auth.State("id")
     public ongId!: string;
 
-    incomesBarData: any[] = [];
-    incomesBarLabels: any[] = [];
+    earningsByMonth: Record<string, number>;
     incomesDoughnoutData: any[] = [];
     donationsDoughnoutData: any[] = [];
 
-    coursesCount = 0;
-    donationsCount = 0;
-    eventsCount = 0;
-    projectsCount = 0;
-    subscriptionsCount = 0;
+    projects = 0;
+    events = 0;
+    services = 0;
+    reviews = 0;
+    bookings = 0;
+    articles = 0;
 
     currentMonth = 0;
 
     async mounted() {
-      await apiData.getDashboard(this.ongId).then(({ data }: any) => {
-        this.coursesCount = +data.countOfCourses;
-        this.donationsCount = +data.countOfDonations;
-        this.eventsCount = +data.countOfEvents;
-        this.projectsCount = +data.countOfProjects;
-        this.subscriptionsCount = +data.countOfSubscriptions;
-      });
-      await apiData.getStatistics(this.ongId).then(({ data }: any) => {
-        const fullYear = new Date().getFullYear();
-        const month = new Date().getMonth();
-
-        for (const year of [fullYear - 1, fullYear]) {
-          for (const [monthName, monthValue] of Object.entries(data[year])) {
-            this.incomesBarData.push((monthValue as any).totalAmount);
-            this.incomesBarLabels.push(`${monthName.substring(0, 3)} ${year}`);
-          }
-        }
-
-        this.incomesDoughnoutData.push(
-          ...[
-            data.incomes.incomesProjects,
-            data.incomes.incomesEvents,
-            data.incomes.incomesCourses,
-            data.incomes.incomesSubscriptions,
-            data.incomes.incomesDonations
-          ]
-        );
-
-        this.currentMonth = (Object.entries(data[fullYear])[month][1] as any)
-          .totalAmount as number;
-        //labels: ["Proyectos", "Eventos", "Cursos", "Socios", "Donaciones"],
-
-        this.donationsDoughnoutData.push(
-          ...[
-            data.donations.projects,
-            data.donations.events,
-            data.donations.courses,
-            data.donations.subscriptions,
-            data.donations.donations
-          ]
-        );
+      await apiData.getDashboard(this.ongId).then(data => {
+        this.projects = +data.portfolio;
+        this.services = +data.services;
+        this.reviews = 0; // TODO: define where these come from
+        this.events = +data.events;
+        this.bookings = +data.reservations;
+        this.earningsByMonth = data.earningsByMonth;
       });
 
       // incomes bar chart
-      const ctx = (document.getElementById(
+      const barCtx = (document.getElementById(
         "incomesBar"
       ) as HTMLCanvasElement)?.getContext("2d");
 
-      if (!ctx) return;
+      if (!barCtx) return;
 
-      new Chart(ctx, {
+      const incomeLabels = Object.keys(this.earningsByMonth);
+      const incomeData = Object.values(this.earningsByMonth);
+
+      new Chart(barCtx, {
         type: "bar",
         legend: {
           display: false
         },
         data: {
-          labels: this.incomesBarLabels,
+          labels: incomeLabels,
           title: null,
           datasets: [
             {
-              data: this.incomesBarData,
+              data: incomeData,
               backgroundColor: ["#8D00D8"],
               borderWidth: 1
             }
@@ -177,11 +140,10 @@
         type: "doughnut",
         data: {
           labels: [
-            this.$t("data.read.labels.projects"),
+            this.$t("data.read.labels.services"),
             this.$t("data.read.labels.events"),
-            this.$t("data.read.labels.courses"),
-            this.$t("data.read.labels.partners"),
-            this.$t("data.read.labels.donations")
+            this.$t("data.read.labels.projects"),
+            this.$t("data.read.labels.shop")
           ],
           datasets: [
             {
@@ -222,62 +184,6 @@
           }
         }
       } as ChartConfiguration);
-
-      const ctxDonationsDonut = (document.getElementById(
-        "donationsDonut"
-      ) as HTMLCanvasElement)?.getContext("2d");
-
-      if (!ctxDonationsDonut) return;
-
-      new Chart(ctxDonationsDonut, {
-        type: "doughnut",
-        data: {
-          labels: [
-            this.$t("data.read.labels.projects"),
-            this.$t("data.read.labels.events"),
-            this.$t("data.read.labels.courses"),
-            this.$t("data.read.labels.partners"),
-            this.$t("data.read.labels.donations")
-          ],
-          datasets: [
-            {
-              data: this.donationsDoughnoutData,
-              backgroundColor: [
-                "#EB2873",
-                "#FF4863",
-                "#FF7456",
-                "#0CF2B4",
-                "#8D00D8"
-              ],
-              borderColor: [
-                "#EB2873",
-                "#FF4863",
-                "#FF7456",
-                "#0CF2B4",
-                "#8D00D8"
-              ],
-              borderWidth: 1
-            }
-          ]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              position: "right",
-              labels: {
-                usePointStyle: true,
-                padding: 10,
-                font: {
-                  size: 10
-                }
-              }
-            },
-            paddingBelowLegends: false
-          }
-        }
-      } as ChartConfiguration);
     }
   }
 </script>
@@ -287,10 +193,11 @@
     &__grid {
       display: grid;
       grid-template-areas:
-        "a a a a a a b b b b"
-        "c c d d e e f f z z"
-        "g g g h h h h i i i"
-        "g g g h h h h i i i";
+        "a a a a a b b b b"
+        "c c c d d d e e e"
+        "f f f g g g h h h"
+        "i i i i j j j j j"
+        "i i i i j j j j j";
       grid-gap: 20px;
       margin-top: 30px;
 
@@ -300,7 +207,7 @@
       }
     }
 
-    &__incomes-bar {
+    .incomes-bar {
       grid-area: a;
       max-height: 300px;
       overflow: hidden;
@@ -310,7 +217,7 @@
       }
     }
 
-    &__incomes-donut {
+    .incomes-donut {
       grid-area: b;
       max-height: 300px;
       overflow: hidden;
@@ -320,63 +227,66 @@
       }
     }
 
-    &__mid {
+    .data.mid {
       align-items: center;
       display: flex;
-      justify-content: flex-start;
+      justify-content: space-between;
       gap: 5px;
       max-width: 100%;
+      /* max-height: 70px; */
 
-      &-number,
-      &-text {
+      .number,
+      .text {
         color: $color-black-02;
         line-height: 20px;
       }
 
-      &-number {
-        font-weight: 700;
-        font-size: 25px;
+      .number {
+        font-weight: 600;
+        font-size: 32px;
       }
 
-      &-text {
-        font-size: 14px;
-        flex: 1;
-        padding: 0 10px;
+      .text {
+        font-size: 18px;
         max-width: 100px;
       }
 
-      &-icon svg {
+      .icon svg {
         stroke: $color-black-02;
         stroke-width: 1.5;
       }
     }
 
-    &__mid-a {
+    .data.projects {
       grid-area: c;
     }
 
-    &__mid-b {
+    .data.events {
       grid-area: d;
     }
 
-    &__mid-c {
+    .data.services {
       grid-area: e;
     }
 
-    &__mid-d {
+    .data.reviews {
       grid-area: f;
     }
 
-    &__mid-e {
-      grid-area: z;
-    }
-
-    &__bottom-a {
+    .data.bookings {
       grid-area: g;
     }
 
-    &__bottom-b {
+    .data.articles {
       grid-area: h;
+    }
+
+    .data.google-analytics {
+      grid-area: i;
+    }
+
+    .data.earnings {
+      grid-area: j;
 
       .bottom-b {
         display: flex;

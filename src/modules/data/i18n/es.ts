@@ -7,9 +7,10 @@ export default {
     incomeOverTime: "Ingresos en el tiempo",
     createdProjects: "proyectos creados",
     newEvents: "eventos totales",
-    newCourses: "cursos totales",
-    totalPartners: "socios totales",
-    newDonations: "donaciones totales",
+    services: "servicios ofrecidos",
+    reviews: "reseñas obtenidas",
+    bookings: "reservas generadas",
+    articles: "articulos publicados",
     collected: "Recaudado este mes",
     currentCollected: "recaudados - 5% de Lazzaro",
     withdraw: "Retirar dinero recaudado",
@@ -17,9 +18,8 @@ export default {
     labels: {
       projects: "Proyectos",
       events: "Eventos",
-      courses: "Cursos",
-      partners: "Socios",
-      donations: "Donaciones"
+      services: "Servicios",
+      shop: "Tienda"
     }
   }
 };

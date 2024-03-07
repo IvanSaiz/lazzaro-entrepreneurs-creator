@@ -62,6 +62,12 @@ export const LZ_MODULES = {
     active: true,
     icon: "certificate-icon"
   },
+  data: {
+    moduleName: "data",
+    label: "Datos",
+    active: true,
+    icon: "chart-pie-icon"
+  },
   consultant: {
     moduleName: "consultant",
     label: "Asesor",
@@ -73,13 +79,6 @@ export const LZ_MODULES = {
   //   label: "NFTs",
   //   active: true,
   //   icon: EthereumIcon
-  // },
-  // data: {
-  //   moduleName: "data",
-  //   label: "Datos",
-  //   active: true,
-  //   icon: "chart-pie-icon",
-  //   features: ["impact"]
   // },
   // improve: {
   //   moduleName: "improve",
