@@ -52,7 +52,7 @@
         .bottom-b__icon
           wallet-icon(size=100)
         .bottom-b__count
-          .bottom-b__count-total {{ (currentMonth * 0.95).toFixed(2) }}€
+          .bottom-b__count-total {{ data.earnings.toFixed(2) }}€
 </template>
 
 <script lang="ts">
@@ -162,6 +162,16 @@
         [[], []] as [VueI18n.TranslateResult[], number[]]
       );
 
+      const colorsMap: Record<EntityType, string> = {
+        Event: "#0093A7",
+        Product: "#8D00D8",
+        Project: "#0CF2B4",
+        Service: "#EB2873"
+      };
+      const colors = Object.keys(this.data.earningsByEntityType).map(
+        key => colorsMap[key as EntityType]
+      );
+
       new Chart(ctxIncomesDonut, {
         type: "doughnut",
         data: {
@@ -169,20 +179,8 @@
           datasets: [
             {
               data: doughnutData,
-              backgroundColor: [
-                "#EB2873",
-                "#FF4863",
-                "#FF7456",
-                "#0CF2B4",
-                "#8D00D8"
-              ],
-              borderColor: [
-                "#EB2873",
-                "#FF4863",
-                "#FF7456",
-                "#0CF2B4",
-                "#8D00D8"
-              ],
+              backgroundColor: colors,
+              borderColor: colors,
               borderWidth: 1
             }
           ]
