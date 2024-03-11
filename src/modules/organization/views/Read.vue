@@ -1,68 +1,101 @@
 <template lang="pug">
-  .organization-read(v-if="loaded")
-    lz-modal(v-if="showBlockedModal" @close="showBlockedModal = false")
-      .organization-read__modal
-        h3 {{ $t('organization.read.blockAdvise') }}
-        lz-button(@click="showBlockedModal = false") {{ $t('common.actions.close') }}
-
-    header
-      h1 {{ $t('organization.read.title') }}
-      p {{ $t('organization.read.subtitle') }}
-
-    .organization-read__stepper
-      lz-stepper(
-        :steps="['general', 'paymentGateway', 'subscription']"
-        :active="active"
-        @click="(step) => { if (!this.blockedBySubscriptionPlan) { this.active = step; }}"
+.organization-read(v-if="loaded")
+  lz-modal(v-if="showBlockedModal" @close="showBlockedModal = false")
+    .organization-read__modal
+      h3 {{ $t('organization.read.blockAdvise') }}
+      lz-button(@click="showBlockedModal = false") {{ $t('common.actions.close') }}
+  header
+    h1 {{ $t('organization.read.title') }}
+    p {{ $t('organization.read.subtitle') }}
+  .organization-read__stepper
+    lz-stepper(
+      :steps="['general', 'subscription', 'paymentGateway']"
+      :active="active"
+      @click="(step) => { if (!this.blockedBySubscriptionPlan) { this.active = step; }}"
+    )
+      template(#default="{ step }") {{ $t('organization.read.steps.' + step) }}
+  transition(name="fade" mode="out-in")
+    section.organization-read__general(v-if="active === 'general'")
+      formulate-form(
+        v-model="generalForm"
+        @submit="membereneralSubmit"
+        :keep-model-data="true"
       )
-        template(#default="{ step }") {{ $t('organization.read.steps.' + step) }}
-
-    transition(name="fade" mode="out-in")
-      section.organization-read__general(v-if="active === 'general'")
-        formulate-form(
-          v-model="generalForm"
-          @submit="membereneralSubmit"
-          :keep-model-data="true"
+      .form__row
+        formulate-input(
+          type="text"
+          name="firstName"
+          :label="$t('organization.read.generalForm.name')"
+          v-model="generalForm.firstName"
         )
-        .form__row
-          formulate-input(
-            type="text"
-            name="name"
-            :label="$t('organization.read.generalForm.name')"
-            v-model="generalForm.name"
-          )
-          formulate-input(
-            type="text"
-            name="NIF"
-            :label="$t('organization.read.generalForm.nif')"
-            v-model="generalForm.nif"
-          )
-        .form__row
-          formulate-input(
-            type="text"
-            name="phone"
-            :label="$t('organization.read.generalForm.phone')"
-            v-model="generalForm.mobilePhone"
-          )
-          formulate-input(
-            type="select"
-            name="currency"
-            :options="currencyOptions"
-            :label="$t('organization.read.generalForm.currency')"
-            v-model="generalForm.currency"
-          )
-          div
-
-        .organization-read__actions
-          lz-button(type="secondary" @click="() => { this.$router.push({ name: 'Home' }) }" ) {{ $t('common.actions.cancel') }}
-          lz-button(type="primary" @click="membereneralSubmit") {{ $t('common.actions.save') }}
-
-      section.organization-read__payment-gateway(v-if="active === 'paymentGateway'")
-        lz-payment-gateway
-
-      section.organization-read__account(v-else-if="active === 'subscription'")
-        p.organization-read__help {{ $t('organization.read.subscriptionForm.description') }}
-          lz-subscription(:member-id="memberId" :currency-symbol="generalForm.currencySymbol")
+        formulate-input(
+          type="text"
+          name="lastName"
+          :label="$t('organization.read.generalForm.surname')"
+          v-model="generalForm.lastName"
+        )
+      .form__row
+        formulate-input(
+          type="select"
+          :options="genderOptions"
+          name="gender"
+          :label="$t('organization.read.generalForm.gender.label')"
+          v-model="generalForm.gender"
+        )
+        formulate-input(
+          type="text"
+          name="dni"
+          :options="currencyOptions"
+          :label="$t('organization.read.generalForm.dni')"
+          v-model="generalForm.dni"
+        )
+      .form__row
+        formulate-input(
+          type="text"
+          name="mobilePhone"
+          :label="$t('organization.read.generalForm.mobilePhone')"
+          v-model="generalForm.mobilePhone"
+        )
+        formulate-input(
+          type="text"
+          name="address"
+          :label="$t('organization.read.generalForm.address')"
+        )
+      .form__row
+        formulate-input(
+          type="text"
+          name="email"
+          :label="$t('organization.read.generalForm.email')"
+          v-model="generalForm.email"
+        )
+        formulate-input(
+          type="text"
+          name="companyName"
+          :label="$t('organization.read.generalForm.companyName')"
+          v-model="generalForm.companyName"
+        )
+      .form__row
+        formulate-input(
+          type="select"
+          :options="currencyOptions"
+          name="currency"
+          :label="$t('organization.read.generalForm.currency')"
+          v-model="generalForm.currency"
+        )
+        formulate-input(
+          type="text"
+          name="cif"
+          :label="$t('organization.read.generalForm.cif')"
+          v-model="generalForm.cif"
+        )
+      .organization-read__actions
+        lz-button(type="secondary" @click="() => { this.$router.push({ name: 'Home' }) }" ) {{ $t('common.actions.cancel') }}
+        lz-button(type="primary" @click="membereneralSubmit") {{ $t('common.actions.save') }}
+    section.organization-read__payment-gateway(v-if="active === 'paymentGateway'")
+      lz-payment-gateway
+    section.organization-read__account(v-else-if="active === 'subscription'")
+      p.organization-read__help {{ $t('organization.read.subscriptionForm.description') }}
+        lz-subscription(:member-id="memberId" :currency-symbol="generalForm.currencySymbol")
 </template>
 
 <script lang="ts">
@@ -149,17 +182,23 @@
     payMethodOptions = {
       card: this.$t("organization.read.subscriptionForm.payMethod.options.card")
     };
+    genderOptions = {
+      man: this.$t("organization.read.generalForm.gender.options.man"),
+      woman: this.$t("organization.read.generalForm.gender.options.woman"),
+      other: this.$t("organization.read.generalForm.gender.options.other")
+    };
 
     // generalForm
-    generalForm = {
-      name: "",
-      nif: "",
+    generalForm: Partial<Member> = {
+      firstName: "",
+      lastName: "",
+      gender: "",
+      dni: "",
       mobilePhone: "",
-      address: "",
-      type: "",
-      ambit: "",
+      email: "",
+      companyName: "",
       currency: "EUR",
-      currency_symbol: "€"
+      cif: ""
     };
 
     // organization
@@ -190,12 +229,18 @@
       await Promise.all([
         apiOrganizations.getOrganization(this.memberId).then(response => {
           const member = response;
-          this.generalForm.name = member.companyName;
-          this.generalForm.nif = member.cif;
-          this.generalForm.mobilePhone = member.mobilePhone;
-          this.generalForm.type = member.type;
-          this.generalForm.ambit = member.ambit;
-          this.generalForm.address = member.address;
+          this.generalForm = {
+            firstName: member.firstName,
+            lastName: member.lastName,
+            // address: "", TODO: Add to model definition
+            cif: member.cif,
+            currency: member.currency,
+            dni: member.dni,
+            gender: member.gender,
+            email: member.email,
+            companyName: member.companyName,
+            mobilePhone: member.mobilePhone
+          };
         }),
 
         apiOrganizations.getOrganizationPlan(this.memberId).then(({ data }) => {
@@ -224,7 +269,7 @@
     }
 
     async membereneralSubmit() {
-      this.generalForm.currency_symbol = this.getSymbolCurrency(
+      this.generalForm.currencySymbol = this.getSymbolCurrency(
         this.generalForm.currency
       );
       apiOrganizations
@@ -232,27 +277,12 @@
         .then(this.showSuccessNotification)
         .catch(this.showErrorNotification);
 
-      apiOrganizations
-        .postCurrencyUpdate(this.memberId, {
-          currency: this.generalForm.currency,
-          currency_symbol: this.generalForm.currency_symbol
-        })
-        .then(() => {
-          this.showSuccessNotification();
-        })
-        .catch(this.showErrorNotification);
-
       return;
     }
 
     onSubscriptionSubmit(planId: string) {
-      return apiOrganizations
-        .postOrganizationPlan(this.memberId, {
-          platform_subscription_id: planId
-          //payment_type: this.organizationPlan.payment_type // todo ?
-        })
-        .then(this.showSuccessNotification)
-        .catch(this.showErrorNotification);
+      // eslint-disable-next-line no-console
+      console.log("onSubscriptionSubmit", planId);
     }
 
     showSuccessNotification() {

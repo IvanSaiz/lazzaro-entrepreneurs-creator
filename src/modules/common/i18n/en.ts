@@ -48,7 +48,7 @@ export default {
     Eventos: "Events",
     Cuentas: "Accounts",
     Socios: "Partners",
-    Organización: "Organization",
+    Empresa: "Company",
     Asesor: "Consultant",
     NFTs: "NFTs",
     Datos: "Data",

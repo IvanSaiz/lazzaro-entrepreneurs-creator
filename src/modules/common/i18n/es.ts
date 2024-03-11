@@ -57,7 +57,7 @@ export default {
     Eventos: "Eventos",
     Cuentas: "Cuentas",
     Socios: "Socios",
-    Organización: "Organización",
+    Empresa: "Empresa",
     Asesor: "Asesor",
     NFTs: "NFTs",
     Datos: "Datos",

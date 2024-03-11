@@ -1,7 +1,7 @@
 export default {
   read: {
-    title: "Organisation details",
-    subtitle: "Set up your organisation's details here",
+    title: "Company",
+    subtitle: "Configure your company details.",
     steps: {
       general: "General",
       paymentGateway: "Payment gateways",

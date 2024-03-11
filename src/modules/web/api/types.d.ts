@@ -180,13 +180,13 @@ interface Team {
   design: {
     backgroundColor: string;
   };
-  members: Member[];
+  members: TeamMember[];
   subTitle: string;
   titleColor: string;
   subtitleColor: string;
 }
 
-interface Member {
+interface TeamMember {
   id: number;
   picture: Image;
   name: string;

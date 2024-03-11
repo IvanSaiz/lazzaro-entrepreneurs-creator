@@ -40,7 +40,7 @@ export const LZ_MODULES = {
   // },
   organization: {
     moduleName: "organization",
-    label: "Organización",
+    label: "Empresa",
     active: true,
     icon: "building-warehouse-icon"
   },

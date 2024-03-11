@@ -1,7 +1,7 @@
 export default {
   read: {
-    title: "Organización",
-    subtitle: "Aquí puedes configurar los datos de tu organización",
+    title: "Empresa",
+    subtitle: "Configura los datos de tu empresa.",
     steps: {
       general: "General",
       paymentGateway: "Pasarelas de pago",
@@ -9,9 +9,21 @@ export default {
     },
     generalForm: {
       name: "Nombre",
-      nif: "NIF",
-      phone: "Teléfono",
+      surname: "Apellido",
+      cif: "CIF",
+      dni: "DNI",
+      mobilePhone: "Teléfono",
       address: "Dirección",
+      gender: {
+        label: "Género",
+        options: {
+          man: "Hombre",
+          woman: "Mujer",
+          other: "Otro"
+        }
+      },
+      email: "Email",
+      companyName: "Nombre de la empresa",
       orgType: {
         label: "Tipo de organización",
         options: {
