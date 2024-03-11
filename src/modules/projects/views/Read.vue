@@ -22,7 +22,7 @@
         </h1>
         <SectionToggle section="portfolio" />
         <div class="view-btn">
-          <a href="" target="_blank">
+          <a :href="`${url}/#portfolio`" target="_blank">
             {{ $t("projects.read.see") }}
             <ArrowUpRightIcon />
           </a>
@@ -76,6 +76,9 @@
   export default class Read extends Vue {
     @auth.State("id")
     public memberId!: string;
+
+    @auth.State("url")
+    public url!: string;
 
     deleteModalOpen = false;
 

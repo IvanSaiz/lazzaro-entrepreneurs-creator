@@ -58,7 +58,7 @@
       subtitle: this.$t(`training.home.cards.${section}.subtitle`),
       buttons: {
         link: `Training${section}`,
-        video: this.videos[section] // TODO: replace with actual video link when available
+        video: this.videos[section]
       }
     }));
 

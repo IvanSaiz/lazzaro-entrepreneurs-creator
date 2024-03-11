@@ -13,7 +13,7 @@
       h1 {{ $t('shop.read.title') }}
       section-toggle(section="shop")
       .view-btn
-        a(href="" target="_blank") {{ $t('shop.read.see') }}
+        a(:href="`${url}/tienda`" target="_blank") {{ $t('shop.read.see') }}
         arrow-up-right-icon
     p {{ $t('shop.read.subtitle') }}
   DesignModal(section="shop")
@@ -83,6 +83,9 @@
   export default class Read extends Vue {
     @auth.State("id")
     public memberId!: string;
+
+    @auth.State("url")
+    public url!: string;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     active = "products";
     products: Product[] = [];
@@ -97,7 +100,7 @@
       {
         id: "status",
         label: this.$t("shop.read.productsTable.status.label")
-      }, 
+      },
       { id: "actions", label: this.$t("shop.read.productsTable.actions") }
     ];
 
