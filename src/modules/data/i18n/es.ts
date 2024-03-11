@@ -15,6 +15,7 @@ export default {
     currentCollected: "recaudados - 5% de Lazzaro",
     withdraw: "Retirar dinero recaudado",
     totalDonors: "Nº de donantes",
+    analyticsLink: "Link Google Analytics",
     labels: {
       projects: "Proyectos",
       events: "Eventos",

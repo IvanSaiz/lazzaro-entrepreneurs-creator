@@ -11,36 +11,41 @@
       h3 {{ $t('data.read.totalIncome') }}
       canvas#incomesDonut
     lz-box.data.mid.projects(:tight="true")
-      .number {{ projects }}
+      .number {{ data.portfolio }}
       .text {{ $t('data.read.createdProjects') }}
       .icon
         award-icon(size=35)
     lz-box.data.mid.events(:tight="true")
-      .number {{ events }}
+      .number {{ data.events }}
       .text {{ $t('data.read.newEvents') }}
       .icon
         calendar-icon(size=35)
     lz-box.data.mid.services(:tight="true")
-      .number {{ services }}
+      .number {{ data.services }}
       .text {{ $t('data.read.services') }}
       .icon
         file-like-icon(size=35)
     lz-box.data.mid.reviews(:tight="true")
-      .number {{ reviews }}
+      .number {{ data.reviews }}
       .text {{ $t('data.read.reviews') }}
       .icon
         user-plus-icon(size=35)
     lz-box.data.mid.bookings(:tight="true")
-      .number {{ bookings }}
+      .number {{ data.reservations }}
       .text {{ $t('data.read.bookings') }}
       .icon
         clipboard-check-icon(size=35)
-    lz-box.data.mid.articles
-      .number {{ articles }}
+    lz-box.data.mid.articles(:tight="true")
+      .number {{ data.articles }}
       .text {{ $t('data.read.articles') }}
       .icon
         browser-icon(size=35)
-    lz-box.data.google-analytics(:tight="true")
+    lz-box.data.google-analytics
+      formulate-input(
+            type="text"
+            v-model="analyticsLink"
+            :label="$t('data.read.analyticsLink')"
+          )
     lz-box.data.earnings(:tight="true")
       h3 {{ $t('data.read.collected') }}
       .bottom-b
@@ -56,6 +61,7 @@
   import { namespace } from "vuex-class";
   import Chart, { ChartConfiguration } from "chart.js/auto";
   import apiData from "../api";
+  import VueI18n from "vue-i18n";
   const auth = namespace("auth");
 
   Chart.register();
@@ -65,27 +71,29 @@
     @auth.State("id")
     public ongId!: string;
 
-    earningsByMonth: Record<string, number>;
-    incomesDoughnoutData: any[] = [];
-    donationsDoughnoutData: any[] = [];
-
-    projects = 0;
-    events = 0;
-    services = 0;
-    reviews = 0;
-    bookings = 0;
-    articles = 0;
+    data: DashboardData = {
+      articles: 0,
+      earnings: 0,
+      earningsByEntityType: {
+        Event: 0,
+        Product: 0,
+        Project: 0,
+        Service: 0
+      },
+      earningsByMonth: {},
+      events: 0,
+      portfolio: 0,
+      reservations: 0,
+      services: 0,
+      reviews: 0
+    };
+    analyticsLink = "";
 
     currentMonth = 0;
 
     async mounted() {
       await apiData.getDashboard(this.ongId).then(data => {
-        this.projects = +data.portfolio;
-        this.services = +data.services;
-        this.reviews = 0; // TODO: define where these come from
-        this.events = +data.events;
-        this.bookings = +data.reservations;
-        this.earningsByMonth = data.earningsByMonth;
+        this.data = { ...this.data, ...data };
       });
 
       // incomes bar chart
@@ -95,8 +103,8 @@
 
       if (!barCtx) return;
 
-      const incomeLabels = Object.keys(this.earningsByMonth);
-      const incomeData = Object.values(this.earningsByMonth);
+      const incomeLabels = Object.keys(this.data.earningsByMonth);
+      const incomeData = Object.values(this.data.earningsByMonth);
 
       new Chart(barCtx, {
         type: "bar",
@@ -136,18 +144,31 @@
 
       if (!ctxIncomesDonut) return;
 
+      const doughnutLabelsMap: Record<EntityType, VueI18n.TranslateResult> = {
+        Event: this.$t("data.read.labels.events"),
+        Product: this.$t("data.read.labels.shop"),
+        Project: this.$t("data.read.labels.projects"),
+        Service: this.$t("data.read.labels.services")
+      };
+
+      const [doughnutLabels, doughnutData] = Object.entries(
+        this.data.earningsByEntityType
+      ).reduce(
+        ([labels, data], [key, value]) => {
+          labels.push(doughnutLabelsMap[key as EntityType]);
+          data.push(value);
+          return [labels, data];
+        },
+        [[], []] as [VueI18n.TranslateResult[], number[]]
+      );
+
       new Chart(ctxIncomesDonut, {
         type: "doughnut",
         data: {
-          labels: [
-            this.$t("data.read.labels.services"),
-            this.$t("data.read.labels.events"),
-            this.$t("data.read.labels.projects"),
-            this.$t("data.read.labels.shop")
-          ],
+          labels: doughnutLabels,
           datasets: [
             {
-              data: this.incomesDoughnoutData,
+              data: doughnutData,
               backgroundColor: [
                 "#EB2873",
                 "#FF4863",
@@ -194,12 +215,15 @@
       display: grid;
       grid-template-areas:
         "a a a a a b b b b"
+        "a a a a a b b b b"
+        "a a a a a b b b b"
         "c c c d d d e e e"
         "f f f g g g h h h"
-        "i i i i j j j j j"
-        "i i i i j j j j j";
+        "i i i i i j j j j"
+        "i i i i i j j j j";
       grid-gap: 20px;
       margin-top: 30px;
+      grid-auto-rows: 80px;
 
       & > * {
         width: 100%;
@@ -209,7 +233,6 @@
 
     .incomes-bar {
       grid-area: a;
-      max-height: 300px;
       overflow: hidden;
 
       canvas {
@@ -219,7 +242,6 @@
 
     .incomes-donut {
       grid-area: b;
-      max-height: 300px;
       overflow: hidden;
 
       canvas {
@@ -283,16 +305,23 @@
 
     .data.google-analytics {
       grid-area: i;
+      height: fit-content;
+      padding: 25px 30px;
+
+      label {
+        font-weight: 700;
+      }
     }
 
     .data.earnings {
       grid-area: j;
+      display: flex;
+      flex-direction: column;
 
       .bottom-b {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin-top: 30px;
 
         &__icon svg {
           stroke: $color-black-02;
