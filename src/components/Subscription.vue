@@ -1,43 +1,42 @@
 <template lang="pug">
-  div(v-if="loaded")
-    .form__row
-      formulate-form(:keep-model-data="true")
-        formulate-input(
-          type="radio"
-          :options="subscriptionOptions"
-          v-model="organizationPlan.payment_type"
-          @input="loadSubscriptionPlans"
-        )
-    .form__row
-      ul.organization-read__plans
-        li.organization-read__plan(
-          v-for="plan in subscriptionPlansList"
-          :class="{ 'organization-read__plan--selected': isSelectedPlan(plan.id) }"
-        )
-          lz-box
-            h2 {{ plan.name }}
-            .organization-read__items
-              p.organization-read__item(
-                v-for="item in plan.description"
-                :class="{ 'organization-read__item--disabled': !item.status }"
-              )
-                | {{ item.text }}
-            lz-button.organization-read__btn(type="primary" @click="redirectToPlan(plan.url)")
-              | {{ plan.priceText }}
-              .organization-read__tax {{ $t('organization.read.subscriptionForm.tax' )}}
-
-    .form__row(v-if="false")
+div(v-if="loaded")
+  .form__row
+    formulate-form(:keep-model-data="true")
       formulate-input(
-        type="select"
-        name="payMethod"
-        :label="$t('organization.read.subscriptionForm.payMethod.label')"
-        :options="payMethodOptions"
+        type="radio"
+        :options="subscriptionOptions"
+        v-model="organizationPlan.payment_type"
+        @input="loadSubscriptionPlans"
       )
-      formulate-input(
-        type="text"
-        name="number"
-        :label="$t('organization.read.subscriptionForm.cardNumber')"
+  .form__row
+    ul.organization-read__plans
+      li.organization-read__plan(
+        v-for="plan in subscriptionPlansList"
+        :class="{ 'organization-read__plan--selected': isSelectedPlan(plan.id) }"
       )
+        lz-box
+          h2 {{ plan.name }}
+          .organization-read__items
+            p.organization-read__item(
+              v-for="item in plan.description"
+              :class="{ 'organization-read__item--disabled': !item.status }"
+            )
+              | {{ item.text }}
+          lz-button.organization-read__btn(type="primary" @click="redirectToPlan(plan.url)")
+            | {{ plan.priceText }}
+            .organization-read__tax {{ $t('organization.read.subscriptionForm.tax' )}}
+  .form__row(v-if="false")
+    formulate-input(
+      type="select"
+      name="payMethod"
+      :label="$t('organization.read.subscriptionForm.payMethod.label')"
+      :options="payMethodOptions"
+    )
+    formulate-input(
+      type="text"
+      name="number"
+      :label="$t('organization.read.subscriptionForm.cardNumber')"
+    )
 </template>
 
 <script lang="ts">

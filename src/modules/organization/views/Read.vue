@@ -59,6 +59,7 @@
         formulate-input(
           type="text"
           name="address"
+          v-model="generalForm.address"
           :label="$t('organization.read.generalForm.address')"
         )
       .form__row
@@ -192,6 +193,7 @@
     generalForm: Partial<Member> = {
       firstName: "",
       lastName: "",
+      address: "",
       gender: "",
       dni: "",
       mobilePhone: "",
@@ -232,7 +234,7 @@
           this.generalForm = {
             firstName: member.firstName,
             lastName: member.lastName,
-            // address: "", TODO: Add to model definition
+            address: member.address,
             cif: member.cif,
             currency: member.currency,
             dni: member.dni,
@@ -249,12 +251,6 @@
             data?.PlatformSubscription;
           this.organizationPlan.payment_type = data?.payment_type;
         })
-
-        // apiOrganizations.getPlatformConfig(this.memberId).then(({ data }) => {
-        //   this.generalForm.currency = data.platformConfig.currency;
-        //   this.generalForm.currency_symbol =
-        //     data.platformConfig.currency_symbol;
-        // })
       ]);
 
       this.loaded = true;
@@ -272,12 +268,10 @@
       this.generalForm.currencySymbol = this.getSymbolCurrency(
         this.generalForm.currency
       );
-      apiOrganizations
+      await apiOrganizations
         .putOrganization(this.memberId, this.generalForm)
         .then(this.showSuccessNotification)
         .catch(this.showErrorNotification);
-
-      return;
     }
 
     onSubscriptionSubmit(planId: string) {

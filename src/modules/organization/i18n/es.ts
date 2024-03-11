@@ -133,8 +133,8 @@ export default {
         "2 sesiones de consultoría personalizada",
       "\nReportes de actividad": "\nReportes de actividad",
       "\nIntegración con dominio web": "\nIntegración con dominio web",
-      "1 video promocional gratis para redes sociales":
-        "1 video promocional gratis para redes sociales",
+      "Video promocional gratis para redes sociales":
+        "Video promocional gratis para redes sociales",
       "Destacar proyecto": "Destacar proyecto"
     }
   }

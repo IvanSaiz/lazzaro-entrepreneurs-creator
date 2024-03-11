@@ -21,7 +21,7 @@ declare interface Member {
   lastName: string;
   companyName: string;
   email: string;
-  password: string;
+  address: string;
   cif: string;
   gender: string;
   websiteId: string;

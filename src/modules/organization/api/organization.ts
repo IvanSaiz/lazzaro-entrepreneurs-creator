@@ -5,7 +5,10 @@ const getOrganization = function(memberId: string): Promise<Member> {
   return http.get(`members/${memberId}`, { noAuth: false });
 };
 
-const putOrganization = function(memberId: string, body: any): Promise<any> {
+const putOrganization = function(
+  memberId: string,
+  body: Partial<Member>
+): Promise<any> {
   return http.put(`members/${memberId}`, body, { noAuth: false });
 };
 
