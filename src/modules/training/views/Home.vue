@@ -49,7 +49,8 @@
     videos = {
       Support: require("../assets/videos/support.mp4"),
       Advisor: require("../assets/videos/advisor.mp4"),
-      Portfolio: require("../assets/videos/portfolio.mp4")
+      Portfolio: require("../assets/videos/portfolio.mp4"),
+      Events: require("../assets/videos/events.mp4")
     };
 
     cards = sections.map(section => ({
