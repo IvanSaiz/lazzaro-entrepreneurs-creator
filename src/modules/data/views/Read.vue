@@ -8,7 +8,12 @@
       h3 {{ $t('data.read.incomeOverTime') }}
       canvas#incomesBar
     lz-box.data.incomes-donut(:tight="true")
-      h3 {{ $t('data.read.totalIncome') }}
+      .top
+        h3 {{ $t('data.read.totalIncome') }}
+        formulate-input(
+              type="select"
+              :options={donutPeriodOptions}
+            )
       canvas#incomesDonut
     lz-box.data.mid.projects(:tight="true")
       .number {{ data.portfolio }}
@@ -90,6 +95,17 @@
     analyticsLink = "";
 
     currentMonth = 0;
+
+    donutPeriodOptions = {
+      last24Hours: "Last 24 hours",
+      today: "Today",
+      yesterday: "Yesterday",
+      last7Days: "Last 7 days",
+      last30Days: "Last 30 days",
+      last60Days: "Last 60 days",
+      last90Days: "Last 90 days",
+      last180Days: "Last 180 days"
+    };
 
     async mounted() {
       await apiData.getDashboard(this.ongId).then(data => {
@@ -188,6 +204,11 @@
         options: {
           responsive: true,
           maintainAspectRatio: false,
+          elements: {
+            arc: {
+              borderJoinStyle: "round"
+            }
+          },
           plugins: {
             legend: {
               position: "right",
@@ -221,7 +242,6 @@
         "i i i i i j j j j";
       grid-gap: 20px;
       margin-top: 30px;
-      grid-auto-rows: 80px;
 
       & > * {
         width: 100%;
@@ -232,6 +252,7 @@
     .incomes-bar {
       grid-area: a;
       overflow: hidden;
+      max-height: 370px;
 
       canvas {
         margin: 20px 0;
@@ -241,9 +262,26 @@
     .incomes-donut {
       grid-area: b;
       overflow: hidden;
+      max-height: 370px;
+      display: flex;
+      flex-direction: column;
 
-      canvas {
-        margin: 20px 0;
+      .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        h3 {
+          margin: 0;
+        }
+        .formulate-input {
+          width: fill;
+          max-width: 200px;
+          select,
+          .formulate-input-element--select {
+            max-height: 3.5rem;
+            margin: 0;
+          }
+        }
       }
     }
 

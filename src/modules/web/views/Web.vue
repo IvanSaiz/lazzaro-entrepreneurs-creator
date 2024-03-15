@@ -1,8 +1,8 @@
 <template lang="pug">
-  section
-    .grid-container
-      transition(name="fade" mode="out-in")
-        router-view
+section
+  .grid-container
+    transition(name="fade" mode="out-in")
+      router-view
 </template>
 
 <script lang="ts">
