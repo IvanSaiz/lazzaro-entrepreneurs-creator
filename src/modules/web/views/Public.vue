@@ -309,6 +309,7 @@
           mapImageField(this.form.bookings, "imgUrl");
           this.form.impact.data.map(i => mapImageField(i, "url"));
           mapImageField(this.form.impact.design, "backgroundImage");
+          mapImageField(this.form.footer.design, "backgroundImage");
 
           // If there are less than 4 impact data items, add the missing ones to compensate
           // this is a hack, this should be fixed on the backend
