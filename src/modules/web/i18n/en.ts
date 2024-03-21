@@ -163,7 +163,10 @@ export default {
       linkedin: "LinkedIn",
       newMember: "Add member",
       table: "Your team",
-      delete: ""
+      delete: "",
+      design: {
+        color: "Background color"
+      }
     },
 
     descriptionForm: {
@@ -262,6 +265,18 @@ export default {
         },
         button: "Button",
         link: "Link of the button"
+      },
+      design: {
+        color: "Background color",
+        layout: {
+          tooltip: "Layout",
+          title: "Main Title",
+          subtitle: "Description",
+          item: {
+            title: "Title",
+            subtitle: "Descriptive text"
+          }
+        }
       }
     },
 
@@ -285,6 +300,18 @@ export default {
         2: "Descriptive text 2*",
         3: "Descriptive text 3",
         4: "Descriptive text 4"
+      },
+      design: {
+        color: "Background color",
+        layout: {
+          tooltip: "Layout",
+          title: "Main Title",
+          subtitle: "Description",
+          item: {
+            title: "Title",
+            subtitle: "Descriptive text"
+          }
+        }
       }
     },
 

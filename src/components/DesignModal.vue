@@ -55,6 +55,12 @@
       display: flex;
       gap: 16px;
       align-items: center;
+      margin-bottom: 2rem;
+
+      h2,
+      h4 {
+        margin: 0 !important;
+      }
     }
 
     .lz-button {

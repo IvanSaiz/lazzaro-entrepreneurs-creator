@@ -5,6 +5,20 @@ section.public-footer
     .subtitle
       h4 {{ $t('web.public.footer.subtitle') }}
       design-modal(section="footer")
+        template(#header)
+          h4 {{ $t('web.public.footer.title') }}
+        template(#form)
+          h2.h2--dash {{ $t('web.public.footer.design.image') }}
+          formulate-input(
+            type="image"
+            v-model="props.design.backgroundImage"
+            :help="$t('web.public.footer.design.imageHelper')"
+          )
+          h2.h2--dash {{ $t('web.public.footer.design.color') }}
+          formulate-input#primary-color(
+            type="textColor"
+            v-model="props.design.backgroundColor"
+          )
   section.-public-footer__subSection
     .public-footer__header
       h3.h3--dash {{ $t('web.public.footer.socialForm.title') }}

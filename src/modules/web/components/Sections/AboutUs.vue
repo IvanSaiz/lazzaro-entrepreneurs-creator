@@ -5,6 +5,32 @@ section.public-whoWeAre
     .subtitle
       h3 {{ $t('web.public.whoWeAreForm.subtitle') }}
       design-modal(section="aboutUs")
+        template(#header)
+          h4 {{ $t('web.public.whoWeAreForm.title') }}
+        template(#form)
+          h2.h2--dash {{ $t('web.public.whoWeAreForm.design.layout.tooltip') }}
+          layout-select(
+            name="aboutUsDesignLayout"
+            v-model="props.design.layout"
+            :options="layoutOptions"
+            optionClass="aboutUs"
+          )
+            template(#tooltip)
+              .side
+                .heading
+                  h1 {{ $t("web.public.whoWeAreForm.design.layout.title") }}
+                  h2 {{ $t("web.public.whoWeAreForm.design.layout.subtitle") }}
+                .grid
+                  .item(v-for="item in Array.from({length: 4})")
+                    h1 {{ $t("web.public.whoWeAreForm.design.layout.item.title") }}
+                    p {{ $t("web.public.whoWeAreForm.design.layout.item.subtitle") }}
+              img(src="@/assets/images/img-placeholder.svg" alt="Placeholder")
+          h2.h2--dash {{ $t('web.public.whoWeAreForm.design.color') }}
+          FormulateInput#primary-color(
+            type="textColor"
+            name="aboutUsDesignBackgroundColor"
+            v-model="props.design.backgroundColor"
+          )
     .form__row
       FormulateInput(
         type="image"
@@ -94,11 +120,93 @@ section.public-whoWeAre
   import { Component, Vue, VModel } from "vue-property-decorator";
   import DesignModal from "@/components/DesignModal.vue";
   import LzEditorInput from "@/components/EditorInput.vue";
+  import LayoutSelect from "@/components/LayoutSelect.vue";
 
   type AboutUsProps = WebProps["aboutUs"];
 
-  @Component({ name: "AboutUs", components: { DesignModal, LzEditorInput } })
+  @Component({
+    name: "AboutUs",
+    components: { DesignModal, LzEditorInput, LayoutSelect }
+  })
   export default class AboutUs extends Vue {
     @VModel() props!: AboutUsProps;
+
+    layoutOptions = [
+      {
+        value: "left",
+        label: this.$t("common.design.layout.options.left")
+      },
+      {
+        value: "right",
+        label: this.$t("common.design.layout.options.right")
+      }
+    ];
   }
 </script>
+
+<style lang="scss">
+  .layout-select {
+    &:has(.aboutUs) {
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .option .aboutUs.layout {
+      width: 100%;
+      display: flex;
+      background-color: $color-white;
+      border-radius: 10px;
+      padding: 2rem;
+      gap: 2rem;
+      align-items: center;
+      justify-content: space-between;
+      pointer-events: none;
+      border: 2px solid transparent;
+
+      .heading {
+        margin-bottom: 1rem;
+
+        h1 {
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 15px;
+          margin: 0 0 0.5rem 0;
+        }
+        h2 {
+          font-size: 12px;
+          font-weight: 400;
+          line-height: 12.55px;
+          margin: 0 0 0.2rem 0;
+        }
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+
+        .item {
+          display: flex;
+          flex-direction: column;
+          h1 {
+            font-size: 10px;
+            font-weight: 400;
+            line-height: 12.55px;
+            margin: 0;
+          }
+          p {
+            font-size: 8px;
+            font-weight: 400;
+            line-height: 10px;
+            margin: 0;
+          }
+        }
+      }
+
+      &.right {
+        flex-direction: row-reverse;
+      }
+    }
+  }
+</style>

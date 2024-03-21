@@ -86,10 +86,15 @@ export default {
         "Permite que un posible cliente pueda ponerse en contacto contigo. Configura el título y subtítulo de tu página de contacto",
       form: {
         title: "Título",
-        subtitle: "Subtítulo"
+        titleColor: "Color del título",
+        subtitle: "Subtítulo",
+        subtitleColor: "Color del subtítulo"
       },
       phone: "Teléfono",
-      location: "Ubicación"
+      location: "Ubicación",
+      design: {
+        color: "Fondo"
+      }
     },
     contentForm: {
       title: "Contenido",
@@ -132,6 +137,11 @@ export default {
           "Sube tus términos y condiciones, aviso legal y política de privacidad para que tus usuarios las acepten",
         transparencyDescription: "Descripción de transparencia",
         accountability: "Transparencia y rendición de cuentas"
+      },
+      design: {
+        image: "Imagen de fondo",
+        color: "Fondo",
+        imageHelper: "180x60. Máx 25MB"
       }
     },
 
@@ -158,7 +168,10 @@ export default {
       linkedin: "Link a LinkedIn",
       newMember: "Añadir miembro",
       table: "Tu equipo",
-      delete: ""
+      delete: "",
+      design: {
+        color: "Fondo"
+      }
     },
 
     descriptionForm: {
@@ -261,6 +274,18 @@ export default {
         },
         button: "Botón",
         link: "Link del botón"
+      },
+      design: {
+        color: "Fondo",
+        layout: {
+          tooltip: "Disposición",
+          title: "Título Principal",
+          subtitle: "Descripción",
+          item: {
+            title: "Título",
+            subtitle: "Texto Descriptivo"
+          }
+        }
       }
     },
 
@@ -284,6 +309,18 @@ export default {
         2: "Texto descriptivo 2*",
         3: "Texto descriptivo 3",
         4: "Texto descriptivo 4"
+      },
+      design: {
+        color: "Fondo",
+        layout: {
+          tooltip: "Disposición",
+          title: "Título Principal",
+          subtitle: "Descripción",
+          item: {
+            title: "Título",
+            subtitle: "Texto Descriptivo"
+          }
+        }
       }
     },
 
@@ -298,7 +335,15 @@ export default {
       titleHelper: "(Máx 80 carácteres)",
       subtitleHelper: "(Máx 140 carácteres)",
       button: "Botón* ",
-      link: "Link a tu página de reserva*"
+      link: "Link a tu página de reserva*",
+      design: {
+        color: "Fondo",
+        layout: {
+          tooltip: "Disposición",
+          title: "Título Principal",
+          subtitle: "Descripción"
+        }
+      }
     },
 
     reviewsForm: {

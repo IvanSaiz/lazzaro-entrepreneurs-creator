@@ -136,7 +136,7 @@ section.choose-template
         cursor: pointer;
       }
       //TODO: to be modified
-      &.disabled-input {
+      &:has(input:disabled) {
         filter: grayscale(100%);
         background-color: #333;
         opacity: 0.5;
@@ -154,7 +154,7 @@ section.choose-template
     }
 
     .template__footer {
-      padding: 1.8rem 1.5rem 1.5rem;
+      padding: 1.8rem 1.5rem;
       border-radius: 1rem;
       border: 1px solid transparent;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -163,7 +163,6 @@ section.choose-template
       position: absolute;
       bottom: -4rem;
       width: 100%;
-      height: 6.18rem;
       display: flex;
       justify-content: space-between;
 

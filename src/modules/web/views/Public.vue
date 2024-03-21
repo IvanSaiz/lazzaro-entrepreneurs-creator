@@ -58,7 +58,8 @@
     Team,
     WhyChooseUs
   } from "../components/Sections";
-  import _ from "lodash";
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const _ = require("lodash");
 
   const auth = namespace("auth");
 
@@ -137,6 +138,10 @@
         features: {
           icons: [],
           buttons: []
+        },
+        design: {
+          layout: "right",
+          backgroundColor: "#F0F0F0"
         }
       },
       whyChooseUs: {
@@ -282,7 +287,7 @@
         .then(data => {
           const { templateId, properties } = data;
 
-          this.form = properties;
+          this.form = _.defaultsDeep(properties, this.form);
           this.form.general.templateId = templateId;
           this.form.general.url = this.url;
           this.form.general.active = this.isActive;
@@ -400,7 +405,8 @@
         whyChooseUs,
         bookings,
         impact,
-        team
+        team,
+        footer
       } = postData.properties;
 
       await Promise.all([
@@ -410,6 +416,7 @@
         mapImgURL(whyChooseUs, "imgUrl"),
         mapImgURL(bookings, "imgUrl"),
         mapImgURL(impact.design, "backgroundImage"),
+        mapImgURL(footer.design, "backgroundImage"),
         Promise.all(aboutUs.features.icons.map(i => mapImgURL(i, "url"))),
         Promise.all(impact.data.map(i => mapImgURL(i, "url"))),
         Promise.all(team.members.map(m => mapImgURL(m, "picture")))
@@ -932,28 +939,6 @@
             formulate-input {
               width: 100%;
             }
-          }
-        }
-      }
-
-      &-contact {
-        h4 {
-          margin: 1.8rem 0;
-          font-size: 16px;
-          color: $color-black-03;
-        }
-
-        &__content {
-          display: flex;
-          width: 100%;
-
-          .formulate-input:first-child {
-            flex-grow: 0;
-            margin-right: 32px;
-          }
-
-          .formulate-input:last-child {
-            flex-grow: 1;
           }
         }
       }

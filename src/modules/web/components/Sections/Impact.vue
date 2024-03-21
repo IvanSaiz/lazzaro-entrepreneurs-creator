@@ -18,7 +18,7 @@ section.public-impact
           formulate-input#primary-color(
             type="textColor"
             v-model="props.design.backgroundColor"
-            )
+          )
   formulate-input(
     type="group"
     name="impactData"

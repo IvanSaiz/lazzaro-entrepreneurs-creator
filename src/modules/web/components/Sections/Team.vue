@@ -5,6 +5,15 @@ section.public-team
     .subtitle
       h3 {{ $t('web.public.teamForm.subtitle') }}
       design-modal(section="team")
+        template(#header)
+          h4 {{ $t('web.public.teamForm.title') }}
+        template(#form)
+          h2.h2--dash {{ $t('web.public.teamForm.design.color') }}
+          FormulateInput#primary-color(
+            type="textColor"
+            name="teamDesignBackgroundColor"
+            v-model="props.design.backgroundColor"
+          )
     .public-team__title
       .team-section
         formulate-input(

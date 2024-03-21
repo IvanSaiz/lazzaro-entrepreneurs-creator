@@ -45,6 +45,10 @@ interface AboutUs {
   titleColor: string;
   description: string;
   subTitleColor: string;
+  design: {
+    layout: "left" | "right";
+    backgroundColor: string;
+  };
 }
 
 interface Features {
@@ -86,13 +90,10 @@ interface Contact {
   titleColor: string;
   subTitle: string;
   subTitleColor: string;
-  design: ContactDesign;
+  design: {
+    backgroundColor: string;
+  };
 }
-
-interface ContactDesign {
-  backgroundColor: string;
-}
-
 interface Footer {
   info: Info;
   design: {
