@@ -16,17 +16,17 @@
     :keep-model-data="true"
     v-if="loaded"
   )
-    <General v-model:props="form.general"/>
-    <Personalize v-model:props="form.style"/>
-    <Homepage v-model:props="form.homePage"/>
-    <AboutUs v-model:props="form.aboutUs"/>
-    <WhyChooseUs v-model:props="form.whyChooseUs"/>
-    <Bookings v-model:props="form.bookings"/>
-    <Reviews v-model:props="form.reviews"/>
-    <Impact v-model:props="form.impact"/>
-    <Team v-model:props="form.team"/>
-    <Contact v-model:props="form.contact"/>
-    <Footer v-model:props="form.footer"/>
+    <General v-model:props="form.general"></General>
+    <Personalize v-model:props="form.style"></Personalize>
+    <Homepage v-model:props="form.homePage"></Homepage>
+    <AboutUs v-model:props="form.aboutUs"></AboutUs>
+    <WhyChooseUs v-model:props="form.whyChooseUs"></WhyChooseUs>
+    <Bookings v-model:props="form.bookings"></Bookings>
+    <Reviews v-model:props="form.reviews"></Reviews>
+    <Impact v-model:props="form.impact"></Impact>
+    <Team v-model:props="form.team"></Team>
+    <Contact v-model:props="form.contact"></Contact>
+    <Footer v-model:props="form.footer"></Footer>
     .public-buttons
       lz-button(
         type="secondary"
@@ -60,7 +60,6 @@
   } from "../components/Sections";
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const _ = require("lodash");
-
   const auth = namespace("auth");
 
   @Component({
@@ -696,7 +695,7 @@
             min-width: 140px;
 
             .formulate-input-element {
-              height: 148px;
+              height: address;
               width: 140px;
             }
           }
@@ -717,15 +716,11 @@
 
             > :last-child {
               flex-grow: 1;
-              margin-left: 18px;
             }
           }
         }
 
         &__content {
-          margin-top: 4px;
-          margin-bottom: 43px;
-
           .formulate-input-grouping {
             display: inline-flex;
             align-items: flex-start;
@@ -736,7 +731,7 @@
             display: flex;
             flex-direction: column;
             width: 256px;
-            gap: 24px;
+            margin-bottom: 1rem;
 
             formulate-input {
               width: 100%;
@@ -745,16 +740,14 @@
         }
 
         &__cta {
-          display: flex;
+          display: grid;
           margin-top: 22px;
 
-          > :first-child {
-            width: 24%;
-          }
-
-          > :last-child {
+          .formulate-input-group-repeatable {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
             flex-grow: 1;
-            margin-left: 18px;
           }
         }
       }
@@ -775,7 +768,6 @@
             min-width: 140px;
 
             .formulate-input-element {
-              height: 148px;
               width: 140px;
             }
           }
@@ -837,11 +829,6 @@
 
           > :first-child {
             min-width: 140px;
-
-            .formulate-input-element {
-              height: 148px;
-              width: 140px;
-            }
           }
         }
 
@@ -926,16 +913,29 @@
         }
         &__content {
           .formulate-input-grouping {
-            display: inline-flex;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
             align-items: flex-start;
             gap: 44px;
+
+            .formulate-input-group-repeatable {
+              height: 100%;
+              display: flex;
+              flex-direction: column;
+            }
           }
 
           .impact-item {
             display: flex;
             flex-direction: column;
-            width: 256px;
-            gap: 24px;
+
+            &[data-type="image"] {
+              margin-bottom: auto !important;
+            }
+
+            &:not(:last-child) {
+              margin-bottom: 1rem;
+            }
 
             formulate-input {
               width: 100%;

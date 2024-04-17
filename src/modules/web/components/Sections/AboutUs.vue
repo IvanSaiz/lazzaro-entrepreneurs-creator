@@ -71,7 +71,6 @@ section.public-whoWeAre
         :label="$t('web.public.whoWeAreForm.form.description')"
         v-model="props.description"
         )
-        section.public-features
   section.public-features
     .public-whoWeAre__header
       h3.h3--dash {{ $t('web.public.whoWeAreForm.features.title') }}

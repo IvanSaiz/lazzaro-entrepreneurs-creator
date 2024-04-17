@@ -86,10 +86,6 @@ section.public-personalizeWeb
     .form__row {
       > :first-child {
         flex-basis: 16.2%;
-
-        .formulate-input-element {
-          height: 148px;
-        }
       }
     }
 
