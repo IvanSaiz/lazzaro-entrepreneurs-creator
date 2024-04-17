@@ -1,6 +1,6 @@
 {
   "vueCompilerOptions": {
-    "plugins": ["@volar/vue-language-plugin-pug"],
+    "plugins": ["@vue/language-plugin-pug"],
     "target": 2.7
   },
   "compilerOptions": {
@@ -8,6 +8,7 @@
     "module": "esnext",
     "strict": false,
     "jsx": "preserve",
+    "outDir": "./dist",
     "importHelpers": true,
     "moduleResolution": "node",
     "experimentalDecorators": true,
@@ -24,5 +25,5 @@
     },
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
   },
-  "exclude": ["node_modules", "tests/**/*.ts", "tests/**/*.tsx"]
+  "exclude": ["node_modules", "tests/**/*.ts", "tests/**/*.tsx", "./dist/**/*"]
 }
