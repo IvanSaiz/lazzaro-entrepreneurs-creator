@@ -128,6 +128,7 @@
         secondButtonText: ""
       },
       aboutUs: {
+        enabled: true,
         imgUrl: "",
         title: "",
         titleColor: "",
@@ -675,79 +676,6 @@
               flex-grow: 1;
               margin-left: 18px;
             }
-          }
-        }
-      }
-
-      &-whoWeAre {
-        &__header {
-          h3 {
-            color: $color-black-03;
-            font-size: 16px;
-            font-weight: 400;
-          }
-        }
-
-        .form__row {
-          gap: 22px;
-
-          > :first-child {
-            min-width: 140px;
-
-            .formulate-input-element {
-              height: address;
-              width: 140px;
-            }
-          }
-        }
-
-        .form-section {
-          display: flex;
-          flex-direction: column;
-
-          .section-row {
-            display: flex;
-            width: 970px;
-            align-items: center;
-
-            > :first-child {
-              width: 82%;
-            }
-
-            > :last-child {
-              flex-grow: 1;
-            }
-          }
-        }
-
-        &__content {
-          .formulate-input-grouping {
-            display: inline-flex;
-            align-items: flex-start;
-            gap: 44px;
-          }
-
-          .text-item {
-            display: flex;
-            flex-direction: column;
-            width: 256px;
-            margin-bottom: 1rem;
-
-            formulate-input {
-              width: 100%;
-            }
-          }
-        }
-
-        &__cta {
-          display: grid;
-          margin-top: 22px;
-
-          .formulate-input-group-repeatable {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            flex-grow: 1;
           }
         }
       }

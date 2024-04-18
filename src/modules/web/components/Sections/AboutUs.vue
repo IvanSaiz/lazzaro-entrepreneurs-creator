@@ -1,7 +1,13 @@
 <template lang="pug">
 section.public-whoWeAre
   .public-whoWeAre__header
-    h2.h2--dash {{ $t('web.public.whoWeAreForm.title') }}
+    .title
+      formulate-input(
+        type="toggle"
+        name="aboutUsEnabled"
+        v-model="props.enabled"
+      )
+      h2.h2--dash {{ $t('web.public.whoWeAreForm.title') }}
     .subtitle
       h3 {{ $t('web.public.whoWeAreForm.subtitle') }}
       design-modal(section="aboutUs")
@@ -144,6 +150,84 @@ section.public-whoWeAre
 </script>
 
 <style lang="scss">
+  .public-whoWeAre {
+    &__header {
+      .title {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        gap: 0.8rem;
+        margin-bottom: 1.2rem;
+      }
+
+      h2 {
+        margin: 0;
+        flex-grow: 1;
+      }
+
+      h3 {
+        color: $color-black-03;
+        font-size: 16px;
+        font-weight: 400;
+      }
+    }
+
+    .form__row {
+      display: grid;
+      grid-template-columns: 20% 80%;
+    }
+
+    .form-section {
+      display: flex;
+      flex-direction: column;
+
+      .section-row {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        > :first-child {
+          width: 82%;
+        }
+
+        > :last-child {
+          flex-grow: 1;
+        }
+      }
+    }
+
+    &__content {
+      .formulate-input-grouping {
+        display: inline-flex;
+        align-items: flex-start;
+        gap: 44px;
+      }
+
+      .text-item {
+        display: flex;
+        flex-direction: column;
+        width: 256px;
+        margin-bottom: 1rem;
+
+        formulate-input {
+          width: 100%;
+        }
+      }
+    }
+
+    &__cta {
+      display: grid;
+      margin-top: 22px;
+
+      .formulate-input-group-repeatable {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        flex-grow: 1;
+      }
+    }
+  }
+
   .layout-select {
     &:has(.aboutUs) {
       display: grid;

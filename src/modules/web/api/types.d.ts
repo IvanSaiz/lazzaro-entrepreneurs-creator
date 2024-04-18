@@ -38,6 +38,7 @@ interface WebProps {
 }
 
 interface AboutUs {
+  enabled: boolean;
   title: string;
   imgUrl: Image;
   features: Features;
