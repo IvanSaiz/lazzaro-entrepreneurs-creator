@@ -198,6 +198,7 @@ interface TeamMember {
 }
 
 interface WhyChooseUs {
+  enabled: boolean;
   title: string;
   design: BookingsDesign;
   imgUrl: Image;

@@ -1,7 +1,6 @@
 import AboutUs from "./AboutUs.vue";
 import Bookings from "./Bookings.vue";
 import Contact from "./Contact.vue";
-import Features from "./Features.vue";
 import Footer from "./Footer.vue";
 import General from "./General.vue";
 import Homepage from "./Homepage.vue";
@@ -15,7 +14,6 @@ export {
   AboutUs,
   Bookings,
   Contact,
-  Features,
   Footer,
   General,
   Homepage,

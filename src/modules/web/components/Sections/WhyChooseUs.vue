@@ -1,7 +1,13 @@
 <template lang="pug">
 section.public-whyUs
   .public-whyUs__header
-    h2.h2--dash {{ $t('web.public.whyChooseUsForm.title') }}
+    .title
+      FormulateInput(
+        type="toggle"
+        name="whyChooseUsEnabled"
+        v-model="props.enabled"
+      )
+      h2.h2--dash {{ $t('web.public.whyChooseUsForm.title') }}
     .subtitle
       h3 {{ $t('web.public.whyChooseUsForm.subtitle') }}
       design-modal(section="whyUs")
@@ -106,6 +112,80 @@ section.public-whyUs
 </script>
 
 <style lang="scss">
+  .public-whyUs {
+    &__header {
+      .title {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        margin-bottom: 1.2rem;
+
+        h2 {
+          flex-grow: 1;
+          margin-bottom: auto;
+        }
+      }
+      h3 {
+        color: $color-black-03;
+        font-size: 16px;
+        font-weight: 400;
+      }
+    }
+
+    .form__row {
+      gap: 22px;
+
+      > :first-child {
+        min-width: 140px;
+
+        .formulate-input-element {
+          width: 140px;
+        }
+      }
+    }
+
+    .form-section {
+      display: flex;
+      flex-direction: column;
+
+      .section-row {
+        display: flex;
+        width: 970px;
+        align-items: center;
+
+        > :first-child {
+          width: 82%;
+        }
+
+        > :last-child {
+          flex-grow: 1;
+          margin-left: 18px;
+        }
+      }
+    }
+
+    &__content {
+      margin-top: 4px;
+
+      .formulate-input-grouping {
+        display: inline-flex;
+        align-items: flex-start;
+        gap: 44px;
+      }
+
+      .text-item {
+        display: flex;
+        flex-direction: column;
+        width: 256px;
+        gap: 24px;
+
+        formulate-input {
+          width: 100%;
+        }
+      }
+    }
+  }
+
   .layout-select {
     &:has(.whyChooseUs) {
       display: grid;
