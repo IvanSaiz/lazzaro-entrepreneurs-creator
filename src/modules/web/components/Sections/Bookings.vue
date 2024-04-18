@@ -1,7 +1,13 @@
 <template lang="pug">
 section.public-bookings
   .public-bookings__header
-    h2.h2--dash {{ $t('web.public.bookingsForm.title') }}
+    .title
+      formulate-input(
+        type="toggle"
+        name="bookingsEnabled"
+        v-model="props.enabled"
+      )
+      h2.h2--dash.grow-1 {{ $t('web.public.bookingsForm.title') }}
     .subtitle
       h3 {{ $t('web.public.bookingsForm.subtitle') }}
       design-modal(section="bookings")
@@ -107,6 +113,62 @@ section.public-bookings
 </script>
 
 <style lang="scss">
+  .public-bookings {
+    &__header {
+      h2 {
+        margin-bottom: auto;
+      }
+      h3 {
+        color: $color-black-03;
+        font-size: 16px;
+        font-weight: 400;
+      }
+    }
+
+    .form__row {
+      gap: 22px;
+
+      > :first-child {
+        min-width: 140px;
+      }
+    }
+
+    .form-section {
+      display: flex;
+      flex-direction: column;
+
+      .section-row {
+        display: flex;
+        width: 970px;
+        align-items: center;
+
+        > :first-child {
+          width: 82%;
+        }
+
+        > :last-child {
+          flex-grow: 1;
+          margin-left: 18px;
+        }
+      }
+
+      .links-row {
+        display: flex;
+        width: 970px;
+        gap: 22px;
+
+        > :first-child {
+          width: 24%;
+        }
+
+        > :last-child {
+          flex-grow: 1;
+          margin-left: 18px;
+        }
+      }
+    }
+  }
+
   .layout-select {
     &:has(.bookings) {
       display: grid;

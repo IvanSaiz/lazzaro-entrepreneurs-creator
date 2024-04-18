@@ -1,7 +1,13 @@
 <template lang="pug">
 section.public-reviews
   .public-reviews__header
-    h2.h2--dash {{ $t('web.public.reviewsForm.title') }}
+    .title
+      formulate-input(
+        type="toggle"
+        name="reviewsEnabled"
+        v-model="props.enabled"
+      )
+      h2.h2--dash.grow-1 {{ $t('web.public.reviewsForm.title') }}
     h3 {{ $t('web.public.reviewsForm.subtitle') }}
   .public-reviews__title
     .reviews-section
@@ -49,3 +55,40 @@ section.public-reviews
     @VModel() props!: ReviewsProps; // TODO: Map to inputs
   }
 </script>
+
+<style lang="scss">
+  .public-reviews {
+    &__header {
+      h2 {
+        margin-bottom: auto;
+      }
+      h3 {
+        color: $color-black-03;
+        font-size: 16px;
+        font-weight: 400;
+      }
+    }
+
+    &__title {
+      display: flex;
+      align-items: flex-start;
+      gap: 30px;
+      width: 100%;
+
+      .reviews-section {
+        display: flex;
+        width: 563px;
+        gap: 18px;
+        align-items: center;
+
+        .formulate-input-element--text {
+          width: 382px;
+        }
+
+        .formulate-input[data-classification="text-color"] {
+          width: 153px;
+        }
+      }
+    }
+  }
+</style>

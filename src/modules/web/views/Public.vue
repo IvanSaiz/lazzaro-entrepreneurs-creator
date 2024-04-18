@@ -156,6 +156,7 @@
         }
       },
       bookings: {
+        enabled: true,
         imgUrl: "",
         title: "",
         titleColor: "",
@@ -169,6 +170,7 @@
         }
       },
       reviews: {
+        enabled: true,
         title: "",
         titleColor: "",
         subtitle: "",
@@ -451,6 +453,10 @@
     section {
       margin-top: 40px;
 
+      .title {
+        @extend .flex, .row, .gap-1, .mb-2;
+      }
+
       .subtitle {
         display: flex;
         justify-content: space-between;
@@ -677,91 +683,6 @@
             > :last-child {
               flex-grow: 1;
               margin-left: 18px;
-            }
-          }
-        }
-      }
-
-      &-bookings {
-        &__header {
-          h3 {
-            color: $color-black-03;
-            font-size: 16px;
-            font-weight: 400;
-          }
-        }
-
-        .form__row {
-          gap: 22px;
-
-          > :first-child {
-            min-width: 140px;
-          }
-        }
-
-        .form-section {
-          display: flex;
-          flex-direction: column;
-
-          .section-row {
-            display: flex;
-            width: 970px;
-            align-items: center;
-
-            > :first-child {
-              width: 82%;
-            }
-
-            > :last-child {
-              flex-grow: 1;
-              margin-left: 18px;
-            }
-          }
-
-          .links-row {
-            display: flex;
-            width: 970px;
-            gap: 22px;
-
-            > :first-child {
-              width: 24%;
-            }
-
-            > :last-child {
-              flex-grow: 1;
-              margin-left: 18px;
-            }
-          }
-        }
-      }
-
-      &-reviews {
-        &__header {
-          h3 {
-            color: $color-black-03;
-            font-size: 16px;
-            font-weight: 400;
-          }
-        }
-
-        &__title {
-          display: flex;
-          align-items: flex-start;
-          gap: 30px;
-          width: 100%;
-
-          .reviews-section {
-            display: flex;
-            width: 563px;
-            gap: 18px;
-            align-items: center;
-
-            .formulate-input-element--text {
-              width: 382px;
-            }
-
-            .formulate-input[data-classification="text-color"] {
-              width: 153px;
             }
           }
         }

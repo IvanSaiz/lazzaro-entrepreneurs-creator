@@ -7,7 +7,7 @@ section.public-whyUs
         name="whyChooseUsEnabled"
         v-model="props.enabled"
       )
-      h2.h2--dash {{ $t('web.public.whyChooseUsForm.title') }}
+      h2.h2--dash.grow-1 {{ $t('web.public.whyChooseUsForm.title') }}
     .subtitle
       h3 {{ $t('web.public.whyChooseUsForm.subtitle') }}
       design-modal(section="whyUs")

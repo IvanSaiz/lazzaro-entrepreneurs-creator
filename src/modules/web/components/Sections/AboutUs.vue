@@ -7,7 +7,7 @@ section.public-whoWeAre
         name="aboutUsEnabled"
         v-model="props.enabled"
       )
-      h2.h2--dash {{ $t('web.public.whoWeAreForm.title') }}
+      h2.h2--dash.grow-1 {{ $t('web.public.whoWeAreForm.title') }}
     .subtitle
       h3 {{ $t('web.public.whoWeAreForm.subtitle') }}
       design-modal(section="aboutUs")
@@ -85,7 +85,7 @@ section.public-whoWeAre
           name="aboutUsFeaturesEnabled"
           v-model="props.features.enabled"
         )
-        h3.h3--dash {{ $t('web.public.whoWeAreForm.features.title') }}
+        h3.h3--dash.grow-1 {{ $t('web.public.whoWeAreForm.features.title') }}
       formulate-input.public-whoWeAre__content(
         type="group"
         v-model="props.features.icons"

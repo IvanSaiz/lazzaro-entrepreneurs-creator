@@ -72,6 +72,7 @@ interface Subtitle {
 }
 
 interface Bookings {
+  enabled: boolean;
   title: string;
   design: BookingsDesign;
   imgUrl: Image;
@@ -162,6 +163,7 @@ interface Datum {
 }
 
 interface Reviews {
+  enabled: true;
   url: string;
   title: string;
   subtitle: string;

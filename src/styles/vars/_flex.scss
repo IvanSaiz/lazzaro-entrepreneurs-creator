@@ -1,0 +1,26 @@
+.flex {
+  display: flex;
+}
+.grow-1 {
+  flex-grow: 1;
+}
+
+.gap-1 {
+  gap: 1rem;
+}
+.gap-2 {
+  gap: 1.4rem;
+}
+.gap-3 {
+  gap: 2rem;
+}
+
+.column {
+  flex-direction: column;
+}
+.row {
+  flex-direction: row;
+}
+.wrap {
+  flex-wrap: wrap;
+}
