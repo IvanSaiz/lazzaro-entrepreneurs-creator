@@ -39,6 +39,7 @@
     .lz-box {
       min-width: 600px;
       background-color: $color-black-07;
+      animation: fade 0.3s ease 1 both alternate;
     }
 
     form {
