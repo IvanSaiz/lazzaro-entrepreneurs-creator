@@ -53,6 +53,7 @@ interface AboutUs {
 }
 
 interface Features {
+  enabled: boolean;
   icons: Subtitle[];
   buttons: Button[];
 }

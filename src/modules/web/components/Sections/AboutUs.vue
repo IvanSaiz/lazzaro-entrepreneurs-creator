@@ -79,7 +79,13 @@ section.public-whoWeAre
         )
   section.public-features
     .public-whoWeAre__header
-      h3.h3--dash {{ $t('web.public.whoWeAreForm.features.title') }}
+      .title
+        formulate-input(
+          type="toggle"
+          name="aboutUsFeaturesEnabled"
+          v-model="props.features.enabled"
+        )
+        h3.h3--dash {{ $t('web.public.whoWeAreForm.features.title') }}
       formulate-input.public-whoWeAre__content(
         type="group"
         v-model="props.features.icons"
@@ -154,21 +160,23 @@ section.public-whoWeAre
     &__header {
       .title {
         display: flex;
-        align-items: start;
+        align-items: center;
         width: 100%;
         gap: 0.8rem;
         margin-bottom: 1.2rem;
       }
 
       h2 {
-        margin: 0;
+        margin-bottom: auto;
         flex-grow: 1;
       }
 
       h3 {
         color: $color-black-03;
+        margin-bottom: 4px;
         font-size: 16px;
         font-weight: 400;
+        flex-grow: 1;
       }
     }
 

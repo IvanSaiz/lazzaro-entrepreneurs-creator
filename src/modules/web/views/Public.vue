@@ -136,6 +136,7 @@
         subTitleColor: "",
         description: "",
         features: {
+          enabled: true,
           icons: [],
           buttons: []
         },
@@ -446,6 +447,8 @@
 
 <style lang="scss">
   #public {
+    margin-bottom: 5rem;
+
     section {
       margin-top: 40px;
 
