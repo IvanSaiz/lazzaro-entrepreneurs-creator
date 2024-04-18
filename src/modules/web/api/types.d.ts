@@ -182,6 +182,7 @@ interface Style {
 }
 
 interface Team {
+  enabled: boolean;
   title: string;
   design: {
     backgroundColor: string;

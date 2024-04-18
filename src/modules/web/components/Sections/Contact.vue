@@ -3,7 +3,7 @@ section.public-contact
   .public-contact__header
     h2.h2--dash {{ $t('web.public.contactForm.title') }}
     .subtitle
-      h3 {{ $t('web.public.teamForm.subtitle') }}
+      h3 {{ $t('web.public.contactForm.subtitle') }}
       design-modal(section="contact")
         template(#header)
           h4 {{ $t('web.public.contactForm.title') }}
@@ -14,7 +14,6 @@ section.public-contact
             name="contactDesignBackgroundColor"
             v-model="props.design.backgroundColor"
           )
-    h4 {{ $t('web.public.contactForm.subtitle') }}
     .public-contact__content
       .form__row
         formulate-input(

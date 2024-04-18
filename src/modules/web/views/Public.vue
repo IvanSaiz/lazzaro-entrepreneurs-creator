@@ -186,6 +186,7 @@
         }
       },
       team: {
+        enabled: true,
         title: "",
         titleColor: "",
         subTitle: "",
@@ -466,6 +467,13 @@
       .subtitle {
         display: flex;
         justify-content: space-between;
+        gap: 1rem;
+
+        h3 {
+          color: $color-black-03;
+          font-size: 16px;
+          font-weight: 400;
+        }
       }
     }
 

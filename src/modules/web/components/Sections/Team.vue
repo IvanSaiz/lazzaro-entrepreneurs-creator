@@ -1,7 +1,13 @@
 <template lang="pug">
 section.public-team
   .public-team__header
-    h2.h2--dash {{ $t('web.public.teamForm.title') }}
+    .title
+      formulate-input(
+        type="toggle"
+        name="teamEnabled"
+        v-model="props.enabled"
+      )
+      h2.h2--dash {{ $t('web.public.teamForm.title') }}
     .subtitle
       h3 {{ $t('web.public.teamForm.subtitle') }}
       design-modal(section="team")
