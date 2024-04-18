@@ -91,7 +91,7 @@ hr {
     content: "";
     border-bottom: 1px dashed $color-black-02;
     flex: 1;
-    padding-top: 5px
+    padding-top: 5px;
   }
 }
 
@@ -116,6 +116,34 @@ i {
   src: url("../../assets/fonts/Muli-Bold.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
+}
+
+@font-face {
+  font-family: "Muli";
+  src: url("../../assets/fonts/Muli-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Muli";
+  src: url("../../assets/fonts/Muli-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Muli";
+  src: url("../../assets/fonts/Muli-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Muli";
+  src: url("../../assets/fonts/Muli-LightItalic.ttf") format("truetype");
+  font-weight: 300;
+  font-style: italic;
 }
 
 /* Jost */
