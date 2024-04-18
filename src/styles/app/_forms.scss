@@ -1,5 +1,5 @@
 /** vue-formulate default */
-@import './formulate';
+@import "./formulate";
 
 /** Custom form modifications */
 form {
@@ -10,7 +10,6 @@ form {
 
 /* Formulate input override */
 .formulate-input {
-
   /** Common native elements */
   &-label {
     color: $color-black-02;
@@ -22,8 +21,8 @@ form {
     line-height: 1.25;
 
     &.required:after {
-        content:"*";
-        color: red;
+      content: "*";
+      color: red;
     }
 
     &--sm {
@@ -52,7 +51,7 @@ form {
       & select,
       & textarea,
       & .formulate-input-upload-area-mask {
-        border-color: $color-red  !important;
+        border-color: $color-red !important;
       }
     }
   }
@@ -75,7 +74,8 @@ form {
     height: 52px;
     margin-top: 8px;
     padding: 16px;
-    transition: background-color $transition-default, border-color $transition-default;
+    transition: background-color $transition-default,
+      border-color $transition-default;
     width: 100%;
 
     &:hover {
@@ -174,12 +174,12 @@ form {
         }
 
         &:hover {
-          cursor: pointer
+          cursor: pointer;
         }
       }
 
       input:checked {
-        &+label {
+        & + label {
           &::after {
             content: "";
             border: solid $color-black-01;
@@ -194,7 +194,7 @@ form {
         }
       }
 
-      &+label {
+      & + label {
         color: $color-black-04;
         cursor: pointer;
         text-decoration: underline;
@@ -210,47 +210,50 @@ form {
   /** Toggle */
   &[data-classification="toggle"] {
     .formulate-input-toggle {
-      border: solid 1px $color-black-01;
+      $height: 24px;
+      $width: $height * 7 / 4;
+      $switch-spacing: 3px;
+      $border-width: 1.5px;
+      border: solid $border-width $color-black-02;
       border-radius: 18px;
       cursor: pointer;
-      height: 30px;
+      height: $height;
+      aspect-ratio: 7 / 4;
       padding: 3px;
       position: relative;
-      margin-top: 8px;
-      width: 48px;
 
       &:before {
         content: "";
-        border: solid 1px $color-black-01;
+        border: solid 1px $color-black-02;
         border-radius: 18px;
-        height: 21px;
-        position: absolute;
-        left: 3px;
+        width: $height * (2 / 3);
+        aspect-ratio: 1;
         top: 50%;
         transform: translateY(-50%);
-        width: 21px;
+        position: absolute;
+        left: $switch-spacing;
+        transition: all .2s ease-out;
       }
 
       &:hover {
-        border-color: #0093A7;
+        border-color: $color-green-01;
 
         &:before {
-          border-color: #0093A7;
+          border-color: $color-green-01;
         }
       }
 
       &-active {
         &:before {
-          background-color: #0093A7;
-          border-color: #0093A7;
-          right: 3px;
-          left: unset;
+          background-color: $color-green-01;
+          border-color: $color-green-01;
+          left: calc(100% - $switch-spacing - $height * (2 / 3) - $border-width);
           transform: translateY(-50%);
         }
 
         &:hover {
           &:before {
-            background-color: #0093A7;
+            background-color: $color-green-01;
           }
         }
       }
@@ -263,6 +266,7 @@ form {
       position: absolute;
       top: 0;
       width: 100%;
+      margin: 0;
 
       &:hover {
         cursor: pointer;
@@ -279,9 +283,8 @@ form {
     /** Image */
     &[data-type="image"] {
       .formulate-input-area {
-
         input[data-is-drag-hover] {
-          &~.formulate-input-upload-area-mask {
+          & ~ .formulate-input-upload-area-mask {
             border-color: $color-green-01;
 
             &::before {
@@ -401,9 +404,8 @@ form {
     /** File */
     &[data-type="file"] {
       .formulate-input-upload-area {
-
         input[data-is-drag-hover] {
-          &~.formulate-input-upload-area-mask {
+          & ~ .formulate-input-upload-area-mask {
             border-color: $color-green-01;
 
             &::before {
@@ -459,7 +461,7 @@ form {
 
       /** Multiple */
       [multiple="multiple"] {
-        &~.formulate-files {
+        & ~ .formulate-files {
           display: flex;
           flex-direction: column;
 
@@ -497,14 +499,13 @@ form {
         }
       }
     }
-
   }
 
   /** Errors */
   &-errors {
     margin-top: 5px;
 
-    &>li {
+    & > li {
       color: $color-red;
       font-size: 11px;
       overflow: hidden;
@@ -520,7 +521,7 @@ form {
     display: flex;
     margin: 10px -15px;
 
-    &>* {
+    & > * {
       flex-basis: 100%;
       flex-wrap: wrap;
       padding: 0 15px;
@@ -530,7 +531,7 @@ form {
     &--flex-end {
       align-items: flex-end;
 
-      &>* {
+      & > * {
         margin: 0;
       }
     }
@@ -538,7 +539,7 @@ form {
     &--flex-center {
       align-items: center;
 
-      &>* {
+      & > * {
         margin: 0;
       }
     }
