@@ -66,17 +66,19 @@
     .lz-button {
       display: flex;
       align-items: center;
-      gap: 18px;
+      gap: 0.7rem;
       justify-content: space-between;
       margin-left: auto;
-      padding: 10px 12px;
+      padding: 10px;
       width: fit-content;
       height: max-content;
       color: $color-black-01;
       font-weight: 500;
       margin-block: 0;
+      letter-spacing: 0.5px;
       border: 1px solid $color-black-06;
       border-radius: 10px;
+      font-size: 1.4rem;
 
       svg {
         margin: 0;
