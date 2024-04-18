@@ -36,11 +36,11 @@ section.public-bookings
     .form__row
       FormulateInput(
         type="image"
-        :label="$t('web.public.brandForm.logo.label')"
+        :label="$t('web.public.bookingsForm.image')"
         label-position="before"
         name="bookingsImgUrl"
         v-model="props.imgUrl"
-        :help="$t('web.public.brandForm.logo.help')"
+        :help="$t('web.public.bookingsForm.imageHelper')"
       )
       .form-section
         .section-row
