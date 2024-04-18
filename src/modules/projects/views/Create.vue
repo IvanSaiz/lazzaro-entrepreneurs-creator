@@ -262,23 +262,40 @@
       margin-top: 40px;
     }
 
-    &__left {
-      flex-basis: 20%;
-    }
-
     &__images {
       width: 100%;
     }
 
+    &__left {
+      flex-basis: 20%;
+    }
     &__right {
       flex: 1;
       padding-left: 40px;
+    }
+
+    &__right,
+    &__left {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
     }
 
     &__actions {
       text-align: right;
       margin-top: 40px;
       width: 100%;
+    }
+
+    .form {
+      &__row {
+        gap: 2rem;
+        margin: 0;
+        > * {
+          padding: 0;
+          margin: 0;
+        }
+      }
     }
   }
 </style>
