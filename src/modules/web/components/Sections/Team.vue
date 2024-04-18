@@ -150,3 +150,90 @@ section.public-team
     }
   }
 </script>
+
+<style lang="scss">
+  .public-team {
+    &__header {
+      margin-bottom: 20px;
+
+      p {
+        font-size: 16px;
+        color: $color-black-04;
+      }
+    }
+
+    &__title {
+      display: flex;
+      align-items: flex-start;
+      gap: 30px;
+      width: 100%;
+
+      .team-section {
+        display: flex;
+        width: 563px;
+        gap: 18px;
+        align-items: center;
+
+        .formulate-input-element--text {
+          width: 382px;
+        }
+
+        .formulate-input[data-classification="text-color"] {
+          width: 153px;
+        }
+      }
+    }
+
+    h3 {
+      color: $color-black-03;
+      font-size: 16px;
+      font-weight: 400;
+    }
+
+    .title-table-container {
+      display: flex;
+      flex-direction: column;
+
+      h3 {
+        margin-bottom: 35px;
+      }
+    }
+
+    &__form {
+      display: flex;
+
+      row {
+        gap: 30px;
+      }
+    }
+
+    &__image {
+      width: 137px;
+      margin-right: 34px;
+    }
+
+    &__texts {
+      flex-grow: 1;
+
+      &:last-child {
+        button {
+          margin-left: auto;
+          margin-right: 15px;
+        }
+      }
+    }
+
+    .lz-table__tools {
+      display: none;
+    }
+
+    .lz-table__th--delete {
+      text-align: right;
+
+      svg:hover {
+        cursor: pointer;
+        stroke: $color-black-01;
+      }
+    }
+  }
+</style>

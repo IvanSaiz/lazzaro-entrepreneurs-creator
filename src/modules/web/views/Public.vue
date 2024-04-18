@@ -178,6 +178,7 @@
         url: ""
       },
       impact: {
+        enabled: true,
         data: [],
         design: {
           backgroundColor: "#FFF0F0",
@@ -455,6 +456,11 @@
 
       .title {
         @extend .flex, .row, .gap-1, .mb-2;
+
+        h2 {
+          margin-bottom: auto;
+          @extend .grow-1;
+        }
       }
 
       .subtitle {
@@ -688,50 +694,6 @@
         }
       }
 
-      &-impact {
-        &__header {
-          .subtitle {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-            p {
-              font-size: 16px;
-            }
-          }
-        }
-        &__content {
-          .formulate-input-grouping {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            align-items: flex-start;
-            gap: 44px;
-
-            .formulate-input-group-repeatable {
-              height: 100%;
-              display: flex;
-              flex-direction: column;
-            }
-          }
-
-          .impact-item {
-            display: flex;
-            flex-direction: column;
-
-            &[data-type="image"] {
-              margin-bottom: auto !important;
-            }
-
-            &:not(:last-child) {
-              margin-bottom: 1rem;
-            }
-
-            formulate-input {
-              width: 100%;
-            }
-          }
-        }
-      }
-
       &-content {
         &__group {
           margin: 0 16px;
@@ -784,83 +746,6 @@
         }
       }
 
-      &-team {
-        &__title {
-          display: flex;
-          align-items: flex-start;
-          gap: 30px;
-          width: 100%;
-
-          .team-section {
-            display: flex;
-            width: 563px;
-            gap: 18px;
-            align-items: center;
-
-            .formulate-input-element--text {
-              width: 382px;
-            }
-
-            .formulate-input[data-classification="text-color"] {
-              width: 153px;
-            }
-          }
-        }
-
-        h3 {
-          color: $color-black-03;
-          font-size: 16px;
-          font-weight: 400;
-        }
-
-        .title-table-container {
-          display: flex;
-          flex-direction: column;
-
-          h3 {
-            margin-bottom: 35px;
-          }
-        }
-
-        &__form {
-          display: flex;
-
-          row {
-            gap: 30px;
-          }
-        }
-
-        &__image {
-          width: 137px;
-          margin-right: 34px;
-        }
-
-        &__texts {
-          flex-grow: 1;
-
-          &:last-child {
-            button {
-              margin-left: auto;
-              margin-right: 15px;
-            }
-          }
-        }
-
-        .lz-table__tools {
-          display: none;
-        }
-
-        .lz-table__th--delete {
-          text-align: right;
-
-          svg:hover {
-            cursor: pointer;
-            stroke: $color-black-01;
-          }
-        }
-      }
-
-      &-team,
       &-description {
         &__header {
           margin-bottom: 20px;

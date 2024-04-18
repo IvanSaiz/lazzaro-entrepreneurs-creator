@@ -148,6 +148,7 @@ interface HomePage {
 }
 
 interface Impact {
+  enabled: true;
   data: Datum[];
   design: {
     backgroundColor: string;

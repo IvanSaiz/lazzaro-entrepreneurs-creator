@@ -1,7 +1,13 @@
 <template lang="pug">
 section.public-impact
   .public-impact__header
-    h2.h2--dash {{ $t('web.public.impactForm.title') }}
+    .title
+      formulate-input(
+        type="toggle"
+        name="impactEnabled"
+        v-model="props.enabled"
+      )
+      h2.h2--dash {{ $t('web.public.impactForm.title') }}
     .subtitle
       p {{ $t('web.public.impactForm.subtitle') }}
       design-modal(section="impact")
@@ -55,3 +61,49 @@ section.public-impact
     @VModel() props!: ImpactProps; // TODO: Map to inputs
   }
 </script>
+
+<style lang="scss">
+  .public-impact {
+    &__header {
+      .subtitle {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+        p {
+          font-size: 16px;
+        }
+      }
+    }
+    &__content {
+      .formulate-input-grouping {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        align-items: flex-start;
+        gap: 44px;
+
+        .formulate-input-group-repeatable {
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+        }
+      }
+
+      .impact-item {
+        display: flex;
+        flex-direction: column;
+
+        &[data-type="image"] {
+          margin-bottom: auto !important;
+        }
+
+        &:not(:last-child) {
+          margin-bottom: 1rem;
+        }
+
+        formulate-input {
+          width: 100%;
+        }
+      }
+    }
+  }
+</style>
