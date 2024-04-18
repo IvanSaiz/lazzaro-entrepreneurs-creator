@@ -211,7 +211,7 @@ form {
   &[data-classification="toggle"] {
     .formulate-input-toggle {
       $height: 24px;
-      $width: $height * 7 / 4;
+      $width: calc($height * 7 / 4);
       $switch-spacing: 3px;
       $border-width: 1.5px;
       border: solid $border-width $color-black-02;
@@ -226,7 +226,7 @@ form {
         content: "";
         border: solid 1px $color-black-02;
         border-radius: 18px;
-        width: $height * (2 / 3);
+        width: calc($height * (2 / 3));
         aspect-ratio: 1;
         top: 50%;
         transform: translateY(-50%);

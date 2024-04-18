@@ -13,20 +13,6 @@
 
         section.projects-create__left
           .form__row
-            //- formulate-input(
-            //-   type="toggle"
-            //-   name="causes"
-            //-   label="Destacar proyecto"
-            //-   label-position="before"
-            //-   :wrapper-class="['formulate-input-inline-toggle']"
-            //- )
-              template(#label="{ label }")
-                label
-                  .formulate-input-label {{ label }} 
-                    span
-                      crown-icon
-                  .formulate-input-under-label Proyecto destacado
-          .form__row
             formulate-input(
               type="image"
               name="imageUrlToConvert"
@@ -46,8 +32,6 @@
               add-label="Añadir imagen"
               :multiple="true"
             )
-
-
         section.projects-create__right
           .form__row
             formulate-input(
