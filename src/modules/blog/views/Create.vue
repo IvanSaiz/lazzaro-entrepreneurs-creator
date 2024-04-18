@@ -186,7 +186,7 @@
 
       .actions {
         display: flex;
-        justify-content: end;
+        justify-content: flex-end;
         grid-column-start: 2;
       }
     }

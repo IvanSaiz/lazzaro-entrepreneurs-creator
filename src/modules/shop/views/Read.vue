@@ -177,7 +177,7 @@
     header {
       .title {
         display: flex;
-        align-items: end;
+        align-items: flex-end;
         gap: 18px;
       }
 
