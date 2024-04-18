@@ -154,7 +154,7 @@ section.public-whoWeAre
     &__header {
       .title {
         display: flex;
-        align-items: center;
+        align-items: start;
         width: 100%;
         gap: 0.8rem;
         margin-bottom: 1.2rem;
