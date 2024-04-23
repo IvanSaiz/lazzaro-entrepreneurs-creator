@@ -9,29 +9,26 @@
         <h2 class="h2--dash">
           {{ $t("events.read.design.modal.form.title") }}
         </h2>
-        <FormulateInput
-          v-model="properties.title"
-          type="text"
+        <ColorText
+          name="title"
+          v-models:text="properties.title"
+          v-models:color="properties.titleColor"
           validation="required"
           validation-name="Titulo"
           :label="$t('events.read.design.modal.form.labels.title')"
         />
-        <FormulateInput
-          v-model="properties.subtitle"
+        <ColorText
+          name="subtitle"
+          v-models:text="properties.subtitle"
+          v-models:color="properties.subtitleColor"
           type="text"
           validation="required"
           validation-name="Subtítulo"
           :label="$t('events.read.design.modal.form.labels.subtitle')"
         />
         <h2 class="h2--dash">Fondo</h2>
-        <FormulateInput
-          v-model="properties.background"
-          type="color"
-          validation="required"
-          validation-name="Color"
-          :label="$t('events.read.design.modal.form.labels.color')"
-        />
-        <LzButton type="secondary" @click="save" v-disabled="saving">
+        <ColorPicker v-model="properties.background" />
+        <LzButton type="secondary" @click="save" :disabled="saving">
           {{ $t("events.read.design.modal.form.save") }}
         </LzButton>
       </FormulateForm>
@@ -53,7 +50,9 @@
 
   type Properties = {
     title: string;
+    titleColor: string;
     subtitle: string;
+    subtitleColor: string;
     background: string;
   };
 
@@ -75,7 +74,9 @@
 
     properties: Properties = {
       title: "",
+      titleColor: "",
       subtitle: "",
+      subtitleColor: "",
       background: ""
     };
 
@@ -151,6 +152,11 @@
 
       input[type="color"] {
         padding-block: 5px;
+      }
+
+      .color-picker {
+        width: min-content;
+        margin-inline: auto;
       }
     }
 

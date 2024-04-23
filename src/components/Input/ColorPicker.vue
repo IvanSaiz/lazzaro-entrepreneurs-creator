@@ -1,11 +1,11 @@
 <template lang="pug">
   .color-picker
-    label Color
+    label {{ label }}
     <chrome-picker v-model="hex" v-on:input="colorInput" />
 </template>
 
 <script lang="ts">
-  import { Component, Vue, VModel } from "vue-property-decorator";
+  import { Component, Vue, VModel, Prop } from "vue-property-decorator";
 
   type Color = {
     a: number;
@@ -38,6 +38,9 @@
   export default class ColorPicker extends Vue {
     @VModel({ type: String })
     hex: string;
+
+    @Prop({ type: String, default: "Color" })
+    label!: string;
 
     colorInput(e: Color) {
       const { hex } = e;

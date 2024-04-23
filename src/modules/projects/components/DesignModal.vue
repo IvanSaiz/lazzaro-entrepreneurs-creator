@@ -7,7 +7,9 @@
       </div>
       <FormulateForm>
         <section>
-          <h2 class="h2--dash">{{ $t("projects.read.design.button") }}</h2>
+          <h2 class="h2--dash">
+            {{ $t("projects.read.design.layout.title") }}
+          </h2>
           <LayoutSelect
             name="portfolioLayout"
             v-model="properties.layout"
@@ -209,11 +211,21 @@
     form {
       display: flex;
       flex-direction: column;
-      gap: 3rem;
+      gap: 2.8rem;
 
       .color-picker {
         margin-inline: auto;
         width: max-content;
+      }
+
+      section {
+        display: flex;
+        flex-direction: column;
+        gap: 1.4rem;
+
+        h2 {
+          margin: 0;
+        }
       }
     }
 

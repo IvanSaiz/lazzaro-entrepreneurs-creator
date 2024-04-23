@@ -17,14 +17,18 @@ import uploader from "@/plugins/formulate/uploader";
 import FormulateInputToggle from "@/components/Input/FormulateInputToggle.vue";
 import FormulateInputTextColor from "@/components/Input/FormulateInputTextColor.vue";
 import LzLevelUpButton from "@/components/LevelUpButton.vue";
+import ColorText from "./components/Input/ColorText.vue";
 import Mixin from "./mixin";
 import { Chrome } from "vue-color";
+import Vue2MultipleVModels from "vue2-multiple-vmodels";
+import ColorPicker from "./components/Input/ColorPicker.vue";
 
 // plugins
 Vue.use(VueI18n);
 Vue.use(VueNotification);
 Vue.use(VueTablerIcons);
 Vue.use(VueTelInput);
+Vue.use(Vue2MultipleVModels);
 
 // formulate
 Vue.component("FormulateInputToggle", FormulateInputToggle);
@@ -52,8 +56,10 @@ Vue.config.productionTip = false;
 
 // Level Up component
 Vue.component("LzLevelUpButton", LzLevelUpButton);
+Vue.component("ColorText", ColorText);
 
 Vue.component("chrome-picker", Chrome);
+Vue.component("ColorPicker", ColorPicker);
 
 // Global mixin
 Vue.mixin(Mixin);
