@@ -3,7 +3,7 @@
     <LzModal v-if="visible" @close="closeModal">
       <div class="header">
         <h2>Diseño</h2>
-        <h4>Portfolio</h4>
+        <h4>{{ $t("projects.read.design.title") }}</h4>
       </div>
       <FormulateForm>
         <section>
@@ -76,7 +76,7 @@
       </FormulateForm>
     </LzModal>
     <LzButton type="secondary" @click="openModal">
-      {{ $t("projects.read.design.title") }}
+      {{ $t("projects.read.design.button") }}
       <EditIcon size="28" stroke-width="1.5" />
     </LzButton>
   </div>
@@ -211,7 +211,7 @@
     form {
       display: flex;
       flex-direction: column;
-      gap: 2.8rem;
+      gap: 2rem;
 
       .color-picker {
         margin-inline: auto;
@@ -221,7 +221,7 @@
       section {
         display: flex;
         flex-direction: column;
-        gap: 1.4rem;
+        gap: 1rem;
 
         h2 {
           margin: 0;
@@ -263,14 +263,20 @@
     }
 
     .layout-select {
-      margin: 0rem 4rem;
+      margin: 0rem 2rem;
       grid-template-columns: repeat(2, 1fr);
       gap: 2rem;
+
+      .option {
+        margin-inline: auto;
+        width: 80%;
+      }
 
       .item {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        padding: 1.5rem 4rem;
+        padding: 1rem 2rem;
+        margin-inline: auto;
         border: 1px solid $color-black-06;
         border-radius: 10px;
         box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.25);

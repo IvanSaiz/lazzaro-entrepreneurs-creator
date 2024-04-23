@@ -1,7 +1,7 @@
 <template lang="pug">
-  .color-picker
-    label {{ label }}
-    <chrome-picker v-model="hex" v-on:input="colorInput" />
+.color-picker
+  label {{ label }}
+  <chrome-picker v-model="hex" v-on:input="colorInput" />
 </template>
 
 <script lang="ts">

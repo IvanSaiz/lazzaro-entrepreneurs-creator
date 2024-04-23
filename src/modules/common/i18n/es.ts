@@ -36,6 +36,7 @@ export default {
     validationError: "Asegúrese de que su CIF / DNI sea correcto"
   },
   design: {
+    button: "Diseño",
     layout: {
       title: "Disposición",
       heading: "Título principal",

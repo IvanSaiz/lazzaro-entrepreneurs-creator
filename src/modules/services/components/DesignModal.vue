@@ -9,15 +9,17 @@
         <h2 class="h2--dash">
           {{ $t("services.read.modal.sections.title.separator") }}
         </h2>
-        <FormulateInput
-          v-model="properties.title"
+        <ColorText
+          v-models:text="properties.title"
+          v-models:color="properties.titleColor"
           type="text"
           validation="required"
           validation-name="Titulo"
           :label="$t('services.read.modal.sections.title.titleLabel')"
         />
-        <FormulateInput
-          v-model="properties.subtitle"
+        <ColorText
+          v-models:text="properties.subtitle"
+          v-models:color="properties.subtitleColor"
           type="text"
           validation="required"
           validation-name="Subtítulo"
@@ -26,20 +28,14 @@
         <h2 class="h2--dash">
           {{ $t("services.read.modal.sections.background.separator") }}
         </h2>
-        <FormulateInput
-          v-model="properties.background"
-          type="color"
-          validation="required"
-          validation-name="Color"
-          :label="$t('services.read.modal.sections.background.colorLabel')"
-        />
+        <ColorPicker v-model="properties.background" />
         <LzButton type="secondary" @click="save" v-disabled="saving">
           {{ $t("services.read.modal.save") }}
         </LzButton>
       </FormulateForm>
     </LzModal>
     <LzButton type="secondary" @click="openModal">
-      {{ $t("projects.read.design") }}
+      {{ $t("common.design.button") }}
       <EditIcon size="28" stroke-width="1.5" />
     </LzButton>
   </div>
@@ -55,7 +51,9 @@
 
   type Properties = {
     title: string;
+    titleColor: string;
     subtitle: string;
+    subtitleColor: string;
     background: string;
   };
 
@@ -77,7 +75,9 @@
 
     properties: Properties = {
       title: "",
+      titleColor: "",
       subtitle: "",
+      subtitleColor: "",
       background: ""
     };
 
@@ -146,23 +146,23 @@
     .lz-box {
       min-width: 600px;
     }
-
     form {
       display: flex;
       flex-direction: column;
       gap: 16px;
-
       input[type="color"] {
         padding-block: 5px;
       }
+      .color-picker {
+        width: min-content;
+        margin-inline: auto;
+      }
     }
-
     .header {
       display: flex;
       gap: 16px;
       align-items: center;
     }
-
     .lz-button {
       display: flex;
       align-items: center;
@@ -177,13 +177,11 @@
       margin-block: 20px 0;
       border: 1px solid $color-black-06;
       border-radius: 10px;
-
       svg {
         margin: 0;
         top: 0;
         color: $color-black-02;
       }
-
       &:hover {
         cursor: pointer;
         background-color: $color-black-06;
