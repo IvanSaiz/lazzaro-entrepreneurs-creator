@@ -75,14 +75,14 @@ export default {
           disabled: "Desactivado"
         }
       }
+    },
+    notifications: {
+      projectCreated: "Proyecto creado con éxito",
+      projectEdited: "Cambios guardados con éxito",
+      projectRemoved: "Proyecto eliminado con éxito",
+      alreadyPremium: "ya tienes una sección destacada",
+      projectHasDonations:
+        "No puedes eliminar este proyecto porque ha recibido donaciones"
     }
-  },
-  notifications: {
-    projectCreated: "Proyecto creado con éxito",
-    projectEdited: "Cambios guardados con éxito",
-    projectRemoved: "Proyecto eliminado con éxito",
-    alreadyPremium: "ya tienes una sección destacada",
-    projectHasDonations:
-      "No puedes eliminar este proyecto porque ha recibido donaciones"
   }
 };

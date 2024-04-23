@@ -148,7 +148,7 @@
         .then(() => {
           this.$notify({
             type: "success",
-            text: this.$tc("shop.create.notifications.deleted")
+            text: this.$tc("shop.create.notifications.productRemoved")
           });
           this.$router.push({ name: "shopRead" });
         })
