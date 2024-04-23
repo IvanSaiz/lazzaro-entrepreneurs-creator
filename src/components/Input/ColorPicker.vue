@@ -1,5 +1,6 @@
 <template lang="pug">
   .color-picker
+    label Color
     <chrome-picker v-model="hex" v-on:input="colorInput" />
 </template>
 
@@ -47,6 +48,17 @@
 
 <style lang="scss">
   .color-picker {
+    * {
+      font-family: "Muli";
+    }
+    display: flex;
+    flex-direction: column;
     // Your SCSS styles here
+    label {
+      font-size: 14px;
+      margin-bottom: 1rem;
+      font-weight: 400;
+      color: $color-black-02;
+    }
   }
 </style>
