@@ -21,7 +21,6 @@
           name="subtitle"
           v-models:text="properties.subtitle"
           v-models:color="properties.subtitleColor"
-          type="text"
           validation="required"
           validation-name="Subtítulo"
           :label="$t('events.read.design.modal.form.labels.subtitle')"

@@ -49,19 +49,21 @@
 
         <section>
           <h2 class="h2--dash">{{ $t("projects.read.design.title") }}</h2>
-          <FormulateInput
-            v-model="properties.title"
-            type="text"
+          <ColorText
+            name="title"
+            v-models:text="properties.title"
+            v-models:color="properties.titleColor"
             validation="required"
             validation-name="Titulo"
-            label="Título"
+            :label="$t('events.read.design.modal.form.labels.title')"
           />
-          <FormulateInput
-            v-model="properties.subtitle"
-            type="text"
+          <ColorText
+            name="subtitle"
+            v-models:text="properties.subtitle"
+            v-models:color="properties.subtitleColor"
             validation="required"
             validation-name="Subtítulo"
-            label="Subtítulo"
+            :label="$t('events.read.design.modal.form.labels.subtitle')"
           />
         </section>
 
@@ -95,7 +97,9 @@
   type Properties = {
     layout: "spaced" | "grid";
     title: string;
+    titleColor: string;
     subtitle: string;
+    subtitleColor: string;
     background: string;
   };
 
@@ -117,7 +121,9 @@
 
     properties: Properties = {
       title: "",
+      titleColor: "000000",
       subtitle: "",
+      subtitleColor: "000000",
       background: "",
       layout: "spaced"
     };

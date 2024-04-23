@@ -8,7 +8,7 @@
       <slot name="form"></slot>
     </LzModal>
     <LzButton type="secondary" @click.prevent="openModal">
-      {{ $t("projects.read.design") }}
+      {{ $t("projects.read.design.button") }}
       <EditIcon size="28" stroke-width="1.5" />
     </LzButton>
   </div>

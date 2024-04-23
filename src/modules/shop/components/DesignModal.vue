@@ -7,28 +7,24 @@
       </div>
       <FormulateForm>
         <h2 class="h2--dash">Título</h2>
-        <FormulateInput
-          v-model="properties.title"
+        <ColorText
+          v-models:text="properties.title"
+          v-models:color="properties.titleColor"
           type="text"
           validation="required"
           validation-name="Titulo"
-          label="Título"
+          :label="$t('services.read.modal.sections.title.titleLabel')"
         />
-        <FormulateInput
-          v-model="properties.subtitle"
+        <ColorText
+          v-models:text="properties.subtitle"
+          v-models:color="properties.subtitleColor"
           type="text"
           validation="required"
           validation-name="Subtítulo"
-          label="Subtítulo"
+          :label="$t('services.read.modal.sections.title.subtitleLabel')"
         />
         <h2 class="h2--dash">Fondo</h2>
-        <FormulateInput
-          v-model="properties.background"
-          type="color"
-          validation="required"
-          validation-name="Color"
-          label="Color"
-        />
+        <ColorPicker v-model="properties.background" />
         <LzButton type="secondary" @click="save" v-disabled="saving">
           Guardar
         </LzButton>
@@ -51,7 +47,9 @@
 
   type Properties = {
     title: string;
+    titleColor: string;
     subtitle: string;
+    subtitleColor: string;
     background: string;
   };
 
@@ -73,7 +71,9 @@
 
     properties: Properties = {
       title: "",
+      titleColor: "",
       subtitle: "",
+      subtitleColor: "",
       background: ""
     };
 
