@@ -6,66 +6,69 @@
         <h4>Portfolio</h4>
       </div>
       <FormulateForm>
-        <h2 class="h2--dash">{{ $t("projects.read.design.button") }}</h2>
-        <LayoutSelect
-          name="portfolioLayout"
-          v-model="properties.layout"
-          :options="layoutOptions"
-          optionClass="portfolio"
-        >
-          <template #tooltip>
-            <div class="item">
-              <img
-                src="@/assets/images/img-placeholder.svg"
-                alt="Placeholder"
-              />
-              <img
-                src="@/assets/images/img-placeholder.svg"
-                alt="Placeholder"
-              />
-              <img
-                src="@/assets/images/img-placeholder.svg"
-                alt="Placeholder"
-              />
-              <img
-                src="@/assets/images/img-placeholder.svg"
-                alt="Placeholder"
-              />
-              <img
-                src="@/assets/images/img-placeholder.svg"
-                alt="Placeholder"
-              />
-              <img
-                src="@/assets/images/img-placeholder.svg"
-                alt="Placeholder"
-              />
-            </div>
-          </template>
-        </LayoutSelect>
-        <h2 class="h2--dash">{{ $t("projects.read.design.title") }}</h2>
-        <FormulateInput
-          v-model="properties.title"
-          type="text"
-          validation="required"
-          validation-name="Titulo"
-          label="Título"
-        />
-        <FormulateInput
-          v-model="properties.subtitle"
-          type="text"
-          validation="required"
-          validation-name="Subtítulo"
-          label="Subtítulo"
-        />
-        <h2 class="h2--dash">{{ $t("projects.read.design.background") }}</h2>
-        <FormulateInput
-          v-model="properties.background"
-          type="color"
-          validation="required"
-          validation-name="Color"
-          label="Color"
-        />
-        <LzButton type="secondary" @click="save" v-disabled="saving">
+        <section>
+          <h2 class="h2--dash">{{ $t("projects.read.design.button") }}</h2>
+          <LayoutSelect
+            name="portfolioLayout"
+            v-model="properties.layout"
+            :options="layoutOptions"
+            optionClass="portfolio"
+          >
+            <template #tooltip>
+              <div class="item">
+                <img
+                  src="@/assets/images/img-placeholder.svg"
+                  alt="Placeholder"
+                />
+                <img
+                  src="@/assets/images/img-placeholder.svg"
+                  alt="Placeholder"
+                />
+                <img
+                  src="@/assets/images/img-placeholder.svg"
+                  alt="Placeholder"
+                />
+                <img
+                  src="@/assets/images/img-placeholder.svg"
+                  alt="Placeholder"
+                />
+                <img
+                  src="@/assets/images/img-placeholder.svg"
+                  alt="Placeholder"
+                />
+                <img
+                  src="@/assets/images/img-placeholder.svg"
+                  alt="Placeholder"
+                />
+              </div>
+            </template>
+          </LayoutSelect>
+        </section>
+
+        <section>
+          <h2 class="h2--dash">{{ $t("projects.read.design.title") }}</h2>
+          <FormulateInput
+            v-model="properties.title"
+            type="text"
+            validation="required"
+            validation-name="Titulo"
+            label="Título"
+          />
+          <FormulateInput
+            v-model="properties.subtitle"
+            type="text"
+            validation="required"
+            validation-name="Subtítulo"
+            label="Subtítulo"
+          />
+        </section>
+
+        <section>
+          <h2 class="h2--dash">{{ $t("projects.read.design.background") }}</h2>
+          <ColorPicker v-model="properties.background" />
+        </section>
+
+        <LzButton type="secondary" @click="save" :disabled="saving">
           {{ $t("common.actions.save") }}
         </LzButton>
       </FormulateForm>
@@ -84,6 +87,7 @@
   import LzButton from "@/components/Button.vue";
   import { apiWebsite } from "@/modules/web/api";
   import LayoutSelect from "@/components/LayoutSelect.vue";
+  import ColorPicker from "@/components/Input/ColorPicker.vue";
   const auth = namespace("auth");
 
   type Properties = {
@@ -93,7 +97,7 @@
     background: string;
   };
 
-  @Component({ components: { LzModal, LzButton, LayoutSelect } })
+  @Component({ components: { LzModal, LzButton, LayoutSelect, ColorPicker } })
   export default class DesignModal extends Vue {
     @auth.State("id")
     ongId!: string;
@@ -193,13 +197,23 @@
       min-width: 600px;
     }
 
+    .lz-modal {
+      overflow-y: auto;
+      align-items: flex-start;
+
+      .lz-box {
+        margin-block: 4rem;
+      }
+    }
+
     form {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 3rem;
 
-      input[type="color"] {
-        padding-block: 5px;
+      .color-picker {
+        margin-inline: auto;
+        width: max-content;
       }
     }
 

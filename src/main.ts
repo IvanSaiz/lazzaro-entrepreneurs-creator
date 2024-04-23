@@ -18,6 +18,7 @@ import FormulateInputToggle from "@/components/Input/FormulateInputToggle.vue";
 import FormulateInputTextColor from "@/components/Input/FormulateInputTextColor.vue";
 import LzLevelUpButton from "@/components/LevelUpButton.vue";
 import Mixin from "./mixin";
+import { Chrome } from "vue-color";
 
 // plugins
 Vue.use(VueI18n);
@@ -51,6 +52,8 @@ Vue.config.productionTip = false;
 
 // Level Up component
 Vue.component("LzLevelUpButton", LzLevelUpButton);
+
+Vue.component("chrome-picker", Chrome);
 
 // Global mixin
 Vue.mixin(Mixin);
