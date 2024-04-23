@@ -3,7 +3,19 @@ export default {
     title: "Portfolio",
     subtitle: "Todos tus proyectos para mostarlos a tus potenciales clientes.",
     see: "Ver portfolio",
-    design: "Diseño",
+    design: {
+      button: "Diseño",
+      title: "Título",
+      subtitle: "Subtítulo",
+      background: "Fondo",
+      layout: {
+        title: "Disposición",
+        options: {
+          grid: "Proyectos no separados",
+          spaced: "Proyectos separados"
+        }
+      }
+    },
     table: {
       name: "Nombre",
       time: {

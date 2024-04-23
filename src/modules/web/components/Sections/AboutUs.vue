@@ -3,22 +3,22 @@ section.public-whoWeAre
   .public-whoWeAre__header
     .title
       formulate-input(
-        type="toggle"
-        name="aboutUsEnabled"
+        type="toggle",
+        name="aboutUsEnabled",
         v-model="props.enabled"
       )
-      h2.h2--dash.grow-1 {{ $t('web.public.whoWeAreForm.title') }}
+      h2.h2--dash.grow-1 {{ $t("web.public.whoWeAreForm.title") }}
     .subtitle
-      h3 {{ $t('web.public.whoWeAreForm.subtitle') }}
+      h3 {{ $t("web.public.whoWeAreForm.subtitle") }}
       design-modal(section="aboutUs")
         template(#header)
-          h4 {{ $t('web.public.whoWeAreForm.title') }}
+          h4 {{ $t("web.public.whoWeAreForm.title") }}
         template(#form)
-          h2.h2--dash {{ $t('web.public.whoWeAreForm.design.layout.tooltip') }}
+          h2.h2--dash {{ $t("web.public.whoWeAreForm.design.layout.tooltip") }}
           layout-select(
-            name="aboutUsDesignLayout"
-            v-model="props.design.layout"
-            :options="layoutOptions"
+            name="aboutUsDesignLayout",
+            v-model="props.design.layout",
+            :options="layoutOptions",
             optionClass="aboutUs"
           )
             template(#tooltip)
@@ -27,102 +27,102 @@ section.public-whoWeAre
                   h1 {{ $t("web.public.whoWeAreForm.design.layout.title") }}
                   h2 {{ $t("web.public.whoWeAreForm.design.layout.subtitle") }}
                 .grid
-                  .item(v-for="item in Array.from({length: 4})")
+                  .item(v-for="item in Array.from({ length: 4 })")
                     h1 {{ $t("web.public.whoWeAreForm.design.layout.item.title") }}
                     p {{ $t("web.public.whoWeAreForm.design.layout.item.subtitle") }}
-              img(src="@/assets/images/img-placeholder.svg" alt="Placeholder")
-          h2.h2--dash {{ $t('web.public.whoWeAreForm.design.color') }}
+              img(src="@/assets/images/img-placeholder.svg", alt="Placeholder")
+          h2.h2--dash {{ $t("web.public.whoWeAreForm.design.color") }}
           FormulateInput#primary-color(
-            type="textColor"
-            name="aboutUsDesignBackgroundColor"
+            type="textColor",
+            name="aboutUsDesignBackgroundColor",
             v-model="props.design.backgroundColor"
           )
     .form__row
       FormulateInput(
-        type="image"
-        :label="$t('web.public.whoWeAreForm.form.image')"
-        label-position="before"
-        v-model="props.imgUrl"
-        name="aboutUsImgUrl"
+        type="image",
+        :label="$t('web.public.whoWeAreForm.form.image')",
+        label-position="before",
+        v-model="props.imgUrl",
+        name="aboutUsImgUrl",
         :help="$t('web.public.whoWeAreForm.form.imageHelper')"
       )
       .form-section
         .section-row
           formulate-input(
-            type="text"
-            name="aboutUsTitle"
-            v-model="props.title"
-            :label="$t('web.public.whoWeAreForm.form.title')"
+            type="text",
+            name="aboutUsTitle",
+            v-model="props.title",
+            :label="$t('web.public.whoWeAreForm.form.title')",
             :help="$t('web.public.whoWeAreForm.form.titleHelper')"
-            )
+          )
           FormulateInput#primary-color(
-            type="textColor"
-            name="aboutUsTitleColor"
+            type="textColor",
+            name="aboutUsTitleColor",
             v-model="props.titleColor"
-            )
+          )
         .section-row
           formulate-input(
-            type="text"
-            name="aboutUsSubtitle"
-            v-model="props.subTitle"
-            :label="$t('web.public.whoWeAreForm.form.subtitle')"
+            type="text",
+            name="aboutUsSubtitle",
+            v-model="props.subTitle",
+            :label="$t('web.public.whoWeAreForm.form.subtitle')",
             :help="$t('web.public.whoWeAreForm.form.subtitleHelper')"
-            )
+          )
           FormulateInput#primary-color(
-            type="textColor"
-            v-model="props.subTitleColor"
+            type="textColor",
+            v-model="props.subTitleColor",
             name="aboutUsSubtitleColor"
-            )
+          )
         lz-editor-input(
-        :label="$t('web.public.whoWeAreForm.form.description')"
-        v-model="props.description"
+          :label="$t('web.public.whoWeAreForm.form.description')",
+          v-model="props.description"
         )
   section.public-features
     .public-whoWeAre__header
       .title
         formulate-input(
-          type="toggle"
-          name="aboutUsFeaturesEnabled"
+          type="toggle",
+          name="aboutUsFeaturesEnabled",
           v-model="props.features.enabled"
         )
-        h3.h3--dash.grow-1 {{ $t('web.public.whoWeAreForm.features.title') }}
+        h3.h3--dash.grow-1 {{ $t("web.public.whoWeAreForm.features.title") }}
       formulate-input.public-whoWeAre__content(
-        type="group"
-        v-model="props.features.icons"
-        name="icons"
-        #default="{index}"
+        type="group",
+        v-model="props.features.icons",
+        name="icons",
+        #default="{ index }"
       )
         formulate-input.text-item(
-          type="image"
-          name="url"
-          :label="$t(`web.public.whoWeAreForm.features.icon.${index + 1}`)"
+          type="image",
+          name="url",
+          :label="$t(`web.public.whoWeAreForm.features.icon.${index + 1}`)",
           :help="$t('web.public.whoWeAreForm.features.icon.help')"
         )
         formulate-input.text-item(
-          type="text"
-          name="title"
+          type="text",
+          name="title",
           :label="$t(`web.public.whoWeAreForm.features.titles.${index + 1}`)"
         )
         formulate-input.text-item(
-          type="text"
-          name="description"
-          :label="$t(`web.public.whoWeAreForm.features.descriptions.${index+1}`)"
+          type="text",
+          name="description",
+          :label="$t(`web.public.whoWeAreForm.features.descriptions.${index + 1}`)"
         )
     hr.hr--dash
     .public-whoWeAre__cta
       formulate-input.public-whoWeAre__content(
-        type="group"
-        v-model="props.features.buttons"
+        type="group",
+        v-model="props.features.buttons",
         name="buttons"
       )
         formulate-input(
-          type="text"
-          name="text"
+          type="text",
+          name="text",
           :label="$t('web.public.whoWeAreForm.features.button')"
         )
         formulate-input(
-          type="text"
-          name="link"
+          type="text",
+          name="link",
           :label="$t('web.public.whoWeAreForm.features.link')"
         )
 </template>

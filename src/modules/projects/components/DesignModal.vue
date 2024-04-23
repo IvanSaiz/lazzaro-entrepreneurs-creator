@@ -6,7 +6,43 @@
         <h4>Portfolio</h4>
       </div>
       <FormulateForm>
-        <h2 class="h2--dash">Título</h2>
+        <h2 class="h2--dash">{{ $t("projects.read.design.button") }}</h2>
+        <LayoutSelect
+          name="portfolioLayout"
+          v-model="properties.layout"
+          :options="layoutOptions"
+          optionClass="portfolio"
+        >
+          <template #tooltip>
+            <div class="item">
+              <img
+                src="@/assets/images/img-placeholder.svg"
+                alt="Placeholder"
+              />
+              <img
+                src="@/assets/images/img-placeholder.svg"
+                alt="Placeholder"
+              />
+              <img
+                src="@/assets/images/img-placeholder.svg"
+                alt="Placeholder"
+              />
+              <img
+                src="@/assets/images/img-placeholder.svg"
+                alt="Placeholder"
+              />
+              <img
+                src="@/assets/images/img-placeholder.svg"
+                alt="Placeholder"
+              />
+              <img
+                src="@/assets/images/img-placeholder.svg"
+                alt="Placeholder"
+              />
+            </div>
+          </template>
+        </LayoutSelect>
+        <h2 class="h2--dash">{{ $t("projects.read.design.title") }}</h2>
         <FormulateInput
           v-model="properties.title"
           type="text"
@@ -21,7 +57,7 @@
           validation-name="Subtítulo"
           label="Subtítulo"
         />
-        <h2 class="h2--dash">Fondo</h2>
+        <h2 class="h2--dash">{{ $t("projects.read.design.background") }}</h2>
         <FormulateInput
           v-model="properties.background"
           type="color"
@@ -30,12 +66,12 @@
           label="Color"
         />
         <LzButton type="secondary" @click="save" v-disabled="saving">
-          Guardar
+          {{ $t("common.actions.save") }}
         </LzButton>
       </FormulateForm>
     </LzModal>
     <LzButton type="secondary" @click="openModal">
-      {{ $t("projects.read.design") }}
+      {{ $t("projects.read.design.title") }}
       <EditIcon size="28" stroke-width="1.5" />
     </LzButton>
   </div>
@@ -47,15 +83,17 @@
   import LzModal from "@/components/Modal.vue";
   import LzButton from "@/components/Button.vue";
   import { apiWebsite } from "@/modules/web/api";
+  import LayoutSelect from "@/components/LayoutSelect.vue";
   const auth = namespace("auth");
 
   type Properties = {
+    layout: "spaced" | "grid";
     title: string;
     subtitle: string;
     background: string;
   };
 
-  @Component({ components: { LzModal, LzButton } })
+  @Component({ components: { LzModal, LzButton, LayoutSelect } })
   export default class DesignModal extends Vue {
     @auth.State("id")
     ongId!: string;
@@ -74,8 +112,20 @@
     properties: Properties = {
       title: "",
       subtitle: "",
-      background: ""
+      background: "",
+      layout: "spaced"
     };
+
+    layoutOptions = [
+      {
+        value: "spaced",
+        label: this.$t("projects.read.design.layout.options.spaced")
+      },
+      {
+        value: "grid",
+        label: this.$t("projects.read.design.layout.options.grid")
+      }
+    ];
 
     openModal() {
       this.visible = true;
@@ -101,18 +151,19 @@
       this.saving = true;
       process(sectionBody)
         .then(() => {
-          this.saving = false;
           this.$notify({
             text: this.$tc("common.notifications.changeSuccess"),
             type: "success"
           });
         })
         .catch(() => {
-          this.saving = false;
           this.$notify({
             text: this.$tc("common.error.generic"),
             type: "error"
           });
+        })
+        .finally(() => {
+          this.saving = false;
         });
     }
 
@@ -145,7 +196,7 @@
     form {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 10px;
 
       input[type="color"] {
         padding-block: 5px;
@@ -182,6 +233,33 @@
       &:hover {
         cursor: pointer;
         background-color: $color-black-06;
+      }
+    }
+
+    .layout-select {
+      margin: 0rem 4rem;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+
+      .item {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        padding: 1.5rem 4rem;
+        border: 1px solid $color-black-06;
+        border-radius: 10px;
+        box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.25);
+        margin-bottom: 1rem;
+
+        img {
+          width: 100%;
+        }
+      }
+
+      .spaced .item {
+        gap: 16px;
+      }
+      .grid .item {
+        gap: 0;
       }
     }
   }
