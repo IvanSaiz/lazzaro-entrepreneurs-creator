@@ -2,7 +2,7 @@
   <div class="design-modal">
     <LzModal v-if="visible" @close="closeModal">
       <div class="header">
-        <h2>{{ $t("projects.read.design") }}</h2>
+        <h2>{{ $t("projects.read.design.button") }}</h2>
         <slot name="header"></slot>
       </div>
       <slot name="form"></slot>
