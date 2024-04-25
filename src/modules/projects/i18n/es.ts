@@ -80,6 +80,7 @@ export default {
       projectCreated: "Proyecto creado con éxito",
       projectEdited: "Cambios guardados con éxito",
       projectRemoved: "Proyecto eliminado con éxito",
+      projectRemovedError: "Error al eliminar el proyecto",
       alreadyPremium: "ya tienes una sección destacada",
       projectHasDonations:
         "No puedes eliminar este proyecto porque ha recibido donaciones"
