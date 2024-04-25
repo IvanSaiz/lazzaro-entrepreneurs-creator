@@ -6,7 +6,6 @@
     .formulate-input-under-label(v-if="underLabel") {{ underLabel }}
     .formulate-input-toggle(
       :class="{ 'formulate-input-toggle-active': context.model }"
-      v-on="$listeners"
     )
       input(
         v-model="context.model"
