@@ -1,5 +1,9 @@
 <template>
-  <FormulateInput type="toggle" v-model="active" @change="handleToggle" />
+  <FormulateInput
+    type="toggle"
+    v-model="this.active"
+    @change="this.handleToggle"
+  />
 </template>
 
 <script lang="ts">
@@ -19,18 +23,17 @@
     mounted() {
       apiWebsite.section
         .get(this.websiteId, this.section, ["active"])
-        .then(res => {
-          this.active = res.active;
+        .then(({ active }) => {
+          this.active = active;
         });
     }
 
-    async handleToggle() {
-      const { active } = await apiWebsite.section.toggle(
-        this.websiteId,
-        this.section
-      );
-      // console.log(res);
-      this.active = active;
+    handleToggle() {
+      apiWebsite.section
+        .toggle(this.websiteId, this.section)
+        .then(({ active }) => {
+          this.active = active;
+        });
     }
   }
 </script>

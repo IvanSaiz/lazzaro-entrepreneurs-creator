@@ -10,6 +10,7 @@
     "jsx": "preserve",
     "outDir": "./dist",
     "importHelpers": true,
+    "noImplicitThis": false,
     "moduleResolution": "node",
     "experimentalDecorators": true,
     "skipLibCheck": true,
