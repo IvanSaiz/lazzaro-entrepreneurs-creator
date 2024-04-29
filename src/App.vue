@@ -1,9 +1,9 @@
 <template lang="pug">
-  #app
-    transition(name="fade")
-      lz-loader(v-if="loading")
-    notifications
-    router-view
+#app
+  transition(name="fade")
+    lz-loader(v-if="loading")
+  notifications
+  router-view
 </template>
 
 <script lang="ts">

@@ -41,7 +41,10 @@
         <template #title="{ row: { title } }">{{ title }}</template>
         <template #skills="{ row: { skills } }">{{ skills }}</template>
         <template #actions="{ row }">
-          <TrashIcon id="trash-icon" @click="this.deleteProject(row)"></TrashIcon>
+          <TrashIcon
+            id="trash-icon"
+            @click="this.deleteProject(row)"
+          ></TrashIcon>
           <EyeIcon id="eye-icon" @click="this.viewProject(row)"></EyeIcon>
         </template>
       </LzTable>

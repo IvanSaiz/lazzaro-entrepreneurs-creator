@@ -1,21 +1,20 @@
 <template lang="pug">
-  div(
-    :class="context.classes.element"
-    :data-type="context.type"
+div(
+  :class="context.classes.element"
+  :data-type="context.type"
+)
+  .formulate-input-under-label(v-if="underLabel") {{ underLabel }}
+  .formulate-input-toggle(
+    :class="{ 'formulate-input-toggle-active': context.model }"
   )
-    .formulate-input-under-label(v-if="underLabel") {{ underLabel }}
-    .formulate-input-toggle(
-      :class="{ 'formulate-input-toggle-active': context.model }"
+    input(
+      v-model="context.model"
+      type="checkbox"
+      :value="context.value"
+      v-bind="attributes"
+      v-on="$listeners"
+      @blur="context.blurHandler"
     )
-      input(
-        v-model="context.model"
-        type="checkbox"
-        :value="context.value"
-        v-bind="attributes"
-        v-on="$listeners"
-        @blur="context.blurHandler"
-      )
-
 </template>
 
 <script lang="ts">

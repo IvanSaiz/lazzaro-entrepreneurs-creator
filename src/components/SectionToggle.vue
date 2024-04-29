@@ -1,9 +1,5 @@
 <template>
-  <FormulateInput
-    type="toggle"
-    v-model="this.active"
-    @change="this.handleToggle"
-  />
+  <FormulateInput type="toggle" v-model="active" @change="handleToggle" />
 </template>
 
 <script lang="ts">
