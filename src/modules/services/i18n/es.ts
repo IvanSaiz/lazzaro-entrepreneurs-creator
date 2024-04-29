@@ -20,7 +20,8 @@ export default {
         },
         background: {
           separator: "Fondo",
-          colorLabel: "Color"
+          colorLabel: "Color fondo",
+          cardsColorLabel: "Color fondo tarjetas"
         }
       },
       save: "Guardar"

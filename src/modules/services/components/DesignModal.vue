@@ -28,7 +28,18 @@
         <h2 class="h2--dash">
           {{ $t("services.read.modal.sections.background.separator") }}
         </h2>
-        <ColorPicker v-model="properties.background" />
+        <div class="background">
+          <ColorPicker
+            v-model="properties.background"
+            :label="$t('services.read.modal.sections.background.colorLabel')"
+          />
+          <ColorPicker
+            v-model="properties.cardsBackground"
+            :label="
+              $t('services.read.modal.sections.background.cardsColorLabel')
+            "
+          />
+        </div>
         <LzButton type="secondary" @click="save" v-disabled="saving">
           {{ $t("services.read.modal.save") }}
         </LzButton>
@@ -55,6 +66,7 @@
     subtitle: string;
     subtitleColor: string;
     background: string;
+    cardsBackground: string;
   };
 
   @Component({ components: { LzModal, LzButton } })
@@ -78,7 +90,8 @@
       titleColor: "",
       subtitle: "",
       subtitleColor: "",
-      background: ""
+      background: "",
+      cardsBackground: ""
     };
 
     openModal() {
@@ -127,7 +140,7 @@
           this.section,
           ["properties", "templateId"]
         );
-        this.properties = section.properties;
+        this.properties = { ...this.properties, ...section.properties };
         if (section.templateId) this.templateId = section.templateId;
         this.sectionExists = true;
       } catch {
@@ -152,6 +165,9 @@
       gap: 16px;
       input[type="color"] {
         padding-block: 5px;
+      }
+      .background {
+        display: flex;
       }
       .color-picker {
         width: min-content;
