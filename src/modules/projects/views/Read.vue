@@ -1,8 +1,8 @@
 <template>
   <div class="projects-read">
     <LzModal
-      v-if="this.deleteModalOpen"
-      v-on:close="() => (this.deleteModalOpen = false)"
+      v-if="deleteModalOpen"
+      v-on:close="() => (deleteModalOpen = false)"
     >
       <h2>{{ $t("projects.read.deleteModal.title") }}</h2>
       <p>{{ $t("projects.read.deleteModal.subtitle") }}</p>
@@ -22,7 +22,7 @@
         </h1>
         <SectionToggle section="portfolio" />
         <div class="view-btn">
-          <a :href="`${this.url}/#portfolio`" target="_blank">
+          <a :href="`${url}/#portfolio`" target="_blank">
             {{ $t("projects.read.see") }}
             <ArrowUpRightIcon />
           </a>
@@ -34,18 +34,15 @@
     <section class="projectsRead__content">
       <LzTable
         title="projects"
-        :fields="this.listFields"
-        :items="this.projects"
+        :fields="listFields"
+        :items="projects"
         :downloable="false"
       >
         <template #title="{ row: { title } }">{{ title }}</template>
         <template #skills="{ row: { skills } }">{{ skills }}</template>
         <template #actions="{ row }">
-          <TrashIcon
-            id="trash-icon"
-            @click="this.deleteProject(row)"
-          ></TrashIcon>
-          <EyeIcon id="eye-icon" @click="this.viewProject(row)"></EyeIcon>
+          <TrashIcon id="trash-icon" @click="deleteProject(row)"></TrashIcon>
+          <EyeIcon id="eye-icon" @click="viewProject(row)"></EyeIcon>
         </template>
       </LzTable>
     </section>
@@ -226,6 +223,15 @@
     .projectsRead__createBtn {
       margin-top: 3rem;
       text-align: right;
+    }
+
+    .actions {
+      display: flex;
+      gap: 2rem;
+      margin-top: 2rem;
+      .lz-button {
+        margin: 0;
+      }
     }
   }
 </style>
