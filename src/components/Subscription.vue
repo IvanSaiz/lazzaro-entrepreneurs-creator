@@ -157,10 +157,13 @@ div(v-if="loaded")
       if (!this.memberId || this.$route.path === "/auth/onboarding")
         return "monthly";
 
-      const {
-        data: { id, payment_type, SubscriptionPlan }
-      } = await apiOrganizations.getOrganizationPlan(this.memberId);
+      const { data } = await apiOrganizations.getOrganizationPlan(
+        this.memberId
+      );
 
+      if (!data) return "monthly";
+
+      const { id, payment_type, SubscriptionPlan } = data;
       this.organizationPlan.id = id;
       this.organizationPlan.SubscriptionPlan = SubscriptionPlan;
       this.organizationPlan.payment_type = payment_type ?? "monthly";
