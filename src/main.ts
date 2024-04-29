@@ -33,6 +33,8 @@ Vue.use(Vue2MultipleVModels);
 // formulate
 Vue.component("FormulateInputToggle", FormulateInputToggle);
 Vue.component("FormulateInputTextColor", FormulateInputTextColor);
+Vue.component("ColorText", ColorText);
+
 Vue.use(VueFormulate, {
   plugins: [es],
   locale: "es",
@@ -48,6 +50,10 @@ Vue.use(VueFormulate, {
     textColor: {
       classification: "text-color",
       component: "FormulateInputTextColor"
+    },
+    colorText: {
+      classification: "color-text",
+      component: "ColorText"
     }
   }
 });
@@ -56,7 +62,6 @@ Vue.config.productionTip = false;
 
 // Level Up component
 Vue.component("LzLevelUpButton", LzLevelUpButton);
-Vue.component("ColorText", ColorText);
 
 Vue.component("chrome-picker", Chrome);
 Vue.component("ColorPicker", ColorPicker);
