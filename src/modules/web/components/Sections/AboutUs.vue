@@ -158,6 +158,8 @@ section.public-whoWeAre
 <style lang="scss">
   .public-whoWeAre {
     &__header {
+      margin-bottom: 2rem;
+
       .title {
         display: flex;
         align-items: center;
@@ -206,16 +208,29 @@ section.public-whoWeAre
 
     &__content {
       .formulate-input-grouping {
-        display: inline-flex;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
         align-items: flex-start;
         gap: 44px;
+
+        .formulate-input-group-repeatable {
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+        }
       }
 
       .text-item {
         display: flex;
         flex-direction: column;
-        width: 256px;
-        margin-bottom: 1rem;
+
+        &[data-type="image"] {
+          margin-bottom: auto !important;
+        }
+
+        &:not(:last-child) {
+          margin-bottom: 1rem;
+        }
 
         formulate-input {
           width: 100%;
