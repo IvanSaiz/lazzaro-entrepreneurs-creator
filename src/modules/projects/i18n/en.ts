@@ -5,7 +5,7 @@ export default {
     see: "See portfolio",
     design: "Design",
     table: {
-      name: "Name",
+      title: "Projects",
       time: {
         label: "Remaining time",
         options: {

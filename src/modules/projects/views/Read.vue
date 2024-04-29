@@ -33,7 +33,7 @@
     </header>
     <section class="projectsRead__content">
       <LzTable
-        title="projects"
+        :title="''"
         :fields="listFields"
         :items="projects"
         :downloable="false"

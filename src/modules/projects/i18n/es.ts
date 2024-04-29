@@ -17,7 +17,7 @@ export default {
       }
     },
     table: {
-      name: "Nombre",
+      title: "Proyectos",
       time: {
         label: "Tiempo restante",
         options: {
