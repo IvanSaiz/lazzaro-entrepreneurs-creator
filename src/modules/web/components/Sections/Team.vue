@@ -208,8 +208,8 @@ section.public-team
     &__form {
       display: flex;
 
-      row {
-        gap: 30px;
+      @media (max-width: $br-sm) {
+        flex-direction: column;
       }
     }
 

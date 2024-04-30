@@ -33,16 +33,7 @@
 
 <style lang="scss" scoped>
   .lz-nav-icon {
-    margin: 16px auto;
     text-align: center;
-
-    & ~ & {
-      margin-top: 12px;
-    }
-
-    &:first-child {
-      margin-top: 30px;
-    }
 
     &__icon {
       svg {

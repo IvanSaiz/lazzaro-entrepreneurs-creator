@@ -477,153 +477,16 @@
       }
     }
 
+    .form {
+      &__row {
+        @media (max-width: $br-md) {
+          grid-template-columns: auto !important;
+          flex-direction: column !important;
+        }
+      }
+    }
+
     .public {
-      &-logos {
-        &__header {
-          display: flex;
-          flex-direction: column;
-          gap: 0.4rem;
-        }
-
-        &__subtitle {
-          font-size: 16px;
-          color: $color-black-04;
-        }
-
-        &__content {
-          .public-logos__images {
-            display: flex;
-            gap: 0.8rem;
-            margin-top: 1.2rem;
-            align-items: center;
-            flex-wrap: wrap;
-
-            .public-logos__images__image {
-              position: relative;
-              cursor: pointer;
-              padding-block: 2rem;
-              flex-basis: 8%;
-              margin-right: 34px;
-
-              button:not(.public-logos__images__image--delete) {
-                width: 100%;
-                height: 11rem;
-                border-radius: 10px;
-                background-color: white;
-                justify-content: center;
-                align-items: center;
-                font-size: 3.2rem;
-                border: $color-black-05 dashed 1px;
-
-                span {
-                  padding: 0.3rem 1.3rem;
-                  border: $color-black-05 solid 4px;
-                  color: $color-black-05;
-                  border-radius: 50%;
-                }
-
-                &:hover:not([disabled]),
-                &:hover:not([disabled]) span {
-                  color: $color-green-01;
-                  border-color: $color-green-01;
-                }
-
-                &:disabled {
-                  opacity: 0.5;
-                  cursor: not-allowed;
-                }
-
-                &:disabled span {
-                  color: $color-black-02;
-                  border-color: $color-black-02;
-                  opacity: 0.5;
-                }
-              }
-
-              img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                border-radius: 10px;
-                cursor: pointer;
-              }
-            }
-
-            button:not(.public-logos__images__image--delete) {
-              width: 8rem;
-              height: 8rem;
-              display: flex;
-              align-content: center;
-              justify-content: center;
-
-              & font {
-                color: white !important;
-                font-weight: 100 !important;
-                font-size: 7rem;
-                margin-bottom: 1.5rem;
-              }
-            }
-
-            .public-logos__images__image--delete {
-              position: absolute;
-              border: none;
-              outline: none;
-              position: absolute;
-              border: none;
-              outline: none;
-              top: -3px;
-              cursor: pointer;
-              right: -11px;
-
-              transition: scale 0.2s ease-in-out;
-
-              &:hover font {
-                scale: 1.3;
-              }
-
-              font {
-                color: $color-green-01;
-                font-size: 1.3rem;
-              }
-            }
-          }
-        }
-      }
-
-      &-brand {
-        &__content {
-          display: flex;
-          justify-content: space-between;
-
-          .public-brand__images {
-            display: flex;
-            flex-grow: 0;
-
-            .formulate-input {
-              width: 137px;
-              margin-right: 34px;
-            }
-          }
-
-          .public-brand__details {
-            flex-grow: 1;
-            height: 180px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-
-            .public-brand__colors {
-              display: flex;
-              justify-content: space-between;
-
-              .formulate-input {
-                width: calc(50% - 12px);
-              }
-            }
-          }
-        }
-      }
-
       &-homepage {
         &__header {
           h3 {
@@ -715,14 +578,6 @@
           display: flex;
           flex-wrap: wrap;
           margin: 0 -16px;
-        }
-      }
-
-      &-networks {
-        &__urls {
-          .formulate-input {
-            margin-bottom: 20px;
-          }
         }
       }
 

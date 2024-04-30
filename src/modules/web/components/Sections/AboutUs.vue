@@ -218,6 +218,13 @@ section.public-whoWeAre
           display: flex;
           flex-direction: column;
         }
+
+        @media (max-width: $br-md) {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        @media (max-width: $br-sm) {
+          grid-template-columns: 1fr;
+        }
       }
 
       .text-item {
