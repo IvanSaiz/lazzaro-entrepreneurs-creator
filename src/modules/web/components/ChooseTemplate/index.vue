@@ -1,27 +1,22 @@
 <template lang="pug">
-
 section.choose-template
-      div
-        .choose-template__header
-          h2.h2--dash {{ $t('web.public.chooseTemplate.title') }}
-          
-        .templates
-          .template(v-for='(template) in computedTemplates' :style= 'template.style' :key='template.id')
-            input(type="radio" :value='template.id' v-model='template.id' @click="handleChooseTemplate"
-            :disabled="isTemplateDisabled(template.id)"
-            )
-            .template__body(:style="template.backgroundImage")
-            .template__footer
-              p.text {{ template.text }} 
-              <eye-icon  @click.prevent='openModal(template.id)' /> 
-                
-                
-        .lz-choose-modal(v-if="showModal")
-          lz-modal(@close="closeModal")
-            .lz-modal-description {{ $t('web.public.chooseTemplate.modalText') }}
-            .lz-modal-img
-              img(:src='modalImage' alt="modal image")
-
+  div
+    .choose-template__header
+      h2.h2--dash {{ $t('web.public.chooseTemplate.title') }}
+    .templates
+      .template(v-for='(template) in computedTemplates' :style='template.style' :key='template.id')
+        input(type="radio" :value='template.id' v-model='template.id' @click="handleChooseTemplate"
+        :disabled="isTemplateDisabled(template.id)"
+        )
+        .template__body(:style="template.backgroundImage")
+        .template__footer
+          p.text {{ template.text }} 
+          <eye-icon  @click.prevent='openModal(template.id)' /> 
+    .lz-choose-modal(v-if="showModal")
+      lz-modal(@close="closeModal")
+        .lz-modal-description {{ $t('web.public.chooseTemplate.modalText') }}
+        .lz-modal-img
+          img(:src='modalImage' alt="modal image")
 </template>
 
 <script lang="ts">
@@ -111,21 +106,23 @@ section.choose-template
       align-items: center;
       width: 100%;
       gap: 2.3rem;
-      margin-bottom: 8rem;
-      margin-top: 2.5rem;
-      flex-wrap: wrap;
+      margin-block: 2.5rem;
+
+      @media (max-width: $br-md) {
+        flex-direction: column;
+      }
     }
 
     .disabled-input {
       opacity: 0.5;
     }
     .template {
-      flex: 1;
       width: 358px;
-      // height: 262px;
-      height: 217px;
-      border-radius: 0.5rem;
+      height: 262px;
+      border-radius: 1rem;
       position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
       input {
         height: 100%;
@@ -141,38 +138,39 @@ section.choose-template
         background-color: #333;
         opacity: 0.5;
       }
-    }
 
-    .template__body {
-      background: #d9d9d9;
-      height: 100%;
-      padding: 5rem 6.5rem;
-      border-top-left-radius: 1.5rem;
-      border-top-right-radius: 1.5rem;
-      background-size: cover;
-      background-position: top;
-    }
+      &__body {
+        background: #d9d9d9;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: top;
+      }
 
-    .template__footer {
-      padding: 1.8rem 1.5rem;
-      border-radius: 1rem;
-      border: 1px solid transparent;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      transition: background-color 0.3s ease-in-out;
-      background-color: var(--template-footer-background-color);
-      position: absolute;
-      bottom: -4rem;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
+      &__footer {
+        padding: 1.8rem 1.5rem;
+        border-radius: 1rem;
+        border: 1px solid transparent;
+        transition: background-color 0.3s ease-in-out;
+        background-color: var(--template-footer-background-color);
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
 
-      p.text {
-        color: var(--template-text-color);
-        font-size: 1.2rem;
-        font-family: Muli;
-        font-style: normal;
-        font-weight: 600;
-        line-height: 2rem;
+        p.text {
+          color: var(--template-text-color);
+          font-size: 1.2rem;
+          font-family: Muli;
+          font-style: normal;
+          font-weight: 600;
+          line-height: 2rem;
+        }
+      }
+
+      @media (max-width: $br-md) {
+        width: 100%;
       }
     }
 
