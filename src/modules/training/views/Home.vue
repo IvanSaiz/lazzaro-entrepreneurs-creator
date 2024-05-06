@@ -50,7 +50,9 @@
       Support: require("../assets/videos/support.mp4"),
       Advisor: require("../assets/videos/advisor.mp4"),
       Portfolio: require("../assets/videos/portfolio.mp4"),
-      Events: require("../assets/videos/events.mp4")
+      Events: require("../assets/videos/events.mp4"),
+      Web: require("../assets/videos/web.mp4"),
+      Blog: require("../assets/videos/shop.mp4")
     };
 
     cards = sections.map(section => ({
