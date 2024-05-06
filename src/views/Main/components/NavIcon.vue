@@ -74,7 +74,7 @@
         border-radius: $border-radius-default;
         height: 100%;
         position: absolute;
-        right: 0;
+        right: -7px;
         top: 0;
         width: 5px;
       }
@@ -92,7 +92,7 @@
       }
     }
 
-    @media (max-height: 800px) {
+    @media (max-height: 850px) {
       &,
       & ~ &,
       &:first-child {

@@ -93,13 +93,12 @@
       box-shadow: 20px 35px 50px 0 rgba(70, 74, 180, 0.15);
       display: flex;
       flex-direction: column;
-      height: calc(100vh - 2 * #{$mainPadding});
-      max-height: max-content;
+      max-height: calc(100vh - 2 * #{$mainPadding});
       width: $navWidth;
       position: fixed;
       z-index: 2;
-      overflow-y: hidden;
       padding-bottom: #{$mainPadding};
+      overflow-y: hidden;
 
       & > * {
         display: block;
@@ -111,20 +110,28 @@
         margin: #{$mainPadding} auto;
       }
       &__list {
-        display: flex;
-        flex-direction: column;
+        max-height: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
         gap: 1rem;
         justify-content: space-between;
+
+        @media (max-height: 700px) {
+          grid-template-columns: 1fr 1fr;
+        }
       }
 
-      @media (max-height: 860px) {
-        &__list {
-          display: flex;
-          flex-wrap: wrap;
-          margin-top: 20px;
+      @media (max-width: $br-md) {
+        padding: 0;
+        .lz-nav__list {
+          display: none;
+        }
 
-          & > * {
-            width: 100%;
+        &:active,
+        &:hover,
+        &:focus-within {
+          .lz-nav__list {
+            display: grid !important;
           }
         }
       }
