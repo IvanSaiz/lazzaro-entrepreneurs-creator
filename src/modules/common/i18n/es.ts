@@ -33,7 +33,10 @@ export default {
     generic: "Ops! Ha ocurrido un error, por favor inténtalo de nuevo.",
     accountAlreadyExists: "Ya existe una cuenta con este email",
     companyAlreadyExists: "Ya existe una empresa con este nombre",
-    validationError: "Asegúrese de que su CIF / DNI sea correcto"
+    validationError: "Asegúrese de que su CIF / DNI sea correcto",
+    subscription: {
+      plans: "Ha ocurrido un error obteniendo los planes."
+    }
   },
   design: {
     button: "Diseño",

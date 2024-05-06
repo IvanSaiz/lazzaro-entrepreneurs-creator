@@ -1,42 +1,22 @@
 <template lang="pug">
 div(v-if="loaded")
   .form__row
-    formulate-form(:keep-model-data="true")
-      formulate-input(
-        type="radio"
-        :options="subscriptionOptions"
-        v-model="organizationPlan.payment_type"
-        @input="loadSubscriptionPlans"
-      )
-  .form__row
     ul.organization-read__plans
       li.organization-read__plan(
-        v-for="plan in subscriptionPlansList"
+        v-for="plan in subscriptionPlans"
         :class="{ 'organization-read__plan--selected': isSelectedPlan(plan.id) }"
       )
         lz-box
           h2 {{ plan.name }}
           .organization-read__items
             p.organization-read__item(
-              v-for="item in plan.description"
-              :class="{ 'organization-read__item--disabled': !item.status }"
+              v-for="(active,description) in plan.description"
+              :class="{ 'organization-read__item--disabled': !active }"
             )
-              | {{ item.text }}
-          lz-button.organization-read__btn(type="primary" @click="redirectToPlan(plan.url)")
-            | {{ plan.priceText }}
+              | {{ description }}
+          lz-button.organization-read__btn(type="primary" @click="redirectToPlan(plan.payment_url)")
+            | {{ plan.price }} {{ $t('organization.read.priceText', {currency: currencySymbol}) }}
             .organization-read__tax {{ $t('organization.read.subscriptionForm.tax' )}}
-  .form__row(v-if="false")
-    formulate-input(
-      type="select"
-      name="payMethod"
-      :label="$t('organization.read.subscriptionForm.payMethod.label')"
-      :options="payMethodOptions"
-    )
-    formulate-input(
-      type="text"
-      name="number"
-      :label="$t('organization.read.subscriptionForm.cardNumber')"
-    )
 </template>
 
 <script lang="ts">
@@ -49,26 +29,9 @@ div(v-if="loaded")
   import { apiOrganizations } from "../modules/organization/api";
 
   const auth = namespace("auth");
-  const periods = ["monthly", "semiannual", "yearly"] as const;
-  type Period = typeof periods[number];
-  type Planes = Record<Period, SubscriptionPlan[]>;
-  type SubscriptionPlansList = {
-    id: string;
-    name: SubscriptionPlan["name"];
-    priceText: string;
-    url: string;
-    description: PlanDescription[];
-  }[];
-
-  type PlanDescription = {
-    text: string;
-    status: boolean;
-  };
-
   type OrganizationPlan = {
     id: string;
     SubscriptionPlan: SubscriptionPlan;
-    payment_type: Period;
   };
 
   @Component({
@@ -77,18 +40,7 @@ div(v-if="loaded")
   export default class Subscription extends Vue {
     loaded = false;
 
-    subscriptionOptions = {
-      monthly: this.$t("organization.read.subscriptionForm.options.monthly"),
-      semiannual: this.$t(
-        "organization.read.subscriptionForm.options.semiannual"
-      ),
-      yearly: this.$t("organization.read.subscriptionForm.options.yearly")
-    };
-
-    subscriptionPlans = {} as Planes;
-
-    subscriptionPlansList: SubscriptionPlansList = [];
-
+    subscriptionPlans: SubscriptionPlan[] = [];
     organizationPlan = {} as OrganizationPlan;
 
     @auth.State("id")
@@ -103,85 +55,51 @@ div(v-if="loaded")
       }
     }
 
-    loadSubscriptionPlans(period: Period): void {
-      const currency_text = this.$t("organization.read.priceText", {
-        currency: this.currencySymbol ?? "€"
-      });
-
-      this.subscriptionPlansList = this.subscriptionPlans[period]
-        ?.map(({ id, name, price, description, payment_url }) => {
-          const formattedDescription = description
-            .split(".")
-            .reduce((acc, current) => {
-              if (!current) return acc;
-
-              const [text, status] = current.replace(/\\n/g, "").split(", ");
-              return acc.concat({
-                text: this.$t(`${text}`) as string,
-                status: status === "true"
-              });
-            }, [] as PlanDescription[]);
-
-          return {
-            id,
-            name: this.$t(
-              `organization.read.planNames.${name}`
-            ) as SubscriptionPlan["name"],
-            priceText: `${price} ${currency_text}`,
-            url: payment_url,
-            description: formattedDescription
-          };
-        })
-        .sort(a => {
-          if (a.name.includes("Basic") || a.name.includes("Básico")) return -1;
-          else return 0;
-        }); // sort to make basic planes on the left side
-    }
-
     isSelectedPlan(plan: string) {
       return plan === this.organizationPlan?.SubscriptionPlan?.id;
     }
 
     async getSubscriptionPlans() {
-      const { data: plans } = await apiOrganizations.getSubscriptionPlans();
-
-      this.subscriptionPlans = periods.reduce((acc, period) => {
-        acc[period] = plans.filter(
-          plan => plan.period === period // @todo - Quitar cuando el backend lo quite de la db
-        );
-        return acc;
-      }, {} as Planes);
+      await apiOrganizations
+        .getSubscriptionPlans()
+        .then(({ data: plans }) => {
+          this.subscriptionPlans = plans;
+        })
+        .catch(() => {
+          this.$notify({
+            type: "error",
+            text: this.$tc("common.error.subscription.plans")
+          });
+        });
     }
 
-    async getOrganizationPlan(): Promise<Period> {
-      if (!this.memberId || this.$route.path === "/auth/onboarding")
-        return "monthly";
+    async getOrganizationPlan() {
+      if (!this.memberId || this.$route.path === "/auth/onboarding") return;
 
-      const { data } = await apiOrganizations.getOrganizationPlan(
-        this.memberId
-      );
+      await apiOrganizations
+        .getOrganizationPlan(this.memberId)
+        .then(({ data }) => {
+          if (!data) return;
 
-      if (!data) return "monthly";
-
-      const { id, payment_type, SubscriptionPlan } = data;
-      this.organizationPlan.id = id;
-      this.organizationPlan.SubscriptionPlan = SubscriptionPlan;
-      this.organizationPlan.payment_type = payment_type ?? "monthly";
-
-      return this.organizationPlan.payment_type;
+          const { id, SubscriptionPlan } = data;
+          this.organizationPlan.id = id;
+          this.organizationPlan.SubscriptionPlan = SubscriptionPlan;
+        })
+        .catch(() => {
+          this.$notify({
+            type: "error",
+            text: this.$tc("common.error.generic")
+          });
+        });
     }
 
     async mounted() {
       try {
         await this.getSubscriptionPlans();
-        const planPeriod = await this.getOrganizationPlan();
-
-        this.loadSubscriptionPlans(planPeriod);
+        await this.getOrganizationPlan();
       } catch (error) {
-        this.$notify({
-          type: "error",
-          text: this.$tc("common.error.generic")
-        });
+        // eslint-disable-next-line no-console
+        console.error(error);
       } finally {
         this.loaded = true;
       }

@@ -1,8 +1,11 @@
 declare type SubscriptionPlan = {
   id: string;
   name: PlatformSubscription["name"];
-  description: string;
+  description: Record<string, boolean>;
   payment_url: string;
+  /**
+   * @deprecated to delete
+   */
   period: string;
   price: number;
   createdAt: string;
