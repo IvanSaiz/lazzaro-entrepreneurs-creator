@@ -85,16 +85,13 @@
 
     async connectToMollie() {
       try {
-        await apiWallet.mollieApi.postConfig(this.ongId, this.form.orgApiKey);
-        this.$store.commit("auth/setOngConfig", { payment_method: "mollie" });
-        this.$store.commit("auth/setData", {
-          mollieOrgApiKey: this.form.orgApiKey
-        });
+        // await apiWallet.mollieApi.postConfig(this.ongId, this.form.orgApiKey);
+        // this.$store.commit("auth/setOngConfig", { payment_method: "mollie" });
+        // this.$store.commit("auth/setData", {
+        //   mollieOrgApiKey: this.form.orgApiKey
+        // });
 
-        this.$notify({
-          type: "success",
-          text: this.$tc("common.notifications.changeSuccess")
-        });
+        throw new Error("Not implemented");
       } catch (error) {
         this.$notify({
           type: "error",

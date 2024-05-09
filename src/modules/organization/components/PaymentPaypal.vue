@@ -47,7 +47,6 @@
   import LzModal from "@/components/Modal.vue";
   import LzLinkIcon from "@/components/LinkIcon.vue";
   import { namespace } from "vuex-class";
-  import { apiWallet } from "../api/";
   import { apiOngs } from "@/modules/web/api";
 
   const auth = namespace("auth");
@@ -88,11 +87,11 @@
 
     async submitForm() {
       try {
-        await apiWallet.paypalApi.postConfig(
-          this.ongId,
-          this.form.id,
-          this.form.secret
-        );
+        // await apiWallet.paypalApi.postConfig(
+        //   this.ongId,
+        //   this.form.id,
+        //   this.form.secret
+        // );
         this.setPaypalConfig({ id: this.form.id, secret: this.form.secret });
 
         await apiOngs.postPlatformConfig(this.ongId, {
