@@ -57,30 +57,34 @@
     loadingPostRecover = false;
     recoverCompleted = false;
 
-    onRecoverSubmit() {
+    async onRecoverSubmit() {
       this.loadingPostRecover = true;
 
-      apiRecover({
+      await apiRecover({
         email: this.recoverForm.email
       })
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         .then(async (response: any) => {
           this.recoverCompleted = true;
         })
-        .catch((error: any) => this.handleError(error))
+        .catch(this.handleError)
         .finally(() => (this.loadingPostRecover = false));
     }
 
     handleError(error: any): void {
-      let text = this.$tc("common.error.generic");
-      switch (error.response.status) {
-        case 404:
+      const message: string = error?.response?.data?.message ?? "";
+      let text: string;
+      switch (message) {
+        case "MAIL_NOT_FOUND":
           text = this.$tc("auth.recover.errors.userNotFound");
+          break;
+        default:
+          text = this.$tc("common.error.generic");
       }
 
       this.$notify({
         type: "error",
-        text: text
+        text
       });
     }
   }

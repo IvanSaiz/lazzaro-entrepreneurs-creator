@@ -15,7 +15,8 @@ export default {
       repeatPassword: "Repeat password"
     },
     errors: {
-      wrongCredentials: "The access data is not correct."
+      wrongCredentials: "The access data is not correct.",
+      userNotFound: "No account associated to this email."
     }
   },
   signin: {

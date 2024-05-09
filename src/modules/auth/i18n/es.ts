@@ -15,7 +15,7 @@ export default {
       repeatPassword: "Repetir contraseña"
     },
     errors: {
-      userNotFound: "No se ha encontrado la dirección de correo."
+      userNotFound: "No se ha encontrado una cuenta asociada a este correo."
     }
   },
   signin: {
