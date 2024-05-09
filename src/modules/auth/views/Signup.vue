@@ -250,13 +250,13 @@
           let error = "";
           switch (err.response.data.message) {
             case "EXISTS_EMAIL":
-              error = "common.error.accountAlreadyExists";
+              error = "auth.signup.notifications.emailExists";
               break;
             case "EXISTS_COMPANY":
-              error = "common.error.companyAlreadyExists";
+              error = "auth.signup.notifications.companyExists";
               break;
-            case "Validation error":
-              error = "common.error.validationError";
+            case "DUPLICATE_CIF":
+              error = "auth.signup.notifications.duplicateCIF";
               break;
             default:
               error = "common.error.generic";

@@ -70,7 +70,10 @@ export default {
       required: "Phone no is required",
       matches: "Invalid phone format",
       success: "User successfully validated",
-      failCode: "Invalid code"
+      failCode: "Invalid code",
+      emailExists: "There is already an account using this mail",
+      companyExists: "There is already an organization with this name",
+      duplicateCIF: "This CIF number is already registered"
     }
   },
   onboarding: {

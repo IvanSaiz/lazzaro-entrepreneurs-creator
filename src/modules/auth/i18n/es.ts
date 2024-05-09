@@ -71,7 +71,10 @@ export default {
       matches: "Formato de teléfono inválido",
       success: "Usuario validado con éxito",
       failCode: "Código no válido",
-      error: "Ha ocurrido un error"
+      error: "Ha ocurrido un error",
+      emailExists: "Ya existe una cuenta con este email",
+      companyExists: "Ya existe una empresa con este nombre",
+      duplicateCIF: "Ya existe una empresa con este CIF"
     }
   },
   onboarding: {
