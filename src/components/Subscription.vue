@@ -14,7 +14,7 @@ div(v-if="loaded")
               :class="{ 'organization-read__item--disabled': !active }"
             )
               | {{ description }}
-          lz-button.organization-read__btn(type="primary" @click="redirectToPlan(plan.payment_url)")
+          lz-button.organization-read__btn(type="primary" @click="goToPayment(plan.payment_url)")
             | {{ plan.price }} {{ $t('organization.read.priceText', {currency: currencySymbol}) }}
             .organization-read__tax {{ $t('organization.read.subscriptionForm.tax' )}}
 </template>
@@ -27,6 +27,7 @@ div(v-if="loaded")
   import { Component, Vue } from "vue-property-decorator";
   import { namespace } from "vuex-class";
   import { apiOrganizations } from "../modules/organization/api";
+  import { apiOngs } from "@/modules/user/api";
 
   const auth = namespace("auth");
   type OrganizationPlan = {
@@ -45,6 +46,8 @@ div(v-if="loaded")
 
     @auth.State("id")
     public memberId?: string;
+
+    member: Member;
 
     @auth.State("currencySymbol")
     currencySymbol?: string;
@@ -97,12 +100,27 @@ div(v-if="loaded")
       try {
         await this.getSubscriptionPlans();
         await this.getOrganizationPlan();
+        await apiOngs
+          .getMember(this.memberId)
+          .then(data => (this.member = data));
       } catch (error) {
         // eslint-disable-next-line no-console
         console.error(error);
       } finally {
         this.loaded = true;
       }
+    }
+
+    goToPayment(url: string) {
+      const params = new URLSearchParams({
+        first_name: this.member.firstName,
+        last_name: this.member.lastName,
+        email: this.member.email,
+        cf_memberid: this.memberId,
+        company_name: this.member.companyName
+      });
+
+      window.location.href = `${url}?${params}`;
     }
   }
 </script>

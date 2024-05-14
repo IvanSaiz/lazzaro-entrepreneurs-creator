@@ -23,11 +23,13 @@
   import { namespace } from "vuex-class";
   const auth = namespace("auth");
 
+  const STRIPE_CLIENT_ID = process.env.VUE_APP_STRIPE_CLIENT_ID;
+
   @Component({
     components: { LzButton, LzModal, LzLinkIcon }
   })
   export default class StripePayment extends Vue {
-    connectToStripeLink = `https://connect.stripe.com/oauth/v2/authorize?response_type=code&client_id=${process.env.VUE_APP_STRIPE_CLIENT_ID}&scope=read_write`;
+    connectToStripeLink = `https://connect.stripe.com/oauth/v2/authorize?response_type=code&client_id=${STRIPE_CLIENT_ID}&scope=read_write&redirect_uri=https://www.entrepreneurs.lazzaro.io/organization/read`;
 
     @auth.State("id")
     public ongId!: string;

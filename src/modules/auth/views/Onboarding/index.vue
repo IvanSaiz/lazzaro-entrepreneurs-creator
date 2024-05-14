@@ -18,12 +18,6 @@
                   lz-button(type="tertiary" @click="onBackClick()" :disabled="isFirstStep") {{ $t('common.actions.back') }}
                   template(v-if="!isLastStep")
                     lz-button(type="tertiary" @click="onNextClick(actionsProps.click)" :disabled="isLastStep || actionsProps.disabled") {{ $t('common.actions.next') }}
-                  template(v-else)
-                    router-link(:to="{ name: 'Signin' }")
-                      lz-button(
-                        type="tertiary"
-                        :disabled="actionsProps.disabled"
-                        @click= 'onSkipClick()') {{ $t('common.actions.skip') }}
 </template>
 
 <script lang="ts">
@@ -89,11 +83,9 @@
       if (!this.isLastStep) {
         this.active = this.steps[this.currentStepIdx + 1];
         actionClick?.();
+      } else {
+        this.$router.push({ name: "Signin" });
       }
-    }
-
-    onSkipClick(): void {
-      this.setTemplateFeatures();
     }
   }
 </script>
