@@ -31,11 +31,19 @@
     @auth.Mutation("setBlockedBySubscriptionPlan")
     public setBlockedBySubscriptionPlan!: (payload: boolean) => void;
 
+    @auth.Action
+    public setTemplateFeatures!: () => Promise<void>;
+
+    @auth.Getter("websiteId")
+    websiteId: string;
+
     async mounted() {
       if (hasAuth()) {
         this.updateData(getAuth());
         await this.refreshMemberData();
         // await this.updateFeatures(this.memberId);
+
+        if (!this.websiteId) await this.setTemplateFeatures();
 
         //TODO: to be updated
         // await this.checkBlockedStatus(this.memberId).catch(() => {

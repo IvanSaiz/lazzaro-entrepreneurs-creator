@@ -21,7 +21,7 @@
 </template>
 
 <script lang="ts">
-  import { Component, Vue } from "vue-property-decorator";
+  import { Component, Vue, Watch } from "vue-property-decorator";
   import { namespace } from "vuex-class";
   import LzStepper from "@/components/Stepper.vue";
   import LzBox from "@/components/Box.vue";
@@ -53,9 +53,6 @@
       "stepSubscription"
     ];
     private active: step = this.steps[0];
-
-    @auth.Action
-    public setTemplateFeatures!: () => Promise<void>;
 
     private setActiveStep(step: step) {
       this.active = step;

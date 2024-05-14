@@ -57,6 +57,7 @@
     Team,
     WhyChooseUs
   } from "../components/Sections";
+  import { getImgURL } from "@/utils/getFormulateImageUrl";
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const _ = require("lodash");
   const auth = namespace("auth");
@@ -377,28 +378,6 @@
         properties: _.cloneDeep(this.form)
       };
 
-      // See https://vueformulate.com/guide/inputs/types/file/#upload-results-with-v-model-on-formulateinput
-      // to check an example of the code below
-      const getImgURL = async (img): Promise<string | string[]> => {
-        if (typeof img?.upload === "function") {
-          return img.upload().then(([res]) => {
-            if (res && "url" in res) return res.url;
-
-            return "";
-          });
-        }
-        if (typeof img === "string") {
-          return img;
-        }
-        if (Array.isArray(img)) {
-          if (img.length === 1 && "url" in img[0]) {
-            return img[0].url;
-          } else if (img.every(pic => "url" in pic)) {
-            return img.map(({ url }) => url);
-          }
-        }
-        return "";
-      };
       const mapImgURL = async <T extends object>(obj: T, field: keyof T) => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         obj[field] = (await getImgURL(obj[field])) as any;

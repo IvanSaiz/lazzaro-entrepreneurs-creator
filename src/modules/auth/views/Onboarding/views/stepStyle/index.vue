@@ -1,60 +1,58 @@
 <template lang="pug">
-  #step-style
-    .step-style__img
-      img(src="./assets/estilo_paso3.svg" height=379)
-    .step-style__title {{ $t('auth.onboarding.stepStyle.title') }}
-    .step-style__description {{ $t('auth.onboarding.stepStyle.subtitle') }}
-    .step-style__form
-      FormulateForm(
-        v-model="styleForm"
-        :keep-model-data="true"
-      )
-        .form__container
+#step-style
+  .step-style__img
+    img(src="./assets/estilo_paso3.svg" height=379)
+  .step-style__title {{ $t('auth.onboarding.stepStyle.title') }}
+  .step-style__description {{ $t('auth.onboarding.stepStyle.subtitle') }}
+  .step-style__form
+    FormulateForm(
+      v-model="styleForm"
+      :keep-model-data="true"
+    )
+      .form__container
+        .form__row
+          .form__logo
+            FormulateInput(
+              type="image"
+              name="logo"
+              :label="$t('auth.onboarding.stepStyle.form.logo.label')"
+              :help="$t('auth.onboarding.stepStyle.form.logo.help')"
+              validation="mime:image/jpeg,image/png"
+            )
+        .form__colors
           .form__row
-            .form__logo
-              FormulateInput(
-                type="image"
-                name="logo"
-                :label="$t('auth.onboarding.stepStyle.form.logo.label')"
-                :help="$t('auth.onboarding.stepStyle.form.logo.help')"
-                validation="mime:image/jpeg,image/png"
-              )
-          .form__colors
-            .form__row
-              FormulateInput#primary-color(
-                type="textColor"
-                name="textColor"
-                :label="$t('auth.onboarding.stepStyle.form.textColour')"
-                value="#1081F2"
-              )
-              FormulateInput#secondary-color(
-                type="textColor"
-                name="buttonColor"
-                :label="$t('auth.onboarding.stepStyle.form.buttonColour')"
-                value="#AD00FF"
-              )
-            .form__row
-              FormulateInput(
-                type="select"
-                name="template"
-                :label="$t('auth.onboarding.stepStyle.form.style')"
-                :label-class="['required']"
-                :options="styleOptions"
-                validation="required"
-                :validation-name="$t('auth.onboarding.stepStyle.form.style')"
-                :placeholder="$t('auth.signup.form.choose')"
-              )  
-
-    .step-style__actions
-      slot(name="actions" :click="onStyleSubmit" :disabled="disableStepStyleButton")
+            FormulateInput#primary-color(
+              type="textColor"
+              name="textColor"
+              :label="$t('auth.onboarding.stepStyle.form.textColour')"
+              value="#1081F2"
+            )
+            FormulateInput#secondary-color(
+              type="textColor"
+              name="buttonColor"
+              :label="$t('auth.onboarding.stepStyle.form.buttonColour')"
+              value="#AD00FF"
+            )
+          .form__row
+            FormulateInput(
+              type="select"
+              name="template"
+              :label="$t('auth.onboarding.stepStyle.form.style')"
+              :label-class="['required']"
+              :options="styleOptions"
+              validation="required"
+              :validation-name="$t('auth.onboarding.stepStyle.form.style')"
+              :placeholder="$t('auth.signup.form.choose')"
+            )  
+  .step-style__actions
+    slot(name="actions" :click="onStyleSubmit" :disabled="disableStepStyleButton")
 </template>
 
 <script lang="ts">
   import { Component, Vue } from "vue-property-decorator";
   import LzButton from "@/components/Button.vue";
-  import toBase64 from "@/utils/toBase64";
   import { namespace } from "vuex-class";
-  import { apiStyle } from "../../../../api";
+  import { getImgURL } from "@/utils/getFormulateImageUrl";
 
   const auth = namespace("auth");
 
@@ -65,13 +63,16 @@
     @auth.State("style")
     public style!: any;
 
+    @auth.Action
+    public setTemplateFeatures!: () => Promise<void>;
+
     styleForm = {
       logo: this.style?.logo ?? {
         files: [{ file: null, name: "" }]
       },
       textColor: this.style?.textColor ?? "#1081F2",
       buttonColor: this.style?.buttonColor ?? "#AD00FF",
-      template: this.style?.template ?? ""
+      template: this.style?.template ?? "modern"
     };
 
     loadingPostStyle = false;
@@ -85,7 +86,7 @@
       // )
     };
 
-    private get disableStepStyleButton(): boolean {
+    get disableStepStyleButton(): boolean {
       return !this.styleForm.template || this.loadingPostStyle;
     }
 
@@ -97,21 +98,16 @@
 
     async onStyleSubmit() {
       this.loadingPostStyle = true;
-      let logoToBase64 = "";
-      const uploadedImage = this.styleForm.logo.files[0].file;
+      const uploadedImage = await getImgURL(this.styleForm.logo.files[0].file);
 
-      if (uploadedImage) {
-        logoToBase64 = (await toBase64(uploadedImage)) as string;
-      }
-
-      const data: any = {
-        logo: logoToBase64,
+      this.setStyle({
+        logo: uploadedImage,
         textColor: this.styleForm.textColor,
         buttonColor: this.styleForm.buttonColor,
         template: this.styleForm.template
-      };
+      });
 
-      this.setStyle(data);
+      await this.setTemplateFeatures();
 
       this.loadingPostStyle = false;
     }
