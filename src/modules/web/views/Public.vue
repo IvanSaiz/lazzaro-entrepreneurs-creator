@@ -342,6 +342,18 @@
             );
           }
 
+          if (this.form.whyChooseUs.subtitles.length < 4) {
+            const missingItems = 4 - this.form.whyChooseUs.subtitles.length;
+            this.form.whyChooseUs.subtitles = this.form.whyChooseUs.subtitles.concat(
+              Array.from({ length: missingItems }, (_, i) => ({
+                id: this.form.whyChooseUs.subtitles.length + 1 + i,
+                description: "",
+                title: "",
+                url: ""
+              }))
+            );
+          }
+
           this.initialForm = _.cloneDeep(this.form);
           this.loaded = true;
         })
