@@ -360,6 +360,10 @@ export default {
         2: "Amount impact 2",
         3: "Amount impact 3",
         4: "Amount impact 4"
+      },
+      design: {
+        color: "Text Color",
+        backgroundColor: "Background Color"
       }
     },
     notify: {

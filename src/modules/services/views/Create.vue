@@ -60,7 +60,6 @@
               name="price"
               v-model="form.price"
               inputmode="numeric"
-              pattern="[0-9]*"
               :label="$t('services.create.price.label')"
               :label-class="['required']"
               :validation="form.payment_in_advance ? 'required|number' : 'number'"

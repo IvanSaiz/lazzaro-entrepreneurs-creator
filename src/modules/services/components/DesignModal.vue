@@ -12,7 +12,6 @@
         <ColorText
           v-models:text="properties.title"
           v-models:color="properties.titleColor"
-          type="text"
           validation="required"
           validation-name="Titulo"
           :label="$t('services.read.modal.sections.title.titleLabel')"
@@ -20,7 +19,6 @@
         <ColorText
           v-models:text="properties.subtitle"
           v-models:color="properties.subtitleColor"
-          type="text"
           validation="required"
           validation-name="Subtítulo"
           :label="$t('services.read.modal.sections.title.subtitleLabel')"

@@ -151,6 +151,7 @@ interface Impact {
   enabled: true;
   data: Datum[];
   design: {
+    color: string;
     backgroundColor: string;
     backgroundImage: Image;
   };

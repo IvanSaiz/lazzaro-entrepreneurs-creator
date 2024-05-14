@@ -14,17 +14,25 @@ section.public-impact
         template(#header)
           h4 {{ $t('web.public.impactForm.design.title') }}
         template(#form)
-          h2.h2--dash {{ $t('web.public.impactForm.design.image') }}
-          formulate-input(
-            type="image"
-            v-model="props.design.backgroundImage"
-            :help="$t('web.public.impactForm.design.imageHelper')"
-          )
-          h2.h2--dash {{ $t('web.public.impactForm.design.color') }}
-          formulate-input#primary-color(
-            type="textColor"
-            v-model="props.design.backgroundColor"
-          )
+          .row
+            h2.h2--dash {{ $t('web.public.impactForm.design.image') }}
+            formulate-input(
+              type="image"
+              v-model="props.design.backgroundImage"
+              :help="$t('web.public.impactForm.design.imageHelper')"
+            )
+          .row
+            h2.h2--dash {{ $t('web.public.impactForm.design.color') }}
+            formulate-input#primary-color(
+              type="textColor"
+              v-model="props.design.color"
+            )
+          .row
+            h2.h2--dash {{ $t('web.public.impactForm.design.backgroundColor') }}
+            formulate-input#primary-color(
+              type="textColor"
+              v-model="props.design.backgroundColor"
+            )
   formulate-input(
     type="group"
     name="impactData"
@@ -103,6 +111,14 @@ section.public-impact
         formulate-input {
           width: 100%;
         }
+      }
+    }
+    .design-modal {
+      h2 {
+        margin-bottom: .4rem;
+      }
+      .row {
+        margin-bottom: 1.4rem;
       }
     }
   }

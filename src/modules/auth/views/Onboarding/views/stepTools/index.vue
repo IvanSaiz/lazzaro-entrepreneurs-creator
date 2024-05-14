@@ -1,61 +1,56 @@
 <template lang="pug">
-  #step-tools
-    .step-tools__img
-      img(src="./assets/herramientas_paso2.svg" height=340)
-    .step-tools__title {{ $t('auth.onboarding.stepTools.title') }}
-    .step-tools__description {{ $t('auth.onboarding.stepTools.subtitle') }}
-    .step-tools__tools
-      .step-tools__block
-        lz-tool(
-          @click.native="() => { tools.portfolio = !tools.portfolio; }"
-          :checked="tools.portfolio"
-        )
-          template(slot="icon")
-            ClipboardListIcon(size=30 stroke-width=1.25)
-          template(slot="label") {{ $t('auth.onboarding.stepTools.tools.portfolio') }}
-
-        lz-tool(
-          @click.native="() => { tools.shop = !tools.shop; }"
-          :checked="tools.shop"
-        )
-          template(slot="icon")
-            BuildingStoreIcon(size=30 stroke-width=1.25)
-          template(slot="label") {{ $t('auth.onboarding.stepTools.tools.shop') }}
-
-        lz-tool(
-          @click.native="() => { tools.events = !tools.events; }"
-          :checked="tools.events"
-        )
-          template(slot="icon")
-            CalendarEventIcon(size=30 stroke-width=1.25)
-          template(slot="label") {{ $t('auth.onboarding.stepTools.tools.events') }}
-
-        lz-tool(
-          @click.native="() => { tools.services = !tools.services; }"
-          :checked="tools.services"
-        )
-          template(slot="icon")
-            FileLikeIcon(size=30 stroke-width=1.25)
-          template(slot="label") {{ $t('auth.onboarding.stepTools.tools.services') }}
-
-        lz-tool(
-          @click.native="() => { tools.reviews = !tools.reviews; }"
-          :checked="tools.reviews"
-        )
-          template(slot="icon")
-            img(src="./assets/star-half-filled.svg" height=61)
-          template(slot="label") {{ $t('auth.onboarding.stepTools.tools.reviews') }}
-
-        lz-tool(
-          @click.native="() => { tools.bookings = !tools.bookings; }"
-          :checked="tools.bookings"
-        )
-          template(slot="icon")
-            AddressBookIcon(size=30 stroke-width=1.25)
-          template(slot="label") {{ $t('auth.onboarding.stepTools.tools.bookings') }}
-        
-    .step-tools__actions
-      slot(name="actions" :click="sendStepTools" :disabled="disableStepToolsButton")
+#step-tools
+  .step-tools__img
+    img(src="./assets/herramientas_paso2.svg" height=340)
+  .step-tools__title {{ $t('auth.onboarding.stepTools.title') }}
+  .step-tools__description {{ $t('auth.onboarding.stepTools.subtitle') }}
+  .step-tools__tools
+    .step-tools__block
+      lz-tool(
+        @click.native="() => { tools.portfolio = !tools.portfolio; }"
+        :checked="tools.portfolio"
+      )
+        template(slot="icon")
+          ClipboardListIcon(size=30 stroke-width=1.25)
+        template(slot="label") {{ $t('auth.onboarding.stepTools.tools.portfolio') }}
+      lz-tool(
+        @click.native="() => { tools.shop = !tools.shop; }"
+        :checked="tools.shop"
+      )
+        template(slot="icon")
+          BuildingStoreIcon(size=30 stroke-width=1.25)
+        template(slot="label") {{ $t('auth.onboarding.stepTools.tools.shop') }}
+      lz-tool(
+        @click.native="() => { tools.events = !tools.events; }"
+        :checked="tools.events"
+      )
+        template(slot="icon")
+          CalendarEventIcon(size=30 stroke-width=1.25)
+        template(slot="label") {{ $t('auth.onboarding.stepTools.tools.events') }}
+      lz-tool(
+        @click.native="() => { tools.services = !tools.services; }"
+        :checked="tools.services"
+      )
+        template(slot="icon")
+          FileLikeIcon(size=30 stroke-width=1.25)
+        template(slot="label") {{ $t('auth.onboarding.stepTools.tools.services') }}
+      lz-tool(
+        @click.native="() => { tools.reviews = !tools.reviews; }"
+        :checked="tools.reviews"
+      )
+        template(slot="icon")
+          img(src="./assets/star-half-filled.svg" height=61)
+        template(slot="label") {{ $t('auth.onboarding.stepTools.tools.reviews') }}
+      lz-tool(
+        @click.native="() => { tools.bookings = !tools.bookings; }"
+        :checked="tools.bookings"
+      )
+        template(slot="icon")
+          AddressBookIcon(size=30 stroke-width=1.25)
+        template(slot="label") {{ $t('auth.onboarding.stepTools.tools.bookings') }}
+      
+  .step-tools__actions
+    slot(name="actions" :click="sendStepTools" :disabled="disableStepToolsButton")
 </template>
 
 <script lang="ts">
@@ -88,7 +83,7 @@
     @auth.Mutation
     public setTools!: (payload: any) => void;
 
-    private get disableStepToolsButton(): boolean {
+    get disableStepToolsButton(): boolean {
       return (
         !Object.values(this.tools).some(value => value === true) ||
         this.loadingPostStepTools

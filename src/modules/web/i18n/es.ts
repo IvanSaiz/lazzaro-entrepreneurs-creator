@@ -364,7 +364,8 @@ export default {
         title: "Datos de impacto",
         image: "Imagen de fondo",
         imageHelper: "180x60. Máx 25MB",
-        color: "Fondo"
+        color: "Color de Texto",
+        backgroundColor: "Fondo"
       },
       icon: {
         1: "Icono 1",

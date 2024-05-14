@@ -22,7 +22,7 @@
     <AboutUs v-model:props="form.aboutUs"></AboutUs>
     <WhyChooseUs v-model:props="form.whyChooseUs"></WhyChooseUs>
     <Bookings v-model:props="form.bookings"></Bookings>
-    <Reviews v-model:props="form.reviews"></Reviews>
+    //<Reviews v-model:props="form.reviews"></Reviews> TODO: Enable when ready on template
     <Impact v-model:props="form.impact"></Impact>
     <Team v-model:props="form.team"></Team>
     <Contact v-model:props="form.contact"></Contact>
@@ -182,6 +182,7 @@
         enabled: true,
         data: [],
         design: {
+          color: "#EFEFEF",
           backgroundColor: "#FFF0F0",
           backgroundImage: ""
         }
