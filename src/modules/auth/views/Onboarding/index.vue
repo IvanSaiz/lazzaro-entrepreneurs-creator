@@ -1,28 +1,27 @@
 <template lang="pug">
-  #onboarding
-    .onboarding__steps
-      lz-stepper(
-        :steps="steps"
-        :active="active"
-        @click="setActiveStep"
-        :pass="true"
-      )
-        template(#default="{ step }") {{ $t('auth.onboarding.steps.' + step) }}
-    .onboarding__box
-      lz-box
-        transition(name="fade" mode="out-in")
-          keep-alive
-            component(:is="active")
-              template(#actions="actionsProps")
-                .onboarding__actions
-                  lz-button(type="tertiary" @click="onBackClick()" :disabled="isFirstStep") {{ $t('common.actions.back') }}
-                  template(v-if="!isLastStep")
-                    lz-button(type="tertiary" @click="onNextClick(actionsProps.click)" :disabled="isLastStep || actionsProps.disabled") {{ $t('common.actions.next') }}
+#onboarding
+  .onboarding__steps
+    lz-stepper(
+      :steps="steps"
+      :active="active"
+      @click="setActiveStep"
+      :pass="true"
+    )
+      template(#default="{ step }") {{ $t('auth.onboarding.steps.' + step) }}
+  .onboarding__box
+    lz-box
+      transition(name="fade" mode="out-in")
+        keep-alive
+          component(:is="active")
+            template(#actions="actionsProps")
+              .onboarding__actions
+                lz-button(type="tertiary" @click="onBackClick()" :disabled="isFirstStep") {{ $t('common.actions.back') }}
+                template(v-if="!isLastStep")
+                  lz-button(type="tertiary" @click="onNextClick(actionsProps.click)" :disabled="isLastStep || actionsProps.disabled") {{ $t('common.actions.next') }}
 </template>
 
 <script lang="ts">
-  import { Component, Vue, Watch } from "vue-property-decorator";
-  import { namespace } from "vuex-class";
+  import { Component, Vue } from "vue-property-decorator";
   import LzStepper from "@/components/Stepper.vue";
   import LzBox from "@/components/Box.vue";
   import LzButton from "@/components/Button.vue";
@@ -32,7 +31,6 @@
   import LzStepSubscription from "./views/stepSubscription/index.vue";
 
   type step = "stepWelcome" | "stepTools" | "stepStyle" | "stepSubscription";
-  const auth = namespace("auth");
 
   @Component({
     components: {
@@ -46,27 +44,27 @@
     }
   })
   export default class Onboarding extends Vue {
-    private steps: Array<step> = [
+    steps: Array<step> = [
       "stepWelcome",
       "stepTools",
       "stepStyle",
       "stepSubscription"
     ];
-    private active: step = this.steps[0];
+    active: step = this.steps[0];
 
-    private setActiveStep(step: step) {
+    setActiveStep(step: step) {
       this.active = step;
     }
 
-    private get currentStepIdx(): number {
+    get currentStepIdx(): number {
       return this.steps.findIndex(step => step === this.active);
     }
 
-    private get isFirstStep(): boolean {
+    get isFirstStep(): boolean {
       return this.currentStepIdx === 0;
     }
 
-    private get isLastStep(): boolean {
+    get isLastStep(): boolean {
       return this.currentStepIdx === this.steps.length - 1;
     }
 
