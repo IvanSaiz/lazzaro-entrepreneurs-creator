@@ -208,6 +208,7 @@ export default {
         },
         buttonsColor: "Color botones",
         menuColor: "Color menú",
+        menuTextColor: "Color texto menú",
         footerColor: "Color Footer",
         logoHelper: "60x60. Máx 25MB"
       }

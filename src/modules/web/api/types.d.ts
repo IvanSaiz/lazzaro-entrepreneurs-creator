@@ -176,6 +176,7 @@ interface Reviews {
 interface Style {
   logo: Image;
   menuColor: string;
+  menuTextColor: string;
   buttonColor: string;
   footerColor: string;
   mainTypography: string;

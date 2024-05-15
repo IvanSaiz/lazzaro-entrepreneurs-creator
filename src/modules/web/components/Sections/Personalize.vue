@@ -50,6 +50,12 @@ section.public-personalizeWeb
           )
         FormulateInput#primary-color(
           type="textColor"
+          name="styleMenuColor"
+          :label="$t('web.public.personalizeWebForm.form.menuTextColor')"
+          v-model="props.menuTextColor"
+          )
+        FormulateInput#primary-color(
+          type="textColor"
           name="styleFooterColor"
           :label="$t('web.public.personalizeWebForm.form.footerColor')"
           v-model="props.footerColor"
@@ -96,7 +102,7 @@ section.public-personalizeWeb
 
       .form-colors {
         display: flex;
-        gap: 42px;
+        gap: 30px;
         flex-wrap: wrap;
       }
     }

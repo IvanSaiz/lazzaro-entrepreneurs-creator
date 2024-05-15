@@ -92,6 +92,7 @@
 <style lang="scss">
   .payment-gateway-card {
     background-color: #fff;
+    max-width: 390px;
     border-radius: 15px;
     padding-block: 40px;
     margin-bottom: 20px;
@@ -102,7 +103,7 @@
     flex: 1;
 
     button {
-      background-color: #eb2873;
+      background-color: #0093a7;
       color: white;
       border: none;
       border-radius: 12px;
@@ -120,7 +121,7 @@
   }
 
   .selected-payment-method {
-    border: 1px solid #eb2873;
+    border: 1px solid #0093a7;
   }
   .payment-gateway-card__header {
     width: 100%;

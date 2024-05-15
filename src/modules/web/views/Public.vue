@@ -109,6 +109,7 @@
         logo: "",
         mainTypography: "",
         menuColor: "",
+        menuTextColor: "",
         secondaryTypography: ""
       },
       homePage: {
