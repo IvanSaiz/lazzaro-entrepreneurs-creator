@@ -104,7 +104,7 @@
         logo: uploadedImage,
         textColor: this.styleForm.textColor,
         buttonColor: this.styleForm.buttonColor,
-        template: this.styleForm.template
+        template: this.styleForm.template ?? "modern"
       });
 
       await this.setTemplateFeatures();
