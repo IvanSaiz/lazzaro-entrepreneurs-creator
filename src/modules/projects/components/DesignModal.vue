@@ -124,7 +124,7 @@
       titleColor: "000000",
       subtitle: "",
       subtitleColor: "000000",
-      background: "",
+      background: "000000",
       layout: "spaced"
     };
 

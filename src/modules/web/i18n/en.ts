@@ -368,7 +368,10 @@ export default {
     },
     notify: {
       success: "Changes successfully saved",
-      error: "An error occurred while saving"
+      error: "An error occurred while saving",
+      publishWebsiteError: "An error has ocurred while publishing your website",
+      unpublishWebsiteError:
+        "An error has ocurred while unpublishing your website"
     }
   }
 };

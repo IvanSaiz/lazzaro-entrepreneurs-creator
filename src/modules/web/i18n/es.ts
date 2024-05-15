@@ -389,7 +389,10 @@ export default {
     },
     notify: {
       success: "Cambios guardados con éxito",
-      error: "Ha ocurrido un error al guardar"
+      error: "Ha ocurrido un error al guardar",
+      publishWebsiteError: "Un error ha ocurrido mientras se publicaba la web",
+      unpublishWebsiteError:
+        "Un error se ha producido mientras se despublicaba la web"
     }
   }
 };

@@ -71,10 +71,10 @@
 
     properties: Properties = {
       title: "",
-      titleColor: "",
+      titleColor: "000000",
       subtitle: "",
-      subtitleColor: "",
-      background: ""
+      subtitleColor: "000000",
+      background: "000000"
     };
 
     openModal() {
