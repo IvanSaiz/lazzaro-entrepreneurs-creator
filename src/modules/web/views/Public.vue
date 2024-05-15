@@ -249,40 +249,40 @@
     }
 
     async handlePublishWebsite(active: boolean, websiteId: string) {
-      try {
-        //TODO: update the member to be active
-        if (active === this.isActive) return;
+      //TODO: update the member to be active
+      if (active === this.isActive) return;
 
-        if (active) {
-          this.modalText = {
-            title: this.$tc("web.public.websiteStatus.publishWebsite.title"),
-            subtitle: this.$tc(
-              "web.public.websiteStatus.publishWebsite.subtitle"
-            )
-          };
+      if (active) {
+        this.modalText = {
+          title: this.$tc("web.public.websiteStatus.publishWebsite.title"),
+          subtitle: this.$tc("web.public.websiteStatus.publishWebsite.subtitle")
+        };
 
-          this.onModalOpen();
-          await apiWebsite.website.publish(websiteId);
-        } else {
-          this.modalText = {
-            title: this.$tc("web.public.websiteStatus.unpublishWebsite.title"),
-            subtitle: this.$tc(
-              "web.public.websiteStatus.unpublishWebsite.subtitle"
-            )
-          };
-
-          this.onModalOpen();
-          await apiWebsite.website.unpublish(websiteId);
-        }
-
-        this.onModalClose();
-      } catch {
-        this.$notify({
-          type: "error",
-          text: this.$tc("web.public.notify.error")
+        this.onModalOpen();
+        await apiWebsite.website.publish(websiteId).catch(() => {
+          this.$notify({
+            type: "error",
+            text: this.$tc("web.public.notify.publishWebsiteError")
+          });
         });
-        this.onModalClose();
+      } else {
+        this.modalText = {
+          title: this.$tc("web.public.websiteStatus.unpublishWebsite.title"),
+          subtitle: this.$tc(
+            "web.public.websiteStatus.unpublishWebsite.subtitle"
+          )
+        };
+
+        this.onModalOpen();
+        await apiWebsite.website.unpublish(websiteId).catch(() => {
+          this.$notify({
+            type: "error",
+            text: this.$tc("web.public.notify.unpublishWebsiteError")
+          });
+        });
       }
+
+      this.onModalClose();
     }
 
     mounted() {
