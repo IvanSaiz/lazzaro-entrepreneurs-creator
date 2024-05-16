@@ -1,16 +1,15 @@
 <template lang="pug">
-  .lz-stepper
-    //- step
-    .lz-stepper__step(
-      v-for='(step, stepIdx) in steps'
-      @click='onStepClick(step)'
-      :class='stepClasses(step, stepIdx)'
-      :style='stepStyle(step)'
-    )
-      .lz-stepper__label
-        slot(v-bind='{ step }') {{ step }}
-      .lz-stepper__dot
-
+.lz-stepper
+  //- step
+  .lz-stepper__step(
+    v-for='(step, stepIdx) in steps'
+    @click='onStepClick()'
+    :class='stepClasses(step, stepIdx)'
+    :style='stepStyle()'
+  )
+    .lz-stepper__label
+      slot(v-bind='{ step }') {{ step }}
+    .lz-stepper__dot
 </template>
 
 <script lang="ts">
@@ -19,16 +18,16 @@
   @Component({})
   export default class Stepper extends Vue {
     @Prop({ required: true })
-    protected readonly steps!: Array<string>;
+    readonly steps!: Array<string>;
 
     @Prop({ required: true })
-    protected readonly active!: string;
+    readonly active!: string;
 
     @Prop({ default: true })
-    protected readonly clickable!: boolean;
+    readonly clickable!: boolean;
 
     @Prop({ default: false })
-    protected readonly pass!: boolean;
+    readonly pass!: boolean;
 
     @Emit("click")
     onStepClick(): void {

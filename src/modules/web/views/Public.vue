@@ -105,7 +105,6 @@
       },
       style: {
         buttonColor: "",
-        footerColor: "",
         logo: "",
         mainTypography: "",
         menuColor: "",
@@ -185,7 +184,8 @@
         design: {
           color: "#EFEFEF",
           backgroundColor: "#FFF0F0",
-          backgroundImage: ""
+          backgroundImage: "",
+          amountColor: "#EFEFEF"
         }
       },
       team: {

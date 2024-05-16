@@ -154,6 +154,7 @@ interface Impact {
     color: string;
     backgroundColor: string;
     backgroundImage: Image;
+    amountColor: string;
   };
 }
 
@@ -178,7 +179,6 @@ interface Style {
   menuColor: string;
   menuTextColor: string;
   buttonColor: string;
-  footerColor: string;
   mainTypography: string;
   secondaryTypography: string;
 }
