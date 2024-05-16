@@ -364,7 +364,9 @@ export default {
       },
       design: {
         color: "Text Color",
-        backgroundColor: "Background Color"
+        backgroundColor: "Background Color",
+        cardTextColor: "Card Text Color",
+        cardAmountColor: "Amount Text Color"
       }
     },
     notify: {

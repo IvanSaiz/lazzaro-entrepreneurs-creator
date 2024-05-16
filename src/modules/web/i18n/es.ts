@@ -366,7 +366,9 @@ export default {
         image: "Imagen de fondo",
         imageHelper: "180x60. Máx 25MB",
         color: "Color de Texto",
-        backgroundColor: "Fondo"
+        backgroundColor: "Fondo",
+        cardTextColor: "Color de titulo de tarjetas",
+        cardAmountColor: "Color de cantidad de tarjetas"
       },
       icon: {
         1: "Icono 1",

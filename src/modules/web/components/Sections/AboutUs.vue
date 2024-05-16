@@ -22,12 +22,12 @@ section.public-whoWeAre
             optionClass="aboutUs"
           )
             template(#tooltip)
-              .side
+              .item
                 .heading
                   h1 {{ $t("web.public.whoWeAreForm.design.layout.title") }}
                   h2 {{ $t("web.public.whoWeAreForm.design.layout.subtitle") }}
                 .grid
-                  .item(v-for="item in Array.from({ length: 4 })")
+                  .side(v-for="item in Array.from({ length: 4 })")
                     h1 {{ $t("web.public.whoWeAreForm.design.layout.item.title") }}
                     p {{ $t("web.public.whoWeAreForm.design.layout.item.subtitle") }}
               img(src="@/assets/images/img-placeholder.svg", alt="Placeholder")
@@ -299,7 +299,7 @@ section.public-whoWeAre
         grid-template-columns: repeat(2, 1fr);
         gap: 1rem;
 
-        .item {
+        .side {
           display: flex;
           flex-direction: column;
           h1 {

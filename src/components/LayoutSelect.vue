@@ -89,7 +89,7 @@
           background-color: $color-pink;
           border-color: $color-pink;
         }
-        .item {
+        .layout {
           outline: 3px solid $color-pink;
         }
       }
