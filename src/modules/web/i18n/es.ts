@@ -328,7 +328,7 @@ export default {
     bookingsForm: {
       title: "Reservas",
       subtitle:
-        "Dá la oportunidad a tus usuarios a que puedan reunirse contigo.",
+        "Da la oportunidad a tus usuarios a que puedan reunirse contigo.",
       image: "Imagen",
       formTitle: "Título",
       formSubtitle: "Subtítulo*",
