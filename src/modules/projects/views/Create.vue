@@ -230,7 +230,6 @@
         images: parsedImages,
         memberId: this.memberId
       };
-      console.log(body);
 
       // if (isNewProject) await this.createProject(body);
       // else await this.updateProject(body);
