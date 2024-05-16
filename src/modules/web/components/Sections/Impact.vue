@@ -33,6 +33,18 @@ section.public-impact
               type="textColor"
               v-model="props.design.backgroundColor"
             )
+          .row
+            h2.h2--dash {{ $t('web.public.impactForm.design.cardTextColor') }}
+            formulate-input#primary-color(
+              type="textColor"
+              v-model="props.design.cardTextColor"
+            )
+          .row
+            h2.h2--dash {{ $t('web.public.impactForm.design.cardAmountColor') }}
+            formulate-input#primary-color(
+              type="textColor"
+              v-model="props.design.cardAmountColor"
+            )
   formulate-input(
     type="group"
     name="impactData"
@@ -115,7 +127,7 @@ section.public-impact
     }
     .design-modal {
       h2 {
-        margin-bottom: .4rem;
+        margin-bottom: 0.4rem;
       }
       .row {
         margin-bottom: 1.4rem;

@@ -154,6 +154,8 @@ interface Impact {
     color: string;
     backgroundColor: string;
     backgroundImage: Image;
+    cardTextColor: string;
+    cardAmountColor: string;
   };
 }
 

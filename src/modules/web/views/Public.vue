@@ -185,7 +185,9 @@
         design: {
           color: "#EFEFEF",
           backgroundColor: "#FFF0F0",
-          backgroundImage: ""
+          backgroundImage: "",
+          cardAmountColor: "#EFEFEF",
+          cardTextColor: "#EFEFEF"
         }
       },
       team: {
