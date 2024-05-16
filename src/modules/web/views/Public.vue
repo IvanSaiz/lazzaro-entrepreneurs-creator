@@ -167,7 +167,8 @@
         buttonText: "",
         design: {
           layout: "center",
-          backgroundColor: "#F0F0F0"
+          backgroundColor: "#F0F0F0",
+          bannerColor: "#ff7456"
         }
       },
       reviews: {

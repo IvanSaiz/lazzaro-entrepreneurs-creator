@@ -28,11 +28,10 @@ section.public-bookings
                   h2 {{ $t("web.public.bookingsForm.design.layout.subtitle") }}
               img(src="@/assets/images/img-placeholder.svg" alt="Placeholder")
           h2.h2--dash {{ $t('web.public.bookingsForm.design.color') }}
-          FormulateInput#primary-color(
-            type="textColor"
-            name="bookingsDesignBackgroundColor"
-            v-model="props.design.backgroundColor"
-          )
+          .colors
+            <ColorPicker v-model="props.design.backgroundColor" :label="$t('web.public.bookingsForm.design.backgroundColor')" />
+            <ColorPicker v-model="props.design.bannerColor" :label="$t('web.public.bookingsForm.design.bannerColor')" />
+
     .form__row
       FormulateInput(
         type="image"
@@ -235,6 +234,15 @@ section.public-bookings
           position: absolute;
         }
       }
+    }
+  }
+
+  .design-modal {
+    .colors {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      justify-content: center;
     }
   }
 </style>

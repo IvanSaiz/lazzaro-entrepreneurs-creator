@@ -338,7 +338,9 @@ export default {
       button: "Botón* ",
       link: "Link a tu página de reserva*",
       design: {
-        color: "Fondo",
+        color: "Color",
+        backgroundColor: "Color de fondo",
+        bannerColor: "Color del báner",
         layout: {
           tooltip: "Disposición",
           title: "Título Principal",
