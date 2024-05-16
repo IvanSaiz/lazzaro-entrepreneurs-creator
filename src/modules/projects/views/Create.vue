@@ -219,7 +219,10 @@
         this.proyectForm.imageUrlToConvert
       )) as string;
 
-      const parsedImages = await parseFiles(this.proyectForm.imagesToConvert);
+      const getImagesURL = images =>
+        images.upload().then(results => results.map(({ url }) => url));
+
+      const parsedImages = await getImagesURL(this.proyectForm.imagesToConvert);
 
       const body: TProjectForm = {
         ...this.proyectForm,
@@ -227,9 +230,10 @@
         images: parsedImages,
         memberId: this.memberId
       };
+      console.log(body);
 
-      if (isNewProject) await this.createProject(body);
-      else await this.updateProject(body);
+      // if (isNewProject) await this.createProject(body);
+      // else await this.updateProject(body);
     }
 
     async mounted() {

@@ -86,6 +86,7 @@ interface Bookings {
 interface BookingsDesign {
   layout: string;
   backgroundColor: string;
+  bannerColor: string;
 }
 
 interface Contact {
@@ -206,7 +207,10 @@ interface TeamMember {
 interface WhyChooseUs {
   enabled: boolean;
   title: string;
-  design: BookingsDesign;
+  design: {
+    layout: "left" | "right";
+    backgroundColor: string;
+  };
   imgUrl: Image;
   subtitles: Subtitle[];
   titleColor: string;
