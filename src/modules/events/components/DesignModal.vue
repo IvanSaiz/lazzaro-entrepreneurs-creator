@@ -124,7 +124,7 @@
           this.websiteId,
           this.section
         );
-        this.properties = section.properties;
+        this.properties = { ...this.properties, ...section.properties };
         if (section.templateId) this.templateId = section.templateId;
         this.sectionExists = true;
       } catch {

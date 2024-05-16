@@ -121,10 +121,10 @@
 
     properties: Properties = {
       title: "",
-      titleColor: "000000",
+      titleColor: "#000000",
       subtitle: "",
-      subtitleColor: "000000",
-      background: "000000",
+      subtitleColor: "#000000",
+      background: "#000000",
       layout: "spaced"
     };
 
@@ -185,7 +185,7 @@
           this.websiteId,
           this.section
         );
-        this.properties = section.properties;
+        this.properties = { ...this.properties, ...section.properties };
         if (section.templateId) this.templateId = section.templateId;
         this.sectionExists = true;
       } catch {

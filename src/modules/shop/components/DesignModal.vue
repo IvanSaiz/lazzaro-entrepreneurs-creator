@@ -8,6 +8,7 @@
       <FormulateForm>
         <h2 class="h2--dash">Título</h2>
         <ColorText
+          name="title"
           v-models:text="properties.title"
           v-models:color="properties.titleColor"
           type="text"
@@ -16,6 +17,7 @@
           :label="$t('services.read.modal.sections.title.titleLabel')"
         />
         <ColorText
+          name="subtitle"
           v-models:text="properties.subtitle"
           v-models:color="properties.subtitleColor"
           type="text"
@@ -71,10 +73,10 @@
 
     properties: Properties = {
       title: "",
-      titleColor: "000000",
+      titleColor: "#000000",
       subtitle: "",
-      subtitleColor: "000000",
-      background: "000000"
+      subtitleColor: "#000000",
+      background: "#000000"
     };
 
     openModal() {
@@ -122,7 +124,7 @@
           this.websiteId,
           this.section
         );
-        this.properties = section.properties;
+        this.properties = { ...this.properties, ...section.properties };
         if (section.templateId) this.templateId = section.templateId;
         this.sectionExists = true;
       } catch {
