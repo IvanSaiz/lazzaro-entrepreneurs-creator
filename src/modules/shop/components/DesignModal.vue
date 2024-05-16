@@ -152,6 +152,11 @@
       input[type="color"] {
         padding-block: 5px;
       }
+
+      .color-picker {
+        width: min-content;
+        margin-inline: auto;
+      }
     }
 
     .header {
