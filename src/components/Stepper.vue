@@ -3,9 +3,9 @@
   //- step
   .lz-stepper__step(
     v-for='(step, stepIdx) in steps'
-    @click='onStepClick()'
+    @click='onStepClick(step)'
     :class='stepClasses(step, stepIdx)'
-    :style='stepStyle()'
+    :style='stepStyle(step)'
   )
     .lz-stepper__label
       slot(v-bind='{ step }') {{ step }}
