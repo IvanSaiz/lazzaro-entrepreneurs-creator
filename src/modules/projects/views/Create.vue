@@ -20,7 +20,7 @@
             validation="required|mime:image/jpeg,image/png"
             :validation-name="$t('projects.create.mainImg.label')"
             label-position="before"
-            :value="proyectForm.imageUrlToConvert"
+            v-model="proyectForm.imageUrlToConvert"
           )
           p {{ $t('projects.create.mainImg.maxSize') }}
           p {{ $t('projects.create.mainImg.suportedFormats') }}
@@ -34,7 +34,7 @@
             label-position="before"
             :add-label="$t('projects.create.images.add')"
             :multiple="true"
-            :value="proyectForm.imagesToConvert"
+            v-model="proyectForm.imagesToConvert"
           )
 
       section.projects-create__right
@@ -101,6 +101,7 @@
   import { apiProjects } from "../api";
   import { parseFiles } from "@/utils/parseFile";
   import LzEditorInput from "@/components/EditorInput.vue";
+  import { getImgURL } from "@/utils/getFormulateImageUrl";
 
   const auth = namespace("auth");
 
@@ -214,15 +215,15 @@
     async onSubmit() {
       const isNewProject = !this.projectId;
 
-      const imageUrlToBase64 = await parseFiles(
+      const imageUrl = (await getImgURL(
         this.proyectForm.imageUrlToConvert
-      );
+      )) as string;
 
       const parsedImages = await parseFiles(this.proyectForm.imagesToConvert);
 
       const body: TProjectForm = {
         ...this.proyectForm,
-        imageUrl: imageUrlToBase64[0],
+        imageUrl,
         images: parsedImages,
         memberId: this.memberId
       };

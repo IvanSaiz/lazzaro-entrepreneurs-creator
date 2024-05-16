@@ -43,8 +43,6 @@
         await this.refreshMemberData();
         // await this.updateFeatures(this.memberId);
 
-        if (!this.websiteId) await this.setTemplateFeatures();
-
         //TODO: to be updated
         // await this.checkBlockedStatus(this.memberId).catch(() => {
         //   this.$notify({
