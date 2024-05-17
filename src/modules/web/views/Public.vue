@@ -260,6 +260,8 @@
           subtitle: this.$tc("web.public.websiteStatus.publishWebsite.subtitle")
         };
 
+        console.log("Publishing website");
+
         this.onModalOpen();
         await apiWebsite.website.publish(websiteId).catch(() => {
           this.$notify({
@@ -422,10 +424,11 @@
       ]);
 
       try {
-        await Promise.all([
-          apiWebsite.section.put(postData),
-          this.handlePublishWebsite(this.form.general.active, this.websiteId)
-        ]);
+        await apiWebsite.section.put(postData);
+        await this.handlePublishWebsite(
+          this.form.general.active,
+          this.websiteId
+        );
         this.$notify({
           type: "success",
           text: this.$tc("web.public.notify.success")
