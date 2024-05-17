@@ -231,8 +231,8 @@
         memberId: this.memberId
       };
 
-      // if (isNewProject) await this.createProject(body);
-      // else await this.updateProject(body);
+      if (isNewProject) await this.createProject(body);
+      else await this.updateProject(body);
     }
 
     async mounted() {
