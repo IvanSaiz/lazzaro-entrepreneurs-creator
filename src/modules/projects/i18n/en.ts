@@ -6,6 +6,7 @@ export default {
     design: "Design",
     table: {
       title: "Projects",
+      name: "Name",
       time: {
         label: "Remaining time",
         options: {
