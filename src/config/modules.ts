@@ -53,7 +53,7 @@ export const LZ_MODULES = {
   blog: {
     moduleName: "blog",
     label: "Blog",
-    active: true,
+    active: false, // ENABLE WHEN READY
     icon: "browser-icon"
   },
   training: {
@@ -87,3 +87,5 @@ export const LZ_MODULES = {
   //   icon: "certificate-icon"
   // }
 } as const;
+
+export type TOOLS = keyof typeof LZ_MODULES;

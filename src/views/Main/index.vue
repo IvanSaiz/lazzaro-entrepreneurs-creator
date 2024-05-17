@@ -54,20 +54,13 @@
     @auth.State("tools")
     public tools: Tools;
 
-    get lzModules() {
-      return LZ_MODULES;
-    }
-
     collapsed = false;
 
     get visibleLzModules() {
-      return Object.keys(this.lzModules).reduce((lzModules, moduleKey) => {
-        const features = this.lzModules[moduleKey].features;
-        if (
-          !features ||
-          features.some((key: string) => this.tools?.includes?.(key))
-        ) {
-          lzModules[moduleKey] = this.lzModules[moduleKey];
+      return Object.keys(LZ_MODULES).reduce((lzModules, moduleKey) => {
+        const { active } = LZ_MODULES[moduleKey as keyof typeof LZ_MODULES];
+        if (active) {
+          lzModules[moduleKey] = LZ_MODULES[moduleKey];
         }
         return lzModules;
       }, {} as typeof LZ_MODULES);
