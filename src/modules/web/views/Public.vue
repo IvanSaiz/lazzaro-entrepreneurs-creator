@@ -260,8 +260,6 @@
           subtitle: this.$tc("web.public.websiteStatus.publishWebsite.subtitle")
         };
 
-        console.log("Publishing website");
-
         this.onModalOpen();
         await apiWebsite.website.publish(websiteId).catch(() => {
           this.$notify({
