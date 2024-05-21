@@ -99,7 +99,6 @@
   import LzConfirm from "@/components/Confirm.vue";
   import { namespace } from "vuex-class";
   import { apiProjects } from "../api";
-  import { parseFiles } from "@/utils/parseFile";
   import LzEditorInput from "@/components/EditorInput.vue";
   import { getImgURL } from "@/utils/getFormulateImageUrl";
 

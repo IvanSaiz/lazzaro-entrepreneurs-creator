@@ -20,7 +20,6 @@
                 validation="required|mime:image/jpeg,image/png"
                 :validation-name="$t('events.create.generalForm.mainImg')"
                 label-position="before"
-                :uploader="uploadFile"
               )
             .form__row
               formulate-input(
@@ -32,7 +31,6 @@
                 validation="mime:image/jpeg,image/png"
                 :validation-name="$t('events.create.generalForm.images.label')"
                 label-position="before"
-                :uploader="uploadFile"
                 multiple
               )
           .calendar-general__section--right
@@ -181,7 +179,7 @@
   import { api } from "../api";
   import LzEditorInput from "@/components/EditorInput.vue";
   import { ROUTES } from "../router";
-  import toBase64 from "@/utils/toBase64";
+  import { getImgURL } from "@/utils/getFormulateImageUrl";
 
   const auth = namespace("auth");
 
@@ -312,12 +310,14 @@
     }
 
     async onSave(event: CalendarEventForm) {
+      console.log(event);
+
       const images: CalendarEventPostBody["images"] = [];
 
       if (Array.isArray(event.main_image)) {
         images.push({
           default: true,
-          url: event.main_image[0].url
+          url: (await getImgURL(this.form.main_image)) as string
         });
       }
       if (Array.isArray(event.images)) {
@@ -342,12 +342,6 @@
 
       if (this.eventId) this.updateEvent(body);
       else this.createEvent(body);
-    }
-
-    async uploadFile(file: File, progress: (progress: number) => void) {
-      const base64 = await toBase64(file);
-      progress(100);
-      return { url: base64 };
     }
   }
 </script>
