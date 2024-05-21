@@ -310,8 +310,6 @@
     }
 
     async onSave(event: CalendarEventForm) {
-      console.log(event);
-
       const images: CalendarEventPostBody["images"] = [];
 
       if (Array.isArray(event.main_image)) {
