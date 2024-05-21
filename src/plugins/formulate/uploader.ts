@@ -7,8 +7,9 @@ export default async function uploader(
 ) {
   // TODO: Replace with S3 endpoint
   progess(0);
+  const [name] = file.name.split(".");
   const res = await http.post("/aws/upload", {
-    filename: file.name,
+    filename: name,
     imageBase64: await toBase64(file)
   });
   progess(100);
