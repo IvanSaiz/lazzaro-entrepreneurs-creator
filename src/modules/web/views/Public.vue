@@ -13,8 +13,10 @@
 
   formulate-form(
     @submit="onPublicWebSubmit"
+    @validation="onValidation"
     :keep-model-data="true"
     v-if="loaded"
+    #default="{ hasErrors, isLoading }"
   )
     <General v-model:props="form.general"></General>
     <Personalize v-model:props="form.style"></Personalize>
@@ -33,7 +35,7 @@
         class='cancel-btn'
         @click.prevent="$router.push({ name: 'Home' })"
       ) {{ $t('common.actions.cancel') }}
-      lz-button(type="primary" class="save-btn" :disabled='!isFormChanged') {{ $t('common.actions.save') }}
+      lz-button(type="primary" class="save-btn" :disabled="hasErrors || isLoading") {{ $t('common.actions.save') }}
 </template>
 
 <script lang="ts">
@@ -232,9 +234,6 @@
       }
     };
     initialForm: WebProps;
-    get isFormChanged() {
-      return !_.isEqual(this.form, this.initialForm);
-    }
 
     loaded = false;
 
@@ -248,6 +247,38 @@
     }
     onModalOpen(): void {
       this.showModal = true;
+    }
+
+    validation: {
+      hasErrors: boolean;
+      errors: string[];
+      name: string;
+    } = {
+      errors: [],
+      hasErrors: false,
+      name: ""
+    };
+
+    onValidation(validation) {
+      this.validation = validation;
+      if (validation.hasErrors) {
+        console.log("event", validation);
+        validation.errors.forEach(text => {
+          this.$notify({
+            type: "error",
+            text,
+            duration: 60000
+          });
+        });
+        const errorInput = document.querySelector(
+          `[name="${validation.name}"]`
+        );
+        console.log(errorInput);
+        if (errorInput) {
+          errorInput.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+      }
+      // Scroll to the first error
     }
 
     async handlePublishWebsite(active: boolean, websiteId: string) {
@@ -369,9 +400,13 @@
     }
 
     async onPublicWebSubmit(form) {
+      if (this.validation?.hasErrors) {
+        this.onValidation(this.validation);
+        return;
+      }
+
       const hasTemplateChanged =
         this.form.general.templateId !== this.initialForm.general.templateId;
-
       if (hasTemplateChanged) {
         this.modalText = {
           title: this.$tc(

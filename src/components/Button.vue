@@ -1,5 +1,5 @@
 <template lang="pug">
-button(@click='onClick' class='lz-button' :class='buttonClass')
+button(@click='onClick' class='lz-button' :class='buttonClass' v-bind='$attrs')
   slot
 </template>
 

@@ -57,7 +57,7 @@ section.public-impact
           name= "text"
           :label="$t(`web.public.impactForm.text.${index+1}`)"
           :help="$t('common.helper.maxChars', { max: 30 })"
-          validation="required|max:30"
+          validation="max:30"
         )
     formulate-input.impact-item(
           type="text"

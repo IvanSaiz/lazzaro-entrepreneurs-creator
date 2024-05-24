@@ -53,6 +53,7 @@ section.public-whyUs
             type="text"
             name="whyChooseUsTitle"
             v-model="props.title"
+            validation="required"
             :label="$t('web.public.whyChooseUsForm.formTitle')"
             :help="$t('web.public.whyChooseUsForm.titleHelperText')"
           )
@@ -64,6 +65,7 @@ section.public-whyUs
         lz-editor-input(
           :label="$t('web.public.whyChooseUsForm.description')"
           v-model="props.description"
+          required
         )
     .public-whyUs__content
       formulate-input(
