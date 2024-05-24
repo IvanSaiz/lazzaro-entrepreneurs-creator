@@ -203,7 +203,7 @@ export default {
       title: "Personaliza tu web",
       subtitle: "Elige los elementos que encajan contigo",
       form: {
-        logo: "Logotipo*",
+        logo: "Logotipo",
         mainTypography: "Tipografía principal",
         secondTypography: "Tipografía secundaria",
         fonts: {
@@ -227,19 +227,19 @@ export default {
         color: "Fondo"
       },
       form: {
-        image: "Imagen principal*",
+        image: "Imagen principal",
         title: "Título",
         subtitle: "Subtítulo",
         imageHelper: "180x60. Máx 25MB",
         titleHelper: "(Máx 80 carácteres)",
         subtitleHelper: "(Máx 140 carácteres)",
         buttons: {
-          1: "Botón 1*",
-          2: "Botón 2*"
+          1: "Botón 1",
+          2: "Botón 2"
         },
         links: {
-          1: "Link Botón 1*",
-          2: "Link Botón 2*"
+          1: "Link Botón 1",
+          2: "Link Botón 2"
         }
       }
     },
@@ -248,13 +248,13 @@ export default {
       title: "Quienes somos",
       subtitle: "Muestra lo que haces al mundo",
       form: {
-        image: "Imagen principal*",
+        image: "Imagen principal",
         title: "Título",
         subtitle: "Subtítulo",
         imageHelper: "180x60. Máx 25MB",
         titleHelper: "(Máx 80 carácteres)",
         subtitleHelper: "(Máx 140 carácteres)",
-        description: "Descripción*"
+        description: "Descripción"
       },
       features: {
         title: "Características de la empresa",
@@ -266,15 +266,15 @@ export default {
           help: "60x60. Max 25MB"
         },
         titles: {
-          1: "Titulo 1*",
-          2: "Titulo 2*",
+          1: "Titulo 1",
+          2: "Titulo 2",
           3: "Titulo 3",
           4: "Titulo 4",
           helper: "(Máximo 30 carácteres)"
         },
         descriptions: {
-          1: "Texto descriptivo 1*",
-          2: "Texto descriptivo 2*",
+          1: "Texto descriptivo 1",
+          2: "Texto descriptivo 2",
           3: "Texto descriptivo 3",
           4: "Texto descriptivo 4"
         },
@@ -298,21 +298,21 @@ export default {
     whyChooseUsForm: {
       title: "¿Por qué elegirnos?",
       subtitle: "Escribe aquí lo que te diferencia del resto",
-      image: "Imagen principal*",
+      image: "Imagen principal",
       imageHelperText: "180x60. Máx 25MB",
       formTitle: "Título",
       titleHelperText: "(Máx 80 carácteres)",
-      description: "Descripción*",
+      description: "Descripción",
       titles: {
-        1: "Título 1*",
-        2: "Título 2*",
+        1: "Título 1",
+        2: "Título 2",
         3: "Título 3",
         4: "Título 4",
         helper: "(Máx 30 carácteres)"
       },
       descriptions: {
-        1: "Texto descriptivo 1*",
-        2: "Texto descriptivo 2*",
+        1: "Texto descriptivo 1",
+        2: "Texto descriptivo 2",
         3: "Texto descriptivo 3",
         4: "Texto descriptivo 4"
       },
@@ -336,12 +336,12 @@ export default {
         "Da la oportunidad a tus usuarios a que puedan reunirse contigo.",
       image: "Imagen",
       formTitle: "Título",
-      formSubtitle: "Subtítulo*",
+      formSubtitle: "Subtítulo",
       imageHelper: "180x60. Máx 25MB",
       titleHelper: "(Máx 80 carácteres)",
       subtitleHelper: "(Máx 140 carácteres)",
-      button: "Botón* ",
-      link: "Link a tu página de reserva*",
+      button: "Botón ",
+      link: "Link a tu página de reserva",
       design: {
         color: "Color",
         backgroundColor: "Color de fondo",
@@ -362,7 +362,7 @@ export default {
       formSubtitle: "Subtítulo",
       titleHelper: "(Máx 80 carácteres)",
       subtitleHelper: "(Máx 140 carácteres)",
-      link: "Link a tu perfil de Google My Business*"
+      link: "Link a tu perfil de Google My Business"
     },
 
     impactForm: {

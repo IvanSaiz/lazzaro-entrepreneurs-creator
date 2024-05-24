@@ -195,7 +195,7 @@ export default {
       title: "Personalize your website",
       subtitle: "Choose the elements that suit you",
       form: {
-        logo: "Logo*",
+        logo: "Logo",
         mainTypography: "Main Typography",
         secondTypography: "Secondary Typography",
         fonts: {
@@ -222,11 +222,11 @@ export default {
         titleHelper: "(Máx 80 characters)",
         subtitleHelper: "(Máx 140 characters)",
         buttons: {
-          1: "Button 1*",
+          1: "Button 1",
           2: "Button 2"
         },
         links: {
-          1: "Link of button 1*",
+          1: "Link of button 1",
           2: "Link of button 2"
         }
       }
@@ -236,13 +236,13 @@ export default {
       title: "Who we are",
       subtitle: "Show what you do to the world",
       form: {
-        image: "Main image*",
+        image: "Main image",
         title: "Title",
         subtitle: "Subtitle",
         imageHelper: "180x60. Máx 25MB",
         titleHelper: "(Max 80 characters)",
         subtitleHelper: "(Max 140 characters)",
-        description: "Description*"
+        description: "Description"
       },
       features: {
         title: "Company Features",
@@ -254,15 +254,15 @@ export default {
           help: "60x60. Max 25MB"
         },
         titles: {
-          1: "Title 1*",
-          2: "Title 2*",
+          1: "Title 1",
+          2: "Title 2",
           3: "Title 3",
           4: "Title 4",
           helper: "(Max 30 characters)"
         },
         descriptions: {
-          1: "Descriptive text 1*",
-          2: "Descriptive text 2*",
+          1: "Descriptive text 1",
+          2: "Descriptive text 2",
           3: "Descriptive text 3",
           4: "Descriptive text 4"
         },
@@ -286,21 +286,21 @@ export default {
     whyChooseUsForm: {
       title: "¿Why choose us?",
       subtitle: "Write here what makes you different from the rest",
-      image: "Main image*",
+      image: "Main image",
       imageHelperText: "180x60. Máx 25MB",
       formTitle: "Title",
       titleHelperText: "(Máx 80 characters)",
-      description: "Description*",
+      description: "Description",
       titles: {
-        1: "Title 1*",
-        2: "Title 2*",
+        1: "Title 1",
+        2: "Title 2",
         3: "Title 3",
         4: "Title 4",
         helper: "(Max 30 characters)"
       },
       descriptions: {
-        1: "Descriptive text 1*",
-        2: "Descriptive text 2*",
+        1: "Descriptive text 1",
+        2: "Descriptive text 2",
         3: "Descriptive text 3",
         4: "Descriptive text 4"
       },
@@ -323,12 +323,12 @@ export default {
       subtitle: "Give your users the opportunity to meet with you.",
       image: "Image",
       formTitle: "Title",
-      formSubtitle: "Subtitle*",
+      formSubtitle: "Subtitle",
       imageHelper: "180x60. Max 25MB",
       titleHelper: "(Max 80 characters)",
       subtitleHelper: "(Max 140 characters)",
-      button: "Button* ",
-      link: "Link to your booking page*"
+      button: "Button ",
+      link: "Link to your booking page"
     },
 
     reviewsForm: {
@@ -339,7 +339,7 @@ export default {
       formSubtitle: "Subtitle",
       titleHelper: "(Max 80 characters)",
       subtitleHelper: "(Max 140 characters)",
-      link: "Link to your Google My Business profile*"
+      link: "Link to your Google My Business profile"
     },
 
     impactForm: {

@@ -11,14 +11,13 @@ section.public-personalizeWeb
       name="styleLogo"
       v-model="props.logo"
       :help="$t('web.public.personalizeWebForm.form.logoHelper')"
-      validation="mime:image/jpeg,image/png,image/webp,image/webp"
+      validation="required|mime:image/jpeg,image/png,image/webp,image/webp"
     )
     .form-section
       FormulateInput(
         type="select"
         name="styleMainTypography"
         :label="$t('web.public.personalizeWebForm.form.mainTypography')"
-        :label-class="['required']"
         :options="fontOptions"
         v-model="props.mainTypography"
         validation="required"
@@ -29,7 +28,6 @@ section.public-personalizeWeb
         type="select"
         name="styleSecondaryTypography"
         :label="$t('web.public.personalizeWebForm.form.secondTypography')"
-        :label-class="['required']"
         :options="fontOptions"
         v-model="props.secondaryTypography"
         validation="required"

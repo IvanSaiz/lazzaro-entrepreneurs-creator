@@ -1,7 +1,7 @@
 <template>
   <div class="label-container">
     <label :for="context.id">
-      {{ context.label }}
+      {{ context.label }} {{ this.required ? "*" : "" }}
     </label>
     <svg
       class="tooltip-icon"
@@ -34,9 +34,9 @@
     @Prop({ required: false, default: "", type: String })
     tooltip: string;
 
-    mounted() {
-      console.log(this.context);
-    }
+    required = this.context.rules.some(
+      ({ ruleName }) => ruleName === "required"
+    );
   }
 </script>
 
