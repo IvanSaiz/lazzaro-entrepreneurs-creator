@@ -82,7 +82,9 @@
       padding: 10px;
 
       p {
-        margin-bottom: 1rem;
+        &:not(:last-child) {
+          margin-bottom: 1rem;
+        }
         color: $color-white;
       }
     }
