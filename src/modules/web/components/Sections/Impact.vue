@@ -82,7 +82,7 @@ section.public-impact
       .subtitle {
         display: flex;
         justify-content: space-between;
-        margin-bottom: 1rem;
+        margin-bottom: 4rem;
         p {
           font-size: 16px;
         }
@@ -91,11 +91,20 @@ section.public-impact
     &__content {
       .formulate-input-grouping {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(4, minmax(0, 1fr));
         align-items: flex-start;
         gap: 44px;
 
+        @media screen and (max-width: 768px) {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        @media screen and (max-width: 480px) {
+          grid-template-columns: minmax(0, 1fr);
+        }
+
         .formulate-input-group-repeatable {
+          flex-shrink: 0;
           height: 100%;
           display: flex;
           flex-direction: column;

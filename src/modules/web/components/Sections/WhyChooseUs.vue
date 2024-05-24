@@ -137,31 +137,32 @@ section.public-whyUs
       gap: 22px;
 
       > :first-child {
-        min-width: 140px;
-
-        .formulate-input-element {
-          width: 140px;
-        }
+        flex-basis: 0;
       }
     }
 
     .form-section {
       display: flex;
       flex-direction: column;
+      align-items: flex-start;
 
       .section-row {
         display: flex;
-        width: 970px;
+        width: 100%;
         align-items: center;
 
         > :first-child {
-          width: 82%;
+          width: 90%;
         }
 
         > :last-child {
-          flex-grow: 1;
-          margin-left: 18px;
+          flex-shrink: 1;
+          margin-left: 1rem;
         }
+      }
+
+      .lz-editor-input {
+        width: 100%;
       }
     }
 
@@ -170,21 +171,21 @@ section.public-whyUs
 
       .formulate-input-grouping {
         width: 100%;
-        display: inline-flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        gap: 4em;
-        flex-wrap: wrap;
+        display: grid;
+        gap: 2em;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+
+        @media screen and (max-width: 768px) {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
       }
 
       .formulate-input-group-repeatable {
-        max-width: 256px;
-        min-width: 220px;
         flex-grow: 1;
 
         display: flex;
         flex-direction: column;
-        gap: 24px;
+        gap: 0.6em;
       }
     }
   }
