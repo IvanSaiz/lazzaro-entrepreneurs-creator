@@ -11,6 +11,7 @@ section.public-personalizeWeb
       name="styleLogo"
       v-model="props.logo"
       :help="$t('web.public.personalizeWebForm.form.logoHelper')"
+      validation="mime:image/jpeg,image/png,image/webp,image/webp"
     )
     .form-section
       FormulateInput(

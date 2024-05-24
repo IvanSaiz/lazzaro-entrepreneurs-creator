@@ -65,14 +65,13 @@ form {
   textarea,
   select {
     border-radius: $border-radius-default;
-    border: solid 1px $color-black-05;
+    border: solid 1px $color-black-06;
     box-sizing: border-box;
     background-color: $color-white;
     color: $color-black-01;
     font-size: 14px;
     line-height: 1.28;
     height: 52px;
-    margin-top: 8px;
     padding: 16px;
     transition: background-color $transition-default,
       border-color $transition-default;
@@ -86,7 +85,7 @@ form {
       background-color: $color-black-07;
 
       &:hover {
-        border-color: $color-black-05;
+        border-color: $color-black-06;
         cursor: not-allowed;
       }
     }
@@ -232,7 +231,7 @@ form {
         transform: translateY(-50%);
         position: absolute;
         left: $switch-spacing;
-        transition: all .2s ease-out;
+        transition: all 0.2s ease-out;
       }
 
       &:hover {
@@ -247,7 +246,9 @@ form {
         &:before {
           background-color: $color-green-01;
           border-color: $color-green-01;
-          left: calc(100% - $switch-spacing - $height * (2 / 3) - $border-width);
+          left: calc(
+            100% - $switch-spacing - $height * (2 / 3) - $border-width
+          );
           transform: translateY(-50%);
         }
 

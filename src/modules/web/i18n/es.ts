@@ -126,6 +126,11 @@ export default {
         facebook: "Link de Facebook",
         twitter: "Link de Twitter",
         whatsapp: "Link de Whatsapp",
+        // whatsappHelp:
+        //   "No special characters like '+' or spaces, see <a target='_blank' href='https://faq.whatsapp.com/502291734918768/?helpref=uf_share&cms_platform=android'>here</a> for WhatsApp Business users or <a target='_blank' href='https://faq.whatsapp.com/5913398998672934/?helpref=uf_share'>here</a> for WhatsApp users. Ex: https://wa.me/1XXXXXXXXXX",
+        whatsappHelp: `<p>Consulta <a target='_blank' href='https://faq.whatsapp.com/502291734918768/?helpref=uf_share&cms_platform=android'>aquí</a> si eres usuario de WhatsApp Business o averigua <a target='_blank' href='https://faq.whatsapp.com/5913398998672934/?helpref=uf_share'>aquí</a> como generar un enlace de conversación.</p>
+          <p>Ej de enlace: https://wa.me/1XXXXXXXXXX</p>
+          <p>Remplaza '1XXXXXXXX' por tu número de teléfono sin espacios ni caracteres especiales como '-' y '+'.</p>`,
         linkedin: "Link de LinkedIn",
         web: "Link de Web Secundaria",
         instagram: "Link de Instagram"

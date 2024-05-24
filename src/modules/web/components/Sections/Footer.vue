@@ -47,6 +47,7 @@ section.public-footer
           type="text"
           name="footerSocialWhatsapp"
           v-model="props.social.whatsapp"
+          :tooltip="$t('web.public.footer.socialForm.whatsappHelp')"
           :label="$t('web.public.footer.socialForm.whatsapp')"
         )
       .form__row  

@@ -43,6 +43,7 @@
       &[data-classification="text-color"] {
         .formulate-input-element {
           position: relative;
+          $icon-size: 35px;
 
           input {
             &[type="text"] {
@@ -53,7 +54,8 @@
               opacity: 0;
               position: absolute;
               right: 0;
-              width: 40px;
+              padding: 0;
+              width: $icon-size;
               z-index: 2;
 
               &:hover {
@@ -66,11 +68,12 @@
             background-color: $color-white;
             position: absolute;
             right: 8px;
-            top: 15px;
+            top: 50%;
+            transform: translateY(-50%);
 
             svg {
-              height: 35px;
-              width: 35px;
+              height: $icon-size;
+              width: $icon-size;
               stroke: $color-black-01;
               stroke-width: 1px;
             }

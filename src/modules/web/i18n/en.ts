@@ -125,6 +125,8 @@ export default {
         facebook: "Link to Facebook",
         twitter: "Link to Twitter",
         whatsapp: "Link to Whatsapp",
+        whatsappHelp:
+          "No special characters like '+' or spaces, see <a target='_blank' href='https://faq.whatsapp.com/502291734918768/?helpref=uf_share&cms_platform=android'>here</a> for WhatsApp Business users or <a target='_blank' href='https://faq.whatsapp.com/5913398998672934/?helpref=uf_share'>here</a> for WhatsApp users. Ex: https://wa.me/1XXXXXXXXXX",
         linkedin: "Link to LinkedIn",
         web: "Link to Secondary web",
         instagram: "Link to Instagram"

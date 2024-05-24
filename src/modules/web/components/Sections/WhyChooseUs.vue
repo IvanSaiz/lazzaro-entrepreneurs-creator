@@ -69,6 +69,7 @@ section.public-whyUs
         type="group"
         name="whyChooseUsSubTitles"
         v-model="props.subtitles"
+        class="reasons"
         #default="{index}"
       )
         formulate-input.text-item(
@@ -168,20 +169,22 @@ section.public-whyUs
       margin-top: 4px;
 
       .formulate-input-grouping {
+        width: 100%;
         display: inline-flex;
+        justify-content: space-between;
         align-items: flex-start;
-        gap: 44px;
+        gap: 4em;
+        flex-wrap: wrap;
       }
 
-      .text-item {
+      .formulate-input-group-repeatable {
+        max-width: 256px;
+        min-width: 220px;
+        flex-grow: 1;
+
         display: flex;
         flex-direction: column;
-        width: 256px;
         gap: 24px;
-
-        formulate-input {
-          width: 100%;
-        }
       }
     }
   }

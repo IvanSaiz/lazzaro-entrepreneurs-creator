@@ -22,6 +22,8 @@ import Mixin from "./mixin";
 import { Chrome } from "vue-color";
 import Vue2MultipleVModels from "vue2-multiple-vmodels";
 import ColorPicker from "./components/Input/ColorPicker.vue";
+import Label from "@/components/Label.vue";
+import VTooltip from "v-tooltip";
 
 // plugins
 Vue.use(VueI18n);
@@ -29,15 +31,26 @@ Vue.use(VueNotification);
 Vue.use(VueTablerIcons);
 Vue.use(VueTelInput);
 Vue.use(Vue2MultipleVModels);
+Vue.use(VTooltip);
 
 // formulate
 Vue.component("FormulateInputToggle", FormulateInputToggle);
 Vue.component("FormulateInputTextColor", FormulateInputTextColor);
 Vue.component("ColorText", ColorText);
+Vue.component("Label", Label);
 
 Vue.use(VueFormulate, {
   plugins: [es],
   locale: "es",
+  mimes: {
+    webp: "image/webp"
+  },
+  slotComponents: {
+    label: "Label"
+  },
+  slotProps: {
+    label: ["tooltip"]
+  },
   uploader,
   library: {
     toggle: {

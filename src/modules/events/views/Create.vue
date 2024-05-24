@@ -17,7 +17,7 @@
                 :v-model="form.main_image"
                 :label="$t('events.create.generalForm.mainImg')"
                 :label-class="['required']"
-                validation="required|mime:image/jpeg,image/png"
+                validation="required|mime:image/jpeg,image/png,image/webp"
                 :validation-name="$t('events.create.generalForm.mainImg')"
                 label-position="before"
               )
@@ -28,7 +28,7 @@
                 :v-model="form.images"
                 :label="$t('events.create.generalForm.images.label')"
                 :label-class="['required']"
-                validation="mime:image/jpeg,image/png"
+                validation="mime:image/jpeg,image/png,image/webp"
                 :validation-name="$t('events.create.generalForm.images.label')"
                 label-position="before"
                 multiple

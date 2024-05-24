@@ -19,7 +19,7 @@
           :label="$t('NFTs.createNFT.form.image.header')"
           :label-class="['required']"
           label-position="before"
-          validation="required|mime:image/jpeg,image/png"
+          validation="required|mime:image/jpeg,image/png,image/webp"
         />
 
         <div class="input__label">
