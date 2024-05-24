@@ -37,7 +37,9 @@
 <style lang="scss">
   .design-modal {
     .lz-box {
-      margin-inline: 1rem;
+      margin: 1rem;
+      max-height: 100vh;
+      overflow-y: auto;
       background-color: $color-black-07;
       animation: fade 0.3s ease 1 both alternate;
     }

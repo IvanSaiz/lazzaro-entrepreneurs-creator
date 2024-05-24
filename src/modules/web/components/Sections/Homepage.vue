@@ -132,6 +132,16 @@ section.public-homepage
       display: grid;
       gap: 2rem;
       grid-template-columns: repeat(3, 1fr);
+
+      overflow-x: auto;
+
+      @media screen and (max-width: 768px) {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      @media screen and (max-width: 480px) {
+        grid-template-columns: 1fr;
+      }
     }
 
     .option .homepage.layout {

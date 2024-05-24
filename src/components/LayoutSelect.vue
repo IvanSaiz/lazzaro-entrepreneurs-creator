@@ -47,7 +47,7 @@
 
 <style lang="scss">
   .layout-select {
-    margin: 1rem;
+    padding: 0.25rem;
     margin-bottom: 3rem;
     display: grid;
     align-items: center;

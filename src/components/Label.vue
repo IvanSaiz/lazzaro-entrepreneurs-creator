@@ -1,7 +1,8 @@
 <template>
   <div class="label-container">
     <label :for="context.id">
-      {{ context.label }} {{ this.required ? "*" : "" }}
+      {{ context.label
+      }}<span class="asterisk">{{ this.required ? "*" : "" }}</span>
     </label>
     <svg
       class="tooltip-icon"
@@ -60,6 +61,10 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+
+    .asterisk {
+      color: $color-red;
+    }
   }
 
   .tooltip-icon {
