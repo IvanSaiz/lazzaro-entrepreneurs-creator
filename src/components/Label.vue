@@ -9,8 +9,10 @@
       v-tooltip="{
         content: tooltip,
         classes: 'bubble',
-        hideOnTargetClick: true,
-        autoHide: false
+        hideOnTargetClick: false,
+        trigger: 'hover click',
+        autoHide: false,
+        delay: { show: 0, hide: 100 }
       }"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 100 100"
