@@ -39,6 +39,7 @@ section.public-bookings
         label-position="before"
         name="bookingsImgUrl"
         v-model="props.imgUrl"
+        validation="required|mime:image/jpeg,image/png,image/webp,image/webp"
         :help="$t('web.public.bookingsForm.imageHelper')"
       )
       .form-section
@@ -47,6 +48,7 @@ section.public-bookings
             type="text"
             name="bookingsTitle"
             v-model="props.title"
+            validation="required"
             :label="$t('web.public.bookingsForm.formTitle')"
             :help="$t('web.public.bookingsForm.titleHelper')"
           )
@@ -60,6 +62,7 @@ section.public-bookings
             type="text"
             name="bookingsSubtitle"
             v-model="props.subtitle"
+            validation="required"
             :label="$t('web.public.bookingsForm.formSubtitle')"
             :help="$t('web.public.bookingsForm.subtitleHelper')"
           )
@@ -73,12 +76,14 @@ section.public-bookings
             type="text"
             name="bookingsButtonText"
             v-model="props.buttonText"
+            validation="required"
             :label="$t('web.public.bookingsForm.button')"
           )
           formulate-input(
             type="text"
             name="bookingsButtonUrl"
             v-model="props.buttonUrl"
+            validation="required"
             :label="$t('web.public.bookingsForm.link')"
           )
 </template>
@@ -128,32 +133,32 @@ section.public-bookings
       gap: 22px;
 
       > :first-child {
-        min-width: 140px;
+        flex-basis: 0;
       }
     }
 
     .form-section {
+      width: 100%;
       display: flex;
       flex-direction: column;
 
       .section-row {
         display: flex;
-        width: 970px;
         align-items: center;
+        gap: 1.2rem;
 
         > :first-child {
-          width: 82%;
+          flex-grow: 1;
+          flex-shrink: 1;
         }
 
         > :last-child {
-          flex-grow: 1;
-          margin-left: 18px;
+          flex-grow: 0;
         }
       }
 
       .links-row {
         display: flex;
-        width: 970px;
         gap: 22px;
 
         > :first-child {

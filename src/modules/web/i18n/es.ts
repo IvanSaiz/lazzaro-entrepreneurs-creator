@@ -258,26 +258,10 @@ export default {
       },
       features: {
         title: "Características de la empresa",
-        icon: {
-          1: "Icono 1",
-          2: "Icono 2",
-          3: "Icono 3",
-          4: "Icono 4",
-          help: "60x60. Max 25MB"
-        },
-        titles: {
-          1: "Titulo 1",
-          2: "Titulo 2",
-          3: "Titulo 3",
-          4: "Titulo 4",
-          helper: "(Máximo 30 carácteres)"
-        },
-        descriptions: {
-          1: "Texto descriptivo 1",
-          2: "Texto descriptivo 2",
-          3: "Texto descriptivo 3",
-          4: "Texto descriptivo 4"
-        },
+        icon: "Caracteristica {index}",
+        iconHelp: "60x60. Max 25MB",
+        titles: "Título {index}",
+        descriptions: "Descripción {index}",
         button: "Botón",
         link: "Link del botón"
       },

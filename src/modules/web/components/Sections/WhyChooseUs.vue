@@ -44,6 +44,7 @@ section.public-whyUs
         label-position="before"
         name="whyChooseUsImgUrl"
         v-model="props.imgUrl"
+        validation="required|mime:image/jpeg,image/png,image/webp,image/webp"
         :help="$t('web.public.whyChooseUsForm.imageHelperText')"
       )
       .form-section

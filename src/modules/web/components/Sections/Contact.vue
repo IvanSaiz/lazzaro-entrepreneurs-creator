@@ -20,6 +20,7 @@ section.public-contact
           type="text"
           name="contactTitle"
           v-model="props.title"
+          validation="required"
           :label="$t('web.public.contactForm.form.title')"
         )
         formulate-input(
@@ -33,6 +34,7 @@ section.public-contact
           type="text"
           name="contactSubTitle"
           v-model="props.subTitle"
+          validation="required"
           :label="$t('web.public.contactForm.form.subtitle')"
         )
         formulate-input(

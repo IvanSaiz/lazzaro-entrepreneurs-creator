@@ -17,7 +17,7 @@
               name="logo"
               :label="$t('auth.onboarding.stepStyle.form.logo.label')"
               :help="$t('auth.onboarding.stepStyle.form.logo.help')"
-              validation="mime:image/jpeg,image/png,image/webp"
+              validation="mime:image/jpeg,image/png,image/webp,image/svg+xml"
             )
         .form__colors
           .form__row

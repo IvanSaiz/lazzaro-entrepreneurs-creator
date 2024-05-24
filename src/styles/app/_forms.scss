@@ -345,8 +345,9 @@ form {
                 background-color: $color-white;
                 border: 1px dashed $color-black-05;
                 border-radius: 15px;
-                height: 135px;
                 width: 100%;
+                max-height: 135px;
+                aspect-ratio: 1;
                 margin-bottom: 10px;
                 position: relative;
               }
@@ -506,9 +507,13 @@ form {
   &-errors {
     margin-top: 5px;
 
+    &:last-child {
+      margin-bottom: 1em;
+    }
+
     & > li {
       color: $color-red;
-      font-size: 11px;
+      font-size: 12px;
       overflow: hidden;
       text-overflow: ellipsis;
       line-height: 1.2;

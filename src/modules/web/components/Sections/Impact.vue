@@ -44,6 +44,7 @@ section.public-impact
     name="impactData"
     :value="props.data"
     #default="{index}"
+    validation="min:2,length|max:4,length"
   ).public-impact__content
     formulate-input.impact-item(
           type="image"
@@ -55,6 +56,8 @@ section.public-impact
           type="text"
           name= "text"
           :label="$t(`web.public.impactForm.text.${index+1}`)"
+          :help="$t('common.helper.maxChars', { max: 30 })"
+          validation="required|max:30"
         )
     formulate-input.impact-item(
           type="text"

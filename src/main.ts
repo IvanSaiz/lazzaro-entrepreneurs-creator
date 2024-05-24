@@ -68,7 +68,8 @@ Vue.use(VueFormulate, {
       classification: "color-text",
       component: "ColorText"
     }
-  }
+  },
+  validationNameStrategy: ["validationName", "label", "name", "type"]
 });
 
 Vue.config.productionTip = false;

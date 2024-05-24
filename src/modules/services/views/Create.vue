@@ -24,7 +24,7 @@
                 v-model="form.image_url"
                 :label="$t('services.create.form.image')"
                 :label-class="['required']"
-                validation="required|mime:image/jpeg,image/png,image/webp"
+                validation="required|mime:image/jpeg,image/png,image/webp,image/svg+xml"
                 :validation-name="$t('services.create.form.image')"
                 label-position="before"
               )

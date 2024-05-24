@@ -47,13 +47,13 @@
 
           input {
             &[type="text"] {
-              padding-right: 45px;
+              width: 100%;
             }
 
             &[type="color"] {
               opacity: 0;
               position: absolute;
-              right: 0;
+              right: 8px;
               padding: 0;
               width: $icon-size;
               z-index: 2;

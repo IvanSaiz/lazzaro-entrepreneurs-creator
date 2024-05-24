@@ -41,6 +41,7 @@ section.public-homepage
               type="text"
               name="homepageTitle"
               v-model="props.title"
+              validation="required"
               :label="$t('web.public.homepageForm.form.title')"
               :help="$t('web.public.homepageForm.form.titleHelper')"
             )
@@ -54,6 +55,7 @@ section.public-homepage
               type="text"
               name="homepageSubtitle"
               v-model="props.subTitle"
+              validation="required"
               :label="$t('web.public.homepageForm.form.subtitle')"
               :help="$t('web.public.homepageForm.form.subtitleHelper')"
               )
@@ -66,12 +68,14 @@ section.public-homepage
           formulate-input(
               type="text"
               name="homepageFirstButtonText"
+              validation="required"
               v-model="props.firstButtonText"
               :label="$t(`web.public.homepageForm.form.buttons.1`)"
             )
           formulate-input(
               type="text"
               name="homepageFirstButtonLink"
+              validation="required"
               v-model="props.firstButtonLink"
               :label="$t(`web.public.homepageForm.form.links.1`)"
             )
@@ -127,6 +131,84 @@ section.public-homepage
 </script>
 
 <style lang="scss">
+  .public-homepage {
+    &__header {
+      h3 {
+        color: $color-black-03;
+        font-size: 16px;
+        font-weight: 400;
+      }
+    }
+
+    .form__row {
+      display: grid;
+      grid-template-columns: min-content auto;
+      gap: 10px;
+
+      > :first-child {
+        min-width: 140px;
+      }
+    }
+
+    .form-section {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      .section-row {
+        display: flex;
+
+        > :first-child {
+          width: 82%;
+        }
+
+        > :last-child {
+          flex-grow: 1;
+          margin-left: 18px;
+        }
+      }
+
+      .button-row {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+
+        .formulate-input {
+          flex-grow: 1;
+        }
+      }
+
+      .text-color-row {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        > :first-child {
+          flex-grow: 1;
+        }
+
+        > :last-child {
+          max-width: fit-content;
+        }
+      }
+
+      &__cta {
+        display: flex;
+        margin-top: 10px;
+
+        > :first-child {
+          width: 24%;
+        }
+
+        > :last-child {
+          flex-grow: 1;
+          margin-left: 18px;
+        }
+      }
+    }
+  }
+
   .layout-select {
     &:has(.homepage) {
       display: grid;

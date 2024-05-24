@@ -66,5 +66,9 @@ export default {
     Servicios: "Servicios",
     Blog: "Blog",
     Formación: "Formación"
+  },
+  helper: {
+    maxChars: "(Máx {max} carácteres)",
+    image: "{w}x{h}. Max {size}"
   }
 };

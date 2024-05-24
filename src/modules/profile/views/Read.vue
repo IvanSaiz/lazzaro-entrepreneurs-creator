@@ -19,7 +19,7 @@
                 :label="$t('profile.read.form.image.label')"
                 :label-class="['required']"
                 :help="$t('profile.read.form.image.help')"
-                validation="required|mime:image/jpeg,image/png,image/webp"
+                validation="required|mime:image/jpeg,image/png,image/webp,image/svg+xml"
               )
           .form__row
             formulate-input(

@@ -26,6 +26,7 @@ section.public-team
           type="text"
           name="teamTitle"
           v-model="props.title"
+          validation="required"
           :label="$t('web.public.teamForm.header.title')"
           :help="$t('web.public.teamForm.header.titleHelperText')"
         )
@@ -39,6 +40,7 @@ section.public-team
           type="text"
           name="teamSubtitle"
           v-model="props.subTitle"
+          validation="required"
           :label="$t('web.public.teamForm.header.subtitle')"
           :help="$t('web.public.teamForm.header.subtitleHelperText')"
         )
@@ -60,6 +62,7 @@ section.public-team
       formulate-input(
         type="image"
         name="picture"
+        validation="mime:image/jpeg,image/png,image/webp,image/svg+xml"
         :label="$t('web.public.teamForm.photo.label')"
         :help="$t('web.public.teamForm.photo.help')"
       )
@@ -171,21 +174,22 @@ section.public-team
     &__title {
       display: flex;
       align-items: flex-start;
-      gap: 30px;
+      flex-wrap: wrap;
+      gap: 2rem;
       width: 100%;
 
       .team-section {
         display: flex;
-        width: 563px;
-        gap: 18px;
+        flex-grow: 1;
+        gap: 0.25rem;
         align-items: center;
 
-        .formulate-input-element--text {
-          width: 382px;
+        > *:first-child {
+          flex-grow: 1;
         }
 
         .formulate-input[data-classification="text-color"] {
-          width: 153px;
+          max-width: 12rem;
         }
       }
     }

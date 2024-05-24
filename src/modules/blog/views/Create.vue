@@ -23,7 +23,7 @@
             :v-model="form.icon"
             :label="$t('blog.create.form.mainImg')"
             :label-class="['required']"
-            validation="required|mime:image/jpeg,image/png,image/webp"
+            validation="required|mime:image/jpeg,image/png,image/webp,image/svg+xml"
             :validation-name="$t('blog.create.form.mainImg')"
             label-position="before"
           />
