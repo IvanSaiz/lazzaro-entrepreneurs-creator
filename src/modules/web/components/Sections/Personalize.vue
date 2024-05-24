@@ -97,6 +97,10 @@ section.public-personalizeWeb
         display: flex;
         gap: 30px;
         flex-wrap: wrap;
+
+        > * {
+          flex-grow: 1;
+        }
       }
     }
   }
