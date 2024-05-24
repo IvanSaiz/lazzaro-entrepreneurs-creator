@@ -209,9 +209,13 @@ section.public-whoWeAre
     &__content {
       .formulate-input-grouping {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(4, minmax(0, 1fr));
         align-items: flex-start;
-        gap: 44px;
+        gap: 2rem;
+
+        @media (max-width: $br-lg) {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
 
         .formulate-input-group-repeatable {
           height: 100%;
