@@ -149,7 +149,7 @@ interface HomePage {
 }
 
 interface Impact {
-  enabled: true;
+  enabled: boolean;
   data: Datum[];
   design: {
     color: string;
@@ -167,7 +167,7 @@ interface Datum {
 }
 
 interface Reviews {
-  enabled: true;
+  enabled: boolean;
   url: string;
   title: string;
   subtitle: string;

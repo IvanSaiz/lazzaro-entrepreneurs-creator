@@ -101,7 +101,7 @@
 
     form: WebProps = {
       general: {
-        active: true,
+        active: false,
         url: "",
         templateId: ""
       },
@@ -129,7 +129,7 @@
         secondButtonText: ""
       },
       aboutUs: {
-        enabled: true,
+        enabled: false,
         imgUrl: "",
         title: "",
         titleColor: "",
@@ -137,7 +137,7 @@
         subTitleColor: "",
         description: "",
         features: {
-          enabled: true,
+          enabled: false,
           icons: [],
           buttons: []
         },
@@ -147,7 +147,7 @@
         }
       },
       whyChooseUs: {
-        enabled: true,
+        enabled: false,
         imgUrl: "",
         title: "",
         titleColor: "",
@@ -159,7 +159,7 @@
         }
       },
       bookings: {
-        enabled: true,
+        enabled: false,
         imgUrl: "",
         title: "",
         titleColor: "",
@@ -174,7 +174,7 @@
         }
       },
       reviews: {
-        enabled: true,
+        enabled: false,
         title: "",
         titleColor: "",
         subtitle: "",
@@ -182,7 +182,7 @@
         url: ""
       },
       impact: {
-        enabled: true,
+        enabled: false,
         data: [],
         design: {
           color: "#EFEFEF",
@@ -192,7 +192,7 @@
         }
       },
       team: {
-        enabled: true,
+        enabled: false,
         title: "",
         titleColor: "",
         subTitle: "",
@@ -262,7 +262,6 @@
     onValidation(validation) {
       this.validation = validation;
       if (validation.hasErrors) {
-        console.log("event", validation);
         validation.errors.forEach(text => {
           this.$notify({
             type: "error",
@@ -273,7 +272,6 @@
         const errorInput = document.querySelector(
           `[name="${validation.name}"]`
         );
-        console.log(errorInput);
         if (errorInput) {
           errorInput.scrollIntoView({ behavior: "smooth", block: "center" });
         }
