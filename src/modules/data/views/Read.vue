@@ -274,7 +274,7 @@
           margin: 0;
         }
         .formulate-input {
-          width: fill;
+          width: stretch;
           max-width: 200px;
           select,
           .formulate-input-element--select {

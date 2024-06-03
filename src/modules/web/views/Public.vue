@@ -17,6 +17,7 @@
     :keep-model-data="true"
     v-if="loaded"
     #default="{ hasErrors, isLoading }"
+    error-behavior="live"
   )
     <General v-model:props="form.general"></General>
     <Personalize v-model:props="form.style"></Personalize>
@@ -397,12 +398,7 @@
         });
     }
 
-    async onPublicWebSubmit(form) {
-      if (this.validation?.hasErrors) {
-        this.onValidation(this.validation);
-        return;
-      }
-
+    handleTemplateChange() {
       const hasTemplateChanged =
         this.form.general.templateId !== this.initialForm.general.templateId;
       if (hasTemplateChanged) {
@@ -417,44 +413,57 @@
 
         this.onModalOpen();
       }
+    }
 
-      const postData: PublicWebFormData = {
-        active: form.active,
-        templateId: form.chosenTemplateId,
-        websiteId: this.websiteId,
-        type: "web",
-        properties: _.cloneDeep(this.form)
-      };
-
-      const mapImgURL = async <T extends object>(obj: T, field: keyof T) => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        obj[field] = (await getImgURL(obj[field])) as any;
-      };
-      const {
-        aboutUs,
-        style,
-        homePage,
-        whyChooseUs,
-        bookings,
-        impact,
-        team,
-        footer
-      } = postData.properties;
-
-      await Promise.all([
-        mapImgURL(aboutUs, "imgUrl"),
-        mapImgURL(style, "logo"),
-        mapImgURL(homePage, "mainImage"),
-        mapImgURL(whyChooseUs, "imgUrl"),
-        mapImgURL(bookings, "imgUrl"),
-        mapImgURL(impact.design, "backgroundImage"),
-        mapImgURL(footer.design, "backgroundImage"),
-        Promise.all(aboutUs.features.icons.map(i => mapImgURL(i, "url"))),
-        Promise.all(impact.data.map(i => mapImgURL(i, "url"))),
-        Promise.all(team.members.map(m => mapImgURL(m, "picture")))
-      ]);
-
+    async onPublicWebSubmit(form) {
       try {
+        if (this.validation?.hasErrors) {
+          this.onValidation(this.validation);
+          return;
+        }
+
+        this.handleTemplateChange();
+
+        console.dir(this.form, form);
+
+        const postData: PublicWebFormData = {
+          active: form.active,
+          templateId: form.chosenTemplateId,
+          websiteId: this.websiteId,
+          type: "web",
+          properties: _.cloneDeep(this.form)
+        };
+
+        const mapImgURL = async <T extends object>(obj: T, field: keyof T) => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          obj[field] = (await getImgURL(obj[field])) as any;
+        };
+        const {
+          aboutUs,
+          style,
+          homePage,
+          whyChooseUs,
+          bookings,
+          impact,
+          team,
+          footer
+        } = postData.properties;
+
+        await Promise.all([
+          mapImgURL(aboutUs, "imgUrl"),
+          mapImgURL(style, "logo"),
+          mapImgURL(homePage, "mainImage"),
+          mapImgURL(whyChooseUs, "imgUrl"),
+          mapImgURL(bookings, "imgUrl"),
+          mapImgURL(impact.design, "backgroundImage"),
+          mapImgURL(footer.design, "backgroundImage"),
+          Promise.all(aboutUs.features.icons.map(i => mapImgURL(i, "url"))),
+          Promise.all(impact.data.map(i => mapImgURL(i, "url"))),
+          Promise.all(team.members.map(m => mapImgURL(m, "picture")))
+        ]);
+
+        await mapImgURL(footer.info.transparency, "accountability");
+
         await apiWebsite.section.put(postData);
         await this.handlePublishWebsite(
           this.form.general.active,

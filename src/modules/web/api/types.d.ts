@@ -114,7 +114,7 @@ interface Info {
 
 interface Transparency {
   description: string;
-  accountability: string;
+  accountability: Image;
 }
 
 interface Social {

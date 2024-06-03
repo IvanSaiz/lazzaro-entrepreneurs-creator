@@ -12,6 +12,7 @@
   import { getAuth, hasAuth } from "./api/core/auth";
   import LzLoader from "@/modules/loader/components/Loader.vue";
   import http from "@/api/core/http";
+  import { apiOrganizations } from "./modules/organization/api";
   const auth = namespace("auth");
 
   @Component({
@@ -75,19 +76,19 @@
       );
     }
 
-    // async checkBlockedStatus(memberId: string) {
-    //   const {
-    //     data: { PlatformSubscription } = {}
-    //   } = await apiOngs.getOrganizationPlan(memberId);
+    async checkBlockedStatus(memberId: string) {
+      const {
+        data: { PlatformSubscription } = {}
+      } = await apiOrganizations.getOrganizationPlan(memberId);
 
-    //   if (!PlatformSubscription) {
-    //     this.setBlockedBySubscriptionPlan(true);
+      if (!PlatformSubscription) {
+        this.setBlockedBySubscriptionPlan(true);
 
-    //     if (this.$route.name !== "organizationRead") {
-    //       this.$router.push({ name: "organizationRead" });
-    //     }
-    //   }
-    // }
+        if (this.$route.name !== "organizationRead") {
+          this.$router.push({ name: "organizationRead" });
+        }
+      }
+    }
   }
 </script>
 

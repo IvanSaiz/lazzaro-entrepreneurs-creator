@@ -83,6 +83,7 @@ section.public-footer
         v-model="props.info.transparency.accountability"
         :label="$t('web.public.footer.termsForm.accountability')"
         :add-label="$t('web.public.footer.termsForm.add')"
+        :uploader="handleUpload"
         :multiple="true"
       )
 </template>
@@ -97,5 +98,9 @@ section.public-footer
   @Component({ name: "Footer", components: { DesignModal, LzEditorInput } })
   export default class Footer extends Vue {
     @VModel() props!: FooterProps;
+
+    handleUpload(file: File) {
+      console.log(file);
+    }
   }
 </script>
