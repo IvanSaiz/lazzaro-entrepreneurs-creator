@@ -78,7 +78,7 @@
       </FormulateForm>
     </LzModal>
     <LzButton type="secondary" @click="openModal">
-      {{ $t("projects.read.design.button") }}
+      {{ $t("common.design.button") }}
       <EditIcon size="28" stroke-width="1.5" />
     </LzButton>
   </div>

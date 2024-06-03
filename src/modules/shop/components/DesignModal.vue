@@ -33,7 +33,7 @@
       </FormulateForm>
     </LzModal>
     <LzButton type="secondary" @click="openModal">
-      {{ $t("shop.read.design") }}
+      {{ $t("common.design.button") }}
       <EditIcon size="28" stroke-width="1.5" />
     </LzButton>
   </div>
