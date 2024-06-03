@@ -1,7 +1,10 @@
 module.exports = {
-  // devServer: {
-  //   https: true
-  // },
+  devServer: {
+    host: "localhost",
+    port: 3000,
+    hot: true
+  },
+  publicPath: "/",
   css: {
     loaderOptions: {
       sass: {
