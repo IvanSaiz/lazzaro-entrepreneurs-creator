@@ -23,18 +23,7 @@ export default {
         }
       }
     },
-    logosForm: {
-      title: "Logos",
-      subtitle:
-        "Hemos dejado este espacio para que añadas logos de cosas chulas",
-      logo: {
-        label: "Logotipo",
-        help: "180x60, máx 25MB",
-        limit: "No puedes agregar más de 10 logos",
-        delete: "Logotipo eliminado correctamente",
-        error: "Error al eliminar el logotipo"
-      }
-    },
+
     chooseTemplate: {
       title: "Plantilla",
       template1: "Moderna",
