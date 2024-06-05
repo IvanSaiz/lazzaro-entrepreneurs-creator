@@ -22,7 +22,7 @@
   import LzButton from "@/components/Button.vue";
   import LzBox from "@/components/Box.vue";
   import { namespace } from "vuex-class";
-  import { apiOngs } from "../api";
+  import { apiMembers } from "@/modules/auth/api";
   const auth = namespace("auth");
 
   @Component({
@@ -44,7 +44,7 @@
     }
 
     mounted() {
-      apiOngs.getMember(this.memberId).then(data => {
+      apiMembers.getById(this.memberId).then(data => {
         this.name = this.capitalizeFirstLetter(data.firstName);
 
         // apiOngs.getWallet(data.walletId).then(response => {

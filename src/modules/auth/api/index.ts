@@ -1,5 +1,5 @@
 import login from "./login";
-import members from "./member";
+import * as members from "./member";
 import tools from "./tools";
 import style from "./style";
 import platform from "./platform";
