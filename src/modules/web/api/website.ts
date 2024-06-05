@@ -36,5 +36,10 @@ export default {
     unpublish: (websiteId: string): Promise<any> => {
       return http.post(`websites/${websiteId}/unpublish`, { noAuth: false });
     }
+  },
+  templates: {
+    getAll: (): Promise<Template[]> => {
+      return http.get("templates", { noAuth: false });
+    }
   }
 };

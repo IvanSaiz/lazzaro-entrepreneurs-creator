@@ -57,7 +57,7 @@
   import { Component, Vue } from "vue-property-decorator";
   import LzTool from "./components/Tool.vue";
   import LzButton from "@/components/Button.vue";
-  import { apiTools } from "../../../../api";
+  import { apiMembers } from "@/modules/auth/api";
   import { namespace } from "vuex-class";
 
   const auth = namespace("auth");
@@ -78,7 +78,7 @@
     loadingPostStepTools = false;
 
     @auth.State("id")
-    public ongId!: string;
+    public memberId!: string;
 
     @auth.Mutation
     public setTools!: (payload: any) => void;

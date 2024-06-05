@@ -9,7 +9,6 @@
   import { Component, Vue } from "vue-property-decorator";
   import LzButton from "@/components/Button.vue";
   import { namespace } from "vuex-class";
-  import { apiOngs } from "@/modules/web/api";
   import { apiWallet } from "../api";
   import PaymentCardView from "./PaymentCardView.vue";
 
@@ -47,10 +46,11 @@
           text: this.$tc("common.notifications.changeSuccess")
         });
 
-        await apiOngs.postPlatformConfig(this.ongId, {
-          ...this.ongConfiguration,
-          payment_method: paymentMethod
-        });
+        // TODO: Research how to implement payment method change
+        // await apiOngs.postPlatformConfig(this.ongId, {
+        //   ...this.ongConfiguration,
+        //   payment_method: paymentMethod
+        // });
 
         this.$store.commit("auth/setOngConfig", {
           payment_method: paymentMethod
@@ -68,10 +68,10 @@
     async changePaymentToStripe(stripeAuthCode: string) {
       await apiWallet.stripeApi.postConfig(this.ongId, stripeAuthCode);
 
-      await apiOngs.postPlatformConfig(this.ongId, {
-        ...this.ongConfiguration,
-        payment_method: "stripe"
-      });
+      // await apiOngs.postPlatformConfig(this.ongId, {
+      //   ...this.ongConfiguration,
+      //   payment_method: "stripe"
+      // });
     }
 
     async mounted() {

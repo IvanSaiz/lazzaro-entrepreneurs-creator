@@ -107,6 +107,7 @@
         template: this.styleForm.template
       });
 
+      // TODO: Replace with PUT /members/{id}
       await this.setTemplateFeatures();
 
       this.loadingPostStyle = false;

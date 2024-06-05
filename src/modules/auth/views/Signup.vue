@@ -217,18 +217,19 @@
         this.signupForm.organization = "none";
       }
 
-      apiMembers({
-        firstName: this.signupForm.firstName,
-        lastName: this.signupForm.lastName,
-        companyName: this.signupForm.companyName,
-        mobilePhone: this.signupForm.mobilePhone,
-        cif: this.signupForm.cif,
-        email: this.signupForm.email,
-        gender: this.signupForm.gender,
-        dni: this.signupForm.dni,
-        organization: this.signupForm.organization,
-        password: this.signupForm.password
-      })
+      apiMembers
+        .create({
+          firstName: this.signupForm.firstName,
+          lastName: this.signupForm.lastName,
+          companyName: this.signupForm.companyName,
+          mobilePhone: this.signupForm.mobilePhone,
+          cif: this.signupForm.cif,
+          email: this.signupForm.email,
+          gender: this.signupForm.gender,
+          dni: this.signupForm.dni,
+          organization: this.signupForm.organization,
+          password: this.signupForm.password
+        })
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         .then((response: any) => {
           this.$notify({

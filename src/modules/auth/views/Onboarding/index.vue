@@ -52,10 +52,6 @@
     ];
     active: step = this.steps[0];
 
-    setActiveStep(step: step) {
-      this.active = step;
-    }
-
     get currentStepIdx(): number {
       return this.steps.findIndex(step => step === this.active);
     }

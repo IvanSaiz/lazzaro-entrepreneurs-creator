@@ -216,3 +216,9 @@ interface WhyChooseUs {
   titleColor: string;
   description: string;
 }
+
+declare interface Template {
+  id: string;
+  name: string;
+  image: string;
+}

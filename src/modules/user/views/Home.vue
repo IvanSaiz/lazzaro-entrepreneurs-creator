@@ -1,20 +1,18 @@
 <template lang="pug">
-  .user-home
-    .user-home__header
-      header
-        h1 {{ $t('user.home.hello') }} {{ name }}!
-        p {{ $t('user.home.description') }}
-
-
-    //- lz-box.user-home__advice(:tight="true")
-    //-   h3 {{ $t('user.home.advice.name') }}
-    //-   .user-home-advice
-    //-     .user-home-advice__icon
-    //-       certificate-icon(size=80)
-    //-     div
-    //-       p.user-home-advice__title {{ $t('user.home.advice.title') }}
-    //-       p.user-home-advice__description {{ $t('user.home.advice.description') }}
-    //-       p.user-home-advice__more(@click="$router.push({ name: 'tip1' })") {{ $t('user.home.advice.more') }}
+.user-home
+  .user-home__header
+    header
+      h1 {{ $t('user.home.hello') }} {{ name }}!
+      p {{ $t('user.home.description') }}
+  //- lz-box.user-home__advice(:tight="true")
+  //-   h3 {{ $t('user.home.advice.name') }}
+  //-   .user-home-advice
+  //-     .user-home-advice__icon
+  //-       certificate-icon(size=80)
+  //-     div
+  //-       p.user-home-advice__title {{ $t('user.home.advice.title') }}
+  //-       p.user-home-advice__description {{ $t('user.home.advice.description') }}
+  //-       p.user-home-advice__more(@click="$router.push({ name: 'tip1' })") {{ $t('user.home.advice.more') }}
 </template>
 
 <script lang="ts">
