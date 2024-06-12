@@ -55,11 +55,11 @@
           )
         .form__row
           FormulateInput(
-            type="text"
+            type="email"
             name="email"
             :label="$t('auth.signup.form.email')"
             :label-class="['required']"
-            validation="required"
+            validation="required|email"
             :validation-name="$t('auth.signup.form.email')"
           )
           FormulateInput(
@@ -94,17 +94,19 @@
 
         .form__row
           FormulateInput(
-            type="text"
+            type="tel"
             name="mobilePhone"
             :label-class="['required']"
+            validation="required|starts_with:+"
+            :validation-messages="{ starts_with: $t('auth.signup.notifications.matches') }"
             :label="$t('auth.signup.form.mobilePhone')"
           )
-
         .form__row
           FormulateInput(
             type="password"
             name="password"
             :label="$t('auth.signup.form.password')"
+            :label-class="['required']"
             validation="required"
             :validation-name="$t('auth.signup.form.password')"
           )
@@ -228,7 +230,8 @@
           gender: this.signupForm.gender,
           dni: this.signupForm.dni,
           organization: this.signupForm.organization,
-          password: this.signupForm.password
+          password: this.signupForm.password,
+          tools: []
         })
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         .then((response: any) => {

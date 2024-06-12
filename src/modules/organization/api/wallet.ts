@@ -6,8 +6,8 @@ const getWallet = function(walletId: string): Promise<any> {
 };
 
 const stripeApi = {
-  postConfig: function(ongId: string, authCode: string): Promise<any> {
-    return http.put(`public/ongs/stripe/${authCode}/${ongId}`, {});
+  updateClientId: function(memberId: string, clientId: string): Promise<any> {
+    return http.put(`members/${memberId}`, { stripe_account_id: clientId });
   }
 };
 

@@ -53,6 +53,7 @@
   import LzButton from "@/components/Button.vue";
   import { namespace } from "vuex-class";
   import { getImgURL } from "@/utils/getFormulateImageUrl";
+  import { apiWebsite } from "@/modules/web/api";
 
   const auth = namespace("auth");
 
@@ -91,23 +92,34 @@
     }
 
     @auth.State("id")
-    public ongId!: string;
+    memberId!: string;
+
+    @auth.State("websiteId")
+    websiteId!: string;
 
     @auth.Mutation
     public setStyle!: (payload: any) => void;
 
+    async mounted() {
+      console.log(this.websiteId);
+    }
+
     async onStyleSubmit() {
       this.loadingPostStyle = true;
-      const uploadedImage = await getImgURL(this.styleForm.logo.files[0].file);
+      const uploadedImage = (await getImgURL(
+        this.styleForm.logo.files[0].file
+      )) as string;
 
-      this.setStyle({
+      const style = {
         logo: uploadedImage,
         textColor: this.styleForm.textColor,
         buttonColor: this.styleForm.buttonColor,
         template: this.styleForm.template
-      });
+      };
 
-      // TODO: Replace with PUT /members/{id}
+      this.setStyle(style);
+      await apiWebsite.website.setStyle(this.websiteId, style);
+
       await this.setTemplateFeatures();
 
       this.loadingPostStyle = false;

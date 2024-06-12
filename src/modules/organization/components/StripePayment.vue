@@ -29,18 +29,16 @@
     components: { LzButton, LzModal, LzLinkIcon }
   })
   export default class StripePayment extends Vue {
-    connectToStripeLink = `https://connect.stripe.com/oauth/v2/authorize?response_type=code&client_id=${STRIPE_CLIENT_ID}&scope=read_write&redirect_uri=https://www.entrepreneurs.lazzaro.io/organization/read`;
+    origin = window.location.origin ?? "https://www.entrepreneurs.lazzaro.io";
+    connectToStripeLink = `https://connect.stripe.com/oauth/v2/authorize?response_type=code&client_id=${STRIPE_CLIENT_ID}&scope=read_write&redirect_uri=${this.origin}/organization/read`;
 
     @auth.State("id")
     public ongId!: string;
 
     @Prop() paymentMethod!: PaymentMethod;
 
-    @auth.State("stripeId")
+    @auth.State("stripe_account_id")
     public readonly stripeId!: string;
-
-    @auth.State("ongConfiguration")
-    public ongConfiguration!: any;
 
     connectToStripe() {
       window.open(this.connectToStripeLink, "_blank");
@@ -48,6 +46,10 @@
 
     get hideSaveBtn(): boolean {
       return !!this.stripeId && this.paymentMethod !== "stripe";
+    }
+
+    mounted() {
+      console.log(window.location);
     }
 
     onSave() {

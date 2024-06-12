@@ -45,7 +45,7 @@ section.choose-template
     async mounted() {
       const data = await website.templates.getAll();
       this.templates = data;
-      this.modernTemplateId = data.find(item => item.name === "modern").id;
+      this.modernTemplateId = data.find(item => item.key === "modern").id;
     }
 
     openModal(clickedTemplateId = "") {

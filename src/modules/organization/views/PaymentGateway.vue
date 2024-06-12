@@ -1,7 +1,7 @@
 <template lang="pug">
 .organization-read__payment-gateway
   <div class="payment-cards">
-  <payment-card-view v-for="card in paymentMethodsCards" :key="card.title" :title="card.title" :features="card.features" :odds="card.odds" @save="onSave" :paymentMethod="ongConfiguration.payment_method"/>
+  <payment-card-view v-for="card in paymentMethodsCards" :key="card.title" :title="card.title" :features="card.features" :odds="card.odds"/>
   </div>
 </template>
 
@@ -9,7 +9,7 @@
   import { Component, Vue } from "vue-property-decorator";
   import LzButton from "@/components/Button.vue";
   import { namespace } from "vuex-class";
-  import { apiWallet } from "../api";
+  import { apiWallet as wallet } from "../api";
   import PaymentCardView from "./PaymentCardView.vue";
 
   const auth = namespace("auth");
@@ -31,66 +31,31 @@
     ];
 
     @auth.State("id")
-    public ongId!: string;
+    private memberId!: string;
 
-    @auth.State("ongConfiguration")
-    public ongConfiguration!: any;
-
-    @auth.State("walletId")
-    public walletId!: string;
-
-    async onSave(paymentMethod: PaymentMethod) {
-      try {
-        this.$notify({
-          type: "success",
-          text: this.$tc("common.notifications.changeSuccess")
+    async changePaymentToStripe(clientId: string) {
+      await wallet.stripeApi
+        .updateClientId(this.memberId, clientId)
+        .then(() => {
+          this.$notify({
+            type: "success",
+            text: this.$tc("organization.read.paymentGateway.stripe.connected")
+          });
+        })
+        .catch(() => {
+          this.$notify({
+            type: "error",
+            text: this.$tc("organization.read.paymentGateway.stripe.error")
+          });
         });
-
-        // TODO: Research how to implement payment method change
-        // await apiOngs.postPlatformConfig(this.ongId, {
-        //   ...this.ongConfiguration,
-        //   payment_method: paymentMethod
-        // });
-
-        this.$store.commit("auth/setOngConfig", {
-          payment_method: paymentMethod
-        });
-
-        this.$forceUpdate();
-      } catch (error) {
-        this.$notify({
-          type: "error",
-          text: this.$tc("common.error.generic")
-        });
-      }
-    }
-
-    async changePaymentToStripe(stripeAuthCode: string) {
-      await apiWallet.stripeApi.postConfig(this.ongId, stripeAuthCode);
-
-      // await apiOngs.postPlatformConfig(this.ongId, {
-      //   ...this.ongConfiguration,
-      //   payment_method: "stripe"
-      // });
     }
 
     async mounted() {
-      const stripeAuthCode = ((this.$route.query.code || "") as string).trim();
-      const isStripeConnected = !!stripeAuthCode.length;
-      if (this.$route.query.code && this.$route.query.state) return; // this for mollie connect
-      if (!isStripeConnected) return;
+      const clientId = ((this.$route.query.code || "") as string).trim();
+      const isStripeConnected = !!clientId.length;
 
-      try {
-        this.changePaymentToStripe(stripeAuthCode);
-        this.$store.commit("auth/setOngConfig", {
-          payment_method: "stripe"
-        });
-        this.$store.commit("auth/setData", { stripeId: stripeAuthCode });
-      } catch (error) {
-        this.$notify({
-          type: "error",
-          text: this.$tc("common.error.generic")
-        });
+      if (isStripeConnected && this.memberId) {
+        this.changePaymentToStripe(clientId);
       }
     }
   }

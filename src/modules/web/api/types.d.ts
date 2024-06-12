@@ -220,5 +220,13 @@ interface WhyChooseUs {
 declare interface Template {
   id: string;
   name: string;
+  key: string;
   image: string;
+}
+
+declare interface SetStyleDto {
+  logo: string;
+  textColor: string;
+  buttonColor: string;
+  template: string;
 }

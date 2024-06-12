@@ -35,11 +35,14 @@ export default {
     },
     unpublish: (websiteId: string): Promise<any> => {
       return http.post(`websites/${websiteId}/unpublish`, { noAuth: false });
+    },
+    setStyle: (websiteId: string, body: SetStyleDto): Promise<any> => {
+      return http.put(`websites/${websiteId}/style`, body, { noAuth: false });
     }
   },
   templates: {
     getAll: (): Promise<Template[]> => {
-      return http.get("templates", { noAuth: false });
+      return http.get("websites/templates", { noAuth: false });
     }
   }
 };

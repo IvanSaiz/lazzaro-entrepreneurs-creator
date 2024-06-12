@@ -68,7 +68,8 @@ export default {
     createBtn: "Regístrate",
     notifications: {
       required: "Teléfono es requerido",
-      matches: "Formato de teléfono inválido",
+      matches:
+        "Formato de teléfono inválido, debe ser del formato +XXXXXXXXX",
       success: "Usuario validado con éxito",
       failCode: "Código no válido",
       error: "Ha ocurrido un error",
