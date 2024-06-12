@@ -17,11 +17,15 @@ export default {
         noAuth: false
       });
     },
-    post: (sectionBody: any): Promise<any> => {
-      return http.post("websites/section", sectionBody, { noAuth: false });
+    post: (websiteId: string, sectionBody: any): Promise<any> => {
+      return http.post(`websites/${websiteId}/section`, sectionBody, {
+        noAuth: false
+      });
     },
-    put: (sectionBody: any): Promise<any> => {
-      return http.put("websites/section", sectionBody, { noAuth: false });
+    put: (websiteId: string, sectionBody: any): Promise<any> => {
+      return http.put(`websites/${websiteId}/section`, sectionBody, {
+        noAuth: false
+      });
     },
     toggle: (websiteId: string, section: string): Promise<any> => {
       return http.patch(`websites/${websiteId}/section/toggle/${section}`, {

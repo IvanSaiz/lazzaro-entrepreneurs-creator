@@ -110,8 +110,8 @@
 
       const process = (body: typeof sectionBody) =>
         this.sectionExists
-          ? apiWebsite.section.put(body)
-          : apiWebsite.section.post(body);
+          ? apiWebsite.section.put(this.websiteId, body)
+          : apiWebsite.section.post(this.websiteId, body);
 
       this.saving = true;
       process(sectionBody)

@@ -464,7 +464,7 @@
 
         await mapImgURL(footer.info.transparency, "accountability");
 
-        await apiWebsite.section.put(postData);
+        await apiWebsite.section.put(this.websiteId, postData);
         await this.handlePublishWebsite(
           this.form.general.active,
           this.websiteId
