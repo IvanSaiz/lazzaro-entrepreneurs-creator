@@ -10,7 +10,11 @@ const stripeApi = {
     return http.put(`members/${memberId}`, { stripe_account_id: clientId });
   },
   getConnectLink: function(memberId: string): Promise<any> {
-    return http.get(`payment/connect/${memberId}`, { noAuth: false });
+    const params = new URLSearchParams({
+      return_url: window.location.href
+    });
+
+    return http.get(`payment/connect/${memberId}?${params}`, { noAuth: false });
   }
 };
 

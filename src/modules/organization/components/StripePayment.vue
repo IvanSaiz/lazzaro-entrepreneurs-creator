@@ -2,15 +2,12 @@
 .payment-stripe
     header
       p {{ $t("organization.read.paymentGateway.configureStripePayment") }}
-
-    formulate-form.payment-stripe__form(@submit="onSave")
-
     lz-link-icon(
       iconName='helpIcon'
       :label="$t('organization.read.paymentGateway.stripe.sixStepsToConfigureStripe')"
       link="https://lazzaro.io/en/como-recibir-donaciones-a-traves-de-stripe-en-6-pasos/"
     )
-    lz-button(type="primary" @click.prevent="connectToStripe" :disabled="connectedToStripe") {{stripeId ?  $t('common.actions.alreadyConnected') : $t('common.actions.connectToStripe')}}
+    lz-button(type="primary" @click.prevent="connect" :disabled="connected") {{stripeId ?  $t('common.actions.alreadyConnected') : $t('common.actions.connectToStripe')}}
 </template>
 
 <script lang="ts">
@@ -21,8 +18,6 @@
   import { namespace } from "vuex-class";
   import { apiWallet } from "../api";
   const auth = namespace("auth");
-
-  const STRIPE_CLIENT_ID = process.env.VUE_APP_STRIPE_CLIENT_ID;
 
   @Component({
     components: { LzButton, LzModal, LzLinkIcon }
@@ -39,9 +34,6 @@
     @auth.Action("refreshMemberData")
     public refreshMemberData!: () => Promise<void>;
 
-    @auth.Mutation("setData")
-    public setData!: (data: unknown) => void;
-
     get connected() {
       return !!this.stripeId || this.$route.params.code;
     }
@@ -51,19 +43,8 @@
       window.open(url, "_blank");
     }
 
-    get hideSaveBtn(): boolean {
-      return !!this.stripeId && this.paymentMethod !== "stripe";
-    }
-
     async mounted() {
-      if (this.$route.params.code) {
-        this.setData({ stripe_client_id: this.$route.params.code });
-      }
       await this.refreshMemberData();
-    }
-
-    onSave() {
-      this.$emit("paymentMethodChange", "stripe");
     }
   }
 </script>
