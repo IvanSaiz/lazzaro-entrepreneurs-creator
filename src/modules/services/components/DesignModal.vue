@@ -78,7 +78,6 @@
     @Prop({ type: String, required: true })
     section!: string;
 
-    templateId!: string;
     visible = false;
     saving = false;
     sectionExists = false;
@@ -103,7 +102,6 @@
     save() {
       const sectionBody = {
         websiteId: this.websiteId,
-        templateId: this.templateId,
         type: this.section,
         properties: this.properties
       };
@@ -136,10 +134,9 @@
         const section = await apiWebsite.section.get<Properties>(
           this.websiteId,
           this.section,
-          ["properties", "templateId"]
+          ["properties"]
         );
         this.properties = { ...this.properties, ...section.properties };
-        if (section.templateId) this.templateId = section.templateId;
         this.sectionExists = true;
       } catch {
         this.sectionExists = false;
