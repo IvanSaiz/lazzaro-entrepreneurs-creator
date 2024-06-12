@@ -19,6 +19,7 @@
   import LzModal from "@/components/Modal.vue";
   import LzLinkIcon from "@/components/LinkIcon.vue";
   import { namespace } from "vuex-class";
+  import { apiWallet } from "../api";
   const auth = namespace("auth");
 
   const STRIPE_CLIENT_ID = process.env.VUE_APP_STRIPE_CLIENT_ID;
@@ -27,9 +28,6 @@
     components: { LzButton, LzModal, LzLinkIcon }
   })
   export default class StripePayment extends Vue {
-    origin = window.location.origin ?? "https://www.entrepreneurs.lazzaro.io";
-    connectToStripeLink = `https://connect.stripe.com/oauth/v2/authorize?response_type=code&client_id=${STRIPE_CLIENT_ID}&scope=read_write&redirect_uri=${this.origin}/organization/read`;
-
     @auth.State("id")
     public ongId!: string;
 
@@ -48,8 +46,9 @@
       return !!this.stripeId || this.$route.params.code;
     }
 
-    connectToStripe() {
-      window.open(this.connectToStripeLink, "_blank");
+    async connectToStripe() {
+      const { url } = await apiWallet.stripeApi.createConnectLink(this.ongId);
+      window.open(url, "_blank");
     }
 
     get hideSaveBtn(): boolean {
