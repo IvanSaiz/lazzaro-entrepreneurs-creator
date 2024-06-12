@@ -424,8 +424,6 @@
 
         this.handleTemplateChange();
 
-        console.dir(this.form, form);
-
         const postData: PublicWebFormData = {
           active: form.active,
           templateId: form.chosenTemplateId,
