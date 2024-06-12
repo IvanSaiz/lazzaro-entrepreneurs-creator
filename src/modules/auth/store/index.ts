@@ -65,7 +65,7 @@ class Auth extends VuexModule {
   };
   paypalClientId: string | null = null;
   paypalClientSecret: string | null = null;
-  stripe_id: string | null = null;
+  stripe_client_id: string | null = null;
   mollie_org_api_key: string | null = null;
   crypto_wallet_address: string | null = null;
 

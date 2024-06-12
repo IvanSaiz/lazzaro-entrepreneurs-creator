@@ -10,7 +10,7 @@
       :label="$t('organization.read.paymentGateway.stripe.sixStepsToConfigureStripe')"
       link="https://lazzaro.io/en/como-recibir-donaciones-a-traves-de-stripe-en-6-pasos/"
     )
-    lz-button(type="primary" @click.prevent="connectToStripe" :disabled="!!stripeId") {{stripeId ?  $t('common.actions.alreadyConnected') : $t('common.actions.connectToStripe')}}
+    lz-button(type="primary" @click.prevent="connectToStripe" :disabled="connectedToStripe") {{stripeId ?  $t('common.actions.alreadyConnected') : $t('common.actions.connectToStripe')}}
 </template>
 
 <script lang="ts">
@@ -41,6 +41,13 @@
     @auth.Action("refreshMemberData")
     public refreshMemberData!: () => Promise<void>;
 
+    @auth.Mutation("setData")
+    public setData!: (data: unknown) => void;
+
+    get connectedToStripe() {
+      return !!this.stripeId || this.$route.params.code;
+    }
+
     connectToStripe() {
       window.open(this.connectToStripeLink, "_blank");
     }
@@ -50,6 +57,9 @@
     }
 
     async mounted() {
+      if (this.$route.params.code) {
+        this.setData({ stripe_client_id: this.$route.params.code });
+      }
       await this.refreshMemberData();
     }
 
