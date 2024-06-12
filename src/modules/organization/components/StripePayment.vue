@@ -47,7 +47,7 @@
     }
 
     async connectToStripe() {
-      const { url } = await apiWallet.stripeApi.createConnectLink(this.ongId);
+      const { url } = await apiWallet.stripe.createConnectLink(this.ongId);
       window.open(url, "_blank");
     }
 

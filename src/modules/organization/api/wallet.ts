@@ -15,6 +15,6 @@ const stripeApi = {
 };
 
 export default {
-  stripeApi,
+  stripe: stripeApi,
   getWallet
 };

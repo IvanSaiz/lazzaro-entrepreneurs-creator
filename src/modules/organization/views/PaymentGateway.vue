@@ -34,7 +34,7 @@
     private memberId!: string;
 
     async changePaymentToStripe(clientId: string) {
-      await wallet.stripeApi
+      await wallet.stripe
         .updateClientId(this.memberId, clientId)
         .then(() => {
           this.$notify({
