@@ -42,12 +42,12 @@
     @auth.Mutation("setData")
     public setData!: (data: unknown) => void;
 
-    get connectedToStripe() {
+    get connected() {
       return !!this.stripeId || this.$route.params.code;
     }
 
-    async connectToStripe() {
-      const { url } = await apiWallet.stripe.createConnectLink(this.ongId);
+    async connect() {
+      const { url } = await apiWallet.stripe.getConnectLink(this.ongId);
       window.open(url, "_blank");
     }
 
