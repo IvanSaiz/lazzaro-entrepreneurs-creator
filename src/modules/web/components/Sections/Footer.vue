@@ -100,7 +100,8 @@ section.public-footer
     @VModel() props!: FooterProps;
 
     handleUpload(file: File) {
-      console.log(file);
+      // TODO: Implement file upload
+      // console.log(file);
     }
   }
 </script>

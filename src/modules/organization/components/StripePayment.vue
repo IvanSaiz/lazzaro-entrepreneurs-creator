@@ -51,7 +51,6 @@
 
     async mounted() {
       await this.refreshMemberData();
-      console.log(this.stripeId);
     }
 
     onSave() {

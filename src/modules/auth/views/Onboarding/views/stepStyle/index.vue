@@ -100,10 +100,6 @@
     @auth.Mutation
     public setStyle!: (payload: any) => void;
 
-    async mounted() {
-      console.log(this.websiteId);
-    }
-
     async onStyleSubmit() {
       this.loadingPostStyle = true;
       const uploadedImage = (await getImgURL(
