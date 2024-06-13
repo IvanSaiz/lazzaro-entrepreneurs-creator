@@ -7,7 +7,7 @@
       :label="$t('organization.read.paymentGateway.stripe.sixStepsToConfigureStripe')"
       link="https://lazzaro.io/en/como-recibir-donaciones-a-traves-de-stripe-en-6-pasos/"
     )
-    lz-button(type="primary" @click.prevent="connect") {{stripeId ?  $t('organization.read.paymentGateway.stripe.edit') : $t('common.actions.connectToStripe.connect')}}
+    lz-button(type="primary" @click.prevent="connect") {{stripeId ?  $t('organization.read.paymentGateway.stripe.edit') : $t('organization.read.paymentGateway.stripe.connect')}}
 </template>
 
 <script lang="ts">
