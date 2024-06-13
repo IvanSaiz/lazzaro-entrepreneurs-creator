@@ -7,7 +7,7 @@
       :label="$t('organization.read.paymentGateway.stripe.sixStepsToConfigureStripe')"
       link="https://lazzaro.io/en/como-recibir-donaciones-a-traves-de-stripe-en-6-pasos/"
     )
-    lz-button(type="primary" @click.prevent="connect" :disabled="connected") {{stripeId ?  $t('common.actions.alreadyConnected') : $t('common.actions.connectToStripe')}}
+    lz-button(type="primary" @click.prevent="connect") {{stripeId ?  $t('organization.read.paymentGateway.stripe.edit') : $t('common.actions.connectToStripe.connect')}}
 </template>
 
 <script lang="ts">
@@ -33,10 +33,6 @@
 
     @auth.Action("refreshMemberData")
     public refreshMemberData!: () => Promise<void>;
-
-    get connected() {
-      return !!this.stripeId || this.$route.params.code;
-    }
 
     async connect() {
       const { url } = await apiWallet.stripe.getConnectLink(this.ongId);

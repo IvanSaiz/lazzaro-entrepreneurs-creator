@@ -47,7 +47,9 @@ export default {
       stripe: {
         sixStepsToConfigureStripe: "Six steps to configure Stripe",
         connected: "Stripe connected successfully",
-        error: "Error connecting with Stripe"
+        error: "Error connecting with Stripe",
+        connect: "Connect with Stripe",
+        edit: "Edit Stripe settings"
       },
       mollie: {
         howToCreateAnAccount: "How to create a mollie account for your NGO",

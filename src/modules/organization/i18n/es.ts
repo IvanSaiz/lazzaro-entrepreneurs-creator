@@ -60,7 +60,9 @@ export default {
       stripe: {
         sixStepsToConfigureStripe: "Seis pasos para configurar Stripe",
         connected: "Stripe conectado con éxito",
-        error: "Ha ocurrido un error al conectar con Stripe"
+        error: "Ha ocurrido un error al conectar con Stripe",
+        connect: "Conectar con Stripe",
+        edit: "Editar configuración"
       },
       mollie: {
         howToCreateAnAccount: "Cómo crear una cuenta mollie para su ONG",
