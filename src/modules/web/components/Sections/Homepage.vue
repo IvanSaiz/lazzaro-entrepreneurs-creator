@@ -68,14 +68,12 @@ section.public-homepage
           formulate-input(
               type="text"
               name="homepageFirstButtonText"
-              validation="required"
               v-model="props.firstButtonText"
               :label="$t(`web.public.homepageForm.form.buttons.1`)"
             )
           formulate-input(
               type="text"
               name="homepageFirstButtonLink"
-              validation="required"
               v-model="props.firstButtonLink"
               :label="$t(`web.public.homepageForm.form.links.1`)"
             )

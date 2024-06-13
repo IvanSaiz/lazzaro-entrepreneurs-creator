@@ -31,7 +31,7 @@ declare interface Member {
   dni: string;
   roles: string[];
   tools: (
-    | "portfolio"
+    | "projects"
     | "shop"
     | "events"
     | "services"

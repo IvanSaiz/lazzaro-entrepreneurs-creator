@@ -7,8 +7,8 @@
   .step-tools__tools
     .step-tools__block
       lz-tool(
-        @click.native="() => { tools.portfolio = !tools.portfolio; }"
-        :checked="tools.portfolio"
+        @click.native="() => { tools.projects = !tools.projects; }"
+        :checked="tools.projects"
       )
         template(slot="icon")
           ClipboardListIcon(size=30 stroke-width=1.25)
@@ -34,13 +34,13 @@
         template(slot="icon")
           FileLikeIcon(size=30 stroke-width=1.25)
         template(slot="label") {{ $t('auth.onboarding.stepTools.tools.services') }}
-      lz-tool(
-        @click.native="() => { tools.reviews = !tools.reviews; }"
-        :checked="tools.reviews"
-      )
-        template(slot="icon")
-          img(src="./assets/star-half-filled.svg" height=61)
-        template(slot="label") {{ $t('auth.onboarding.stepTools.tools.reviews') }}
+      //- lz-tool(
+      //-   @click.native="() => { tools.reviews = !tools.reviews; }"
+      //-   :checked="tools.reviews"
+      //- )
+      //-   template(slot="icon")
+      //-     img(src="./assets/star-half-filled.svg" height=61)
+      //-   template(slot="label") {{ $t('auth.onboarding.stepTools.tools.reviews') }}
       lz-tool(
         @click.native="() => { tools.bookings = !tools.bookings; }"
         :checked="tools.bookings"
@@ -57,7 +57,7 @@
   import { Component, Vue } from "vue-property-decorator";
   import LzTool from "./components/Tool.vue";
   import LzButton from "@/components/Button.vue";
-  import { apiTools } from "../../../../api";
+  import { apiMembers } from "@/modules/auth/api";
   import { namespace } from "vuex-class";
 
   const auth = namespace("auth");
@@ -66,8 +66,8 @@
     components: { LzTool, LzButton }
   })
   export default class StepTools extends Vue {
-    tools = {
-      portfolio: false,
+    tools: Record<Member["tools"][number], boolean> = {
+      projects: false,
       shop: false,
       events: false,
       services: false,
@@ -78,7 +78,7 @@
     loadingPostStepTools = false;
 
     @auth.State("id")
-    public ongId!: string;
+    public memberId!: string;
 
     @auth.Mutation
     public setTools!: (payload: any) => void;
@@ -90,14 +90,17 @@
       );
     }
 
-    sendStepTools() {
+    async sendStepTools() {
       this.loadingPostStepTools = true;
 
       const selectedTools = Object.keys(this.tools).filter(
         key => this.tools[key]
-      );
+      ) as Member["tools"];
 
       this.setTools(selectedTools);
+
+      await apiMembers.update(this.memberId, { tools: selectedTools });
+
       this.loadingPostStepTools = false;
     }
   }

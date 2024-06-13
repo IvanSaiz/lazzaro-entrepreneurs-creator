@@ -47,7 +47,6 @@
   import LzModal from "@/components/Modal.vue";
   import LzLinkIcon from "@/components/LinkIcon.vue";
   import { namespace } from "vuex-class";
-  import { apiOngs } from "@/modules/web/api";
 
   const auth = namespace("auth");
 
@@ -94,10 +93,10 @@
         // );
         this.setPaypalConfig({ id: this.form.id, secret: this.form.secret });
 
-        await apiOngs.postPlatformConfig(this.ongId, {
-          ...this.ongConfiguration,
-          payment_method: "paypal"
-        });
+        // await apiOngs.postPlatformConfig(this.ongId, {
+        //   ...this.ongConfiguration,
+        //   payment_method: "paypal"
+        // });
 
         this.$store.commit("auth/setOngConfig", { payment_method: "paypal" });
 

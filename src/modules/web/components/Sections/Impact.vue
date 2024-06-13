@@ -44,25 +44,32 @@ section.public-impact
     name="impactData"
     :value="props.data"
     #default="{index}"
-    validation="min:2,length|max:4,length"
   ).public-impact__content
     formulate-input.impact-item(
           type="image"
           name= "url"
           :label="$t(`web.public.impactForm.icon.${index+1}`)"
           :help="$t('web.public.impactForm.icon.help')"
+          validation="enabled"
+          :validation-rules="rules"
+          error-behavior="live"
         )
     formulate-input.impact-item(
           type="text"
           name= "text"
           :label="$t(`web.public.impactForm.text.${index+1}`)"
           :help="$t('common.helper.maxChars', { max: 30 })"
-          validation="max:30"
+          validation="enabled"
+          :validation-rules="rules"
+          error-behavior="live"
         )
     formulate-input.impact-item(
           type="text"
           name= "amount"
           :label="$t(`web.public.impactForm.amount.${index+1}`)"
+          validation="enabled"
+          :validation-rules="rules"
+          error-behavior="live"
         )
   
 </template>
@@ -76,6 +83,19 @@ section.public-impact
   @Component({ name: "Impact", components: { DesignModal } })
   export default class Impact extends Vue {
     @VModel() props!: ImpactProps; // TODO: Map to inputs
+
+    rules = {
+      enabled: ({ value, getFormValues }) => {
+        const { impactEnabled } = getFormValues();
+
+        // If impact is not enabled, skip validation
+        if (!impactEnabled) return true;
+        // If impact is enabled, validate if value is present
+        else return !!value;
+      }
+    };
+
+    messages = {};
   }
 </script>
 

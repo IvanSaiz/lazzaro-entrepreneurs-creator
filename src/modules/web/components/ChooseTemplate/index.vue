@@ -23,7 +23,7 @@ section.choose-template
   import { Component, Vue, Prop } from "vue-property-decorator";
   import LzModal from "@/components/Modal.vue";
   import LzButton from "@/components/Button.vue";
-  import { apiOngs } from "../../api";
+  import website from "../../api/website";
 
   type TTemplate = Record<"id" | "image", string>;
 
@@ -43,9 +43,9 @@ section.choose-template
     public handleChooseTemplate!: (e: Event) => void;
 
     async mounted() {
-      const data = await apiOngs.getTemplates();
+      const data = await website.templates.getAll();
       this.templates = data;
-      this.modernTemplateId = data.find(item => item.name === "modern").id;
+      this.modernTemplateId = data.find(item => item.key === "modern").id;
     }
 
     openModal(clickedTemplateId = "") {

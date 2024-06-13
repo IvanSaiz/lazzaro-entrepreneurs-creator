@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const reader = new FileReader();
 
 const toBase64 = (file: File | { url: string }): Promise<string> => {

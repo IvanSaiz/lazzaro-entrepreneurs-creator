@@ -12,9 +12,8 @@ import {
   getModule,
   config
 } from "vuex-module-decorators";
-import { apiOngs } from "@/modules/web/api";
 import { getAuth } from "@/api/core/auth";
-import { apiPlatform } from "@/modules/auth/api";
+import { apiPlatform, apiMembers } from "@/modules/auth/api";
 
 config.rawError = true;
 @Module({ namespaced: true, name: "auth", dynamic: true, store })
@@ -66,7 +65,7 @@ class Auth extends VuexModule {
   };
   paypalClientId: string | null = null;
   paypalClientSecret: string | null = null;
-  stripe_id: string | null = null;
+  stripe_client_id: string | null = null;
   mollie_org_api_key: string | null = null;
   crypto_wallet_address: string | null = null;
 
@@ -158,7 +157,7 @@ class Auth extends VuexModule {
   @Action
   public async refreshMemberData() {
     if (this.id) {
-      return await apiOngs.getMember(this.id).then(data => {
+      return await apiMembers.getById(this.id).then(data => {
         this.context.commit("setData", data);
       });
     }

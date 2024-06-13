@@ -2,15 +2,15 @@
 import http from "@/api/core/http";
 
 const getProjects = function(memberId: string): Promise<TProject[]> {
-  return http.get(`portfolio/member/${memberId}`, { noAuth: false });
+  return http.get(`projects/member/${memberId}`, { noAuth: false });
 };
 
 const getProject = function(projectId: string): Promise<TProject> {
-  return http.get(`portfolio/${projectId}`, { noAuth: false });
+  return http.get(`projects/${projectId}`, { noAuth: false });
 };
 
 const deleteProject = function(projectId: string): Promise<any> {
-  return http.delete(`portfolio/${projectId}`, {
+  return http.delete(`projects/${projectId}`, {
     noAuth: false
   });
 };
@@ -19,11 +19,11 @@ const updateProject = function(
   projectId: string,
   body: Partial<TProjectPutBody>
 ): Promise<any> {
-  return http.put(`portfolio/${projectId}`, body, { noAuth: false });
+  return http.put(`projects/${projectId}`, body, { noAuth: false });
 };
 
 const postProject = function(body: TProjectPostBody): Promise<any> {
-  return http.post(`portfolio`, body, { noAuth: false });
+  return http.post(`projects`, body, { noAuth: false });
 };
 
 export default {

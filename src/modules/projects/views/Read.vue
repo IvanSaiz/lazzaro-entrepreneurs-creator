@@ -20,7 +20,7 @@
         <h1>
           {{ $t("projects.read.title") }}
         </h1>
-        <SectionToggle section="portfolio" />
+        <SectionToggle section="projects" />
         <div class="view-btn">
           <a :href="`${url}/#portfolio`" target="_blank">
             {{ $t("projects.read.see") }}
@@ -29,7 +29,7 @@
         </div>
       </div>
       <p>{{ $t("projects.read.subtitle") }}</p>
-      <DesignModal section="portfolio" />
+      <DesignModal section="projects" />
     </header>
     <section class="projectsRead__content">
       <LzTable

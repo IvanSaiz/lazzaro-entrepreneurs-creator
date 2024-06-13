@@ -2,13 +2,13 @@
   <div class="design-modal">
     <LzModal v-if="visible" @close="closeModal">
       <div class="header">
-        <h2>{{ $t("projects.read.design.button") }}</h2>
+        <h2>{{ $t("common.design.button") }}</h2>
         <slot name="header"></slot>
       </div>
       <slot name="form"></slot>
     </LzModal>
     <LzButton type="secondary" @click.prevent="openModal">
-      {{ $t("projects.read.design.button") }}
+      {{ $t("common.design.button") }}
       <EditIcon size="28" stroke-width="1.5" />
     </LzButton>
   </div>

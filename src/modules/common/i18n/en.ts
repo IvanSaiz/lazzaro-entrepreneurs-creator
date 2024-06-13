@@ -36,6 +36,7 @@ export default {
     validationError: "Please make sure your CIF/DNI are correct"
   },
   design: {
+    button: "Design",
     layout: {
       title: "Layout",
       heading: "Heading",

@@ -2,6 +2,7 @@ export default {
   public: {
     title: "Public web",
     subtitle: "Set up your public website here",
+
     generalForm: {
       title: "General",
       publicate: "Publish your web",
@@ -23,18 +24,6 @@ export default {
         }
       }
     },
-    logosForm: {
-      title: "Logos",
-      subtitle: "We have left this space for you to add logos of cool things",
-      logo: {
-        label: "Logo",
-        help: "180x60, max 25MB",
-        limit: "You can not add more than 10 logos",
-        delete: "logo Deleted successfully",
-        error: "Error deleting logo"
-      }
-    },
-
     chooseTemplate: {
       title: "Template",
       template1: "Modern",
@@ -47,9 +36,100 @@ export default {
           "Cool you are gonna see the new template! this might take few minutes. It is the perfect moment to prepare the coffee"
       }
     },
+    personalizeWebForm: {
+      title: "Personalize your website",
+      subtitle: "Choose the elements that suit you",
+      form: {
+        logo: "Logo",
+        mainTypography: "Main Typography",
+        secondTypography: "Secondary Typography",
+        fonts: {
+          label: "Font",
+          roboto: "Roboto",
+          arial: "Arial"
+        },
+        buttonsColor: "Button color",
+        menuColor: "Menu color",
+        menuTextColor: "Menu text color",
+        footerColor: "Footer color",
+        logoHelper: "60x60. Máx 25MB"
+      }
+    },
+    homepageForm: {
+      title: "Homepage",
+      subtitle: "First impressions are what matter",
+      form: {
+        image: "Main Image",
+        title: "Title",
+        subtitle: "Subtitle",
+        imageHelper: "180x60. Máx 25MB",
+        titleHelper: "(Máx 80 characters)",
+        subtitleHelper: "(Máx 140 characters)",
+        buttons: {
+          1: "Button 1",
+          2: "Button 2"
+        },
+        links: {
+          1: "Link of button 1",
+          2: "Link of button 2"
+        }
+      }
+    },
+    whoWeAreForm: {
+      title: "Who we are",
+      subtitle: "Show what you do to the world",
+      form: {
+        image: "Main image",
+        title: "Title",
+        subtitle: "Subtitle",
+        imageHelper: "180x60. Máx 25MB",
+        titleHelper: "(Max 80 characters)",
+        subtitleHelper: "(Max 140 characters)",
+        description: "Description"
+      },
+      features: {
+        title: "Company Features",
+        icon: {
+          1: "Icon 1",
+          2: "Icon 2",
+          3: "Icon 3",
+          4: "Icon 4",
+          help: "60x60. Max 25MB"
+        },
+        titles: "Title {index}",
+        descriptions: {
+          1: "Descriptive text 1",
+          2: "Descriptive text 2",
+          3: "Descriptive text 3",
+          4: "Descriptive text 4"
+        },
+        button: "Button",
+        link: "Link of the button"
+      },
+      design: {
+        color: "Background color",
+        layout: {
+          tooltip: "Layout",
+          title: "Main Title",
+          subtitle: "Description",
+          item: {
+            title: "Title",
+            subtitle: "Descriptive text"
+          }
+        }
+      }
+    },
 
-    googleAnalytics: {
-      title: "Google analytics ID"
+    logosForm: {
+      title: "Logos",
+      subtitle: "We have left this space for you to add logos of cool things",
+      logo: {
+        label: "Logo",
+        help: "180x60, max 25MB",
+        limit: "You can not add more than 10 logos",
+        delete: "logo Deleted successfully",
+        error: "Error deleting logo"
+      }
     },
 
     websiteStatus: {
@@ -189,98 +269,6 @@ export default {
         help: "180x60, max 25MB"
       },
       largeDescription: "Full description"
-    },
-
-    personalizeWebForm: {
-      title: "Personalize your website",
-      subtitle: "Choose the elements that suit you",
-      form: {
-        logo: "Logo",
-        mainTypography: "Main Typography",
-        secondTypography: "Secondary Typography",
-        fonts: {
-          label: "Font",
-          roboto: "Roboto",
-          arial: "Arial"
-        },
-        buttonsColor: "Button color",
-        menuColor: "Menu color",
-        menuTextColor: "Menu text color",
-        footerColor: "Footer color",
-        logoHelper: "60x60. Máx 25MB"
-      }
-    },
-
-    homepageForm: {
-      title: "Homepage",
-      subtitle: "First impressions are what matter",
-      form: {
-        image: "Main Image",
-        title: "Title",
-        subtitle: "Subtitle",
-        imageHelper: "180x60. Máx 25MB",
-        titleHelper: "(Máx 80 characters)",
-        subtitleHelper: "(Máx 140 characters)",
-        buttons: {
-          1: "Button 1",
-          2: "Button 2"
-        },
-        links: {
-          1: "Link of button 1",
-          2: "Link of button 2"
-        }
-      }
-    },
-
-    whoWeAreForm: {
-      title: "Who we are",
-      subtitle: "Show what you do to the world",
-      form: {
-        image: "Main image",
-        title: "Title",
-        subtitle: "Subtitle",
-        imageHelper: "180x60. Máx 25MB",
-        titleHelper: "(Max 80 characters)",
-        subtitleHelper: "(Max 140 characters)",
-        description: "Description"
-      },
-      features: {
-        title: "Company Features",
-        icon: {
-          1: "Icon 1",
-          2: "Icon 2",
-          3: "Icon 3",
-          4: "Icon 4",
-          help: "60x60. Max 25MB"
-        },
-        titles: {
-          1: "Title 1",
-          2: "Title 2",
-          3: "Title 3",
-          4: "Title 4",
-          helper: "(Max 30 characters)"
-        },
-        descriptions: {
-          1: "Descriptive text 1",
-          2: "Descriptive text 2",
-          3: "Descriptive text 3",
-          4: "Descriptive text 4"
-        },
-        button: "Button",
-        link: "Link of the button"
-      },
-      design: {
-        color: "Background color",
-        layout: {
-          tooltip: "Layout",
-          title: "Main Title",
-          subtitle: "Description",
-          item: {
-            title: "Title",
-            subtitle: "Descriptive text"
-          }
-        }
-      }
     },
 
     whyChooseUsForm: {

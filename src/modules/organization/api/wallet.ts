@@ -6,12 +6,19 @@ const getWallet = function(walletId: string): Promise<any> {
 };
 
 const stripeApi = {
-  postConfig: function(ongId: string, authCode: string): Promise<any> {
-    return http.put(`public/ongs/stripe/${authCode}/${ongId}`, {});
+  updateClientId: function(memberId: string, clientId: string): Promise<any> {
+    return http.put(`members/${memberId}`, { stripe_account_id: clientId });
+  },
+  getConnectLink: function(memberId: string): Promise<any> {
+    const params = new URLSearchParams({
+      return_url: window.location.href
+    });
+
+    return http.get(`payment/connect/${memberId}?${params}`, { noAuth: false });
   }
 };
 
 export default {
-  stripeApi,
+  stripe: stripeApi,
   getWallet
 };

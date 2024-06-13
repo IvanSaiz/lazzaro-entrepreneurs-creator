@@ -114,7 +114,7 @@ interface Info {
 
 interface Transparency {
   description: string;
-  accountability: string;
+  accountability: Image;
 }
 
 interface Social {
@@ -149,7 +149,7 @@ interface HomePage {
 }
 
 interface Impact {
-  enabled: true;
+  enabled: boolean;
   data: Datum[];
   design: {
     color: string;
@@ -167,7 +167,7 @@ interface Datum {
 }
 
 interface Reviews {
-  enabled: true;
+  enabled: boolean;
   url: string;
   title: string;
   subtitle: string;
@@ -215,4 +215,18 @@ interface WhyChooseUs {
   subtitles: Subtitle[];
   titleColor: string;
   description: string;
+}
+
+declare interface Template {
+  id: string;
+  name: string;
+  key: string;
+  image: string;
+}
+
+declare interface SetStyleDto {
+  logo: string;
+  textColor: string;
+  buttonColor: string;
+  template: string;
 }

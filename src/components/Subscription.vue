@@ -27,7 +27,7 @@ div(v-if="loaded")
   import { Component, Vue } from "vue-property-decorator";
   import { namespace } from "vuex-class";
   import { apiOrganizations } from "../modules/organization/api";
-  import { apiOngs } from "@/modules/user/api";
+  import { apiMembers } from "@/modules/auth/api";
 
   const auth = namespace("auth");
   type OrganizationPlan = {
@@ -100,9 +100,9 @@ div(v-if="loaded")
       try {
         await this.getSubscriptionPlans();
         await this.getOrganizationPlan();
-        await apiOngs
-          .getMember(this.memberId)
-          .then(data => (this.member = data));
+        await apiMembers
+          .getById(this.memberId)
+          .then(data => (this.member = { ...this.member, ...data }));
       } catch (error) {
         // eslint-disable-next-line no-console
         console.error(error);

@@ -45,7 +45,11 @@ export default {
         howToGetPaypalCredentials: "How to get Paypal's client and secret id"
       },
       stripe: {
-        sixStepsToConfigureStripe: "Six steps to configure Stripe"
+        sixStepsToConfigureStripe: "Six steps to configure Stripe",
+        connected: "Stripe connected successfully",
+        error: "Error connecting with Stripe",
+        connect: "Connect with Stripe",
+        edit: "Edit Stripe settings"
       },
       mollie: {
         howToCreateAnAccount: "How to create a mollie account for your NGO",
