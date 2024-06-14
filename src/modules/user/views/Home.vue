@@ -3,7 +3,7 @@
   header
     h1 {{ $t('user.home.hello') }} {{ firstName }}!
     p {{ $t('user.home.description') }}
-  lz-box.advice(:tight="true" :shadow="true" @click="() => redirectTo('training/home')")
+  lz-box.advice(:tight="true" :shadow="true" @click="() => redirectTo('/training/home')")
     h1 {{ $t('user.home.advice.name') }}
     .body
       .icon
