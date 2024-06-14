@@ -3,7 +3,7 @@
   header
     h1 {{ $t('user.home.hello') }} {{ firstName }}!
     p {{ $t('user.home.description') }}
-  lz-box.advice(:tight="true" :shadow="true" @click="() => redirectTo('/training/home')")
+  lz-box.advice(:tight="true" :shadow="true" @click="() => redirectTo('training')")
     h1 {{ $t('user.home.advice.name') }}
     .body
       .icon
@@ -52,11 +52,11 @@
         icon: "calendar",
         route: "events/read"
       },
-      blog: {
-        title: this.$t("user.home.tools.blog"),
-        icon: "calendar",
-        route: "blog/read"
-      },
+      // blog: {
+      //   title: this.$t("user.home.tools.blog"),
+      //   icon: "calendar",
+      //   route: "blog/read"
+      // },
       // reviews: {
       //   title: this.$t("user.home.tools.reviews"),
       //   icon: "clipboard-text",
