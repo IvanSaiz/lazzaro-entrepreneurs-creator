@@ -15,6 +15,9 @@ const stripeApi = {
     });
 
     return http.get(`payment/connect/${memberId}?${params}`, { noAuth: false });
+  },
+  getAccountStatus: function(memberId: string): Promise<unknown> {
+    return http.get(`payment/stripe/${memberId}/status`, { noAuth: false });
   }
 };
 
