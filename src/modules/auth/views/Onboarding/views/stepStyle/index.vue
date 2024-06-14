@@ -78,8 +78,8 @@
 
     //TODO: show the styles but disable them
     styleOptions = {
-      classic: this.$t("auth.onboarding.stepStyle.form.styleOptions.classic")
-      // modern: this.$t("auth.onboarding.stepStyle.form.styleOptions.modern")
+      // classic: this.$t("auth.onboarding.stepStyle.form.styleOptions.classic")
+      modern: this.$t("auth.onboarding.stepStyle.form.styleOptions.modern")
       // minimalist: this.$t(
       //   "auth.onboarding.stepStyle.form.styleOptions.minimalist"
       // )
