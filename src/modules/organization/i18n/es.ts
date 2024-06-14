@@ -63,6 +63,7 @@ export default {
         error: "Ha ocurrido un error al conectar con Stripe",
         connect: "Conectar con Stripe",
         edit: "Editar configuración",
+        enabled: "Habilitado",
         missingInfo: "Faltan datos para completar la conexión con Stripe",
         chargesDisabled: "Stripe no permite cobros en tu cuenta",
         payoutsDisabled: "Stripe no permite pagos en tu cuenta"

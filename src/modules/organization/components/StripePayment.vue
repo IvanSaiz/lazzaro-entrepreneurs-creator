@@ -9,9 +9,10 @@
     )
     lz-button(type="primary" @click.prevent="connect") {{enabled ?  $t('organization.read.paymentGateway.stripe.edit') : $t('organization.read.paymentGateway.stripe.connect')}}
     .messages(v-if="enabled")
-      p.missing-info(v-if="!detailsSubmitted") {{ $t('organization.read.paymentGateway.stripe.missingInfo') }}
-      p.charges-disabled(v-if="!chargesEnabled") {{ $t('organization.read.paymentGateway.stripe.chargesDisabled') }}
-      p.payouts-disabled(v-if="!payoutsEnabled") {{ $t('organization.read.paymentGateway.stripe.payoutsDisabled') }}
+      p.success(v-if="connected") {{ $t("organization.read.paymentGateway.stripe.enabled") }}
+      p.error(v-if="!detailsSubmitted") {{ $t('organization.read.paymentGateway.stripe.missingInfo') }}
+      p.error(v-if="!chargesEnabled") {{ $t('organization.read.paymentGateway.stripe.chargesDisabled') }}
+      p.error(v-if="!payoutsEnabled") {{ $t('organization.read.paymentGateway.stripe.payoutsDisabled') }}
       
 </template>
 
@@ -40,6 +41,7 @@
     public refreshMemberData!: () => Promise<void>;
 
     enabled = false;
+    connected = false;
     type: "account_onboarding" | "account_update" = "account_onboarding";
     chargesEnabled = false;
     payoutsEnabled = false;
@@ -65,6 +67,7 @@
         this.chargesEnabled = rest.charges_enabled;
         this.payoutsEnabled = rest.payouts_enabled;
         this.detailsSubmitted = rest.details_submitted;
+        this.connected = rest.requirements.errors.length === 0;
         // this.type = "account_update"; // Error: Standard accounts can only update their details
       }
     }
@@ -84,8 +87,11 @@
       flex-direction: column;
       gap: 1rem;
 
-      p {
+      p.error {
         color: red;
+      }
+      p.success {
+        color: green;
       }
     }
   }

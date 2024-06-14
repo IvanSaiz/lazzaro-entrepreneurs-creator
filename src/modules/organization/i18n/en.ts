@@ -47,6 +47,7 @@ export default {
       stripe: {
         sixStepsToConfigureStripe: "Six steps to configure Stripe",
         connected: "Stripe connected successfully",
+        enabled: "Enabled",
         error: "Error connecting with Stripe",
         connect: "Connect with Stripe",
         edit: "Edit Stripe settings"
