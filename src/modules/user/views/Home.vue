@@ -1,18 +1,25 @@
 <template lang="pug">
 .user-home
-  .user-home__header
-    header
-      h1 {{ $t('user.home.hello') }} {{ name }}!
-      p {{ $t('user.home.description') }}
-  //- lz-box.user-home__advice(:tight="true")
-  //-   h3 {{ $t('user.home.advice.name') }}
-  //-   .user-home-advice
-  //-     .user-home-advice__icon
-  //-       certificate-icon(size=80)
-  //-     div
-  //-       p.user-home-advice__title {{ $t('user.home.advice.title') }}
-  //-       p.user-home-advice__description {{ $t('user.home.advice.description') }}
-  //-       p.user-home-advice__more(@click="$router.push({ name: 'tip1' })") {{ $t('user.home.advice.more') }}
+  header
+    h1 {{ $t('user.home.hello') }} {{ firstName }}!
+    p {{ $t('user.home.description') }}
+  lz-box.advice(:tight="true" :shadow="true" @click="() => redirectTo('training/home')")
+    h1 {{ $t('user.home.advice.name') }}
+    .body
+      .icon
+        certificate-icon(size=91)
+      .text
+        h1 {{ $t('training.home.cards.Web.title') }}
+        p {{ $t('training.home.cards.Web.subtitle') }}
+  lz-box.tools
+    h1 {{ $t("user.home.tools.title") }}
+    .grid
+      .tool(v-for="({icon,title,route}) in tools" @click="() => redirectTo(route)")
+        component(:is="`${icon}-icon`" size="38")
+        span {{ title }}
+  .ybs-logo
+    p {{ $t('user.home.ybs') }}
+    img(src="@/assets/images/ybs-logo.png" alt="YBS Logo")
 </template>
 
 <script lang="ts">
@@ -27,45 +34,58 @@
     components: { LzButton, LzBox }
   })
   export default class Home extends Vue {
-    @auth.State("id")
-    public memberId!: string;
+    @auth.State("firstName")
+    public firstName!: string;
 
-    balance = "0";
-    netBalance = "0";
-    features = {};
-    plan = {} as any;
-    free = false;
-    name = "";
+    tools = {
+      web: {
+        title: this.$t("user.home.tools.web"),
+        icon: "device-laptop",
+        route: "web/public"
+      },
+      shop: {
+        title: this.$t("user.home.tools.shop"),
+        icon: "building-store",
+        route: "shop/read"
+      },
+      events: {
+        title: this.$t("user.home.tools.events"),
+        icon: "calendar",
+        route: "events/read"
+      },
+      blog: {
+        title: this.$t("user.home.tools.blog"),
+        icon: "calendar",
+        route: "blog/read"
+      },
+      // reviews: {
+      //   title: this.$t("user.home.tools.reviews"),
+      //   icon: "clipboard-text",
+      //   route: "web/public#reviews"
+      // },
+      bookings: {
+        title: this.$t("user.home.tools.bookings"),
+        icon: "address-book",
+        route: "web/public#bookings"
+      },
+      projects: {
+        title: this.$t("user.home.tools.projects"),
+        icon: "clipboard-text",
+        route: "projects/read"
+      },
+      services: {
+        title: this.$t("user.home.tools.services"),
+        icon: "file-like",
+        route: "services/read"
+      }
+    } as const;
 
-    capitalizeFirstLetter(str) {
+    capitalizeFirstLetter(str: string) {
       return str.charAt(0).toUpperCase() + str.substring(1);
     }
 
-    mounted() {
-      apiMembers.getById(this.memberId).then(data => {
-        this.name = this.capitalizeFirstLetter(data.firstName);
-
-        // apiOngs.getWallet(data.walletId).then(response => {
-        //   this.balance = response.availableBalance.toString();
-        //   this.netBalance = (
-        //     parseInt(this.balance) -
-        //     parseInt(this.balance) * 0.05
-        //   ).toString();
-        // });
-      });
-      // apiOngs.getPlatformFeatures(this.ongId).then(({ data }) => {
-      //   this.features = data;
-      // });
-      // apiOngs.getOrganizationPlan(this.ongId).then(({ data }) => {
-      //   this.plan = data;
-
-      //   if (
-      //     data.PlatformSubscription?.id ==
-      //     "c02645a9-108a-4541-a031-c1a67593960e"
-      //   ) {
-      //     this.free = true;
-      //   }
-      // });
+    redirectTo(path: string) {
+      this.$router.push({ path: `/${path}` });
     }
   }
 </script>
@@ -74,176 +94,162 @@
   .user-home {
     display: grid;
     grid-template-areas:
-      "h h h h n n"
-      "p p p p n n"
-      "a a a a n n"
-      "t t t t n n"
-      "t t t t n n";
-    grid-gap: 20px;
+      "h h h h h h"
+      "p p p p p p"
+      "a a a a a a"
+      "t t t t t t"
+      "l l l l l l";
+    grid-gap: 25px;
 
-    &__header {
+    header {
       grid-area: h;
       height: 100%;
       width: 100%;
-      margin-bottom: 30px;
+
+      h1 {
+        font-family: Jost;
+        font-size: 35px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        color: $color-black-01;
+      }
     }
 
-    &__advice {
-      grid-area: a;
-      height: 100%;
-      width: 100%;
+    .lz-box {
+      padding: 30px 50px;
 
-      .user-home-advice {
+      h1 {
+        color: $color-black-02;
+        font-family: Mulish;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+      }
+
+      &.advice {
+        grid-area: a;
+        height: 100%;
+        width: 100%;
         display: flex;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        user-select: none;
+        transition: all 0.3s ease-in-out;
 
-        &__icon {
-          margin: 0 40px 0 30px;
-
-          svg {
-            stroke-width: 1px;
-            stroke: $color-black-02;
-          }
+        &:hover {
+          filter: brightness(0.97);
         }
 
-        &__title {
-          color: $color-black-02;
-          font-weight: 900;
-          font-size: 14px;
-          margin-bottom: 10px;
-        }
-
-        &__description {
-          font-weight: 500;
-          color: $color-black-02;
-          margin-bottom: 10px;
-        }
-
-        &__more {
-          color: $color-black-03;
-          text-decoration: underline;
-          cursor: pointer;
-        }
-      }
-    }
-
-    &__wallet {
-      grid-area: w;
-      height: 100%;
-      width: 100%;
-      text-align: center;
-
-      .user-home-wallet {
-        &__icon svg {
-          stroke: $color-black-02;
-          stroke-width: 1px;
-          margin-bottom: 5px;
-        }
-
-        &__money {
-          color: $color-black-02;
-          font-size: 20px;
-          font-weight: 700;
-        }
-
-        &__available {
-          color: $color-black-03;
-          font-size: 16px;
-        }
-
-        &__extra {
-          color: $color-black-03;
-          font-size: 10px;
-          margin-top: 15px;
-        }
-      }
-    }
-
-    &__tools {
-      grid-area: t;
-      height: 100%;
-      width: 100%;
-
-      .user-home-tools {
-        &__list {
+        .body {
           display: flex;
-          flex-wrap: wrap;
-          margin-top: 20px;
-        }
-
-        &__item {
+          gap: 30px;
           align-items: center;
-          display: flex;
-          font-size: 16px;
-          font-weight: 700;
-          flex-basis: 33%;
-          margin: 10px 0;
 
+          h1 {
+            font-family: Mulish;
+            font-size: 16px;
+            font-weight: 600;
+            color: $color-black-02;
+            margin-bottom: 0.8rem;
+          }
           p {
             color: $color-black-02;
-            white-space: nowrap;
+            font-family: Mulish;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
           }
+          .icon {
+            margin: 0;
 
-          svg {
-            stroke: $color-black-02;
-            stroke-width: 1px;
-            margin-right: 10px;
+            svg {
+              stroke-width: 0.7px;
+              stroke: $color-black-02;
+            }
           }
         }
       }
-    }
 
-    &__notifications {
-      grid-area: n;
-      height: 100%;
-      width: 100%;
+      &.tools {
+        grid-area: t;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 34px;
 
-      .user-home-notification {
-        margin: 20px 0;
-        position: relative;
-        padding-left: 25px;
-
-        &:before {
-          content: "";
-          height: 10px;
-          width: 10px;
-          background-color: $color-purple;
-          border-radius: 100%;
-          position: absolute;
-          left: 0;
-          top: 50%;
-          transform: translateY(-50%);
-        }
-
-        &__title {
-          font-family: Muli;
-          font-size: 12px;
-          font-weight: 500;
+        h1 {
+          font-family: Mulish;
+          font-size: 16px;
+          font-weight: 600;
           color: $color-black-02;
+          margin-bottom: 0;
         }
 
-        &__time {
-          font-family: Muli;
-          font-size: 10px;
-          color: $color-black-01;
-          font-weight: 700;
-          margin-top: 5px;
-        }
-      }
+        .grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 20px;
 
-      .user-home-notifications__bottom {
-        font-size: 10px;
-        text-align: center;
+          .tool {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            user-select: none;
+            cursor: pointer;
+            transition: all 0.1s ease-in-out;
 
-        strong {
-          font-weight: 700;
+            &:hover {
+              transform: scale(1.02);
+            }
+
+            svg {
+              stroke-width: 1.2px;
+              stroke: $color-black-02;
+            }
+
+            span {
+              font-family: Mulish;
+              font-size: 16px;
+              font-style: normal;
+              font-weight: 600;
+              line-height: normal;
+              color: $color-black-02;
+            }
+          }
         }
       }
     }
 
-    &__discount {
-      grid-area: d;
-      height: 100%;
-      width: 100%;
+    .ybs-logo {
+      grid-area: l;
+      width: max-content;
+      margin-left: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      justify-content: end;
+      align-items: end;
+      margin-top: 6rem;
+
+      img {
+        width: 100%;
+        max-width: 200px;
+      }
+
+      p {
+        font-family: Mulish;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        align-self: center;
+        color: $color-black-02;
+      }
     }
   }
 </style>

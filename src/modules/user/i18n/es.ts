@@ -8,20 +8,17 @@ export default {
       description: "La primera parte del texto es una conceptualización.",
       more: "Ver más"
     },
-    wallet: {
-      currency: {
-        euro: "€"
-      },
-      available: "disponibles"
-    },
     tools: {
       title: "Tus herramientas",
-      newProject: "Crear proyecto",
-      newEvent: "Crear evento / curso",
-      newProduct: "Crear producto",
-      manageDonations: "Gestionar donaciones",
-      consultant: "Contactar asesor",
-      withdraw: "Retirar dinero"
-    }
+      web: "Diseña tu web",
+      shop: "Crea tu tienda",
+      events: "Crear evento",
+      blog: "Crear tu blog",
+      reviews: "Reseñas",
+      bookings: "Reservas",
+      projects: "Crear portafolio",
+      services: "Crear servicios"
+    },
+    ybs: "Con el apoyo de"
   }
 };

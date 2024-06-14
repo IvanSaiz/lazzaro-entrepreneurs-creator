@@ -68,19 +68,17 @@
     public setTemplateFeatures!: () => Promise<void>;
 
     styleForm = {
-      logo: this.style?.logo ?? {
-        files: [{ file: null, name: "" }]
-      },
+      logo: this.style?.logo ?? "",
       textColor: this.style?.textColor ?? "#1081F2",
       buttonColor: this.style?.buttonColor ?? "#AD00FF",
-      template: this.style?.template ?? "modern"
+      template: this.style?.template ?? "classic"
     };
 
     loadingPostStyle = false;
 
     //TODO: show the styles but disable them
     styleOptions = {
-      classic: this.$t("auth.onboarding.stepStyle.form.styleOptions.classic"),
+      classic: this.$t("auth.onboarding.stepStyle.form.styleOptions.classic")
       // modern: this.$t("auth.onboarding.stepStyle.form.styleOptions.modern")
       // minimalist: this.$t(
       //   "auth.onboarding.stepStyle.form.styleOptions.minimalist"

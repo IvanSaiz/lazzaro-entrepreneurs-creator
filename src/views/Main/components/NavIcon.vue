@@ -1,10 +1,9 @@
 <template lang="pug">
-  component(:is="tag" @click="onClick" :class="cssClasses").lz-nav-icon
-    .lz-nav-icon__icon
-      slot(name="icon")
-    .lz-nav-icon__label
-      slot(name="label")
-
+component(:is="tag" @click="onClick" :class="cssClasses").lz-nav-icon
+  .lz-nav-icon__icon
+    slot(name="icon")
+  .lz-nav-icon__label
+    slot(name="label")
 </template>
 
 <script lang="ts">

@@ -1,6 +1,6 @@
 <template functional lang="pug">
-  .lz-box(:class="[ props.tight && 'lz-box--tight', data.staticClass ]")
-    slot
+.lz-box(:class="[ props.tight && 'lz-box--tight', data.staticClass ]" v-on="listeners")
+  slot
 </template>
 
 <style lang="scss">
@@ -10,7 +10,8 @@
     border-radius: $border-radius-default;
     box-shadow: 0 0 10px 0 $color-shadow-01;
     position: relative;
-    transition: height $transition-default, width $transition-default;
+    transition: height $transition-default, width $transition-default,
+      shadow $transition-default;
 
     &.lz-box--tight {
       border-radius: calc($border-radius-default / 2);

@@ -1,5 +1,5 @@
 <template lang="pug">
-section.public-bookings
+section.public-bookings#bookings
   .public-bookings__header
     .title
       formulate-input(
