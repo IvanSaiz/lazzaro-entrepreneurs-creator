@@ -27,7 +27,6 @@
   import LzButton from "@/components/Button.vue";
   import LzBox from "@/components/Box.vue";
   import { namespace } from "vuex-class";
-  import { apiMembers } from "@/modules/auth/api";
   const auth = namespace("auth");
 
   @Component({

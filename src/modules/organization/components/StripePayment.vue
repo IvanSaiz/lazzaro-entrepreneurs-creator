@@ -7,7 +7,12 @@
       :label="$t('organization.read.paymentGateway.stripe.sixStepsToConfigureStripe')"
       link="https://lazzaro.io/en/como-recibir-donaciones-a-traves-de-stripe-en-6-pasos/"
     )
-    lz-button(type="primary" @click.prevent="connect") {{stripeId ?  $t('organization.read.paymentGateway.stripe.edit') : $t('organization.read.paymentGateway.stripe.connect')}}
+    lz-button(type="primary" @click.prevent="connect") {{enabled ?  $t('organization.read.paymentGateway.stripe.edit') : $t('organization.read.paymentGateway.stripe.connect')}}
+    .messages(v-if="enabled")
+      p.missing-info(v-if="!detailsSubmitted") {{ $t('organization.read.paymentGateway.stripe.missingInfo') }}
+      p.charges-disabled(v-if="!chargesEnabled") {{ $t('organization.read.paymentGateway.stripe.chargesDisabled') }}
+      p.payouts-disabled(v-if="!payoutsEnabled") {{ $t('organization.read.paymentGateway.stripe.payoutsDisabled') }}
+      
 </template>
 
 <script lang="ts">
@@ -34,13 +39,34 @@
     @auth.Action("refreshMemberData")
     public refreshMemberData!: () => Promise<void>;
 
+    enabled = false;
+    type: "account_onboarding" | "account_update" = "account_onboarding";
+    chargesEnabled = false;
+    payoutsEnabled = false;
+    detailsSubmitted = false;
+
     async connect() {
-      const { url } = await apiWallet.stripe.getConnectLink(this.ongId);
+      const { url } = await apiWallet.stripe.getConnectLink(
+        this.ongId,
+        this.type
+      );
       window.open(url, "_blank");
     }
 
     async mounted() {
       await this.refreshMemberData();
+
+      const { enabled, ...rest } = await apiWallet.stripe.getAccountStatus(
+        this.ongId
+      );
+
+      if (enabled) {
+        this.enabled = true;
+        this.chargesEnabled = rest.charges_enabled;
+        this.payoutsEnabled = rest.payouts_enabled;
+        this.detailsSubmitted = rest.details_submitted;
+        // this.type = "account_update"; // Error: Standard accounts can only update their details
+      }
     }
   }
 </script>
@@ -52,6 +78,16 @@
     align-items: flex-start;
     width: 100%;
     padding-inline: 3rem;
+
+    .messages {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      p {
+        color: red;
+      }
+    }
   }
 
   .payment-stripe header p {

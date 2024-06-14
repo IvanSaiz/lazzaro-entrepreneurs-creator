@@ -53,3 +53,11 @@ declare interface Member {
   stripe_account_id: null | string;
   SubscriptionMembershipId: null | string;
 }
+
+declare interface StripeAccountStatus {
+  enabled: boolean;
+  charges_enabled?: boolean;
+  details_submitted?: boolean;
+  payouts_enabled?: boolean;
+  requirements?: Record<string, any>;
+}
