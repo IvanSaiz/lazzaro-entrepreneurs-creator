@@ -21,6 +21,7 @@ section.public-personalizeWeb
         :options="fontOptions"
         v-model="props.mainTypography"
         validation="required"
+        error-behavior="live"
         :validation-name="$t('web.public.personalizeWebForm.form.fonts.label')"
         :placeholder="$t('auth.signup.form.choose')"
       )  
@@ -31,6 +32,7 @@ section.public-personalizeWeb
         :options="fontOptions"
         v-model="props.secondaryTypography"
         validation="required"
+        error-behavior="live"
         :validation-name="$t('auth.onboarding.stepStyle.form.style')"
         :placeholder="$t('auth.signup.form.choose')"
       )

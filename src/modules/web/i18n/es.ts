@@ -373,6 +373,7 @@ export default {
     notify: {
       success: "Cambios guardados con éxito",
       error: "Ha ocurrido un error al guardar",
+      validationError: "Por favor, rellena todos los campos obligatorios",
       publishWebsiteError: "Un error ha ocurrido mientras se publicaba la web",
       unpublishWebsiteError:
         "Un error se ha producido mientras se despublicaba la web"

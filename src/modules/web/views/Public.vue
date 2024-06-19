@@ -13,11 +13,11 @@
 
   formulate-form(
     @submit="onPublicWebSubmit"
-    @validation="onValidation"
+    @failed-validation="handleFailedValidation"
     :keep-model-data="true"
     v-if="loaded"
-    #default="{ hasErrors, isLoading }"
-    error-behavior="submit"
+    #default="{ isLoading }"
+    validation-behavior="submit"
   )
     <General v-model:props="form.general"></General>
     <Personalize v-model:props="form.style"></Personalize>
@@ -39,7 +39,7 @@
       lz-button(
         type="primary" 
         class="save-btn" 
-        :disabled="isLoading || hasErrors"
+        :disabled="isLoading"
       ) {{ $t('common.actions.save') }}
 </template>
 
@@ -120,25 +120,6 @@
     }
     onModalOpen(): void {
       this.showModal = true;
-    }
-
-    onValidation(validation) {
-      if (validation.hasErrors) {
-        validation.errors.forEach(text => {
-          this.$notify({
-            type: "error",
-            text,
-            duration: 10000
-          });
-        });
-        const errorInput = document.querySelector(
-          `[name="${validation.name}"]`
-        );
-        if (errorInput) {
-          errorInput.scrollIntoView({ behavior: "smooth", block: "center" });
-        }
-      }
-      // Scroll to the first error
     }
 
     async handlePublishWebsite(active: boolean, websiteId: string) {
@@ -278,6 +259,7 @@
 
     async onPublicWebSubmit(form) {
       try {
+        console.dir(form);
         this.handleTemplateChange();
 
         const postData: PublicWebFormData = {
@@ -335,6 +317,18 @@
           text: this.$tc("web.public.notify.error")
         });
       }
+    }
+
+    async handleFailedValidation(fields: Record<string, any>) {
+      this.$notify({
+        type: "error",
+        text: this.$tc("web.public.notify.validationError")
+      });
+      // Scroll to the first field with an error
+      Object.values(fields)[0]?.$el?.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
     }
   }
 </script>
