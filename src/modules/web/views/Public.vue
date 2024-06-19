@@ -259,7 +259,6 @@
 
     async onPublicWebSubmit(form) {
       try {
-        console.dir(form);
         this.handleTemplateChange();
 
         const postData: PublicWebFormData = {
