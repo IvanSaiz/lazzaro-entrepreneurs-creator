@@ -112,8 +112,8 @@ export default {
           label: "Sube tu logo",
           help: "Añade una imagen en png o jpg."
         },
-        primaryColour: "Elige color para el texto",
-        secondaryColour: "Elige color para los botones",
+        textColour: "Elige color para el texto",
+        buttonColour: "Elige color para los botones",
         style: "Escoge tu estilo",
         styleOptions: {
           classic: "Clásico",

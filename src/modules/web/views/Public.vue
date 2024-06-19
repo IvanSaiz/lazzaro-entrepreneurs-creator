@@ -17,7 +17,7 @@
     :keep-model-data="true"
     v-if="loaded"
     #default="{ hasErrors, isLoading }"
-    error-behavior="live"
+    error-behavior="submit"
   )
     <General v-model:props="form.general"></General>
     <Personalize v-model:props="form.style"></Personalize>
@@ -65,6 +65,7 @@
     WhyChooseUs
   } from "../components/Sections";
   import { getImgURL } from "@/utils/getFormulateImageUrl";
+  import { defaultWebProps } from "../utils/defaults";
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const _ = require("lodash");
   const auth = namespace("auth");
@@ -104,140 +105,7 @@
     @auth.State("isActive")
     public isActive!: boolean;
 
-    form: WebProps = {
-      general: {
-        active: false,
-        url: "",
-        templateId: ""
-      },
-      style: {
-        buttonColor: "",
-        logo: "",
-        mainTypography: "",
-        menuColor: "",
-        menuTextColor: "",
-        secondaryTypography: ""
-      },
-      homePage: {
-        design: {
-          layout: "left",
-          backgroundColor: "#EFEFEF"
-        },
-        title: "",
-        titleColor: "",
-        subTitle: "",
-        subTitleColor: "",
-        mainImage: "",
-        firstButtonLink: "",
-        firstButtonText: "",
-        secondButtonLink: "",
-        secondButtonText: ""
-      },
-      aboutUs: {
-        enabled: false,
-        imgUrl: "",
-        title: "",
-        titleColor: "",
-        subTitle: "",
-        subTitleColor: "",
-        description: "",
-        features: {
-          enabled: false,
-          icons: [],
-          buttons: []
-        },
-        design: {
-          layout: "right",
-          backgroundColor: "#F0F0F0"
-        }
-      },
-      whyChooseUs: {
-        enabled: false,
-        imgUrl: "",
-        title: "",
-        titleColor: "",
-        description: "",
-        subtitles: [],
-        design: {
-          layout: "right",
-          backgroundColor: "#F0F0F0"
-        }
-      },
-      bookings: {
-        enabled: false,
-        imgUrl: "",
-        title: "",
-        titleColor: "",
-        subtitle: "",
-        subtitleColor: "",
-        buttonUrl: "",
-        buttonText: "",
-        design: {
-          layout: "center",
-          backgroundColor: "#F0F0F0",
-          bannerColor: "#ff7456"
-        }
-      },
-      reviews: {
-        enabled: false,
-        title: "",
-        titleColor: "",
-        subtitle: "",
-        subtitleColor: "",
-        url: ""
-      },
-      impact: {
-        enabled: false,
-        data: [],
-        design: {
-          color: "#EFEFEF",
-          backgroundColor: "#FFF0F0",
-          backgroundImage: "",
-          amountColor: "#EFEFEF"
-        }
-      },
-      team: {
-        enabled: false,
-        title: "",
-        titleColor: "",
-        subTitle: "",
-        subtitleColor: "",
-        members: [],
-        design: {
-          backgroundColor: "#F0F0F0"
-        }
-      },
-      contact: {
-        title: "",
-        subTitle: "",
-        titleColor: "",
-        subTitleColor: "",
-        design: {
-          backgroundColor: "#EFEFEF"
-        }
-      },
-      footer: {
-        info: {
-          terms: "",
-          transparency: {
-            description: "",
-            accountability: ""
-          }
-        },
-        social: {
-          facebook: "",
-          twitter: "",
-          linkedIn: "",
-          whatsapp: "",
-          secondaryWeb: "",
-          instagram: ""
-        },
-        design: {
-          backgroundColor: "",
-          backgroundImage: ""
-        }
-      }
-    };
+    form: WebProps = defaultWebProps;
     initialForm: WebProps;
 
     loaded = false;
@@ -254,18 +122,7 @@
       this.showModal = true;
     }
 
-    validation: {
-      hasErrors: boolean;
-      errors: string[];
-      name: string;
-    } = {
-      errors: [],
-      hasErrors: false,
-      name: ""
-    };
-
     onValidation(validation) {
-      this.validation = validation;
       if (validation.hasErrors) {
         validation.errors.forEach(text => {
           this.$notify({
@@ -421,11 +278,6 @@
 
     async onPublicWebSubmit(form) {
       try {
-        if (this.validation?.hasErrors) {
-          this.onValidation(this.validation);
-          return;
-        }
-
         this.handleTemplateChange();
 
         const postData: PublicWebFormData = {

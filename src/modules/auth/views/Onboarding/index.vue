@@ -4,7 +4,6 @@
     lz-stepper(
       :steps="steps"
       :active="active"
-      @click="setActiveStep"
       :pass="true"
     )
       template(#default="{ step }") {{ $t('auth.onboarding.steps.' + step) }}
