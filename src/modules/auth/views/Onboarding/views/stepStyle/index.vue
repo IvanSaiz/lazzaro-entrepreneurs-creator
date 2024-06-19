@@ -69,9 +69,9 @@
 
     styleForm = {
       logo: this.style?.logo ?? "",
-      textColor: this.style?.textColor ?? "#1081F2",
-      buttonColor: this.style?.buttonColor ?? "#AD00FF",
-      template: this.style?.template ?? "classic"
+      textColor: this.style?.textColor ?? "#000000",
+      buttonColor: this.style?.buttonColor ?? "#000000",
+      template: this.style?.template ?? "modern"
     };
 
     loadingPostStyle = false;

@@ -44,7 +44,7 @@ section.public-whyUs
         label-position="before"
         name="whyChooseUsImgUrl"
         v-model="props.imgUrl"
-        validation="required|mime:image/jpeg,image/png,image/webp,image/webp"
+        :validation="validateIfEnabled('required|mime:image/jpeg,image/png,image/webp,image/webp')"
         :help="$t('web.public.whyChooseUsForm.imageHelperText')"
       )
       .form-section
@@ -53,7 +53,7 @@ section.public-whyUs
             type="text"
             name="whyChooseUsTitle"
             v-model="props.title"
-            validation="required"
+            :validation="validateIfEnabled('required')"
             :label="$t('web.public.whyChooseUsForm.formTitle')"
             :help="$t('web.public.whyChooseUsForm.titleHelperText')"
           )
@@ -65,7 +65,7 @@ section.public-whyUs
         lz-editor-input(
           :label="$t('web.public.whyChooseUsForm.description')"
           v-model="props.description"
-          required
+          :required="props.enabled"
         )
     .public-whyUs__content
       formulate-input(
@@ -112,6 +112,10 @@ section.public-whyUs
         label: this.$t("common.design.layout.options.right")
       }
     ];
+
+    validateIfEnabled(validation: string) {
+      return this.props.enabled ? validation : [];
+    }
   }
 </script>
 

@@ -43,6 +43,7 @@ section.public-impact
     type="group"
     name="impactData"
     :value="props.data"
+    :validation="validateIfEnabled('required|max:4,length')"
     #default="{index}"
   ).public-impact__content
     formulate-input.impact-item(
@@ -50,26 +51,20 @@ section.public-impact
           name= "url"
           :label="$t(`web.public.impactForm.icon.${index+1}`)"
           :help="$t('web.public.impactForm.icon.help')"
-          validation="enabled"
-          :validation-rules="rules"
-          error-behavior="live"
+          :validation="validateIfEnabled('required|mime:image/jpeg,image/png,image/webp,image/webp')"
         )
     formulate-input.impact-item(
           type="text"
           name= "text"
           :label="$t(`web.public.impactForm.text.${index+1}`)"
           :help="$t('common.helper.maxChars', { max: 30 })"
-          validation="enabled"
-          :validation-rules="rules"
-          error-behavior="live"
+          :validation="validateIfEnabled('required|max:30,length')"
         )
     formulate-input.impact-item(
           type="text"
           name= "amount"
           :label="$t(`web.public.impactForm.amount.${index+1}`)"
-          validation="enabled"
-          :validation-rules="rules"
-          error-behavior="live"
+          :validation="validateIfEnabled('required|alphanumeric|min:0,length|max:999999,length')"
         )
   
 </template>
@@ -84,16 +79,10 @@ section.public-impact
   export default class Impact extends Vue {
     @VModel() props!: ImpactProps; // TODO: Map to inputs
 
-    rules = {
-      enabled: ({ value, getFormValues }) => {
-        const { impactEnabled } = getFormValues();
 
-        // If impact is not enabled, skip validation
-        if (!impactEnabled) return true;
-        // If impact is enabled, validate if value is present
-        else return !!value;
-      }
-    };
+    validateIfEnabled(validation: string) {
+      return this.props.enabled ? validation : [];
+    }
 
     messages = {};
   }

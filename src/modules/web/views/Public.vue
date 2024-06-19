@@ -36,7 +36,11 @@
         class='cancel-btn'
         @click.prevent="$router.push({ name: 'Home' })"
       ) {{ $t('common.actions.cancel') }}
-      lz-button(type="primary" class="save-btn" :disabled="hasErrors || isLoading") {{ $t('common.actions.save') }}
+      lz-button(
+        type="primary" 
+        class="save-btn" 
+        :disabled="isLoading || hasErrors"
+      ) {{ $t('common.actions.save') }}
 </template>
 
 <script lang="ts">
@@ -267,7 +271,7 @@
           this.$notify({
             type: "error",
             text,
-            duration: 60000
+            duration: 10000
           });
         });
         const errorInput = document.querySelector(

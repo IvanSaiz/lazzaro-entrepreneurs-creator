@@ -26,7 +26,7 @@ section.public-team
           type="text"
           name="teamTitle"
           v-model="props.title"
-          validation="required"
+          :validation="validateIfEnabled('required')"
           :label="$t('web.public.teamForm.header.title')"
           :help="$t('web.public.teamForm.header.titleHelperText')"
         )
@@ -40,7 +40,7 @@ section.public-team
           type="text"
           name="teamSubtitle"
           v-model="props.subTitle"
-          validation="required"
+          :validation="validateIfEnabled('required')"
           :label="$t('web.public.teamForm.header.subtitle')"
           :help="$t('web.public.teamForm.header.subtitleHelperText')"
         )
@@ -117,6 +117,10 @@ section.public-team
   @Component({ name: "Team", components: { LzTable, LzButton, DesignModal } })
   export default class Team extends Vue {
     @VModel() props!: TeamProps;
+
+    validateIfEnabled(validation: string) {
+      return this.props.enabled ? validation : [];
+    }
 
     teamForm = {
       id: "",

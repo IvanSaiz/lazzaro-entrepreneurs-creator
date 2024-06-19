@@ -44,7 +44,7 @@ section.public-whoWeAre
         label-position="before",
         v-model="props.imgUrl",
         name="aboutUsImgUrl",
-        validation="required|mime:image/jpeg,image/png,image/svg+xml,image/webp",
+        :validation="validateIfEnabled('required|mime:image/jpeg,image/png,image/svg+xml,image/webp')",
         :help="$t('web.public.whoWeAreForm.form.imageHelper')"
       )
       .form-section
@@ -53,7 +53,7 @@ section.public-whoWeAre
             type="text",
             name="aboutUsTitle",
             v-model="props.title",
-            validation="required",
+            :validation="validateIfEnabled('required')",
             :label="$t('web.public.whoWeAreForm.form.title')",
             :help="$t('web.public.whoWeAreForm.form.titleHelper')"
           )
@@ -67,7 +67,7 @@ section.public-whoWeAre
             type="text",
             name="aboutUsSubtitle",
             v-model="props.subTitle",
-            validation="required",
+            :validation="validateIfEnabled('required')",
             :label="$t('web.public.whoWeAreForm.form.subtitle')",
             :help="$t('web.public.whoWeAreForm.form.subtitleHelper')"
           )
@@ -78,7 +78,7 @@ section.public-whoWeAre
           )
         lz-editor-input(
           :label="$t('web.public.whoWeAreForm.form.description')",
-          required
+          :required="props.enabled"
           v-model="props.description"
         )
   section.public-features
@@ -94,13 +94,13 @@ section.public-whoWeAre
         type="group",
         v-model="props.features.icons",
         name="icons",
-        validation="min:2,length|max:4,length"
+        :validation="validateIfEnabled('min:2,length|max:4,length')"
         #default="{ index }"
       )
         formulate-input.text-item(
           type="image",
           name="url",
-          validation="mime:image/jpeg,image/png,image/svg+xml,image/webp",
+          :validation="validateIfEnabled('mime:image/jpeg,image/png,image/svg+xml,image/webp')",
           :label="$t(`web.public.whoWeAreForm.features.icon`, { index: index + 1 })",
           :help="$t('common.helper.image', {w: 60, h: 60, size: '25MB'})"
         )
@@ -158,6 +158,10 @@ section.public-whoWeAre
         label: this.$t("common.design.layout.options.right")
       }
     ];
+
+    validateIfEnabled(validation: string) {
+      return this.props.enabled ? validation : [];
+    }
   }
 </script>
 

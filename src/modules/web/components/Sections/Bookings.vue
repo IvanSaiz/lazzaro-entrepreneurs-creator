@@ -39,7 +39,7 @@ section.public-bookings#bookings
         label-position="before"
         name="bookingsImgUrl"
         v-model="props.imgUrl"
-        validation="required|mime:image/jpeg,image/png,image/webp,image/webp"
+        :validation="validateIfEnabled('required|mime:image/jpeg,image/png,image/webp,image/webp')"
         :help="$t('web.public.bookingsForm.imageHelper')"
       )
       .form-section
@@ -48,7 +48,7 @@ section.public-bookings#bookings
             type="text"
             name="bookingsTitle"
             v-model="props.title"
-            validation="required"
+            :validation="validateIfEnabled('required')"
             :label="$t('web.public.bookingsForm.formTitle')"
             :help="$t('web.public.bookingsForm.titleHelper')"
           )
@@ -62,7 +62,7 @@ section.public-bookings#bookings
             type="text"
             name="bookingsSubtitle"
             v-model="props.subtitle"
-            validation="required"
+            :validation="validateIfEnabled('required')"
             :label="$t('web.public.bookingsForm.formSubtitle')"
             :help="$t('web.public.bookingsForm.subtitleHelper')"
           )
@@ -76,14 +76,14 @@ section.public-bookings#bookings
             type="text"
             name="bookingsButtonText"
             v-model="props.buttonText"
-            validation="required"
+            :validation="validateIfEnabled('required')"
             :label="$t('web.public.bookingsForm.button')"
           )
           formulate-input(
             type="text"
             name="bookingsButtonUrl"
             v-model="props.buttonUrl"
-            validation="required"
+            :validation="validateIfEnabled('required')"
             :label="$t('web.public.bookingsForm.link')"
           )
 </template>
@@ -113,6 +113,10 @@ section.public-bookings#bookings
         label: this.$t("common.design.layout.options.right")
       }
     ];
+
+    validateIfEnabled(validation: string): string {
+      return this.props.enabled ? validation : "";
+    }
   }
 </script>
 
