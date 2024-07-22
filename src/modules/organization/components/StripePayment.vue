@@ -5,7 +5,7 @@
     lz-link-icon(
       iconName='helpIcon'
       :label="$t('organization.read.paymentGateway.stripe.sixStepsToConfigureStripe')"
-      link="https://lazzaro.io/en/como-recibir-donaciones-a-traves-de-stripe-en-6-pasos/"
+      link="https://lazzaro.io/como-recibir-donaciones-a-traves-de-stripe-en-tan-solo-6-pasos/"
     )
     lz-button(type="primary" @click.prevent="connect") {{enabled ?  $t('organization.read.paymentGateway.stripe.edit') : $t('organization.read.paymentGateway.stripe.connect')}}
     .messages(v-if="enabled")
