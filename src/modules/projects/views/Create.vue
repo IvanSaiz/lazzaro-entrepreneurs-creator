@@ -218,8 +218,14 @@
         this.proyectForm.imageUrlToConvert
       )) as string;
 
-      const getImagesURL = images =>
-        images.upload().then(results => results.map(({ url }) => url));
+      const getImagesURL = async (
+        images: { url: string }[]
+      ): Promise<string[]> => {
+        const results = await Promise.all(
+          images.map(image => getImgURL([image]))
+        );
+        return results.map(url => url as string);
+      };
 
       const parsedImages = await getImagesURL(this.proyectForm.imagesToConvert);
 
