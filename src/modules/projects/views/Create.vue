@@ -218,6 +218,8 @@
         this.proyectForm.imageUrlToConvert
       )) as string;
 
+      /* Get Images URL */
+
       const getImagesURL = async (
         images: { url: string }[]
       ): Promise<string[]> => {
