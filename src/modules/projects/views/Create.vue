@@ -212,35 +212,36 @@
     }
 
     async onSubmit() {
-      const isNewProject = !this.projectId;
+    const isNewProject = !this.projectId;
 
-      const imageUrl = (await getImgURL(
-        this.proyectForm.imageUrlToConvert
-      )) as string;
+    const imageUrl = (await getImgURL(this.proyectForm.imageUrlToConvert)) as string;
 
-      /* Get Images URL */
+    /* Get Images URL */
+    const getImagesURL = async (images: { url: string }[]): Promise<string[]> => {
+      if (!Array.isArray(images)) {
+        throw new TypeError('images should be an array');
+      }
+      const results = await Promise.all(images.map(image => getImgURL([image.url])));
+      return results.map(url => url as string);
+    };
 
-      const getImagesURL = async (
-        images: { url: string }[]
-      ): Promise<string[]> => {
-        const results = await Promise.all(
-          images.map(image => getImgURL([image]))
-        );
-        return results.map(url => url as string);
-      };
+    const imagesToConvert = Array.isArray(this.proyectForm.imagesToConvert) ? this.proyectForm.imagesToConvert : [];
 
-      const parsedImages = await getImagesURL(this.proyectForm.imagesToConvert);
+    const parsedImages = await getImagesURL(imagesToConvert);
 
-      const body: TProjectForm = {
-        ...this.proyectForm,
-        imageUrl,
-        images: parsedImages,
-        memberId: this.memberId
-      };
+    const body: TProjectForm = {
+      ...this.proyectForm,
+      imageUrl,
+      images: parsedImages,
+      memberId: this.memberId
+    };
 
-      if (isNewProject) await this.createProject(body);
-      else await this.updateProject(body);
+    if (isNewProject) {
+      await this.createProject(body);
+    } else {
+      await this.updateProject(body);
     }
+  }
 
     async mounted() {
       try {
