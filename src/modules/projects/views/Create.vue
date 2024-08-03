@@ -33,7 +33,7 @@
             :validation-name="$t('projects.create.images.label')"
             label-position="before"
             :add-label="$t('projects.create.images.add')"
-            :multiple="false"
+            :multiple="true"
             v-model="proyectForm.imagesToConvert"
           )
 

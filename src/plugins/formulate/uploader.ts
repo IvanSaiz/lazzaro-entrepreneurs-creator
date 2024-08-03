@@ -3,16 +3,17 @@ import http from "@/api/core/http";
 
 export default async function uploader(
   file: File,
-  progess: (percent: number) => void
+  progress: (percent: number) => void
 ) {
   // TODO: Replace with S3 endpoint
-  progess(0);
+  progress(0);
   const [name] = file.name.split(".");
+  const imageBase64 = await toBase64(file);
   const res = await http.post("/aws/upload", {
     filename: name,
-    imageBase64: await toBase64(file)
+    imageBase64
   });
-  progess(100);
+  progress(100);
   return {
     url: res,
     name: file.name
