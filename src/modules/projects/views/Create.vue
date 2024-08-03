@@ -33,7 +33,7 @@
             :validation-name="$t('projects.create.images.label')"
             label-position="before"
             :add-label="$t('projects.create.images.add')"
-            :multiple="true"
+            :multiple="false"
             v-model="proyectForm.imagesToConvert"
           )
 
@@ -111,7 +111,7 @@
     skills: string;
     status: "enabled" | "disabled";
     imageUrlToConvert: { url: string }[];
-    imagesToConvert: { url: string }[];
+    imagesToConvert: { url: string }[] | any;
     memberId: string;
     imageUrl: string;
     images: string[];
@@ -212,36 +212,33 @@
     }
 
     async onSubmit() {
-    const isNewProject = !this.projectId;
+      const isNewProject = !this.projectId;
 
-    const imageUrl = (await getImgURL(this.proyectForm.imageUrlToConvert)) as string;
+      const parsedImages: string[] = [];
 
-    /* Get Images URL */
-    const getImagesURL = async (images: { url: string }[]): Promise<string[]> => {
-      if (!Array.isArray(images)) {
-        throw new TypeError('images should be an array');
+      const imageUrl = (await getImgURL(
+        this.proyectForm.imageUrlToConvert
+      )) as string;
+
+      this.proyectForm.imagesToConvert.files.forEach(async element => {
+        if (element) {
+          parsedImages.push(element?.path?.url);
+        }
+      });
+
+      const body: TProjectForm = {
+        ...this.proyectForm,
+        imageUrl,
+        images: parsedImages,
+        memberId: this.memberId
+      };
+
+      if (isNewProject) {
+        await this.createProject(body);
+      } else {
+        await this.updateProject(body);
       }
-      const results = await Promise.all(images.map(image => getImgURL([image.url])));
-      return results.map(url => url as string);
-    };
-
-    const imagesToConvert = Array.isArray(this.proyectForm.imagesToConvert) ? this.proyectForm.imagesToConvert : [];
-
-    const parsedImages = await getImagesURL(imagesToConvert);
-
-    const body: TProjectForm = {
-      ...this.proyectForm,
-      imageUrl,
-      images: parsedImages,
-      memberId: this.memberId
-    };
-
-    if (isNewProject) {
-      await this.createProject(body);
-    } else {
-      await this.updateProject(body);
     }
-  }
 
     async mounted() {
       try {
