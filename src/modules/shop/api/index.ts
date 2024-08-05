@@ -1,9 +1,12 @@
 import http from "@/api/core/http";
-import { Product } from "./types";
+import { Order, Product } from "./types";
 
 export default {
   getAllByMemberId: async (id: string): Promise<Product[]> => {
     return http.get(`product/member/${id}`, { noAuth: false });
+  },
+  getAllOrdersMemberId: async (id: string): Promise<Order[]> => {
+    return http.get(`orders/member/${id}`, { noAuth: false });
   },
   getById: async (id: string): Promise<Product> => {
     return http.get(`product/${id}`, { noAuth: false });
