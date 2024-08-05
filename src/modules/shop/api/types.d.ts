@@ -1,3 +1,5 @@
+// src/modules/shop/api/types.ts
+
 export type Product = {
   id: string;
   member_id: string;
@@ -23,4 +25,29 @@ export type ProductForm = {
   images: { url: string; name?: string }[] | "";
   delivery_time: string;
   discount: string;
+};
+
+export type Order = {
+  id: string;
+  member_id: string;
+  product_id: string;
+  payment_id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  Member: Member;
+  Product: Product;
+  Payment: Payment;
+};
+
+export type Member = {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+};
+
+export type Payment = {
+  id: string;
+  amount: number;
+  paid: boolean;
 };
