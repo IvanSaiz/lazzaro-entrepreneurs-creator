@@ -6,7 +6,6 @@ section.choose-template
     .templates
       .template(v-for='(template) in computedTemplates' :style='template.style' :key='template.id')
         input(type="radio" :value='template.id' v-model='template.id' @click="handleChooseTemplate"
-        :disabled="isTemplateDisabled(template.id)"
         )
         .template__body(:style="template.backgroundImage")
         .template__footer
