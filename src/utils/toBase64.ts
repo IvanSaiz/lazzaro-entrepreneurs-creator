@@ -1,9 +1,8 @@
-const reader = new FileReader();
-
 const toBase64 = (file: File | { url: string }): Promise<string> => {
   if (!(file instanceof File)) return Promise.resolve(file?.url ?? "");
-  reader.readAsDataURL(file);
   return new Promise((resolve, reject) => {
+    const reader = new FileReader();  // Crear una nueva instancia de FileReader para cada archivo
+    reader.readAsDataURL(file);
     reader.onload = () => {
       if (typeof reader.result === "string") {
         resolve(reader.result);

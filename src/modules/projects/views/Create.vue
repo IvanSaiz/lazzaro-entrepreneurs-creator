@@ -111,7 +111,7 @@
     skills: string;
     status: "enabled" | "disabled";
     imageUrlToConvert: { url: string }[];
-    imagesToConvert: { url: string }[];
+    imagesToConvert: { url: string }[] | any;
     memberId: string;
     imageUrl: string;
     images: string[];
@@ -214,14 +214,17 @@
     async onSubmit() {
       const isNewProject = !this.projectId;
 
+      const parsedImages: string[] = [];
+
       const imageUrl = (await getImgURL(
         this.proyectForm.imageUrlToConvert
       )) as string;
 
-      const getImagesURL = images =>
-        images.upload().then(results => results.map(({ url }) => url));
-
-      const parsedImages = await getImagesURL(this.proyectForm.imagesToConvert);
+      this.proyectForm.imagesToConvert.files.forEach(async element => {
+        if (element) {
+          parsedImages.push(element?.path?.url);
+        }
+      });
 
       const body: TProjectForm = {
         ...this.proyectForm,
@@ -230,8 +233,11 @@
         memberId: this.memberId
       };
 
-      if (isNewProject) await this.createProject(body);
-      else await this.updateProject(body);
+      if (isNewProject) {
+        await this.createProject(body);
+      } else {
+        await this.updateProject(body);
+      }
     }
 
     async mounted() {

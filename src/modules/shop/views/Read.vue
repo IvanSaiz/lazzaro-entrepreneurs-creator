@@ -45,13 +45,13 @@
         ) {{ $t('shop.read.newProduct') }}
     section.shop-read__orders(v-else-if="active === 'orders'")
       lz-table(title="" :fields="ordersFields" :items="orders")
-        template(#name="{ row: { name }}") {{ name }}
-        template(#code="{ row: { code }}") {{ code }}
-        template(#products="{ row: { products }}") {{ products }}
-        template(#total="{ row: { total }}") {{ total }}
-        template(#status="{ row: { status }}") {{ status }}
-        template(#actions="{ row }")
-          eye-icon
+        template(#name="{ row: { Member }}") {{ Member.firstName + ' ' + Member.lastName}}
+        template(#code="{ row: { Product }}") {{ Product.id }}
+        template(#products="{ row: { Product }}") {{ Product.title }}
+        template(#total="{ row: { Product }}") {{ Product.price }}
+        template(#status="{ row: { Payment }}") {{ Payment.paid ? "Pagado" : "En espera de pago" }}
+<!--         template(#actions="{ row }")
+          eye-icon -->
 </template>
 
 <script lang="ts">
@@ -62,7 +62,7 @@
   import LzModal from "@/components/Modal.vue";
   import Products from "../api";
   import { namespace } from "vuex-class";
-  import { Product } from "../api/types";
+  import { Order, Product } from "../api/types";
   import DesignModal from "../components/DesignModal.vue";
   import LzConfirm from "@/components/Confirm.vue";
   import SectionToggle from "@/components/SectionToggle.vue";
@@ -104,15 +104,15 @@
       { id: "actions", label: this.$t("shop.read.productsTable.actions") }
     ];
 
-    orders: any[] = [];
+    orders: Order[] = [];
 
     ordersFields = [
       { id: "name", label: this.$t("shop.read.ordersTable.name") },
       { id: "code", label: this.$t("shop.read.ordersTable.trackingCode") },
       { id: "products", label: this.$t("shop.read.ordersTable.products") },
       { id: "total", label: this.$t("shop.read.ordersTable.total") },
-      { id: "status", label: this.$t("shop.read.ordersTable.status") },
-      { id: "actions", label: this.$t("shop.read.ordersTable.actions") }
+      { id: "status", label: this.$t("shop.read.ordersTable.status") }
+   /*    { id: "actions", label: this.$t("shop.read.ordersTable.actions") } */
     ];
 
     orderFields = [
@@ -136,8 +136,19 @@
     itemToDelete: Product;
 
     mounted() {
+      this.getProducts();
+      this.getOrders();
+    }
+
+    getProducts() {
       Products.getAllByMemberId(this.memberId).then(res => {
         this.products = res;
+      });
+    }
+
+    getOrders() {
+      Products.getAllOrdersMemberId(this.memberId).then(res => {
+        this.orders = res;
       });
     }
 

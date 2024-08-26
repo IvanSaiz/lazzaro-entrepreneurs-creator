@@ -8,12 +8,12 @@ section.public-footer
         template(#header)
           h4 {{ $t('web.public.footer.title') }}
         template(#form)
-          h2.h2--dash {{ $t('web.public.footer.design.image') }}
+          <!-- h2.h2--dash {{ $t('web.public.footer.design.image') }}
           formulate-input(
             type="image"
             v-model="props.design.backgroundImage"
             :help="$t('web.public.footer.design.imageHelper')"
-          )
+          ) -->
           h2.h2--dash {{ $t('web.public.footer.design.color') }}
           formulate-input#primary-color(
             type="textColor"
@@ -76,7 +76,7 @@ section.public-footer
         :label="$t('web.public.footer.termsForm.transparencyDescription')"
         v-model="props.info.transparency.description"
       )
-    .form__row
+<!--     .form__row
       formulate-input(
         type="file"
         name="footerTransparencyAccountability"
@@ -85,7 +85,7 @@ section.public-footer
         :add-label="$t('web.public.footer.termsForm.add')"
         :uploader="handleUpload"
         :multiple="true"
-      )
+      ) -->
 </template>
 
 <script lang="ts">

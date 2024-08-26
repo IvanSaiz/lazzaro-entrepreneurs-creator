@@ -1,89 +1,86 @@
 <template lang="pug">
 .services-create
-  lz-confirm(
-    v-if="showDeleteModal"
-    @close='showDeleteModal = false'
-    @confirm='deleteService'
-  )
-
-  header
-    h1 {{ $t('services.create.title') }}
-    p {{ $t('services.create.subtitle') }}
-
-    formulate-form(@submit="onSave" v-if="loaded" v-model="form")
-      section.services-general
-        .services-general__header
-          h2.h2--dash {{ $t('services.create.form.title') }}
-          p {{ $t('services.create.form.subtitle') }}
-        .services-general__section
-          .services-general__section--left
-            .form__row
-              formulate-input(
-                type="image"
-                name="image_url"
-                v-model="form.image_url"
-                :label="$t('services.create.form.image')"
-                :label-class="['required']"
-                validation="required|mime:image/jpeg,image/png,image/webp,image/svg+xml"
-                :validation-name="$t('services.create.form.image')"
-                label-position="before"
-              )
-          .services-general__section--right
+    lz-confirm(
+      v-if="showDeleteModal"
+      @close='showDeleteModal = false'
+      @confirm='deleteService'
+    )
+  
+    header
+      h1 {{ $t('services.create.title') }}
+      p {{ $t('services.create.subtitle') }}
+  
+      formulate-form(@submit="onSave" v-if="loaded" v-model="form")
+        section.services-general
+          .services-general__header
+            h2.h2--dash {{ $t('services.create.form.title') }}
+            p {{ $t('services.create.form.subtitle') }}
+          .services-general__section
+            .services-general__section--left
+              .form__row
+                formulate-input(
+                  type="image"
+                  name="image_url"
+                  v-model="form.image_url"
+                  :label="$t('services.create.form.image')"
+                  :label-class="['required']"
+                  validation="required|mime:image/jpeg,image/png,image/webp,image/svg+xml"
+                  :validation-name="$t('services.create.form.image')"
+                  label-position="before"
+                )
+            .services-general__section--right
+              .form__row
+                formulate-input(
+                  type="text"
+                  name="service_name"
+                  v-model="form.service_name"
+                  :label="$t('services.create.form.name')"
+                  :label-class="['required']"
+                  validation="required"
+                )
+              .form__row
+                lz-editor-input(
+                  :label="$t('services.create.form.description.title')"
+                  :subtitle="$t('services.create.form.description.subtitle')"
+                  name="description"
+                  v-model="form.description"
+                )
+        section.price
+          .price__header.dash
+            formulate-input(
+              type="toggle"
+              name="payment_in_advance"
+              v-model="form.payment_in_advance"
+            )
+            h2 {{ $t('services.create.price.title') }}
+          .price__section
             .form__row
               formulate-input(
                 type="text"
-                name="service_name"
-                v-model="form.service_name"
-                :label="$t('services.create.form.name')"
+                name="price"
+                v-model="form.price"
+                inputmode="numeric"
+                :label="$t('services.create.price.label')"
                 :label-class="['required']"
-                validation="required"
+                :validation="form.payment_in_advance ? 'required|number' : 'number'"
+                :validation-name="$t('services.create.price.label')"
               )
+        section.bookings
+          .bookings__header
+            h2.h2--dash {{ $t('services.create.bookings.title') }}
+          .bookings__body
             .form__row
-              lz-editor-input(
-                :label="$t('services.create.form.description.title')"
-                :subtitle="$t('services.create.form.description.subtitle')"
-                name="description"
-                v-model="form.description"
+              formulate-input(
+                type="text"
+                name="calendly_url"
+                v-model="form.calendly_url"
+                :label="$t('services.create.bookings.label')"
               )
-      section.price
-        .price__header.dash
-          formulate-input(
-            type="toggle"
-            name="payment_in_advance"
-            v-model="form.payment_in_advance"
-          )
-          h2 {{ $t('services.create.price.title') }}
-        .price__section
-          .form__row
-            formulate-input(
-              type="text"
-              name="price"
-              v-model="form.price"
-              inputmode="numeric"
-              :label="$t('services.create.price.label')"
-              :label-class="['required']"
-              :validation="form.payment_in_advance ? 'required|number' : 'number'"
-              :validation-name="$t('services.create.price.label')"
-            )
-      section.bookings
-        .bookings__header
-          h2.h2--dash {{ $t('services.create.bookings.title') }}
-        .bookings__body
-          .form__row
-            formulate-input(
-              type="text"
-              name="calendly_url"
-              v-model="form.calendly_url"
-              :label="$t('services.create.bookings.label')"
-              validation="url"
-              :validation-name="$t('services.create.bookings.label')"
-            )
-      .services-create__actions
-        lz-button(v-if="!isNewService" type="tertiary" @click="confirmDeleteService") {{ $t('services.create.actions.delete') }}
-        lz-button(type="secondary" @click="onCancel") {{ $t('services.create.actions.cancel') }}
-        lz-button(type="primary") {{ isNewService ? $t('services.create.actions.add') : $t('services.create.actions.save') }}
-
-</template>
+        .services-create__actions
+          lz-button(v-if="!isNewService" type="tertiary" @click="confirmDeleteService") {{ $t('services.create.actions.delete') }}
+          lz-button(type="secondary" @click="onCancel") {{ $t('services.create.actions.cancel') }}
+          lz-button(type="primary") {{ isNewService ? $t('services.create.actions.add') : $t('services.create.actions.save') }}
+      </template>
 
 <script lang="ts">
   import { Component, Vue } from "vue-property-decorator";

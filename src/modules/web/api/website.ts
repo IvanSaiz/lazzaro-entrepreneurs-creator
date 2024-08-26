@@ -47,6 +47,13 @@ export default {
   templates: {
     getAll: (): Promise<Template[]> => {
       return http.get("websites/templates", { noAuth: false });
+    },
+    changeTemplate: (payload: PayloadChangeTemplate): Promise<Template> => {
+      return http.put(
+        `websites/${payload.websiteId}/templates/${payload.templateName}`,
+        {},
+        { noAuth: false }
+      );
     }
   }
 };

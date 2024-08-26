@@ -201,7 +201,7 @@ export default {
           arial: "Arial"
         },
         buttonsColor: "Color botones",
-        menuColor: "Color menú",
+        menuColor: "Color de fondo",
         menuTextColor: "Color texto menú",
         footerColor: "Color Footer",
         logoHelper: "60x60. Máx 25MB"

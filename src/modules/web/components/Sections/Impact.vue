@@ -64,7 +64,7 @@ section.public-impact
           type="text"
           name= "amount"
           :label="$t(`web.public.impactForm.amount.${index+1}`)"
-          :validation="validateIfEnabled('required|alphanumeric|min:0,length|max:999999,length')"
+          :validation="validateIfEnabled('required|min:0,length|max:999999,length')"
         )
   
 </template>
