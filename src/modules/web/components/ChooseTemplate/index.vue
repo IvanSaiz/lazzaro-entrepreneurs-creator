@@ -87,7 +87,6 @@ section.choose-template
     }
 
     get computedTemplates() {
-      console.log(this.templates, "templatesss");
       return this.templates?.map((template, i) => ({
         id: template.id,
         style:
@@ -112,10 +111,10 @@ section.choose-template
       website.templates
         .changeTemplate(payload)
         .then(response => {
-          console.log("Template changed successfully:", response);
+          /* console.log("Template changed successfully:", response); */
         })
         .catch(error => {
-          console.error("Error changing template:", error);
+          /* console.error("Error changing template:", error); */
         });
     }
   }

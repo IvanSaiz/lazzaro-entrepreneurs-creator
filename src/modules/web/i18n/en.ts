@@ -49,7 +49,7 @@ export default {
           arial: "Arial"
         },
         buttonsColor: "Button color",
-        menuColor: "Menu color",
+        menuColor: "background color",
         menuTextColor: "Menu text color",
         footerColor: "Footer color",
         logoHelper: "60x60. Máx 25MB"
