@@ -230,3 +230,8 @@ declare interface SetStyleDto {
   buttonColor: string;
   template: string;
 }
+
+declare interface PayloadChangeTemplate {
+  websiteId: string;
+  templateName: string;
+}
