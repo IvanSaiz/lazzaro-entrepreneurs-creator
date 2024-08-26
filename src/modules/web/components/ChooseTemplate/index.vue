@@ -5,8 +5,7 @@ section.choose-template
       h2.h2--dash {{ $t('web.public.chooseTemplate.title') }}
     .templates
       .template(v-for='(template) in computedTemplates' :style='template.style' :key='template.id')
-        input(type="radio" :value='template.id' v-model='template.id' @click="handleChooseTemplate"
-        )
+        input(type="radio" :value='template.id' v-model='template.id' @click="handleChooseTemplate(template.key)")
         .template__body(:style="template.backgroundImage")
         .template__footer
           p.text {{ template.text }} 
@@ -23,8 +22,14 @@ section.choose-template
   import LzModal from "@/components/Modal.vue";
   import LzButton from "@/components/Button.vue";
   import website from "../../api/website";
+  import { namespace } from "vuex-class";
+  const auth = namespace("auth");
 
-  type TTemplate = Record<"id" | "image", string>;
+  type TTemplate = {
+    id: string;
+    image: string;
+    key: string;
+  };
 
   @Component({
     components: { LzButton, LzModal }
@@ -38,8 +43,8 @@ section.choose-template
     @Prop({ required: true })
     protected readonly chosenTemplateId!: string;
 
-    @Prop({ required: true })
-    public handleChooseTemplate!: (e: Event) => void;
+    @auth.State("websiteId")
+    websiteId!: string;
 
     async mounted() {
       const data = await website.templates.getAll();
@@ -80,7 +85,9 @@ section.choose-template
         "--template-text-color": "black"
       };
     }
+
     get computedTemplates() {
+      console.log(this.templates, "templatesss");
       return this.templates?.map((template, i) => ({
         id: template.id,
         style:
@@ -88,12 +95,28 @@ section.choose-template
             ? this.chosenTemplateTheme
             : this.fallBackTheme,
         backgroundImage: { backgroundImage: `url(${template.image})` },
-        text: this.$t(`web.public.chooseTemplate.template${i + 1}`)
+        text: this.$t(`web.public.chooseTemplate.template${i + 1}`),
+        key: template.key
       }));
     }
 
     isTemplateDisabled(templateId: string): boolean {
       return templateId !== this.modernTemplateId;
+    }
+
+    handleChooseTemplate(key: string) {
+      const payload = {
+        websiteId: this.websiteId,
+        templateName: key
+      };
+      website.templates
+        .changeTemplate(payload)
+        .then(response => {
+          console.log("Template changed successfully:", response);
+        })
+        .catch(error => {
+          console.error("Error changing template:", error);
+        });
     }
   }
 </script>
@@ -115,6 +138,7 @@ section.choose-template
     .disabled-input {
       opacity: 0.5;
     }
+
     .template {
       width: 358px;
       height: 262px;
@@ -131,6 +155,7 @@ section.choose-template
         z-index: 99;
         cursor: pointer;
       }
+
       //TODO: to be modified
       &:has(input:disabled) {
         filter: grayscale(100%);
@@ -177,6 +202,7 @@ section.choose-template
       z-index: 100;
       cursor: pointer;
     }
+
     svg path,
     svg circle {
       color: var(--svg-icon-color);
