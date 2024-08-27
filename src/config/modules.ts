@@ -62,12 +62,12 @@ export const LZ_MODULES = {
     active: true,
     icon: "certificate-icon"
   },
-  data: {
+/*   data: {
     moduleName: "data",
     label: "Datos",
     active: true,
     icon: "chart-pie-icon"
-  },
+  }, */
   consultant: {
     moduleName: "consultant",
     label: "Asesor",
