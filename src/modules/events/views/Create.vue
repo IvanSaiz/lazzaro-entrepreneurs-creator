@@ -144,7 +144,6 @@
           formulate-input.ticket-group(
             type="group"
             name="tickets"
-            :repeatable="true"
             :add-label="$t('events.create.ratesForm.add')"
           )
             .ticket
@@ -327,6 +326,10 @@
         );
       }
 
+      // Enviar solo el primer ticket
+      const firstTicket =
+        this.form.tickets.length > 0 ? this.form.tickets[0] : null;
+
       const body: CalendarEventPostBody = {
         name: this.form.name,
         member_id: this.memberId,
@@ -334,7 +337,7 @@
         dates: this.form.dates[0],
         images,
         location: this.form.location,
-        tickets: this.form.tickets,
+        tickets: firstTicket ? [firstTicket] : [],
         url: this.form.url
       };
 
@@ -375,6 +378,7 @@
       &__table {
         margin-top: 30px;
       }
+
       .ticket-group {
         padding: 0;
         border: none;
@@ -403,6 +407,7 @@
         }
       }
     }
+
     &__form {
       display: flex;
       flex-wrap: wrap;

@@ -1,14 +1,14 @@
 <template lang="pug">
 .lz-table
   .lz-table__tools
-    .lz-table__download.lz-table-download(v-if="downloable")
+    <!-- .lz-table__download.lz-table-download(v-if="downloable")
       download-excel(
         :data="items"
         name="lazzaro-download.xls"
         :fields="downloadFields"
       )
         download-icon.lz-table-download__icon
-        span.lz-table-download__text {{ $t('common.actions.downloadData') }}
+        span.lz-table-download__text {{ $t('common.actions.downloadData') }} -->
   h3(v-if="title") {{ title }}
   
   table.lz-table__table
