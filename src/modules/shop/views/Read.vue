@@ -108,7 +108,7 @@
 
     ordersFields = [
       { id: "name", label: this.$t("shop.read.ordersTable.name") },
-      { id: "code", label: this.$t("shop.read.ordersTable.trackingCode") },
+    /*   { id: "code", label: this.$t("shop.read.ordersTable.trackingCode") }, */
       { id: "products", label: this.$t("shop.read.ordersTable.products") },
       { id: "total", label: this.$t("shop.read.ordersTable.total") },
       { id: "status", label: this.$t("shop.read.ordersTable.status") }
