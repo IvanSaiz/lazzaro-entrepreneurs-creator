@@ -65,13 +65,6 @@
             validation="required|number"
             :validation-name="$t('shop.create.form.price')"
           )
-          formulate-input(
-            type="text"
-            name="discount"
-            :label="$t('shop.create.form.discount')"
-            validation="number"
-            :validation-name="$t('shop.create.form.discount')"
-            )
         .form__row
           formulate-input(
             type="text"
