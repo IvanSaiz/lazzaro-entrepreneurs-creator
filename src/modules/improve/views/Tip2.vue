@@ -5,7 +5,7 @@
       p Las ventajas de una tienda online son enormes
 
     .improve-tip__body
-      p El “alquiler” del espacio es mucho más económico, llegas a todo el mundo, está abierta las 24 horas del día, recibir pagos a distancia… En fin, muchos beneficios y vamos a aprender a configurar nuestra propia tienda online con Lazzaro. ¡Vamos!
+      p El “alquiler” del espacio es mucho más económico, llegas a todo el mundo, está abierta las 24 horas del día, recibir pagos a distancia… En fin, muchos beneficios y vamos a aprender a configurar nuestra propia tienda online con Innovaslab. ¡Vamos!
       p Para empezar nos dirigimos al menú lateral y hacemos clic en Tienda.
       p Y nos aparecerá una vista similar a esta:
 

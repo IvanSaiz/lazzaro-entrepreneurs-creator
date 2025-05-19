@@ -42,7 +42,7 @@
         title: "Las ventajas de una tienda online son enormes",
         preview:
           "El “alquiler” del espacio es mucho más económico, llegas a todo el mundo, está abierta las 24 horas" +
-          "Vamos a aprender a configurar nuestra propia tienda online con Lazzaro. ¡Vamos!",
+          "Vamos a aprender a configurar nuestra propia tienda online con Innovaslab. ¡Vamos!",
         link: "https://www.youtube.com/watch?v=NyQYd5lee_k"
       },
       {

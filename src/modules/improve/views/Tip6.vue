@@ -17,7 +17,7 @@
       p También hay un interruptor que permite que se puedan poner una cantidad a voluntad.
       p Recordad, activado= bolita negra y a la derecha, Activado, bolita blanca y a la izquierda=Desactivado.
       p En este apartado puedes también establecer tus donaciones estándar.
-      p Ahora sería bueno que anuncies en tus redes los beneficios de cada una ¡y pegues el link de tu página pública en Lazzaro para que la gente pueda hacerse socio!
+      p Ahora sería bueno que anuncies en tus redes los beneficios de cada una ¡y pegues el link de tu página pública en Innovaslab para que la gente pueda hacerse socio!
 
 </template>
 

@@ -12,7 +12,7 @@ export default {
     bookings: "reservas generadas",
     articles: "articulos publicados",
     collected: "Recaudado este mes",
-    currentCollected: "recaudados - 5% de Lazzaro",
+    currentCollected: "recaudados - 5% de Innovaslab",
     withdraw: "Retirar dinero recaudado",
     totalDonors: "Nº de donantes",
     analyticsLink: "Link Google Analytics",

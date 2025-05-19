@@ -19,7 +19,7 @@
 
       <a
         class="subtext"
-        href="https://lazzaro.io/en/como-crear-una-wallet-en-metamask-guia-paso-a-paso/"
+        href="https://innovaslab.com/en/como-crear-una-wallet-en-metamask-guia-paso-a-paso/"
         target="_blank"
         rel="noopener noreferrer"
       >

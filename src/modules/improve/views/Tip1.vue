@@ -11,7 +11,7 @@
 
       h3 1º - PONER UN TÍTULO (una frase clara y fácil conlleva una gran responsabilidad)
 
-      p Imaginemos que nos enteramos de la situación de la población de Milamba, una pequeña población en Mozambique. La situación es la dificultad que tienen para acceder a uno de los recursos más básicos, sin el cual no podemos pasar ni una semana, por si no os habéis dado cuenta aún sí, es el agua. Por ello, decidimos emprender acción, pero como queremos aportar transparencia y necesitamos una herramienta sencilla que nos facilite la vida, damos con Lazzaro, abrimos una cuenta y creamos un proyecto.
+      p Imaginemos que nos enteramos de la situación de la población de Milamba, una pequeña población en Mozambique. La situación es la dificultad que tienen para acceder a uno de los recursos más básicos, sin el cual no podemos pasar ni una semana, por si no os habéis dado cuenta aún sí, es el agua. Por ello, decidimos emprender acción, pero como queremos aportar transparencia y necesitamos una herramienta sencilla que nos facilite la vida, damos con Innovaslab, abrimos una cuenta y creamos un proyecto.
 
       img(src="./img/C1.png")
 

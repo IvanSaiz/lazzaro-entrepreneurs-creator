@@ -131,7 +131,7 @@
             template(#label="{ label }")
               label.formulate-input-label.formulate-input-label--after
                 a(
-                  href="https://lazzaro.io/politica-de-condiciones-de-uso/"
+                  href="https://innovaslab.com/politica-de-condiciones-de-uso/"
                   target="_blank"
                 ) {{ label }}
 

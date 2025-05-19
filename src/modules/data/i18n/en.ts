@@ -11,7 +11,7 @@ export default {
     totalPartners: "members",
     newDonations: "total donations",
     collected: "Raised this month",
-    currentCollected: "raised - 5% for Lazzaro",
+    currentCollected: "raised - 5% for Innovaslab",
     withdraw: "Withdraw",
     totalDonors: "No. of donors",
     labels: {

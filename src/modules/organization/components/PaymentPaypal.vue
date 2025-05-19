@@ -27,13 +27,13 @@
     lz-link-icon(
       iconName='helpIcon'
       :label="$t('organization.read.paymentGateway.paypal.howToOpenAnAccount')"
-      link="https://lazzaro.io/como-abrir-una-cuenta-de-paypal-si-eres-ong/"
+      link="https://innovaslab.com/como-abrir-una-cuenta-de-paypal-si-eres-ong/"
     )
 
     lz-link-icon(
       iconName='helpIcon'
       :label="$t('organization.read.paymentGateway.paypal.howToGetPaypalCredentials')"
-      link="https://lazzaro.io/como-obtener-el-id-de-cliente-y-la-clave-secreta-de-paypal/"
+      link="https://innovaslab.com/como-obtener-el-id-de-cliente-y-la-clave-secreta-de-paypal/"
     )
 
     lz-button(type="primary" @click.prevent="submitForm") {{ !!(paypalClientId && paypalClientSecret) ? $t("common.actions.alreadyConnected") : $t("organization.read.paymentCards.button") }}
