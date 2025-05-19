@@ -16,7 +16,7 @@ export default {
       seeWeb: "See web",
       url: "URL of your portal",
       powered: {
-        title: 'Remove "Powered by Lázzaro" from footer',
+        title: 'Remove "Powered by Innovaslab" from footer',
         under: "The message will appear at the bottom of your website",
         options: {
           enabled: "Enabled",

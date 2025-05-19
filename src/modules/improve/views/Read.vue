@@ -55,7 +55,7 @@
       {
         title: "Personaliza tu plataforma web",
         preview:
-          "Es momento de redecorar y personalizar la manera en la que se ve nuestra página en Lázzaro. " +
+          "Es momento de redecorar y personalizar la manera en la que se ve nuestra página en Innovaslab. " +
           "Para ello, podemos acceder a múltiples opciones accediendo a Web.",
         link: "https://www.youtube.com/watch?v=PLmpniwqmjM"
       },
@@ -88,7 +88,7 @@
       {
         title: "Elije el estilo de te web que más te guste",
         preview:
-          "En Lázzaro tenemos múltiples plantillas para que puedas elegir el tema que más te guste para atraer a tus donantes. Cambio de estilo sin problema en cuestión de minutos.",
+          "En Innovaslab tenemos múltiples plantillas para que puedas elegir el tema que más te guste para atraer a tus donantes. Cambio de estilo sin problema en cuestión de minutos.",
         link: "https://www.youtube.com/watch?v=rNxbqZiPqKY"
       },
       {

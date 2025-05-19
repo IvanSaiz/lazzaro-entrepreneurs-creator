@@ -15,7 +15,7 @@ export default {
       seeWeb: "Ver web",
       url: "URL de tu portal",
       powered: {
-        title: 'Quitar "Powered by Lázzaro" del pie de página',
+        title: 'Quitar "Powered by Innovaslab" del pie de página',
         under: "Se mostrará el mensaje al final de la web",
         options: {
           enabled: "Activado",

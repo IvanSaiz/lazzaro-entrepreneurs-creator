@@ -7,12 +7,12 @@ export default {
       Web: {
         title: "¿Cómo comienzo a crear mi sitio web en la plataforma?",
         subtitle:
-          "Comienza tu viaje digital en Lázzaro Emprende de manera fácil y rápida. Con nuestra interfaz intuitiva, simplemente elige tu diseño, personaliza tu contenido y publica tu sitio web en cuestión de minutos."
+          "Comienza tu viaje digital en Innovaslab Emprende de manera fácil y rápida. Con nuestra interfaz intuitiva, simplemente elige tu diseño, personaliza tu contenido y publica tu sitio web en cuestión de minutos."
       },
       Support: {
         title: "¿La plataforma ofrece soporte técnico en caso de problemas?",
         subtitle:
-          "En Lázzaro Emprende, nuestro equipo especializado está listo para brindarte apoyo técnico siempre que lo necesites. Con asistencia dedicada, resolvemos tus inquietudes y te ayudamos a superar cualquier desafío técnico."
+          "En Innovaslab Emprende, nuestro equipo especializado está listo para brindarte apoyo técnico siempre que lo necesites. Con asistencia dedicada, resolvemos tus inquietudes y te ayudamos a superar cualquier desafío técnico."
       },
       Advisor: {
         title: "Sácale partido a tu asesor",
@@ -160,7 +160,7 @@ export default {
     create: {
       title: "Creación de eventos",
       subtitle:
-        "Accede a la herramienta de Lázzaro Emprende para crear eventos. Completa los detalles esenciales como el título del evento, fecha, hora, ubicación y una descripción completa."
+        "Accede a la herramienta de Innovaslab Emprende para crear eventos. Completa los detalles esenciales como el título del evento, fecha, hora, ubicación y una descripción completa."
     },
     images: {
       title: "Imágenes atractivas",

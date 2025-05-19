@@ -5,7 +5,7 @@
       p Personaliza tu plataforma web
 
     .improve-tip__body
-      p Es momento de redecorar y personalizar la manera en la que se ve nuestra página en Lázzaro:
+      p Es momento de redecorar y personalizar la manera en la que se ve nuestra página en Innovaslab:
       p En 4ª posición de arriba hacia abajo, en el menú de la izquierda, encontramos un botón llamado Web. Al hacer clic en él, aparecerá la siguiente pantalla:
 
       img(src="./img/C4.png")
@@ -15,10 +15,10 @@
       h2 General
 
       p Puede que una de las áreas más importantes:
-      p ¿Publicar Web? Este botón cambia entre que tu página sea pública o no. Si el puntito negro está a la derecha, significa que está publicada y que se puede ver. De lo contrario, no será posible encontrar su web de Lázzaro.
+      p ¿Publicar Web? Este botón cambia entre que tu página sea pública o no. Si el puntito negro está a la derecha, significa que está publicada y que se puede ver. De lo contrario, no será posible encontrar su web de Innovaslab.
       p Para previsualizar la web, a la derecha, tenemos un link que pone Ver Web. Nos será muy útil para ir viendo los cambios que vamos haciendo.
       p Personalizar tu URL es una buena estrategia, para posicionamiento y claridad y también a nivel personalización corporativa, da más confianza y es más fácil de recordar y compartir.
-      p Esto junto a quitar la marca de “powered by Lázzaro” del pié de página, son funcionalidades premium a considerar. 
+      p Esto junto a quitar la marca de “powered by Innovaslab” del pié de página, son funcionalidades premium a considerar. 
       h2 Marca  
       h3 Logotipo
       p Preferiblemente en formato cuadrado con una proporción de:

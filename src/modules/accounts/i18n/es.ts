@@ -26,10 +26,10 @@ export default {
     },
     modal: {
       title: "¿Cuánto dinero quieres retirar?",
-      subtitle: `El dinero recaudado en tu portal Lázzaro irá a la cuenta configurada en el perfil de tu
+      subtitle: `El dinero recaudado en tu portal Innovaslab irá a la cuenta configurada en el perfil de tu
         <br> organización. El 5% del mismo será descontado.`,
       available: "disponibles",
-      collected: "€ recaudados - 5% de Lázzaro",
+      collected: "€ recaudados - 5% de Innovaslab",
       warn:
         "Para realizar la retirada de fondos, se debe realizar desde tu cuenta de Paypal asociada. Por favor, pulsa en retirar para poder acceder."
     },

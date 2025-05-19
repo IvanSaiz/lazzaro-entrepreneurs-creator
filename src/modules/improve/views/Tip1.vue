@@ -98,13 +98,13 @@
       
       h3 5º DESTACAR PROYECTO
 
-      p En el caso de Lázzaro, si tienes el plan premium, puedes decidir destacar tu proyecto dentro de la tu plataforma web y que tenga una prioridad en relevancia.
+      p En el caso de Innovaslab, si tienes el plan premium, puedes decidir destacar tu proyecto dentro de la tu plataforma web y que tenga una prioridad en relevancia.
 
       img(src="./img/C15.png")
       
       h3 6º HABLA CON TU CONSULTOR
 
-      p En Lázzaro, tanto dentro del perfil básico como del premium, tienes la opción de tener sesiones con lo que llamamos nuestro “Consejo de Sabios”, que son nuestros consultores.
+      p En Innovaslab, tanto dentro del perfil básico como del premium, tienes la opción de tener sesiones con lo que llamamos nuestro “Consejo de Sabios”, que son nuestros consultores.
 
       p Nuestro consejo aquí es que lo aproveches al máximo. Pide una cita con tu consultor y desarrolla la estrategia necesaria para conseguir tus objetivos. Ve con las dudas ya preparadas para maximizar la efectividad de esa hora de consultoría.
 

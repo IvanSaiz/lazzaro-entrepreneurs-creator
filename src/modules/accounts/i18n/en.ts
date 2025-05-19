@@ -26,10 +26,10 @@ export default {
     },
     modal: {
       title: "How much money do you want to withdraw?",
-      subtitle: `The money collected in your Lázzaro portal will go to the account configured in the profile of your
+      subtitle: `The money collected in your Innovaslab portal will go to the account configured in the profile of your
           <br> organization. The 3,1% of the same will be discounted.`,
       available: "available",
-      collected: "€ collected - 3,1% of Lázzaro",
+      collected: "€ collected - 3,1% of Innovaslab",
       warn:
         "To make the withdrawal of funds, it must be done from your associated Paypal account. Please click withdraw to gain access."
     },
